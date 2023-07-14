@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\eq">
+      <UniqueIdentifier>{9d9a7f53-c33c-4c31-b5d3-3ceef79534b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\eqapp">
+      <UniqueIdentifier>{132140ad-5d7f-48be-8127-a194e854e7f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eq">
+      <UniqueIdentifier>{00dea3ea-a16a-464e-99d3-2a18b73c1a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eqapp">
+      <UniqueIdentifier>{07431fca-3370-4750-8d37-b4f1245c6d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\magic_enum">
+      <UniqueIdentifier>{0b4c5277-cc25-4597-a112-5c200bfc0f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mq">
+      <UniqueIdentifier>{26161976-693e-41e3-b112-1542551f742b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\magic_enum\magic_enum.hpp">
+      <Filter>Header Files\magic_enum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\magic_enum\magic_enum_format.hpp">
+      <Filter>Header Files\magic_enum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\magic_enum\magic_enum_fuse.hpp">
+      <Filter>Header Files\magic_enum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\eq\eq_macros.h">
+      <Filter>Header Files\eq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mq\eqgame.h">
+      <Filter>Header Files\mq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mq\eqgraphics.h">
+      <Filter>Header Files\mq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mq\eqmain.h">
+      <Filter>Header Files\mq</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mq\mq.h">
+      <Filter>Header Files\mq</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_detours.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_log.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_addresses.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_classes.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_constants.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_functions.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_memory.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_offsets.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_structures.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_executecommand.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eq\eq_functions_h.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

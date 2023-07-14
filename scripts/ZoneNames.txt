@@ -1,0 +1,634 @@
+1^South Qeynos^0^0
+2^North Qeynos^30^90
+3^Surefall Glade^20^60
+4^Qeynos Hills^20^60
+6^High Keep^20^60
+8^North Freeport^0^0
+9^West Freeport^0^0
+10^East Freeport^0^0
+11^The Liberated Citadel of Runnyeye^20^60
+12^The Western Plains of Karana^45^135
+13^The Northern Plains of Karana^25^75
+14^The Southern Plains of Karana^40^120
+15^The Eastern Plains of Karana^30^90
+16^The Gorge of King Xorbb^20^60
+17^Blackburrow^20^60
+18^The Lair of the Splitpaw^20^60
+19^Rivervale^0^0
+20^Kithicor Forest^35^105
+21^West Commonlands^0^0
+22^East Commonlands^0^0
+23^Erudin Palace^0^0
+24^Erudin^0^0
+25^Nektulos Forest^55^165
+26^Sunset Home^0^0
+27^The Lavastorm Mountains^40^120
+29^Halas^0^0
+30^Everfrost Peaks^50^150
+31^Solusek's Eye^20^60
+32^Nagafen's Lair^20^0
+34^The Northern Desert of Ro^0^0
+35^The Southern Desert of Ro^0^0
+36^Befallen^20^60
+37^The Oasis of Marr^0^0
+39^The Ruins of Old Paineel^40^0
+40^Neriak - Foreign Quarter^0^0
+41^Neriak - Commons^0^0
+42^Neriak - Third Gate^0^0
+43^Neriak - Fourth Gate^35^105
+44^Najena^20^60
+45^The Qeynos Aqueduct System^20^60
+47^The Feerrott^60^180
+48^Temple of Cazic-Thule^20^60
+49^Oggok^0^0
+50^The Rathe Mountains^60^180
+51^Lake Rathetear^20^60
+52^Grobb^0^0
+53^Aviak^0^0
+54^The Greater Faydark^60^180
+55^Ak'Anon^0^0
+57^The Lesser Faydark^35^105
+58^Clan Crushbone^20^60
+59^The Castle of Mistmoore^20^60
+60^South Kaladim^0^0
+61^Northern Felwithe^0^0
+62^Southern Felwithe^0^0
+63^The Estate of Unrest^20^60
+64^Kedge Keep^20^0
+65^The City of Guk^30^90
+66^The Ruins of Old Guk^30^90
+67^North Kaladim^0^0
+68^Butcherblock Mountains^60^180
+69^The Ocean of Tears^0^0
+70^Dagnor's Cauldron^20^60
+71^The Plane of Sky^0^0
+72^The Plane of Fear^25^0
+73^Permafrost Keep^25^0
+75^Paineel^20^60
+76^The Plane of Hate^0^0
+77^The Arena^0^0
+78^The Field of Bone^60^180
+79^The Warsliks Woods^60^180
+80^The Temple of Solusek Ro^0^0
+81^The Temple of Droga^55^165
+82^Cabilis West^0^0
+83^The Swamp of No Hope^60^180
+84^Firiona Vie^60^180
+85^Lake of Ill Omen^60^180
+86^The Dreadlands^45^0
+87^The Burning Woods^40^120
+88^Kaesora^20^60
+89^The Ruins of Sebilis^30^0
+90^The City of Mist^30^90
+91^The Skyfire Mountains^40^0
+92^Frontier Mountains^50^150
+93^The Overthere^60^180
+94^The Emerald Jungle^40^0
+95^Trakanon's Teeth^40^120
+96^Timorous Deep^45^0
+97^Kurn's Tower^30^90
+98^Erud's Crossing^20^60
+100^The Stonebrunt Mountains^55^165
+101^The Warrens^30^90
+102^Karnor's Castle^20^0
+103^Chardok^40^120
+104^The Crypt of Dalnir^20^60
+105^Howling Stones^25^0
+106^Cabilis East^0^0
+107^The Mines of Nurga^20^60
+108^Veeshan's Peak^0^0
+109^Veksar^25^0
+110^The Iceclad Ocean^30^0
+111^The Tower of Frozen Shadow^25^75
+112^Velketor's Labyrinth^25^0
+113^Kael Drakkel^25^0
+114^Skyshrine^25^0
+115^The City of Thurgadin^20^60
+116^Eastern Wastes^50^150
+117^Cobalt Scar^20^0
+118^The Great Divide^45^0
+119^The Wakening Land^40^0
+120^The Western Wastes^25^0
+121^Crystal Caverns^20^60
+123^Dragon Necropolis^25^0
+124^The Temple of Veeshan^25^0
+125^Siren's Grotto^25^75
+126^The Plane of Mischief^0^0
+127^The Plane of Growth^0^0
+128^The Sleeper's Tomb^0^0
+129^Icewell Keep^20^0
+150^Shadow Haven^0^0
+151^The Bazaar^0^0
+152^The Nexus^0^0
+153^Echo Caverns^20^60
+154^Acrylia Caverns^20^0
+155^Shar Vahl^0^0
+156^Paludal Caverns^30^90
+157^The Fungus Grove^25^75
+158^Vex Thal^0^0
+159^Sanctus Seru^50^0
+160^Katta Castellum^20^0
+161^Netherbian Lair^20^60
+162^Ssraeshza Temple^35^0
+163^Grieg's End^20^0
+164^The Deep^30^0
+165^Shadeweaver's Thicket^45^135
+166^Hollowshade Moor^25^75
+167^Grimling Forest^35^105
+168^Marus Seru^20^60
+169^Mons Letalis^20^60
+170^The Twilight Sea^30^90
+171^The Grey^25^75
+172^The Tenebrous Mountains^20^60
+173^The Maiden's Eye^25^75
+174^Dawnshroud Peaks^20^60
+175^The Scarlet Desert^40^120
+176^The Umbral Plains^20^0
+179^The Akheva Ruins^20^0
+181^Jaggedpine Forest^50^165
+182^Nedaria's Landing^0^0
+186^The Plane of Hate^50^0
+187^Shadowrest^0^0
+200^Ruins of Lxanvom^20^0
+201^The Plane of Justice^0^0
+202^The Plane of Knowledge^0^0
+203^The Plane of Tranquility^200^0
+204^The Plane of Nightmare^0^0
+205^The Plane of Disease^30^0
+206^The Plane of Innovation^25^0
+207^Torment, the Plane of Pain^20^0
+208^The Plane of Valor^25^0
+209^Torden, the Bastion of Thunder^35^0
+210^The Plane of Storms^40^0
+211^The Halls of Honor^30^0
+212^The Tower of Solusek Ro^30^0
+213^The Plane of War^0^0
+214^Drunder, the Fortress of Zek^20^0
+215^Eryslai, the Kingdom of Wind^20^0
+216^The Reef of Coirnav^20^0
+217^Doomfire, the Burning Lands^40^0
+218^Vegarlson, The Earthen Badlands^25^0
+219^The Plane of Time^0^0
+220^The Temple of Marr^0^0
+221^The Lair of Terris-Thule^0^0
+222^Ragrax, Stronghold of the Twelve^0^0
+223^The Prison of the Forsaken^0^0
+224^The Gulf of Gunthak^40^120
+225^Dulak's Harbor^45^135
+226^The Torgiran Mines^20^60
+227^The Crypt of Nadox^25^75
+228^Hate's Fury^20^0
+229^Deepest Guk: Cauldron of Lost Souls^0^0
+230^The Rujarkian Hills: Bloodied Quarries^0^0
+231^Takish-Hiz: Sunken Library^0^0
+232^Miragul's Menagerie: Silent Gallery^0^0
+233^Mistmoore's Catacombs: Forlorn Caverns^0^0
+234^Deepest Guk: Drowning Crypt^0^0
+235^The Rujarkian Hills: Halls of War^0^0
+236^Takish-Hiz: Shifting Tower^0^0
+237^Miragul's Menagerie: Maw of the Menagerie^0^0
+238^Mistmoore's Catacombs: Dreary Grotto^0^0
+239^Deepest Guk: Ancient Aqueducts^0^0
+240^The Rujarkian Hills: Wind Bridges^0^0
+241^Takish-Hiz: Fading Temple^0^0
+242^Miragul's Menagerie: Spider Den^0^0
+243^Mistmoore's Catacombs: Asylum of Invoked Stone^0^0
+244^Deepest Guk: Mushroom Grove^0^0
+245^The Rujarkian Hills: Gladiator Pits^0^0
+246^Takish-Hiz: Royal Observatory^0^0
+247^Miragul's Menagerie: Hushed Banquet^0^0
+248^Mistmoore's Catacombs: Chambers of Eternal Affliction^0^0
+249^Deepest Guk: Foreboding Prison^0^0
+250^The Rujarkian Hills: Drudge Hollows^0^0
+251^Takish-Hiz: River of Recollection^0^0
+252^Miragul's Menagerie: Frosted Halls^0^0
+253^Mistmoore's Catacombs: Sepulcher of the Damned^0^0
+254^Deepest Guk: Chapel of the Witnesses^0^0
+255^The Rujarkian Hills: Fortified Lair of the Taskmasters^0^0
+256^Takish-Hiz: Sandfall Corridors^0^0
+257^Miragul's Menagerie: Forgotten Wastes^0^0
+258^Mistmoore's Catacombs: Ritualistic Summoning Grounds^0^0
+259^Deepest Guk: Root Garden^0^0
+260^The Rujarkian Hills: Hidden Vale^0^0
+261^Takish-Hiz: Balancing Chamber^0^0
+262^Miragul's Menagerie: Heart of the Menagerie^0^0
+263^Mistmoore's Catacombs: Cesspits of Putrescence^0^0
+264^Deepest Guk: Accursed Sanctuary^0^0
+265^The Rujarkian Hills: Blazing Forge ^0^0
+266^Takish-Hiz: Sweeping Tides^0^0
+267^Miragul's Menagerie: Morbid Laboratory^0^0
+268^Mistmoore's Catacombs: Aisles of Blood^0^0
+269^The Rujarkian Hills: Arena of Chance^0^0
+270^Takish-Hiz: Antiquated Palace^0^0
+271^Miragul's Menagerie: Theater of Imprisoned Horrors^0^0
+272^Mistmoore's Catacombs: Halls of Sanguinary Rites^0^0
+273^The Rujarkian Hills: Barracks of War^0^0
+274^Takish-Hiz: Prismatic Corridors^0^0
+275^Miragul's Menagerie: Grand Library^0^0
+276^Mistmoore's Catacombs: Infernal Sanctuary^0^0
+277^Chardok: The Halls of Betrayal^20^0
+278^The Caverns of Exile^25^0
+279^The Abysmal Sea^0^0
+280^Natimbi, the Broken Shores^20^0
+281^Qinimi, Court of Nihilia^20^60
+282^Riwwi, Coliseum of Games^20^0
+283^Barindu, Hanging Gardens^20^0
+284^Ferubi, Forgotten Temple of Taelosia^20^0
+285^Sewers of Nihilia, Pool of Sludge^0^0
+286^Sewers of Nihilia, Lair of Trapped Ones^0^0
+287^Sewers of Nihilia, Purifying Plant^0^0
+288^Sewers of Nihilia, Emanating Crematory^0^0
+289^Tipt, Treacherous Crags^0^0
+290^Vxed, the Crumbling Caverns^0^0
+291^Yxtta, Pulpit of Exiles ^30^0
+292^Uqua, the Ocean God Chantry^0^0
+293^Kod'Taz, Broken Trial Grounds^45^0
+294^Ikkinz, Chambers of Destruction^0^0
+295^Qvic, Prayer Grounds of Calling^20^0
+296^Inktu'Ta, the Unmasked Chapel^0^0
+297^Txevu, Lair of the Elite^20^0
+298^Tacvi, the Broken Temple^0^0
+300^Wall of Slaughter^25^0
+301^The Bloodfields^20^0
+302^Dranik's Scar^30^0
+303^Nobles' Causeway^30^0
+304^Proving Grounds^0^0
+305^Proving Grounds^0^0
+306^Proving Grounds^0^0
+307^Proving Grounds^0^0
+308^Proving Grounds^0^0
+309^Proving Grounds^0^0
+316^Muramite Proving Grounds^25^0
+317^Anguish, the Fallen Palace^0^0
+318^Dranik's Hollows: Watering Hole^0^0
+319^Dranik's Hollows: Fire Pit^0^0
+320^Dranik's Hollows: Murkglider Hive^0^0
+321^Dranik's Hollows^0^0
+322^Dranik's Hollows^0^0
+323^Dranik's Hollows^0^0
+324^Dranik's Hollows^0^0
+325^Dranik's Hollows^0^0
+326^Dranik's Hollows^0^0
+327^Dranik's Hollows^0^0
+328^Catacombs of Dranik^0^0
+329^Catacombs of Dranik^0^0
+330^Catacombs of Dranik^0^0
+331^Sewers of Dranik^0^0
+332^Sewers of Dranik^0^0
+333^Sewers of Dranik^0^0
+334^Riftseekers' Sanctum^20^0
+335^Harbinger's Spire^20^0
+336^The Ruined City of Dranik^35^0
+337^The Broodlands^20^60
+338^Stillmoon Temple^20^60
+339^The Ascent^20^60
+340^Thundercrest Isles^50^150
+341^Lavaspinner's Lair^20^60
+342^Tirranun's Delve^20^60
+343^The Accursed Nest^40^120
+344^Guild Lobby^0^0
+345^Guild Hall^0^0
+347^Ruins of Illsalin^20^60
+348^Illsalin Marketplace^0^0
+349^Temple of the Korlach^0^0
+350^The Nargilor Pits^0^0
+351^Dreadspire Keep^20^60
+354^The Hive^20^60
+355^The Hatchery^0^0
+356^The Cocoons^0^0
+357^The Queen's Lair^0^0
+358^Stoneroot Falls^55^165
+359^Chambers of Xill^0^0
+360^Caverns of the Lost^0^0
+361^Lair of the Korlach^0^0
+362^The Undershore^40^120
+363^Snarlstone Dens^0^0
+364^Shadowspine^0^0
+365^Corathus Creep^25^75
+366^Sporali Caverns^0^0
+367^Corathus Lair^0^0
+368^Shadowed Grove^0^0
+369^Arcstone, Isle of Spirits^20^60
+370^Relic, the Artifact City^20^0
+371^Skylance^0^0
+372^The Devastation^0^0
+373^The Seething Wall^0^0
+374^Sverag, Stronghold of Rage^0^0
+375^Razorthorn, Tower of Sullon Zek^0^0
+376^Ruins of Takish-Hiz^20^60
+377^The Root of Ro^0^0
+378^The Elddar Forest^35^105
+379^Tunare's Shrine^0^0
+380^Theater of Blood^0^0
+381^Deathknell, Tower of Dissonance^0^0
+382^East Freeport^0^0
+383^West Freeport^50^150
+384^Freeport Sewers^20^60
+385^Academy of Arcane Sciences^0^0
+386^Temple of Marr^0^0
+387^Freeport Militia House^0^0
+388^Arena^0^0
+389^City Hall^0^0
+390^Theater^0^0
+391^Hall of Truth^0^0
+392^North Desert of Ro^35^105
+393^South Desert of Ro^50^150
+394^Crescent Reach^40^120
+395^Blightfire Moors^55^165
+396^Stone Hive^30^90
+397^Goru`kar Mesa^55^165
+398^Blackfeather Roost^20^60
+399^The Steppes^35^105
+400^Icefall Glacier^50^150
+401^Valdeholm^60^180
+402^Frostcrypt, Throne of the Shade King^30^90
+403^Sunderock Springs^45^135
+404^Vergalid Mines^20^60
+405^Direwind Cliffs^40^120
+406^Ashengate, Reliquary of the Scale^20^60
+407^Highpass Hold^25^75
+408^The Commonlands^55^0
+409^The Ocean of Tears^60^180
+413^Innothule Swamp^50^150
+414^Toxxulia Forest^60^180
+415^Misty Thicket^40^120
+416^Katta Castrum^60^180
+417^Thalassius, the Coral Keep^25^75
+418^Jewel of Atiiki^35^105
+419^Zhisza, the Shissar Sanctuary^20^60
+420^Silyssar, New Chelsith^35^105
+421^Solteris, the Throne of Ro^0^0
+422^Barren Coast^40^120
+423^The Buried Sea^60^180
+424^Jardel's Hook^0^0
+425^Monkey Rock^0^0
+426^Suncrest Isle^0^0
+427^Deadbone Reef^0^0
+428^Blacksail Folly^0^0
+429^Maiden's Grave^0^0
+430^Redfeather Isle^0^0
+431^The Open Sea^0^0
+432^The Open Sea^0^0
+433^The Open Sea^0^0
+434^The Open Sea^0^0
+435^The Open Sea^0^0
+436^Fortress Mechanotus^60^180
+437^Meldrath's Majestic Mansion^25^75
+438^The Steam Factory^55^165
+439^S.H.I.P. Workshop^40^120
+440^Gyrospire Beza^20^60
+441^Gyrospire Zeka^20^60
+442^Dragonscale Hills^60^180
+443^Loping Plains^50^150
+444^Hills of Shade^50^150
+445^Bloodmoon Keep^20^60
+446^Crystallos, Lair of the Awakened^20^60
+447^The Mechamatic Guardian^0^0
+448^The Steamfont Mountains^50^150
+449^Crypt of Shade^0^0
+450^Tinmizer's Wunderwerks^0^0
+451^Deepscar's Den^0^0
+452^Field of Scale^55^165
+453^Kaesora Library^25^75
+454^Kaesora Hatchery^20^60
+455^Kurn's Tower^20^60
+456^Bloody Kithicor^45^135
+457^Old Commonlands^45^135
+459^The Void^0^0
+460^The Void^0^0
+461^The Void^0^0
+462^The Void^0^0
+463^The Void^0^0
+464^The Void^0^0
+465^The Void^0^0
+466^Oceangreen Hills^30^90
+467^Oceangreen Village^20^60
+468^Blackburrow^20^60
+469^Temple of Bertoxxulous^20^60
+470^Korafax, Home of the Riders^20^60
+471^Citadel of the Worldslayer^0^0
+472^Old Bloodfields^20^60
+473^Precipice of War^0^0
+474^City of Dranik^20^60
+475^Toskirakk^20^60
+476^Korascian Warrens^25^75
+477^Rathe Council Chamber^20^60
+478^Field of Scale^0^0
+480^Brell's Rest^20^60
+481^Fungal Forest^45^135
+482^The Underquarry^45^135
+483^The Cooling Chamber^45^135
+484^Kernagir, the Shining City^55^165
+485^Arthicrex^35^105
+486^The Foundation^35^105
+487^Lichen Creep^35^105
+488^Pellucid Grotto^35^105
+489^Volska's Husk^20^60
+490^Brell's Temple^20^60
+491^The Convorteum^50^150
+492^Brell's Arena^0^0
+493^Wedding Chapel^0^0
+494^Wedding Chapel^0^0
+495^Lair of the Fallen^0^0
+502^North Qeynos^0^0
+503^Firiona Vie^0^0
+504^The Spell of the Undead^0^0
+505^The Castle of Mistmoore^0^0
+506^Kithicor Forest^0^0
+507^Kithicor Forest^0^0
+508^Veeshan's Peak^0^0
+510^Reinforced Clan Crushbone^0^0
+512^Rejuvenating Plains of Karana^0^0
+513^The Northern Plains of Karana^0^0
+515^The Graveyard of the Dead^0^0
+517^Reinforced Blackburrow^0^0
+518^The Invaded Lair of the Splitpaw^0^0
+525^Nektulos Forest^0^0
+526^The Plane of Mischief^0^0
+530^Everfrost- Unseasonably Warm^0^0
+531^Everfrost Peaks^0^0
+534^The Feast of Tishe Virm^0^0
+537^The Oasis of Marr^0^0
+539^The Hole^0^0
+548^Accursed Temple of Cazic-Thule^0^0
+549^Reinforced Temple of Cazic-Thule^0^0
+550^The Nightfall Haunting^0^0
+551^The Rathe Mountains^0^0
+557^The Lesser Faydark^0^0
+563^The Reinforced Estate of Unrest^0^0
+566^The Reinforced Ruins of Old Guk^0^0
+569^The Ocean of Tears^0^0
+572^The Plane of Fear^0^0
+576^The Testing Grounds^0^0
+581^The Temple of Droga^0^0
+586^The Plane of Hate^0^0
+596^Timorous Deep^0^0
+598^Erud's Crossing^0^0
+607^The Mines of Nurga^0^0
+615^The City of Thurgadin^0^0
+616^Eastern Wastes^0^0
+618^The Great Divide^0^0
+626^The Plane of Mischief^0^0
+628^The Sleeper's Tomb^0^0
+629^Icewell Keep^0^0
+666^Hollowshade Moor^0^0
+700^The Feerrott^50^150
+701^House of Thule^20^60
+702^House of Thule, Upper Floors^25^75
+703^The Grounds^30^90
+704^The Library^20^60
+705^The Well^20^60
+706^Erudin Burning^20^60
+707^Morell's Castle^30^90
+708^Sanctum Somnium^25^75
+709^Al'Kabor's Nightmare^25^75
+710^Miragul's Nightmare^20^60
+711^Fear Itself^35^105
+712^Sunrise Hills^0^0
+713^Miragul's Phylactery^0^0
+714^Three Room House Interior^0^0
+715^One Room House Interior^0^0
+716^Three Room House Interior^0^0
+717^Three Room House Interior^0^0
+718^One Room House Interior^0^0
+719^One Room House Interior^0^0
+720^One Room House Interior^0^0
+721^One Room House Interior^0^0
+722^One Room House Interior^0^0
+723^Hermit's Hideaway Interior^0^0
+724^Argath, Bastion of Illdaera^45^135
+725^Valley of Lunanyn^60^180
+726^Sarith, City of Tides^20^60
+727^Rubak Oseka, Temple of the Sea^20^60
+728^Beasts' Domain^40^120
+729^The Resplendent Temple^45^135
+730^Pillars of Alra^60^180
+731^Windsong Sanctuary^40^120
+732^Erillion, City of Bronze^60^180
+733^Sepulcher of Order^40^120
+734^Sepulcher East^20^60
+735^Sepulcher West^20^60
+736^Shadowed Mount^0^0
+737^Palatial Guild Hall^0^0
+738^Grand Guild Hall^0^0
+739^One Bedroom House Interior^0^0
+740^One Bedroom House Interior^0^0
+741^Three Bedroom House Interior^0^0
+742^Three Bedroom House Interior^0^0
+743^Three Bedroom House Interior^0^0
+744^Three Bedroom House Interior^0^0
+745^One Bedroom House Interior^0^0
+746^One Bedroom House Interior^0^0
+747^One Bedroom House Interior^0^0
+748^Three Bedroom House Interior^0^0
+749^Three Bedroom House Interior^0^0
+750^Three Bedroom House Interior^0^0
+751^Modest Guild Hall^0^0
+752^Shard's Landing^60^180
+753^Valley of King Xorbb^55^165
+754^Kael Drakkel: The King's Madness^25^75
+755^East Wastes: Zeixshi-Kar's Awakening^50^150
+756^The Crystal Caverns: Fragment of Fear^20^60
+757^The Breeding Grounds^20^60
+758^Evantil, the Vile Oak^40^120
+759^Grelleth's Palace, the Chateau of Filth^30^90
+760^Chapterhouse of the Fallen^30^90
+763^Chelsith Reborn^60^180
+764^Plane of Shadow^60^180
+765^Heart of Fear: The Threshold^40^120
+766^Evantil's Abode^0^0
+768^Heart of Fear: The Rebirth^30^90
+769^Heart of Fear: The Epicenter^20^60
+770^Bixie Warfront^20^60
+771^The Dead Hills^20^60
+772^Ethernere Tainted West Karana^50^150
+773^The Void^0^0
+774^Bixie Hive^0^0
+775^Tower of Rot^25^75
+776^Argin-Hiz^55^165
+777^Sul Vius: Demiplane of Life^0^0
+778^Arx Mentis^20^60
+779^Brother Island^20^60
+780^Katta Castrum: Deluge^20^60
+781^Combine Dredge^60^180
+782^Caverns of Endless Song^25^75
+783^Thuliasaur Island^35^105
+784^Degmar, the Lost Castle^20^60
+785^Tempest Temple^35^105
+786^The Wayward Lady^0^0
+787^Gnome Memorial Mountain^20^60
+788^The Temple of Droga^35^105
+789^Sathir's Tomb^20^60
+790^The Scorched Woods^55^165
+791^Frontier Mountains^60^180
+792^Gorowyn^20^60
+793^Gates of Kor-Sha^20^60
+794^Lceanium^35^105
+795^Crypt of Sul^20^60
+796^Ruins of Lxanvom^20^60
+797^Sul Vius: Demiplane of Decay^0^0
+798^The Plane of Health^20^60
+799^Kor-Sha Laboratory^20^60
+800^Chardok^30^90
+801^The Sleeper's Tomb^0^0
+802^Kerafyrm's Lair^0^0
+803^Skyshrine^0^0
+804^Permafrost Keep^0^0
+805^Reinforced Permafrost Keep^0^0
+806^Gukta, Outpost of Marr^0^0
+807^Innothule Swamp^0^0
+808^Neriak - Foreign Quarter^0^0
+809^Grimling Forest^0^0
+810^The Reinforced Castle of Mistmoore^0^0
+811^Reinforced Nagafen's Lair^0^0
+812^The Reinforced Ruins of Sebilis^0^0
+813^Howling Stones^20^60
+814^The Skyfire Mountains^35^105
+815^The Overthere^60^180
+816^Veeshan's Peak^20^60
+817^Plane of Smoke^20^60
+818^Stratos: Zephyr's Flight^20^60
+819^Aalishai: Palace of Embers^30^90
+820^Empyr: Realms of Ash^40^120
+821^Esianti: Palace of the Winds^25^75
+822^Mearatas: The Stone Demesne^20^60
+823^Chamber of Tears^0^0
+824^The Eastern Wastes^25^75
+825^The Tower of Frozen Shadow^25^75
+826^The Ry`Gorr Mines^20^60
+827^The Great Divide^60^180
+828^Velketor's Labyrinth^20^60
+829^Kael Drakkel^20^60
+830^Crystal Caverns^20^60
+831^The Sleeper's Tomb^20^60
+832^Dragon Necropolis^30^90
+833^Cobalt Scar^40^120
+834^The Western Wastes^45^135
+835^Skyshrine^25^75
+836^The Temple of Veeshan^20^60
+837^Winter^0^0
+838^Anniversary^0^0
+839^Spring^0^0
+840^Autumn^0^0
+841^Frostfell^0^0
+842^April Fools^0^0
+843^Maiden's Eye^30^90
+844^Umbral Plains^30^90
+845^Ka Vethan^25^75
+846^Vex Thal^30^90
+847^Shadow Valley^35^105
+848^Basilica of Adumbration^20^60
+849^Bloodfalls^25^75
+850^Coterie Chambers^0^0
+851^Ruins of Shadow Haven^20^60
+852^Shar Vahl, Divided^20^60
+853^Paludal Depths^40^120
+854^Shadeweaver's Tangle^45^135
+855^Darklight Caverns^20^60
+856^Deepshade^25^75
+857^Firefall Pass^25^75
+858^Hollowshade Moor^0^0
+904^Qeynos Hills^0^0
+996^The Pit of Rathpher^0^0
+997^CODE PH solo^0^0
+998^The Forgotten Halls^0^0
