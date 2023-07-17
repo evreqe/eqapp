@@ -37,7 +37,7 @@ public:
     {
         bool IsEnabled = true;
 
-        bool PrintToConsole = true;
+        bool PrintToConsole = false;
         bool WriteToFile = true;
     };
 

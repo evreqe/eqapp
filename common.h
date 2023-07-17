@@ -30,6 +30,7 @@
 #include <numbers>
 #include <numeric>
 #include <optional>
+#include <print>
 #include <random>
 #include <ranges>
 #include <source_location>
@@ -56,6 +57,11 @@
 
 #include "magic_enum.hpp"
 using namespace magic_enum::bitwise_operators;
+
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <iphlpapi.h>
+#pragma comment(lib, "ws2_32.lib")
 
 #include <windows.h>
 #include <tlhelp32.h>

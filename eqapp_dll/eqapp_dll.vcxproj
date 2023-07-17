@@ -137,7 +137,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <NoEntryPoint>false</NoEntryPoint>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>psapi.lib;fmt.lib;detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;winmm.lib;psapi.lib;fmt.lib;detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>Z:\Code\!libraries_x64\fmt-10.0.0\lib;Z:\Code\!libraries_x64\Detours-4.0.1\lib.X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -151,12 +151,16 @@
     <ClInclude Include="..\mq\eqgraphics.h" />
     <ClInclude Include="..\mq\eqmain.h" />
     <ClInclude Include="..\mq\mq.h" />
+    <ClInclude Include="..\utility.h" />
     <ClInclude Include="dllmain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\eqapp\eqapp.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_boxchatclient.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_console.ixx" />
     <ClCompile Include="..\eqapp\eqapp_detours.ixx" />
     <ClCompile Include="..\eqapp\eqapp_log.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_timer.ixx" />
     <ClCompile Include="..\eq\eq.ixx" />
     <ClCompile Include="..\eq\eq_addresses.ixx" />
     <ClCompile Include="..\eq\eq_classes.ixx" />

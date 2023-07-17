@@ -4,9 +4,9 @@ EXTERN_DLL_EXPORT DWORD __stdcall Inject()
 {
     //MessageBoxA(0, "Loading application", "Inject()", MB_ICONINFORMATION);
 
-    g_Application.SetModule(g_Module);
+    util::WinAPI::EnableDebugPrivileges();
 
-    g_Application.EnableDebugPrivileges();
+    g_Application.SetModule(g_Module);
 
     g_Application.Load();
 

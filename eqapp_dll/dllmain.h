@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.h"
+#include "utility.h"
 
 import eqapp;
 

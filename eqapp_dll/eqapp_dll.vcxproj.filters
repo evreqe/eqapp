@@ -63,6 +63,9 @@
     <ClInclude Include="..\mq\mq.h">
       <Filter>Header Files\mq</Filter>
     </ClInclude>
+    <ClInclude Include="..\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -106,6 +109,15 @@
     </ClCompile>
     <ClCompile Include="..\eq\eq_functions_h.ixx">
       <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_boxchatclient.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_timer.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_console.ixx">
+      <Filter>Source Files\eqapp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

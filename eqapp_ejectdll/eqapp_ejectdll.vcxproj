@@ -118,12 +118,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
+      <AdditionalIncludeDirectories>Z:\Code\eqapp;Z:\Code\eqapp\mq;Z:\Code\eqapp\eq;Z:\Code\eqapp\eqapp;Z:\Code\eqapp\eqapp_dll;Z:\Code\eqapp\magic_enum;Z:\Code\!libraries_x64\fmt-10.0.0\include;Z:\Code\!libraries_x64\tomlplusplus-3.3.0;Z:\Code\!libraries_x64\glm-0.9.9.8;Z:\Code\!libraries_x64\Detours-4.0.1\src;Z:\Code\!libraries_x64\Detours-4.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;winmm.lib;psapi.lib;fmt.lib;detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Z:\Code\!libraries_x64\fmt-10.0.0\lib;Z:\Code\!libraries_x64\Detours-4.0.1\lib.X64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

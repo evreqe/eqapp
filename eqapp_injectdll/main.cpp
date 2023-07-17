@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -66,37 +68,6 @@ void EQAPP_EnableDebugPrivileges()
     CloseHandle(token);
 }
 
-DWORD_PTR EQAPP_GetModuleBaseAddress(DWORD processID, const wchar_t* moduleName)
-{
-    DWORD_PTR baseAddress = NULL;
-
-    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, processID);
-
-    if (snapshot == INVALID_HANDLE_VALUE)
-    {
-        return baseAddress;
-    }
-
-    MODULEENTRY32 module_entry;
-    module_entry.dwSize = sizeof(MODULEENTRY32);
-
-    if (Module32First(snapshot, &module_entry))
-    {
-        do
-        {
-            if (wcscmp(module_entry.szModule, moduleName) == 0)
-            {
-                baseAddress = (DWORD_PTR)module_entry.modBaseAddr;
-                break;
-            }
-        } while (Module32Next(snapshot, &module_entry));
-    }
-
-    CloseHandle(snapshot);
-
-    return baseAddress;
-}
-
 DWORD_PTR EQAPP_GetBaseAddressByProcessHandle(HANDLE processHandle)
 {
     DWORD_PTR baseAddress = NULL;
@@ -130,71 +101,6 @@ DWORD_PTR EQAPP_GetBaseAddressByProcessHandle(HANDLE processHandle)
     }
 
     return baseAddress;
-}
-
-BOOL CALLBACK EQAPP_EnumWindowsProc(HWND hwnd, LPARAM lparam)
-{
-    DWORD processID;
-    GetWindowThreadProcessId(hwnd, &processID);
-
-    if (processID == lparam)
-    {
-        g_WindowHandle = hwnd;
-
-        return FALSE;
-    }
-
-    return TRUE;
-}
-
-FARPROC EQAPP_GetRelativeEntryAddress(LPCSTR pcszLibrary, const char* szEntryFunction)
-{
-    if (GetFileAttributesA(pcszLibrary) == INVALID_FILE_ATTRIBUTES)
-    {
-        return NULL;
-    }
-
-    HINSTANCE hLibrary = LoadLibraryA(pcszLibrary);
-    if (hLibrary == NULL)
-    {
-        return NULL;
-    }
- 
-    FARPROC pFunction = GetProcAddress(hLibrary, szEntryFunction);
-    if (pFunction == NULL)
-    {
-        return NULL;
-    }
-
-    return (FARPROC)((DWORD_PTR)pFunction - (DWORD_PTR)hLibrary);
-}
-
-LPVOID EQAPP_GetAbsoluteAddress(DWORD_PTR dwBaseAddress, LPVOID pFunction)
-{
-    return (LPVOID)((DWORD_PTR)pFunction + dwBaseAddress);
-}
-
-bool EQAPP_CallRemoteFunction(HANDLE hProcess, LPVOID pFunction)
-{
-    DWORD dwExitCode;
- 
-    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)pFunction, NULL, 0, NULL);
-    if (hThread == NULL)
-    {
-        return false;
-    }
-
-    if (WaitForSingleObject(hThread, 20000) != WAIT_OBJECT_0)
-    {
-        return false;
-    }
-
-    if (GetExitCodeThread(hThread, &dwExitCode) == FALSE)
-    {
-        return false;
-    }
-
-    return (dwExitCode != 0);
 }
 
 int main(int argc, char *argv[])
@@ -270,7 +176,7 @@ int main(int argc, char *argv[])
                         char moduleNameEx[1024] = {0};
                         GetModuleBaseNameA(processHandle, modules[j], moduleNameEx, sizeof(moduleNameEx));
 
-                        //std::printf("Module Name Ex: %s\n", moduleNameEx);
+                        //std::printf("moduleNameEx: %s\n", moduleNameEx);
 
                         if (strcmp(moduleNameEx, g_DLLName) == 0)
                         {
@@ -307,9 +213,6 @@ int main(int argc, char *argv[])
                             HANDLE remoteThread = CreateRemoteThread(processHandle, NULL, 0, (LPTHREAD_START_ROUTINE)GetProcAddress(moduleKernel32, "LoadLibraryA"), remoteMemory, 0, NULL);
                             if (remoteThread != NULL)
                             {
-                                //DWORD exitCode;
-                                //GetExitCodeThread(remoteThread, &exitCode);
-
                                 WaitForSingleObject(remoteThread, INFINITE);
                                 CloseHandle(remoteThread);
 
@@ -342,8 +245,6 @@ int main(int argc, char *argv[])
     std::printf("Done\n");
 
     system("pause");
-
-    ////MessageBoxA(NULL, "Done!", g_ApplicationName, MB_ICONINFORMATION);
 
     return EXIT_SUCCESS;
 }

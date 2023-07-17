@@ -1,13 +1,18 @@
 module;
 
 #include "common.h"
+#include "utility.h"
 
 export module eqapp;
 
 export import eq;
-export import eqapp_detours;
 
 export import eqapp_log;
+
+export import eqapp_detours;
+
+export import eqapp_console;
+export import eqapp_boxchatclient;
 
 export
 {
@@ -38,8 +43,6 @@ private:
 
 public:
 
-    void EnableDebugPrivileges();
-
     void Load();
     void Unload();
 
@@ -63,54 +66,6 @@ Application::Application()
 Application::~Application()
 {
     //
-}
-
-void Application::EnableDebugPrivileges()
-{
-    HANDLE token;
-
-    if (OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &token))
-    {
-        TOKEN_PRIVILEGES tokenPrivileges;
-        TOKEN_PRIVILEGES tokenPrivilegesPrevious;
-
-        DWORD tokenPrivilegesSize = sizeof(TOKEN_PRIVILEGES);
-
-        LUID locallyUniqueIdentifier;
-
-        if (LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &locallyUniqueIdentifier))
-        {
-            tokenPrivileges.PrivilegeCount           = 1;
-            tokenPrivileges.Privileges[0].Luid       = locallyUniqueIdentifier;
-            tokenPrivileges.Privileges[0].Attributes = 0;
-
-            AdjustTokenPrivileges
-            (
-                token,
-                FALSE,
-                &tokenPrivileges,
-                sizeof(TOKEN_PRIVILEGES),
-                &tokenPrivilegesPrevious,
-                &tokenPrivilegesSize
-            );
-
-            tokenPrivilegesPrevious.PrivilegeCount            = 1;
-            tokenPrivilegesPrevious.Privileges[0].Luid        = locallyUniqueIdentifier;
-            tokenPrivilegesPrevious.Privileges[0].Attributes |= (SE_PRIVILEGE_ENABLED);
-    
-            AdjustTokenPrivileges
-            (
-                token,
-                FALSE,
-                &tokenPrivilegesPrevious,
-                tokenPrivilegesSize,
-                NULL,
-                NULL
-            );
-        }
-    }
-
-    CloseHandle(token);
 }
 
 void Application::Load()
@@ -143,16 +98,38 @@ void Application::Load()
 
     EQAPP_Detours_Load();
 
+    //g_Console.Load();
+
+    g_BoxChatClient.Load();
+
+    if (g_BoxChatClient.IsLoaded() == true)
+    {
+        if (g_BoxChatClient.IsEnabled() == true)
+        {
+            if (g_BoxChatClient.IsServerRunning() == true)
+            {
+                g_BoxChatClient.ConnectAsPlayerSpawnName();
+            }
+        }
+    }
+
+    EQ_PrintTextToChat("EQ Application loaded!");
+
     m_isLoaded = true;
 }
 
 void Application::Unload()
 {
+    g_BoxChatClient.Unload();
+    //g_Console.Unload();
+
     EQAPP_Detours_Unload();
 
     g_Log.write("{} unloaded!    Build: {} {}\n", m_name, __TIME__, __DATE__);
 
     g_Log.close();
+
+    EQ_PrintTextToChat("EQ Application unloaded!");
 
     m_isLoaded = false;
 }
