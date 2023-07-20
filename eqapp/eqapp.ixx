@@ -98,8 +98,7 @@ void Application::Load()
 
     EQAPP_Detours_Load();
 
-    //g_Console.Load();
-
+    g_Console.Load();
     g_BoxChatClient.Load();
 
     if (g_BoxChatClient.IsLoaded() == true)
@@ -113,7 +112,8 @@ void Application::Load()
         }
     }
 
-    EQ_PrintTextToChat("EQ Application loaded!");
+    std::print(std::cout, "Loaded!\n");
+    g_Console.Print();
 
     m_isLoaded = true;
 }
@@ -121,15 +121,17 @@ void Application::Load()
 void Application::Unload()
 {
     g_BoxChatClient.Unload();
-    //g_Console.Unload();
+
+    std::print(std::cout, "Unloaded!\n");
+    g_Console.Print();
+
+    g_Console.Unload();
 
     EQAPP_Detours_Unload();
 
     g_Log.write("{} unloaded!    Build: {} {}\n", m_name, __TIME__, __DATE__);
 
     g_Log.close();
-
-    EQ_PrintTextToChat("EQ Application unloaded!");
 
     m_isLoaded = false;
 }

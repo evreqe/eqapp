@@ -49,20 +49,35 @@ public:
     void Toggle();
     void Enable();
     void Disable();
+    void PrintStatus();
     bool Connect(const std::string& clientName);
     bool ConnectAsPlayerSpawnName();
+    void ConnectFailed(PADDRINFOA addressInfo);
     void Disconnect();
     void DisconnectEx();
     bool SendText(const std::string& text);
-    bool SetGlobalChannel(const std::string& globalChannelName);
-    bool SetChannel(const std::string& channelName);
+    void PrintClientName();
+    std::string GetClientName();
+    bool SetClientName(const std::string& clientName);
+    void PrintClientGlobalChannelName();
+    std::string GetClientGlobalChannelName();
+    bool SetClientGlobalChannelName(const std::string& clientGlobalChannelName);
+    void PrintClientChannelName();
+    std::string GetClientChannelName();
+    bool SetClientChannelName(const std::string& clientChannelName);
+    void PrintIPAddress();
+    std::string GetIPAddress();
+    bool SetIPAddress(const std::string& ipAddress);
+    void PrintPortNumber();
+    std::string GetPortNumber();
+    bool SetPortNumber(const std::string& portNumber);
     void Execute();
     void InterpretCommands();
-    bool HandleInterpetCommand(const char* text);
+    bool HandleInterpetCommand(const std::string& commandText);
 
 private:
 
-    const std::string m_name = "EQ Box Chat Client";
+    const std::string m_name = "Box Chat";
 
     const char* m_processFileName = "eqapp_boxchatserver.exe";
 
@@ -79,6 +94,7 @@ private:
     std::list<std::string> m_interpretCommandList;
     eqapp::Timer m_interpretCommandTimer;
 
+    const std::string m_keepAliveText = "$KeepAlive\n";
     eqapp::Timer m_keepAliveTimer;
     eqapp::Timer::TimeInterval m_keepAliveTimerInterval = 3;
 
@@ -145,7 +161,7 @@ bool BoxChatClient::IsServerRunning()
 void BoxChatClient::Toggle()
 {
     util::ToggleBool(m_isEnabled);
-    EQ_PrintTextToChat(std::format("Box Chat: {}", m_isEnabled).c_str());
+    std::print(std::cout, "{}: {}", m_name, m_isEnabled);
 }
 
 void BoxChatClient::Enable()
@@ -161,6 +177,24 @@ void BoxChatClient::Disable()
     if (m_isEnabled == true)
     {
         Toggle();
+    }
+}
+
+void BoxChatClient::PrintStatus()
+{
+    if (IsConnected() == false)
+    {
+        std::print(std::cout, "{} Status: You are disconnected.\n", m_name);
+    }
+    else
+    {
+        std::print(std::cout, "{} Status: You are connected.\n", m_name);
+
+        PrintIPAddress();
+        PrintPortNumber();
+        PrintClientName();
+        PrintClientGlobalChannelName();
+        PrintClientChannelName();
     }
 }
 
@@ -181,16 +215,14 @@ bool BoxChatClient::Connect(const std::string& clientName)
 
     if (getaddrinfo(m_ipAddress.c_str(), m_portNumber.c_str(), &m_addressInfoHints, &m_addressInfoResult) != 0)
     {
-        freeaddrinfo(m_addressInfoResult);
-        DisconnectEx();
+        ConnectFailed(m_addressInfoResult);
         return false;
     }
 
     m_socket = socket(m_addressInfoResult->ai_family, m_addressInfoResult->ai_socktype, m_addressInfoResult->ai_protocol);
     if (m_socket == INVALID_SOCKET)
     {
-        freeaddrinfo(m_addressInfoResult);
-        DisconnectEx();
+        ConnectFailed(m_addressInfoResult);
         return false;
     }
 
@@ -202,12 +234,11 @@ bool BoxChatClient::Connect(const std::string& clientName)
 
             if (send(m_socket, clientNameText.c_str(), (int)clientNameText.size(), 0) == SOCKET_ERROR)
             {
-                freeaddrinfo(m_addressInfoResult);
-                DisconnectEx();
+                ConnectFailed(m_addressInfoResult);
                 return false;
             }
 
-            EQ_PrintTextToChat("Box Chat connected.");
+            std::print(std::cout, "{} connected.\n", m_name);
 
             m_clientName = clientName;
 
@@ -217,8 +248,7 @@ bool BoxChatClient::Connect(const std::string& clientName)
         }
     }
 
-    freeaddrinfo(m_addressInfoResult);
-    DisconnectEx();
+    ConnectFailed(m_addressInfoResult);
     return false;
 }
 
@@ -227,19 +257,25 @@ bool BoxChatClient::ConnectAsPlayerSpawnName()
     std::string playerSpawnName = EQ_GetPlayerSpawnName();
     if (playerSpawnName.size() != 0)
     {
-        bool result = Connect(playerSpawnName);
-
-        return result;
+        return Connect(playerSpawnName);
     }
 
     return false;
+}
+
+void BoxChatClient::ConnectFailed(PADDRINFOA addressInfo)
+{
+    freeaddrinfo(m_addressInfoResult);
+    DisconnectEx();
+
+    std::print("{} failed to connect.\n", m_name);
 }
 
 void BoxChatClient::Disconnect()
 {
     DisconnectEx();
 
-    EQ_PrintTextToChat("Box Chat disconnected.");
+    std::print(std::cout, "{} disconnected.\n", m_name);
 }
 
 void BoxChatClient::DisconnectEx()
@@ -259,19 +295,19 @@ bool BoxChatClient::SendText(const std::string& text)
 {
     if (text.size() == 0)
     {
-        EQ_PrintTextToChat("Box Chat: text is empty");
+        std::print(std::cout, "{}: text is empty\n", m_name);
         return false;
     }
 
     if (text.back() != '\n')
     {
-        EQ_PrintTextToChat("Box Chat: text does not end with a newline character");
+        std::print(std::cout, "{}: text does not end with a newline character\n", m_name);
         return false;
     }
 
     if (m_socket == INVALID_SOCKET)
     {
-        EQ_PrintTextToChat("Box Chat: socket is invalid");
+        std::print(std::cout, "{}: socket is invalid\n", m_name);
 
         Disconnect();
         return false;
@@ -280,7 +316,7 @@ bool BoxChatClient::SendText(const std::string& text)
     int sendResult = send(m_socket, text.c_str(), (int)text.size(), 0);
     if (sendResult == SOCKET_ERROR)
     {
-        EQ_PrintTextToChat("Box Chat: send() failed with SOCKET_ERROR");
+        std::print(std::cout, "{}: send() failed with SOCKET_ERROR\n", m_name);
 
         Disconnect();
         return false;
@@ -289,42 +325,137 @@ bool BoxChatClient::SendText(const std::string& text)
     return true;
 }
 
-bool BoxChatClient::SetGlobalChannel(const std::string& globalChannelName)
+void BoxChatClient::PrintClientName()
 {
-    if (globalChannelName.size() == 0)
+    std::print(std::cout, "{} Client Name: {}\n", m_name, m_clientName);
+}
+
+std::string BoxChatClient::GetClientName()
+{
+    return m_clientName;
+}
+
+bool BoxChatClient::SetClientName(const std::string& clientName)
+{
+    if (clientName.size() == 0)
     {
-        EQ_PrintTextToChat("Box Chat: globalChannelName is empty");
+        std::print(std::cout, "{}: clientName is empty\n", m_name);
         return false;
     }
 
-    std::string globalChannelNameText = std::format("$ClientGlobalChannel {}\n", globalChannelName);
+    std::string clientNameText = std::format("$ClientName {}\n", clientName);
 
-    if (SendText(globalChannelNameText) == true)
+    if (SendText(clientNameText) == true)
     {
-        m_clientGlobalChannelName = globalChannelName;
+        m_clientName = clientName;
         return true;
     }
 
     return false;
 }
 
-bool BoxChatClient::SetChannel(const std::string& channelName)
+void BoxChatClient::PrintClientGlobalChannelName()
 {
-    if (channelName.size() == 0)
+    std::print(std::cout, "{} Client Global Channel Name: {}\n", m_name, m_clientGlobalChannelName);
+}
+
+std::string BoxChatClient::GetClientGlobalChannelName()
+{
+    return m_clientGlobalChannelName;
+}
+
+bool BoxChatClient::SetClientGlobalChannelName(const std::string& clientGlobalChannelName)
+{
+    if (clientGlobalChannelName.size() == 0)
     {
-        EQ_PrintTextToChat("Box Chat: channelName is empty");
+        std::print(std::cout, "{}: clientGlobalChannelName is empty\n", m_name);
         return false;
     }
 
-    std::string channelNameText = std::format("$ClientChannel {}\n", channelName);
+    std::string clientGlobalChannelNameText = std::format("$ClientGlobalChannelName {}\n", clientGlobalChannelName);
 
-    if (SendText(channelNameText) == true)
+    if (SendText(clientGlobalChannelNameText) == true)
     {
-        m_clientChannelName = channelName;
+        m_clientGlobalChannelName = clientGlobalChannelName;
         return true;
     }
 
     return false;
+}
+
+void BoxChatClient::PrintClientChannelName()
+{
+    std::print(std::cout, "{} Client Channel Name: {}\n", m_name, m_clientChannelName);
+}
+
+std::string BoxChatClient::GetClientChannelName()
+{
+    return m_clientChannelName;
+}
+
+bool BoxChatClient::SetClientChannelName(const std::string& clientChannelName)
+{
+    if (clientChannelName.size() == 0)
+    {
+        std::print(std::cout, "{}: clientChannelName is empty\n", m_name);
+        return false;
+    }
+
+    std::string clientChannelNameText = std::format("$ClientChannelName {}\n", clientChannelName);
+
+    if (SendText(clientChannelNameText) == true)
+    {
+        m_clientChannelName = clientChannelName;
+        return true;
+    }
+
+    return false;
+}
+
+void BoxChatClient::PrintIPAddress()
+{
+    std::print(std::cout, "{} IP Address: {}\n", m_name, m_ipAddress);
+}
+
+std::string BoxChatClient::GetIPAddress()
+{
+    return m_ipAddress;
+}
+
+bool BoxChatClient::SetIPAddress(const std::string& ipAddress)
+{
+    if (ipAddress.size() == 0)
+    {
+        std::print(std::cout, "{}: ipAddress is empty\n", m_name);
+        return false;
+    }
+
+    m_ipAddress = ipAddress;
+
+    return true;
+}
+
+void BoxChatClient::PrintPortNumber()
+{
+    std::print(std::cout, "{} Port Number: {}\n", m_name, m_portNumber);
+}
+
+std::string BoxChatClient::GetPortNumber()
+{
+    return m_portNumber;
+}
+
+bool BoxChatClient::SetPortNumber(const std::string& portNumber)
+{
+    if (portNumber.size() == 0)
+    {
+        std::print(std::cout, "{}: portNumber is empty\n", m_name);
+        return false;
+    }
+
+    m_portNumber = portNumber;
+
+    return true;
 }
 
 void BoxChatClient::Execute()
@@ -355,7 +486,7 @@ void BoxChatClient::Execute()
 
     if (m_keepAliveTimer.HasTimeElapsedInSeconds(m_keepAliveTimerInterval) == true)
     {
-        SendText("$KeepAlive\n");
+        SendText(m_keepAliveText);
 
         m_keepAliveTimer.Restart();
     }
@@ -376,13 +507,13 @@ void BoxChatClient::Execute()
             return;
         }
 
-        ////std::print("recvText: {}\n", recvText);
+        ////std::print(std::cout, "recvText: {}\n", recvText);
 
         std::vector<std::string> recvTextList = util::String::Split(recvText, '\n');
 
         if (recvTextList.size() == 0)
         {
-            ////std::print("recvTextList.size() == 0\n");
+            ////std::print(std::cout, "recvTextList.size() == 0\n");
             return;
         }
 
@@ -392,7 +523,7 @@ void BoxChatClient::Execute()
 
             if (wordList.size() == 0)
             {
-                ////std::print("wordList.size() == 0\n");
+                ////std::print(std::cout, "wordList.size() == 0\n");
                 continue;
             }
 
@@ -407,18 +538,18 @@ void BoxChatClient::Execute()
 
                     if (wordListEx.size() == 0)
                     {
-                        ////std::print("wordListEx.size() == 0\n");
+                        ////std::print(std::cout, "wordListEx.size() == 0\n");
                         continue;
                     }
 
                     std::string commandText = util::String::Join(wordListEx, " ");
                     if (commandText.size() == 0)
                     {
-                        ////std::print("commandText.size() == 0\n");
+                        ////std::print(std::cout, "commandText.size() == 0\n");
                         break;
                     }
 
-                    ////std::print("commandText: {}\n", commandText);
+                    ////std::print(std::cout, "commandText: {}\n", commandText);
 
                     m_interpretCommandList.push_back(commandText);
                 }
@@ -439,11 +570,13 @@ void BoxChatClient::InterpretCommands()
     std::string commandText = m_interpretCommandList.front();
     if (commandText.size() == 0)
     {
+        m_interpretCommandList.pop_front();
         return;
     }
 
     if (commandText.starts_with("/") == false)
     {
+        m_interpretCommandList.pop_front();
         return;
     }
 
@@ -451,14 +584,20 @@ void BoxChatClient::InterpretCommands()
 
     bool bHasTimeElapsed = false;
 
+    bool bUsePause = false;
+
     eqapp::Timer::TimeInterval timeInterval = 1;
 
     if (commandText.starts_with("//Pause ") == true)
     {
-        std::string timeInteralAsString = util::String::GetAfter(commandText, " ");
-        if (timeInteralAsString.size() != 0)
+        bUsePause = true;
+
+        std::string arg0;
+        eqapp::Timer::TimeInterval arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
         {
-            timeInterval = std::stoll(timeInteralAsString);
+            timeInterval = arg1;
 
             bUseTimer = true;
         }
@@ -478,22 +617,256 @@ void BoxChatClient::InterpretCommands()
 
     m_interpretCommandList.pop_front();
 
+    if (bUsePause == true)
+    {
+        return;
+    }
+
     EQ_InterpretCommand(commandText.c_str());
 }
 
-bool BoxChatClient::HandleInterpetCommand(const char* text)
+bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 {
-    std::string commandText = text;
+    if (commandText == "//BoxChatStatus" || commandText == "//BCS")
+    {
+        PrintStatus();
+        return true;
+    }
 
-    if (commandText == "//BoxChatConnect")
+    if (commandText.starts_with("//BoxChatSendText ") == true || commandText.starts_with("//BCST ") == true)
+    {
+        std::string arg0;
+        auto result = scn::scan(commandText, "{}", arg0);
+        if (result)
+        {
+            std::string remainder = result.range_as_string();
+            if (remainder.size() != 0)
+            {
+                SendText(remainder);
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//BoxChatConnect" || commandText == "//BCC")
     {
         ConnectAsPlayerSpawnName();
         return true;
     }
 
-    if (commandText == "//BoxChatDisconnect")
+    if (commandText.starts_with("//BoxChatConnect ") == true || commandText.starts_with("//BCC ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            if (arg1.size() != 0)
+            {
+                Connect(arg1);
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//BoxChatDisconnect" || commandText == "//BCD")
     {
         Disconnect();
+        return true;
+    }
+
+    if (commandText == "//BoxChatIP" || commandText == "//BCIP")
+    {
+        PrintIPAddress();
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatIP ") == true || commandText.starts_with("//BCIP ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            if (arg1.size() != 0)
+            {
+                SetIPAddress(arg1);
+                PrintIPAddress();
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//BoxChatPortNumber" || commandText == "//BCPN")
+    {
+        PrintPortNumber();
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatPortNumber ") == true || commandText.starts_with("//BCPN ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            if (arg1.size() != 0)
+            {
+                SetPortNumber(arg1);
+                PrintPortNumber();
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//BoxChatClientName" || commandText == "//BCCN")
+    {
+        PrintClientName();
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatClientName ") == true || commandText.starts_with("//BCCN ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            if (arg1.size() != 0)
+            {
+                SetClientName(arg1);
+                PrintClientName();
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//BoxChatClientGlobalChannelName" || commandText == "//BCCGCN")
+    {
+        PrintClientGlobalChannelName();
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatClientGlobalChannelName ") == true || commandText.starts_with("//BCCGCN ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            if (arg1.size() != 0)
+            {
+                SetClientGlobalChannelName(arg1);
+                PrintClientGlobalChannelName();
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//BoxChatClientChannelName" || commandText == "//BCCCN")
+    {
+        PrintClientChannelName();
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatClientChannelName ") == true || commandText.starts_with("//BCCCN ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            if (arg1.size() != 0)
+            {
+                SetClientChannelName(arg1);
+                PrintClientChannelName();
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatTell ") == true || commandText.starts_with("//BCT ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            std::string remainder = result.range_as_string();
+            util::String::TrimSpacesOnLeftAndRight(remainder);
+            if (remainder.size() != 0)
+            {
+                std::string sendText = std::format("$BoxChatTell {} {}\n", arg1, remainder);
+
+                SendText(sendText);
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatToChannel ") == true || commandText.starts_with("//BCTC ") == true)
+    {
+        std::string arg0;
+        std::string arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            std::string remainder = result.range_as_string();
+            util::String::TrimSpacesOnLeftAndRight(remainder);
+            if (remainder.size() != 0)
+            {
+                std::string sendText = std::format("$BoxChatToChannel {} {}\n", arg1, remainder);
+
+                SendText(sendText);
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatToOthers ") == true || commandText.starts_with("//BCTO ") == true)
+    {
+        std::string arg0;
+        auto result = scn::scan(commandText, "{}", arg0);
+        if (result)
+        {
+            std::string remainder = result.range_as_string();
+            util::String::TrimSpacesOnLeftAndRight(remainder);
+            if (remainder.size() != 0)
+            {
+                std::string sendText = std::format("$BoxChatToOthers {}\n", remainder);
+
+                SendText(sendText);
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//BoxChatToAll ") == true || commandText.starts_with("//BCTA ") == true)
+    {
+        std::string arg0;
+        auto result = scn::scan(commandText, "{}", arg0);
+        if (result)
+        {
+            std::string remainder = result.range_as_string();
+            util::String::TrimSpacesOnLeftAndRight(remainder);
+            if (remainder.size() != 0)
+            {
+                std::string sendText = std::format("$BoxChatToAll {}\n", remainder);
+
+                SendText(sendText);
+            }
+        }
+
         return true;
     }
 

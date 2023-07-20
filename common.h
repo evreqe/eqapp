@@ -51,6 +51,9 @@
 #include "fmt/compile.h"
 #pragma comment(lib, "fmt.lib")
 
+#include "scn/scn.h"
+#pragma comment(lib, "scn.lib")
+
 #include "glm/glm.hpp"
 
 #include "toml.hpp"

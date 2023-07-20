@@ -119,5 +119,8 @@
     <ClCompile Include="..\eqapp\eqapp_console.ixx">
       <Filter>Source Files\eqapp</Filter>
     </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_interpretcommand.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

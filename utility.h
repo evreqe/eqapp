@@ -43,7 +43,7 @@ namespace util
 
     namespace File
     {
-        static std::string getText(const char* fileName)
+        static std::string GetText(const char* fileName)
         {
             if (fileName == nullptr || std::strlen(fileName) == 0)
             {
@@ -82,7 +82,27 @@ namespace util
             );
         }
 
-        static std::string GetBetweenBeginAndEnd(const std::string& subject, const std::string& begin, const std::string& end)
+        static void ReplaceAll(std::string& subject, const std::string& search, const std::string& replace)
+        {
+            std::string newString;
+            newString.reserve(subject.length());
+
+            std::string::size_type lastPosition = 0;
+            std::string::size_type findPosition;
+
+            while((findPosition = subject.find(search, lastPosition)) != std::string::npos)
+            {
+                newString.append(subject, lastPosition, findPosition - lastPosition);
+                newString += replace;
+                lastPosition = findPosition + search.length();
+            }
+
+            newString += subject.substr(lastPosition);
+
+            subject.swap(newString);
+        }
+
+        static std::string GetFromBeginToEnd(const std::string& subject, const std::string& begin, const std::string& end)
         {
             std::size_t beginPosition;
             if ((beginPosition = subject.find(begin)) != std::string::npos)
@@ -90,8 +110,25 @@ namespace util
                 std::size_t endPosition;
                 if ((endPosition = subject.find(end, beginPosition)) != std::string::npos && endPosition != beginPosition)
                 {
-                    endPosition = endPosition + 1;
+                    endPosition = endPosition + end.length();
 
+                    return subject.substr(beginPosition, endPosition - beginPosition);
+                }
+            }
+
+            return std::string();
+        }
+
+        static std::string GetBetweenBeginAndEnd(const std::string& subject, const std::string& begin, const std::string& end)
+        {
+            std::size_t beginPosition;
+            if ((beginPosition = subject.find(begin)) != std::string::npos)
+            {
+                beginPosition = beginPosition + begin.length();
+
+                std::size_t endPosition;
+                if ((endPosition = subject.find(end, beginPosition)) != std::string::npos && endPosition != beginPosition)
+                {
                     return subject.substr(beginPosition, endPosition - beginPosition);
                 }
             }
@@ -125,6 +162,27 @@ namespace util
             return result;
         }
 
+        static std::vector<std::string> GetAfterN(const std::string& subject, const std::string& search, size_t numGet)
+        {
+            std::vector<std::string> tokenList;
+            tokenList.reserve(numGet);
+
+            std::string token = subject;
+
+            for (size_t i = 0; i < numGet; i++)
+            {
+                token = GetAfter(token, search);
+                if (token.size() == 0)
+                {
+                    break;
+                }
+
+                tokenList.push_back(token);
+            }
+
+            return tokenList;
+        }
+
         static std::string Join(const std::vector<std::string>& stringList, const std::string& separator)
         {
             if (stringList.empty() == false)
@@ -152,12 +210,76 @@ namespace util
 
         static std::vector<std::string> Split(const std::string& subject, const char delimiter)
         {
-            std::vector<std::string> tokens;
+            std::vector<std::string> tokenList;
 
             std::istringstream iss(subject);
-            for (std::string token; std::getline(iss, token, delimiter); tokens.push_back(token));
+            for (std::string token; std::getline(iss, token, delimiter); tokenList.push_back(token));
 
-            return tokens;
+            return tokenList;
+        }
+
+        static std::vector<std::string> SplitN(const std::string& subject, const char delimiter, size_t numSplit)
+        {
+            std::vector<std::string> tokenList;
+            tokenList.reserve(numSplit);
+
+            std::istringstream iss(subject);
+
+            for (size_t i = 0; i < numSplit; i++)
+            {
+                std::string token;
+                std::getline(iss, token, delimiter);
+
+                if (token.size() == 0)
+                {
+                    break;
+                }
+
+                tokenList.push_back(token);
+            }
+
+            return tokenList;
+        }
+
+        static void TrimLeft(std::string& subject, const char delimiter)
+        {
+            subject.erase(0, subject.find_first_not_of(delimiter));
+        }
+
+        static void TrimRight(std::string& subject, const char delimiter)
+        {
+            subject.erase(subject.find_last_not_of(delimiter) + 1);
+        }
+
+        static void TrimSpacesOnLeftAndRight(std::string& subject)
+        {
+            TrimLeft(subject, ' ');
+            TrimRight(subject, ' ');
+        }
+
+        static bool IsDigits(const std::string &subject)
+        {
+            return std::all_of(subject.begin(), subject.end(), ::isdigit);
+        }
+
+        static bool IsLowercase(const std::string &subject)
+        {
+            return std::all_of(subject.begin(), subject.end(), ::islower);
+        }
+
+        static bool IsUppercase(const std::string &subject)
+        {
+            return std::all_of(subject.begin(), subject.end(), ::isupper);
+        }
+
+        static void ToLowercase(std::string& subject)
+        {
+            std::transform(subject.begin(), subject.end(), subject.begin(), ::tolower);
+        }
+
+        static void ToUppercase(std::string& subject)
+        {
+            std::transform(subject.begin(), subject.end(), subject.begin(), ::toupper);
         }
     }
 
@@ -240,6 +362,30 @@ namespace util
             CloseHandle(snapshot);
 
             return result;
+        }
+
+        static void Beep()
+        {
+            MessageBeep(0);
+        }
+
+        static void BeepEx(UINT beepType)
+        {
+            MessageBeep(beepType);
+        }
+
+        static void CopyTextToClipboard(const char* text)
+        {
+            size_t length = strlen(text) + 1;
+
+            HGLOBAL memory = GlobalAlloc(GMEM_MOVEABLE, length);
+            memcpy(GlobalLock(memory), text, length);
+            GlobalUnlock(memory);
+
+            OpenClipboard(0);
+            EmptyClipboard();
+            SetClipboardData(CF_TEXT, memory);
+            CloseClipboard();
         }
     }
 }

@@ -43,12 +43,14 @@ public:
 
 private:
 
+    const std::string m_name = "Console";
+
     bool m_isLoaded = false;
 
     std::size_t m_bufferSize = 1024;
 
     std::stringstream m_stringStream;
-    std::streambuf* m_streamBufferPointer;
+    std::streambuf* m_streamBufferPointer = nullptr;
 
 };
 
@@ -95,7 +97,7 @@ void Console::Print()
             continue;
         }
 
-        std::string printText = std::format("[{}] {}", "EQ Application", text);
+        std::string printText = std::format("[{}] {}", m_name, text);
 
         EQ_PrintTextToChatByColor(printText.c_str(), eq::Constants::ChatTextColor::Yellow);
     }

@@ -11,6 +11,7 @@ export import eqapp_log;
 
 export import eqapp_console;
 export import eqapp_boxchatclient;
+export import eqapp_interpretcommand;
 
 export
 {
@@ -91,19 +92,28 @@ void EQAPP_Detours_DisplayText()
             if (g_BoxChatClient.IsConnected() == true)
             {
                 EQ_DrawText("Box Chat connected", drawTextX, drawTextY);
+                drawTextOffsetY += 16;
+
+                std::string clientChannelNameText = std::format("Box Chat channel: {}", g_BoxChatClient.GetClientChannelName());
+                EQ_DrawText(clientChannelNameText.c_str(), drawTextX, drawTextY);
+                drawTextOffsetY += 16;
             }
             else
             {
                 EQ_DrawText("Box Chat disconnected", drawTextX, drawTextY);
+                drawTextOffsetY += 16;
             }
-
-            drawTextOffsetY += 16;
         }
     }
 }
 
 void EQAPP_Detours_Loop()
 {
+    if (EQ_IsInGame() == false)
+    {
+        return;
+    }
+
     EQAPP_Detours_DisplayText();
 
     // Console
@@ -166,29 +176,32 @@ void EQAPP_DETOURED_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uin
 
     g_Log.write("CEverQuest__InterpretCommand() text: {}\n", text);
 
-    if (std::strcmp(text, "//Sit") == 0)
+    std::string commandText = text;
+
+    if (commandText.size() == 0)
     {
-        EQ_InterpretCommand("/sit");
-        EQ_PrintTextToChat("You do a sit!");
         return;
     }
 
-    if (std::strcmp(text, "//Jump") == 0)
+    if (commandText.starts_with("//") == true)
     {
-        EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::JUMP, true);
-        EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::JUMP, false);
-        EQ_PrintTextToChat("You do a jump!");
-        return;
-    }
+        EQAPP_InterpretCommand_ConvertText(commandText);
 
-    // BoxChatClient
-    if (g_BoxChatClient.IsLoaded() == true)
-    {
-        if (g_BoxChatClient.IsEnabled() == true)
+        // InterpretCommand
+        if (EQAPP_InterpretCommand_HandleInterpretCommand(text) == true)
         {
-            if (g_BoxChatClient.HandleInterpetCommand(text) == true)
+            return;
+        }
+
+        // BoxChatClient
+        if (g_BoxChatClient.IsLoaded() == true)
+        {
+            if (g_BoxChatClient.IsEnabled() == true)
             {
-                return;
+                if (g_BoxChatClient.HandleInterpetCommand(text) == true)
+                {
+                    return;
+                }
             }
         }
     }
