@@ -353,6 +353,19 @@ bool EQ_IsWindowInBackground()
     return eqWindow != foregroundWindow;
 }
 
+bool EQ_SetWindowTitle(const std::string& windowTitle)
+{
+    HWND window = EQ_GetWindow();
+    if (window == NULL)
+    {
+        return false;
+    }
+
+    SetWindowTextA(window, windowTitle.c_str());
+
+    return true;
+}
+
 POINT EQ_GetMousePosition()
 {
     HWND window = EQ_GetWindow();
@@ -482,20 +495,6 @@ uint64_t EQ_GetNumNearbySpawns(uint8_t spawnType, float distance, float distance
 
 uintptr_t EQ_GetSpawnByID(uint32_t spawnID)
 {
-/*
-    uintptr_t* spawnPointer = EQ_CLASS_POINTER_SpawnManager->GetSpawnByID(spawnID);
-    if (spawnPointer == NULL)
-    {
-        return NULL;
-    }
-
-    uintptr_t spawn = (uintptr_t)*&spawnPointer;
-    if (spawn == NULL)
-    {
-        return NULL;
-    }
-*/
-
     uintptr_t spawnManager = EQ_GetSpawnManager();
     if (spawnManager == NULL)
     {
@@ -511,29 +510,16 @@ uintptr_t EQ_GetSpawnByID(uint32_t spawnID)
     return spawn;
 }
 
-uintptr_t EQ_GetSpawnByName(const char* spawnName)
+uintptr_t EQ_GetSpawnByName(const std::string& spawnName)
 {
-/*
-    uintptr_t* spawnPointer = EQ_CLASS_POINTER_SpawnManager->GetSpawnByName(spawnName);
-    if (spawnPointer == NULL)
-    {
-        return NULL;
-    }
-
-    uintptr_t spawn = (uintptr_t)*&spawnPointer;
-    if (spawn == NULL)
-    {
-        return NULL;
-    }
-*/
-
     uintptr_t spawnManager = EQ_GetSpawnManager();
     if (spawnManager == NULL)
     {
         return NULL;
     }
 
-    uintptr_t spawn = EQ_FUNCTION_SpawnManager__GetSpawnByName((uintptr_t*)spawnManager, spawnName);
+    // this function uses named numbered
+    uintptr_t spawn = EQ_FUNCTION_SpawnManager__GetSpawnByName((uintptr_t*)spawnManager, spawnName.c_str());
     if (spawn == NULL)
     {
         return NULL;
@@ -542,9 +528,35 @@ uintptr_t EQ_GetSpawnByName(const char* spawnName)
     return spawn;
 }
 
+uintptr_t EQ_GetSpawnByNameOrNameNumbered(const std::string& spawnName)
+{
+    uintptr_t spawn = EQ_GetFirstSpawn();
+
+    while (spawn != NULL)
+    {
+        std::string spawnName_ = EQ_GetSpawnName(spawn);
+
+        if (spawnName_ == spawnName)
+        {
+            return spawn;
+        }
+
+        std::string spawnNameNumbered_ = EQ_GetSpawnNameNumbered(spawn);
+
+        if (spawnNameNumbered_ == spawnName)
+        {
+            return spawn;
+        }
+
+        spawn = EQ_GetSpawnNext(spawn);
+    }
+
+    return NULL;
+}
+
 uintptr_t EQ_GetFirstSpawn()
 {
-    uintptr_t spawnManager = eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::SpawnManager);
+    uintptr_t spawnManager = EQ_GetSpawnManager();
     if (spawnManager == NULL)
     {
         return NULL;
@@ -555,7 +567,7 @@ uintptr_t EQ_GetFirstSpawn()
 
 uintptr_t EQ_GetLastSpawn()
 {
-    uintptr_t spawnManager = eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::SpawnManager);
+    uintptr_t spawnManager = EQ_GetSpawnManager();
     if (spawnManager == NULL)
     {
         return NULL;
@@ -595,7 +607,7 @@ void EQ_SetTargetSpawnByID(uint32_t spawnID)
     EQ_SetTargetSpawn(spawn);
 }
 
-void EQ_SetTargetSpawnByName(const char* spawnName)
+void EQ_SetTargetSpawnByName(const std::string& spawnName)
 {
     uintptr_t spawn = EQ_GetSpawnByName(spawnName);
     if (spawn == NULL)
@@ -1602,7 +1614,7 @@ void EQ_TurnPlayerAwayFromTarget()
     EQ_TurnPlayerAwayFromSpawn(targetSpawn);
 }
 
-void EQ_InterpretCommand(const char* text)
+void EQ_InterpretCommand(const std::string& text)
 {
     uintptr_t xCEverQuest = EQ_GetCEverQuest();
     if (xCEverQuest == NULL)
@@ -1616,7 +1628,7 @@ void EQ_InterpretCommand(const char* text)
         return;
     }
 
-    EQ_FUNCTION_CEverQuest__InterpretCommand((uintptr_t*)xCEverQuest, (uintptr_t*)playerSpawn, text);
+    EQ_FUNCTION_CEverQuest__InterpretCommand((uintptr_t*)xCEverQuest, (uintptr_t*)playerSpawn, text.c_str());
 }
 
 void EQ_ExecuteCommand(uint32_t commandID)
@@ -1629,7 +1641,7 @@ void EQ_ExecuteCommandEx(uint32_t commandID, bool keyDown)
     EQ_FUNCTION_ExecuteCommand(commandID, keyDown, nullptr, nullptr);
 }
 
-void EQ_PrintTextToChat(const char* text)
+void EQ_PrintTextToChat(const std::string& text)
 {
     uintptr_t chatManager = EQ_GetChatManager();
     if (chatManager == NULL)
@@ -1637,10 +1649,10 @@ void EQ_PrintTextToChat(const char* text)
         return;
     }
 
-    EQ_FUNCTION_ChatManager__PrintText((uintptr_t*)chatManager, text, eq::Constants::ChatTextColor::White, true, true, NULL);
+    EQ_FUNCTION_ChatManager__PrintText((uintptr_t*)chatManager, text.c_str(), eq::Constants::ChatTextColor::White, true, true, NULL);
 }
 
-void EQ_PrintTextToChatByColor(const char* text, uint32_t chatTextColor)
+void EQ_PrintTextToChatByColor(const std::string& text, uint32_t chatTextColor)
 {
     uintptr_t chatManager = EQ_GetChatManager();
     if (chatManager == NULL)
@@ -1648,17 +1660,17 @@ void EQ_PrintTextToChatByColor(const char* text, uint32_t chatTextColor)
         return;
     }
 
-    EQ_FUNCTION_ChatManager__PrintText((uintptr_t*)chatManager, text, chatTextColor, true, true, NULL);
+    EQ_FUNCTION_ChatManager__PrintText((uintptr_t*)chatManager, text.c_str(), chatTextColor, true, true, NULL);
 }
 
-void EQ_DrawText(const char* text, uint32_t x, uint32_t y)
+void EQ_DrawText(const std::string& text, uint32_t x, uint32_t y)
 {
-    EQ_FUNCTION_DrawText(text, x, y, eq::Constants::DrawTextColor::Gray);
+    EQ_FUNCTION_DrawText(text.c_str(), x, y, eq::Constants::DrawTextColor::Gray);
 }
 
-void EQ_DrawTextByColor(const char* text, uint32_t x, uint32_t y, uint32_t drawTextColor)
+void EQ_DrawTextByColor(const std::string& text, uint32_t x, uint32_t y, uint32_t drawTextColor)
 {
-    EQ_FUNCTION_DrawText(text, x, y, drawTextColor);
+    EQ_FUNCTION_DrawText(text.c_str(), x, y, drawTextColor);
 }
 
 void EQ_PlaySound(const std::string& fileName)

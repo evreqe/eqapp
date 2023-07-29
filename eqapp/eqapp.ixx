@@ -7,12 +7,15 @@ export module eqapp;
 
 export import eq;
 
+export import eqapp_constants;
 export import eqapp_log;
-
 export import eqapp_detours;
-
 export import eqapp_console;
 export import eqapp_boxchatclient;
+export import eqapp_follow;
+export import eqapp_windowtitle;
+export import eqapp_interpretcommand;
+export import eqapp_macromanager;
 
 export
 {
@@ -50,7 +53,7 @@ public:
 
 private:
 
-    const std::string m_name = "EQ Application";
+    const std::string m_className = "Application";
 
     bool m_isLoaded = false;
 
@@ -73,7 +76,7 @@ void Application::Load()
     g_Log.deleteFileContents();
     g_Log.open();
 
-    g_Log.write("{} loaded!    Build: {} {}\n", m_name, __TIME__, __DATE__);
+    g_Log.write("{} loaded!    Build: {} {}\n", eqapp::Constants::ApplicationName, __TIME__, __DATE__);
 
     char* versionDateAsString = eq::Memory::ReadString(eq::EQGame::Addresses::VersionDate);
     char* versionTimeAsString = eq::Memory::ReadString(eq::EQGame::Addresses::VersionTime);
@@ -99,20 +102,28 @@ void Application::Load()
     EQAPP_Detours_Load();
 
     g_Console.Load();
+    g_InterpretCommand.Load();
+    g_MacroManager.Load();
+    g_WindowTitle.Load();
     g_BoxChatClient.Load();
+    g_Follow.Load();
 
-    if (g_BoxChatClient.IsLoaded() == true)
+    // Box Chat
+    if (EQ_IsInGame() == true)
     {
-        if (g_BoxChatClient.IsEnabled() == true)
+        if (g_BoxChatClient.IsLoaded() == true)
         {
-            if (g_BoxChatClient.IsServerRunning() == true)
+            if (g_BoxChatClient.IsEnabled() == true)
             {
-                g_BoxChatClient.ConnectAsPlayerSpawnName();
+                if (g_BoxChatClient.IsServerRunning() == true)
+                {
+                    g_BoxChatClient.ConnectAsPlayerSpawnName();
+                }
             }
         }
     }
 
-    std::print(std::cout, "Loaded!\n");
+    std::print(std::cout, "********** Loaded! **********\n");
     g_Console.Print();
 
     m_isLoaded = true;
@@ -120,16 +131,20 @@ void Application::Load()
 
 void Application::Unload()
 {
+    g_Follow.Unload();
     g_BoxChatClient.Unload();
+    g_WindowTitle.Unload();
+    g_MacroManager.Unload();
+    g_InterpretCommand.Unload();
 
-    std::print(std::cout, "Unloaded!\n");
+    std::print(std::cout, "********** Unloaded! **********\n");
     g_Console.Print();
 
     g_Console.Unload();
 
     EQAPP_Detours_Unload();
 
-    g_Log.write("{} unloaded!    Build: {} {}\n", m_name, __TIME__, __DATE__);
+    g_Log.write("{} unloaded!    Build: {} {}\n", eqapp::Constants::ApplicationName, __TIME__, __DATE__);
 
     g_Log.close();
 

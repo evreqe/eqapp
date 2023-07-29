@@ -7,6 +7,8 @@ export module eqapp_console;
 export import eq;
 export import eq_functions;
 
+export import eqapp_constants;
+
 export
 {
 
@@ -38,12 +40,13 @@ public:
 
     void Load();
     void Unload();
+    void Clear();
     void Print();
     bool IsLoaded();
 
 private:
 
-    const std::string m_name = "Console";
+    const std::string m_className = "Console";
 
     bool m_isLoaded = false;
 
@@ -83,8 +86,19 @@ void Console::Unload()
     m_isLoaded = false;
 }
 
+void Console::Clear()
+{
+    m_stringStream.str(std::string());
+    m_stringStream.clear();
+}
+
 void Console::Print()
 {
+    if (EQ_IsInGame() == false)
+    {
+        return;
+    }
+
     for (std::string text; std::getline(m_stringStream, text, '\n'); )
     {
         if (text.size() == 0)
@@ -97,13 +111,11 @@ void Console::Print()
             continue;
         }
 
-        std::string printText = std::format("[{}] {}", m_name, text);
-
-        EQ_PrintTextToChatByColor(printText.c_str(), eq::Constants::ChatTextColor::Yellow);
+        std::string printText = std::format("[{}] {}", eqapp::Constants::ApplicationName, text);
+        EQ_PrintTextToChatByColor(printText, eq::Constants::ChatTextColor::Yellow);
     }
 
-    m_stringStream.str(std::string());
-    m_stringStream.clear();
+    Clear();
 }
 
 bool Console::IsLoaded()

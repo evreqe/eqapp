@@ -43,11 +43,11 @@ namespace util
 
     namespace File
     {
-        static std::string GetText(const char* fileName)
+        static std::string GetText(const std::string& fileName)
         {
-            if (fileName == nullptr || std::strlen(fileName) == 0)
+            if (fileName.empty() == true)
             {
-                return {};
+                return std::string();
             }
 
             std::ifstream file(fileName);
@@ -366,7 +366,7 @@ namespace util
 
         static void Beep()
         {
-            MessageBeep(0);
+            MessageBeep(MB_OK);
         }
 
         static void BeepEx(UINT beepType)

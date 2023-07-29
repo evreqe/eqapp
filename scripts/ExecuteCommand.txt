@@ -1,0 +1,1628 @@
+.rdata:00000001407E3038 aAutorun        db 'AUTORUN',0          ; DATA XREF: .data:off_140AC41B0?o
+.rdata:00000001407E3038                                         ; .data:off_140ACB5C0?o
+.rdata:00000001407E3040 aJump           db 'JUMP',0             ; DATA XREF: .data:0000000140AC41B8?o
+.rdata:00000001407E3040                                         ; .data:off_140ACB5C8?o
+.rdata:00000001407E3045                 align 8
+.rdata:00000001407E3048 aForward        db 'FORWARD',0          ; DATA XREF: .data:0000000140AC41C0?o
+.rdata:00000001407E3048                                         ; .data:0000000140ACB5D0?o
+.rdata:00000001407E3050 aBack           db 'BACK',0             ; DATA XREF: .data:0000000140AC41C8?o
+.rdata:00000001407E3050                                         ; .data:0000000140ACB5D8?o
+.rdata:00000001407E3055                 align 8
+.rdata:00000001407E3058 aRight          db 'RIGHT',0            ; DATA XREF: sub_140562A90:loc_140562FB9?o
+.rdata:00000001407E3058                                         ; sub_14058B180:loc_14058B74D?o ...
+.rdata:00000001407E305E                 align 20h
+.rdata:00000001407E3060 aLeft           db 'LEFT',0             ; DATA XREF: sub_140562A90:loc_140562FD6?o
+.rdata:00000001407E3060                                         ; sub_14058B180+587?o ...
+.rdata:00000001407E3065                 align 8
+.rdata:00000001407E3068 aStrafeLeft     db 'STRAFE_LEFT',0      ; DATA XREF: .data:0000000140AC41E0?o
+.rdata:00000001407E3068                                         ; .data:0000000140ACB5F0?o
+.rdata:00000001407E3074                 align 8
+.rdata:00000001407E3078 aStrafeRight    db 'STRAFE_RIGHT',0     ; DATA XREF: .data:0000000140AC41E8?o
+.rdata:00000001407E3078                                         ; .data:0000000140ACB5F8?o
+.rdata:00000001407E3085                 align 8
+.rdata:00000001407E3088 aMouselook      db 'MOUSELOOK',0        ; DATA XREF: .data:0000000140AC41F0?o
+.rdata:00000001407E3088                                         ; .data:0000000140ACB600?o
+.rdata:00000001407E3092                 align 8
+.rdata:00000001407E3098 aMouselookEngag db 'MOUSELOOK_ENGAGE',0 ; DATA XREF: .data:0000000140AC41F8?o
+.rdata:00000001407E3098                                         ; .data:0000000140ACB608?o
+.rdata:00000001407E30A9                 align 10h
+.rdata:00000001407E30B0 aAutoprim       db 'AUTOPRIM',0         ; DATA XREF: .data:0000000140AC4200?o
+.rdata:00000001407E30B0                                         ; .data:0000000140ACB610?o
+.rdata:00000001407E30B9                 align 20h
+.rdata:00000001407E30C0 aConsider       db 'CONSIDER',0         ; DATA XREF: sub_140221B10+229?o
+.rdata:00000001407E30C0                                         ; .data:0000000140AC4208?o ...
+.rdata:00000001407E30C9                 align 4
+.rdata:00000001407E30CC aDuck           db 'DUCK',0             ; DATA XREF: .data:0000000140AC4210?o
+.rdata:00000001407E30CC                                         ; .data:0000000140ACB620?o
+.rdata:00000001407E30D1                 align 4
+.rdata:00000001407E30D4 aHail           db 'HAIL',0             ; DATA XREF: .data:0000000140AC4218?o
+.rdata:00000001407E30D4                                         ; .data:0000000140ACB628?o
+.rdata:00000001407E30D9                 align 20h
+.rdata:00000001407E30E0 aInventory_2    db 'INVENTORY',0        ; DATA XREF: .data:0000000140AC4220?o
+.rdata:00000001407E30E0                                         ; .data:0000000140ACB630?o
+.rdata:00000001407E30EA                 align 4
+.rdata:00000001407E30EC aTell           db 'TELL',0             ; DATA XREF: .data:0000000140AC4228?o
+.rdata:00000001407E30EC                                         ; .data:0000000140ACB638?o
+.rdata:00000001407E30F1                 align 4
+.rdata:00000001407E30F4 aUse            db 'USE',0              ; DATA XREF: .data:0000000140AC4230?o
+.rdata:00000001407E30F4                                         ; .data:0000000140ACB640?o
+.rdata:00000001407E30F8 aPitchup        db 'PITCHUP',0          ; DATA XREF: .data:0000000140AC4238?o
+.rdata:00000001407E30F8                                         ; .data:0000000140ACB648?o
+.rdata:00000001407E3100 aPitchdown      db 'PITCHDOWN',0        ; DATA XREF: .data:0000000140AC4240?o
+.rdata:00000001407E3100                                         ; .data:0000000140ACB650?o
+.rdata:00000001407E310A                 align 10h
+.rdata:00000001407E3110 aCenterview     db 'CENTERVIEW',0       ; DATA XREF: .data:0000000140AC4248?o
+.rdata:00000001407E3110                                         ; .data:0000000140ACB658?o
+.rdata:00000001407E311B                 align 4
+.rdata:00000001407E311C aZoomin         db 'ZOOMIN',0           ; DATA XREF: .data:0000000140AC4250?o
+.rdata:00000001407E311C                                         ; .data:0000000140ACB660?o
+.rdata:00000001407E3123                 align 8
+.rdata:00000001407E3128 aZoomout        db 'ZOOMOUT',0          ; DATA XREF: .data:0000000140AC4258?o
+.rdata:00000001407E3128                                         ; .data:0000000140ACB668?o
+.rdata:00000001407E3130 aTogglecam      db 'TOGGLECAM',0        ; DATA XREF: .data:0000000140AC4260?o
+.rdata:00000001407E3130                                         ; .data:0000000140ACB670?o
+.rdata:00000001407E313A                 align 20h
+.rdata:00000001407E3140 aFullscreen     db 'FULLSCREEN',0       ; DATA XREF: .data:0000000140AC4268?o
+.rdata:00000001407E3140                                         ; .data:0000000140ACB678?o
+.rdata:00000001407E314B                 align 10h
+.rdata:00000001407E3150 aTargetme       db 'TARGETME',0         ; DATA XREF: .data:0000000140AC4270?o
+.rdata:00000001407E3150                                         ; .data:0000000140ACB680?o
+.rdata:00000001407E3159                 align 4
+.rdata:00000001407E315C aParty1         db 'PARTY1',0           ; DATA XREF: .data:0000000140AC4278?o
+.rdata:00000001407E315C                                         ; .data:0000000140ACB688?o
+.rdata:00000001407E3163                 align 4
+.rdata:00000001407E3164 aParty2         db 'PARTY2',0           ; DATA XREF: .data:0000000140AC4280?o
+.rdata:00000001407E3164                                         ; .data:0000000140ACB690?o
+.rdata:00000001407E316B                 align 4
+.rdata:00000001407E316C aParty3         db 'PARTY3',0           ; DATA XREF: .data:0000000140AC4288?o
+.rdata:00000001407E316C                                         ; .data:0000000140ACB698?o
+.rdata:00000001407E3173                 align 4
+.rdata:00000001407E3174 aParty4         db 'PARTY4',0           ; DATA XREF: .data:0000000140AC4290?o
+.rdata:00000001407E3174                                         ; .data:0000000140ACB6A0?o
+.rdata:00000001407E317B                 align 4
+.rdata:00000001407E317C aParty5         db 'PARTY5',0           ; DATA XREF: .data:0000000140AC4298?o
+.rdata:00000001407E317C                                         ; .data:0000000140ACB6A8?o
+.rdata:00000001407E3183                 align 8
+.rdata:00000001407E3188 aTargetpc       db 'TARGETPC',0         ; DATA XREF: .data:0000000140AC42A0?o
+.rdata:00000001407E3188                                         ; .data:0000000140ACB6B0?o
+.rdata:00000001407E3191                 align 8
+.rdata:00000001407E3198 aCyclepctargets db 'CYCLEPCTARGETS',0   ; DATA XREF: .data:0000000140AC42A8?o
+.rdata:00000001407E3198                                         ; .data:0000000140ACB6B8?o
+.rdata:00000001407E31A7                 align 8
+.rdata:00000001407E31A8 aTargetnpc      db 'TARGETNPC',0        ; DATA XREF: .data:0000000140AC42B0?o
+.rdata:00000001407E31A8                                         ; .data:0000000140ACB6C0?o
+.rdata:00000001407E31B2                 align 8
+.rdata:00000001407E31B8 aCyclenpctarget db 'CYCLENPCTARGETS',0  ; DATA XREF: .data:0000000140AC42B8?o
+.rdata:00000001407E31B8                                         ; .data:0000000140ACB6C8?o
+.rdata:00000001407E31C8 aTargetcorpse   db 'TARGETCORPSE',0     ; DATA XREF: .data:0000000140AC42C0?o
+.rdata:00000001407E31C8                                         ; .data:0000000140ACB6D0?o
+.rdata:00000001407E31D5                 align 8
+.rdata:00000001407E31D8 aCyclecorpsetar db 'CYCLECORPSETARGETS',0
+.rdata:00000001407E31D8                                         ; DATA XREF: .data:0000000140AC42C8?o
+.rdata:00000001407E31D8                                         ; .data:0000000140ACB6D8?o
+.rdata:00000001407E31EB                 align 10h
+.rdata:00000001407E31F0 aNetstat_0      db 'NETSTAT',0          ; DATA XREF: .data:0000000140AC42D0?o
+.rdata:00000001407E31F0                                         ; .data:0000000140ACB6E0?o
+.rdata:00000001407E31F8 aHot11          db 'HOT1_1',0           ; DATA XREF: .data:0000000140AC42D8?o
+.rdata:00000001407E31F8                                         ; .data:0000000140ACB6E8?o
+.rdata:00000001407E31FF                 align 20h
+.rdata:00000001407E3200 aHot12          db 'HOT1_2',0           ; DATA XREF: .data:0000000140AC42E0?o
+.rdata:00000001407E3200                                         ; .data:0000000140ACB6F0?o
+.rdata:00000001407E3207                 align 8
+.rdata:00000001407E3208 aHot13          db 'HOT1_3',0           ; DATA XREF: .data:0000000140AC42E8?o
+.rdata:00000001407E3208                                         ; .data:0000000140ACB6F8?o
+.rdata:00000001407E320F                 align 10h
+.rdata:00000001407E3210 aHot14          db 'HOT1_4',0           ; DATA XREF: .data:0000000140AC42F0?o
+.rdata:00000001407E3210                                         ; .data:0000000140ACB700?o
+.rdata:00000001407E3217                 align 8
+.rdata:00000001407E3218 aHot15          db 'HOT1_5',0           ; DATA XREF: .data:0000000140AC42F8?o
+.rdata:00000001407E3218                                         ; .data:0000000140ACB708?o
+.rdata:00000001407E321F                 align 20h
+.rdata:00000001407E3220 aHot16          db 'HOT1_6',0           ; DATA XREF: .data:0000000140AC4300?o
+.rdata:00000001407E3220                                         ; .data:0000000140ACB710?o
+.rdata:00000001407E3227                 align 8
+.rdata:00000001407E3228 aHot17          db 'HOT1_7',0           ; DATA XREF: .data:0000000140AC4308?o
+.rdata:00000001407E3228                                         ; .data:0000000140ACB718?o
+.rdata:00000001407E322F                 align 10h
+.rdata:00000001407E3230 aHot18          db 'HOT1_8',0           ; DATA XREF: .data:0000000140AC4310?o
+.rdata:00000001407E3230                                         ; .data:0000000140ACB720?o
+.rdata:00000001407E3237                 align 8
+.rdata:00000001407E3238 aHot19          db 'HOT1_9',0           ; DATA XREF: .data:0000000140AC4318?o
+.rdata:00000001407E3238                                         ; .data:0000000140ACB728?o
+.rdata:00000001407E323F                 align 20h
+.rdata:00000001407E3240 aHot110         db 'HOT1_10',0          ; DATA XREF: .data:0000000140AC4320?o
+.rdata:00000001407E3240                                         ; .data:0000000140ACB730?o
+.rdata:00000001407E3248 aHot111         db 'HOT1_11',0          ; DATA XREF: .data:0000000140AC4328?o
+.rdata:00000001407E3248                                         ; .data:0000000140ACB738?o
+.rdata:00000001407E3250 aHot112         db 'HOT1_12',0          ; DATA XREF: .data:0000000140AC4330?o
+.rdata:00000001407E3250                                         ; .data:0000000140ACB740?o
+.rdata:00000001407E3258 aHot21          db 'HOT2_1',0           ; DATA XREF: .data:0000000140AC4338?o
+.rdata:00000001407E3258                                         ; .data:0000000140ACB748?o
+.rdata:00000001407E325F                 align 20h
+.rdata:00000001407E3260 aHot22          db 'HOT2_2',0           ; DATA XREF: .data:0000000140AC4340?o
+.rdata:00000001407E3260                                         ; .data:0000000140ACB750?o
+.rdata:00000001407E3267                 align 8
+.rdata:00000001407E3268 aHot23          db 'HOT2_3',0           ; DATA XREF: .data:0000000140AC4348?o
+.rdata:00000001407E3268                                         ; .data:0000000140ACB758?o
+.rdata:00000001407E326F                 align 10h
+.rdata:00000001407E3270 aHot24          db 'HOT2_4',0           ; DATA XREF: .data:0000000140AC4350?o
+.rdata:00000001407E3270                                         ; .data:0000000140ACB760?o
+.rdata:00000001407E3277                 align 8
+.rdata:00000001407E3278 aHot25          db 'HOT2_5',0           ; DATA XREF: .data:0000000140AC4358?o
+.rdata:00000001407E3278                                         ; .data:0000000140ACB768?o
+.rdata:00000001407E327F                 align 20h
+.rdata:00000001407E3280 aHot26          db 'HOT2_6',0           ; DATA XREF: .data:0000000140AC4360?o
+.rdata:00000001407E3280                                         ; .data:0000000140ACB770?o
+.rdata:00000001407E3287                 align 8
+.rdata:00000001407E3288 aHot27          db 'HOT2_7',0           ; DATA XREF: .data:0000000140AC4368?o
+.rdata:00000001407E3288                                         ; .data:0000000140ACB778?o
+.rdata:00000001407E328F                 align 10h
+.rdata:00000001407E3290 aHot28          db 'HOT2_8',0           ; DATA XREF: .data:0000000140AC4370?o
+.rdata:00000001407E3290                                         ; .data:0000000140ACB780?o
+.rdata:00000001407E3297                 align 8
+.rdata:00000001407E3298 aHot29          db 'HOT2_9',0           ; DATA XREF: .data:0000000140AC4378?o
+.rdata:00000001407E3298                                         ; .data:0000000140ACB788?o
+.rdata:00000001407E329F                 align 20h
+.rdata:00000001407E32A0 aHot210         db 'HOT2_10',0          ; DATA XREF: .data:0000000140AC4380?o
+.rdata:00000001407E32A0                                         ; .data:0000000140ACB790?o
+.rdata:00000001407E32A8 aHot211         db 'HOT2_11',0          ; DATA XREF: .data:0000000140AC4388?o
+.rdata:00000001407E32A8                                         ; .data:0000000140ACB798?o
+.rdata:00000001407E32B0 aHot212         db 'HOT2_12',0          ; DATA XREF: .data:0000000140AC4390?o
+.rdata:00000001407E32B0                                         ; .data:0000000140ACB7A0?o
+.rdata:00000001407E32B8 aHot31          db 'HOT3_1',0           ; DATA XREF: .data:0000000140AC4398?o
+.rdata:00000001407E32B8                                         ; .data:0000000140ACB7A8?o
+.rdata:00000001407E32BF                 align 20h
+.rdata:00000001407E32C0 aHot32          db 'HOT3_2',0           ; DATA XREF: .data:0000000140AC43A0?o
+.rdata:00000001407E32C0                                         ; .data:0000000140ACB7B0?o
+.rdata:00000001407E32C7                 align 8
+.rdata:00000001407E32C8 aHot33          db 'HOT3_3',0           ; DATA XREF: .data:0000000140AC43A8?o
+.rdata:00000001407E32C8                                         ; .data:0000000140ACB7B8?o
+.rdata:00000001407E32CF                 align 10h
+.rdata:00000001407E32D0 aHot34          db 'HOT3_4',0           ; DATA XREF: .data:0000000140AC43B0?o
+.rdata:00000001407E32D0                                         ; .data:0000000140ACB7C0?o
+.rdata:00000001407E32D7                 align 8
+.rdata:00000001407E32D8 aHot35          db 'HOT3_5',0           ; DATA XREF: .data:0000000140AC43B8?o
+.rdata:00000001407E32D8                                         ; .data:0000000140ACB7C8?o
+.rdata:00000001407E32DF                 align 20h
+.rdata:00000001407E32E0 aHot36          db 'HOT3_6',0           ; DATA XREF: .data:0000000140AC43C0?o
+.rdata:00000001407E32E0                                         ; .data:0000000140ACB7D0?o
+.rdata:00000001407E32E7                 align 8
+.rdata:00000001407E32E8 aHot37          db 'HOT3_7',0           ; DATA XREF: .data:0000000140AC43C8?o
+.rdata:00000001407E32E8                                         ; .data:0000000140ACB7D8?o
+.rdata:00000001407E32EF                 align 10h
+.rdata:00000001407E32F0 aHot38          db 'HOT3_8',0           ; DATA XREF: .data:0000000140AC43D0?o
+.rdata:00000001407E32F0                                         ; .data:0000000140ACB7E0?o
+.rdata:00000001407E32F7                 align 8
+.rdata:00000001407E32F8 aHot39          db 'HOT3_9',0           ; DATA XREF: .data:0000000140AC43D8?o
+.rdata:00000001407E32F8                                         ; .data:0000000140ACB7E8?o
+.rdata:00000001407E32FF                 align 20h
+.rdata:00000001407E3300 aHot310         db 'HOT3_10',0          ; DATA XREF: .data:0000000140AC43E0?o
+.rdata:00000001407E3300                                         ; .data:0000000140ACB7F0?o
+.rdata:00000001407E3308 aHot311         db 'HOT3_11',0          ; DATA XREF: .data:0000000140AC43E8?o
+.rdata:00000001407E3308                                         ; .data:0000000140ACB7F8?o
+.rdata:00000001407E3310 aHot312         db 'HOT3_12',0          ; DATA XREF: .data:0000000140AC43F0?o
+.rdata:00000001407E3310                                         ; .data:0000000140ACB800?o
+.rdata:00000001407E3318 aHot41          db 'HOT4_1',0           ; DATA XREF: .data:0000000140AC43F8?o
+.rdata:00000001407E3318                                         ; .data:0000000140ACB808?o
+.rdata:00000001407E331F                 align 20h
+.rdata:00000001407E3320 aHot42          db 'HOT4_2',0           ; DATA XREF: .data:0000000140AC4400?o
+.rdata:00000001407E3320                                         ; .data:0000000140ACB810?o
+.rdata:00000001407E3327                 align 8
+.rdata:00000001407E3328 aHot43          db 'HOT4_3',0           ; DATA XREF: .data:0000000140AC4408?o
+.rdata:00000001407E3328                                         ; .data:0000000140ACB818?o
+.rdata:00000001407E332F                 align 10h
+.rdata:00000001407E3330 aHot44          db 'HOT4_4',0           ; DATA XREF: .data:0000000140AC4410?o
+.rdata:00000001407E3330                                         ; .data:0000000140ACB820?o
+.rdata:00000001407E3337                 align 8
+.rdata:00000001407E3338 aHot45          db 'HOT4_5',0           ; DATA XREF: .data:0000000140AC4418?o
+.rdata:00000001407E3338                                         ; .data:0000000140ACB828?o
+.rdata:00000001407E333F                 align 20h
+.rdata:00000001407E3340 aHot46          db 'HOT4_6',0           ; DATA XREF: .data:0000000140AC4420?o
+.rdata:00000001407E3340                                         ; .data:0000000140ACB830?o
+.rdata:00000001407E3347                 align 8
+.rdata:00000001407E3348 aHot47          db 'HOT4_7',0           ; DATA XREF: .data:0000000140AC4428?o
+.rdata:00000001407E3348                                         ; .data:0000000140ACB838?o
+.rdata:00000001407E334F                 align 10h
+.rdata:00000001407E3350 aHot48          db 'HOT4_8',0           ; DATA XREF: .data:0000000140AC4430?o
+.rdata:00000001407E3350                                         ; .data:0000000140ACB840?o
+.rdata:00000001407E3357                 align 8
+.rdata:00000001407E3358 aHot49          db 'HOT4_9',0           ; DATA XREF: .data:0000000140AC4438?o
+.rdata:00000001407E3358                                         ; .data:0000000140ACB848?o
+.rdata:00000001407E335F                 align 20h
+.rdata:00000001407E3360 aHot410         db 'HOT4_10',0          ; DATA XREF: .data:0000000140AC4440?o
+.rdata:00000001407E3360                                         ; .data:0000000140ACB850?o
+.rdata:00000001407E3368 aHot411         db 'HOT4_11',0          ; DATA XREF: .data:0000000140AC4448?o
+.rdata:00000001407E3368                                         ; .data:0000000140ACB858?o
+.rdata:00000001407E3370 aHot412         db 'HOT4_12',0          ; DATA XREF: .data:0000000140AC4450?o
+.rdata:00000001407E3370                                         ; .data:0000000140ACB860?o
+.rdata:00000001407E3378 aHot51          db 'HOT5_1',0           ; DATA XREF: .data:0000000140AC4458?o
+.rdata:00000001407E3378                                         ; .data:0000000140ACB868?o
+.rdata:00000001407E337F                 align 20h
+.rdata:00000001407E3380 aHot52          db 'HOT5_2',0           ; DATA XREF: .data:0000000140AC4460?o
+.rdata:00000001407E3380                                         ; .data:0000000140ACB870?o
+.rdata:00000001407E3387                 align 8
+.rdata:00000001407E3388 aHot53          db 'HOT5_3',0           ; DATA XREF: .data:0000000140AC4468?o
+.rdata:00000001407E3388                                         ; .data:0000000140ACB878?o
+.rdata:00000001407E338F                 align 10h
+.rdata:00000001407E3390 aHot54          db 'HOT5_4',0           ; DATA XREF: .data:0000000140AC4470?o
+.rdata:00000001407E3390                                         ; .data:0000000140ACB880?o
+.rdata:00000001407E3397                 align 8
+.rdata:00000001407E3398 aHot55          db 'HOT5_5',0           ; DATA XREF: .data:0000000140AC4478?o
+.rdata:00000001407E3398                                         ; .data:0000000140ACB888?o
+.rdata:00000001407E339F                 align 20h
+.rdata:00000001407E33A0 aHot56          db 'HOT5_6',0           ; DATA XREF: .data:0000000140AC4480?o
+.rdata:00000001407E33A0                                         ; .data:0000000140ACB890?o
+.rdata:00000001407E33A7                 align 8
+.rdata:00000001407E33A8 aHot57          db 'HOT5_7',0           ; DATA XREF: .data:0000000140AC4488?o
+.rdata:00000001407E33A8                                         ; .data:0000000140ACB898?o
+.rdata:00000001407E33AF                 align 10h
+.rdata:00000001407E33B0 aHot58          db 'HOT5_8',0           ; DATA XREF: .data:0000000140AC4490?o
+.rdata:00000001407E33B0                                         ; .data:0000000140ACB8A0?o
+.rdata:00000001407E33B7                 align 8
+.rdata:00000001407E33B8 aHot59          db 'HOT5_9',0           ; DATA XREF: .data:0000000140AC4498?o
+.rdata:00000001407E33B8                                         ; .data:0000000140ACB8A8?o
+.rdata:00000001407E33BF                 align 20h
+.rdata:00000001407E33C0 aHot510         db 'HOT5_10',0          ; DATA XREF: .data:0000000140AC44A0?o
+.rdata:00000001407E33C0                                         ; .data:0000000140ACB8B0?o
+.rdata:00000001407E33C8 aHot511         db 'HOT5_11',0          ; DATA XREF: .data:0000000140AC44A8?o
+.rdata:00000001407E33C8                                         ; .data:0000000140ACB8B8?o
+.rdata:00000001407E33D0 aHot512         db 'HOT5_12',0          ; DATA XREF: .data:0000000140AC44B0?o
+.rdata:00000001407E33D0                                         ; .data:0000000140ACB8C0?o
+.rdata:00000001407E33D8 aHot61          db 'HOT6_1',0           ; DATA XREF: .data:0000000140AC44B8?o
+.rdata:00000001407E33D8                                         ; .data:0000000140ACB8C8?o
+.rdata:00000001407E33DF                 align 20h
+.rdata:00000001407E33E0 aHot62          db 'HOT6_2',0           ; DATA XREF: .data:0000000140AC44C0?o
+.rdata:00000001407E33E0                                         ; .data:0000000140ACB8D0?o
+.rdata:00000001407E33E7                 align 8
+.rdata:00000001407E33E8 aHot63          db 'HOT6_3',0           ; DATA XREF: .data:0000000140AC44C8?o
+.rdata:00000001407E33E8                                         ; .data:0000000140ACB8D8?o
+.rdata:00000001407E33EF                 align 10h
+.rdata:00000001407E33F0 aHot64          db 'HOT6_4',0           ; DATA XREF: .data:0000000140AC44D0?o
+.rdata:00000001407E33F0                                         ; .data:0000000140ACB8E0?o
+.rdata:00000001407E33F7                 align 8
+.rdata:00000001407E33F8 aHot65          db 'HOT6_5',0           ; DATA XREF: .data:0000000140AC44D8?o
+.rdata:00000001407E33F8                                         ; .data:0000000140ACB8E8?o
+.rdata:00000001407E33FF                 align 20h
+.rdata:00000001407E3400 aHot66          db 'HOT6_6',0           ; DATA XREF: .data:0000000140AC44E0?o
+.rdata:00000001407E3400                                         ; .data:0000000140ACB8F0?o
+.rdata:00000001407E3407                 align 8
+.rdata:00000001407E3408 aHot67          db 'HOT6_7',0           ; DATA XREF: .data:0000000140AC44E8?o
+.rdata:00000001407E3408                                         ; .data:0000000140ACB8F8?o
+.rdata:00000001407E340F                 align 10h
+.rdata:00000001407E3410 aHot68          db 'HOT6_8',0           ; DATA XREF: .data:0000000140AC44F0?o
+.rdata:00000001407E3410                                         ; .data:0000000140ACB900?o
+.rdata:00000001407E3417                 align 8
+.rdata:00000001407E3418 aHot69          db 'HOT6_9',0           ; DATA XREF: .data:0000000140AC44F8?o
+.rdata:00000001407E3418                                         ; .data:0000000140ACB908?o
+.rdata:00000001407E341F                 align 20h
+.rdata:00000001407E3420 aHot610         db 'HOT6_10',0          ; DATA XREF: .data:0000000140AC4500?o
+.rdata:00000001407E3420                                         ; .data:0000000140ACB910?o
+.rdata:00000001407E3428 aHot611         db 'HOT6_11',0          ; DATA XREF: .data:0000000140AC4508?o
+.rdata:00000001407E3428                                         ; .data:0000000140ACB918?o
+.rdata:00000001407E3430 aHot612         db 'HOT6_12',0          ; DATA XREF: .data:0000000140AC4510?o
+.rdata:00000001407E3430                                         ; .data:0000000140ACB920?o
+.rdata:00000001407E3438 aHot71          db 'HOT7_1',0           ; DATA XREF: .data:0000000140AC4518?o
+.rdata:00000001407E3438                                         ; .data:0000000140ACB928?o
+.rdata:00000001407E343F                 align 20h
+.rdata:00000001407E3440 aHot72          db 'HOT7_2',0           ; DATA XREF: .data:0000000140AC4520?o
+.rdata:00000001407E3440                                         ; .data:0000000140ACB930?o
+.rdata:00000001407E3447                 align 8
+.rdata:00000001407E3448 aHot73          db 'HOT7_3',0           ; DATA XREF: .data:0000000140AC4528?o
+.rdata:00000001407E3448                                         ; .data:0000000140ACB938?o
+.rdata:00000001407E344F                 align 10h
+.rdata:00000001407E3450 aHot74          db 'HOT7_4',0           ; DATA XREF: .data:0000000140AC4530?o
+.rdata:00000001407E3450                                         ; .data:0000000140ACB940?o
+.rdata:00000001407E3457                 align 8
+.rdata:00000001407E3458 aHot75          db 'HOT7_5',0           ; DATA XREF: .data:0000000140AC4538?o
+.rdata:00000001407E3458                                         ; .data:0000000140ACB948?o
+.rdata:00000001407E345F                 align 20h
+.rdata:00000001407E3460 aHot76          db 'HOT7_6',0           ; DATA XREF: .data:0000000140AC4540?o
+.rdata:00000001407E3460                                         ; .data:0000000140ACB950?o
+.rdata:00000001407E3467                 align 8
+.rdata:00000001407E3468 aHot77          db 'HOT7_7',0           ; DATA XREF: .data:0000000140AC4548?o
+.rdata:00000001407E3468                                         ; .data:0000000140ACB958?o
+.rdata:00000001407E346F                 align 10h
+.rdata:00000001407E3470 aHot78          db 'HOT7_8',0           ; DATA XREF: .data:0000000140AC4550?o
+.rdata:00000001407E3470                                         ; .data:0000000140ACB960?o
+.rdata:00000001407E3477                 align 8
+.rdata:00000001407E3478 aHot79          db 'HOT7_9',0           ; DATA XREF: .data:0000000140AC4558?o
+.rdata:00000001407E3478                                         ; .data:0000000140ACB968?o
+.rdata:00000001407E347F                 align 20h
+.rdata:00000001407E3480 aHot710         db 'HOT7_10',0          ; DATA XREF: .data:0000000140AC4560?o
+.rdata:00000001407E3480                                         ; .data:0000000140ACB970?o
+.rdata:00000001407E3488 aHot711         db 'HOT7_11',0          ; DATA XREF: .data:0000000140AC4568?o
+.rdata:00000001407E3488                                         ; .data:0000000140ACB978?o
+.rdata:00000001407E3490 aHot712         db 'HOT7_12',0          ; DATA XREF: .data:0000000140AC4570?o
+.rdata:00000001407E3490                                         ; .data:0000000140ACB980?o
+.rdata:00000001407E3498 aHot81          db 'HOT8_1',0           ; DATA XREF: .data:0000000140AC4578?o
+.rdata:00000001407E3498                                         ; .data:0000000140ACB988?o
+.rdata:00000001407E349F                 align 20h
+.rdata:00000001407E34A0 aHot82          db 'HOT8_2',0           ; DATA XREF: .data:0000000140AC4580?o
+.rdata:00000001407E34A0                                         ; .data:0000000140ACB990?o
+.rdata:00000001407E34A7                 align 8
+.rdata:00000001407E34A8 aHot83          db 'HOT8_3',0           ; DATA XREF: .data:0000000140AC4588?o
+.rdata:00000001407E34A8                                         ; .data:0000000140ACB998?o
+.rdata:00000001407E34AF                 align 10h
+.rdata:00000001407E34B0 aHot84          db 'HOT8_4',0           ; DATA XREF: .data:0000000140AC4590?o
+.rdata:00000001407E34B0                                         ; .data:0000000140ACB9A0?o
+.rdata:00000001407E34B7                 align 8
+.rdata:00000001407E34B8 aHot85          db 'HOT8_5',0           ; DATA XREF: .data:0000000140AC4598?o
+.rdata:00000001407E34B8                                         ; .data:0000000140ACB9A8?o
+.rdata:00000001407E34BF                 align 20h
+.rdata:00000001407E34C0 aHot86          db 'HOT8_6',0           ; DATA XREF: .data:0000000140AC45A0?o
+.rdata:00000001407E34C0                                         ; .data:0000000140ACB9B0?o
+.rdata:00000001407E34C7                 align 8
+.rdata:00000001407E34C8 aHot87          db 'HOT8_7',0           ; DATA XREF: .data:0000000140AC45A8?o
+.rdata:00000001407E34C8                                         ; .data:0000000140ACB9B8?o
+.rdata:00000001407E34CF                 align 10h
+.rdata:00000001407E34D0 aHot88          db 'HOT8_8',0           ; DATA XREF: .data:0000000140AC45B0?o
+.rdata:00000001407E34D0                                         ; .data:0000000140ACB9C0?o
+.rdata:00000001407E34D7                 align 8
+.rdata:00000001407E34D8 aHot89          db 'HOT8_9',0           ; DATA XREF: .data:0000000140AC45B8?o
+.rdata:00000001407E34D8                                         ; .data:0000000140ACB9C8?o
+.rdata:00000001407E34DF                 align 20h
+.rdata:00000001407E34E0 aHot810         db 'HOT8_10',0          ; DATA XREF: .data:0000000140AC45C0?o
+.rdata:00000001407E34E0                                         ; .data:0000000140ACB9D0?o
+.rdata:00000001407E34E8 aHot811         db 'HOT8_11',0          ; DATA XREF: .data:0000000140AC45C8?o
+.rdata:00000001407E34E8                                         ; .data:0000000140ACB9D8?o
+.rdata:00000001407E34F0 aHot812         db 'HOT8_12',0          ; DATA XREF: .data:0000000140AC45D0?o
+.rdata:00000001407E34F0                                         ; .data:0000000140ACB9E0?o
+.rdata:00000001407E34F8 aHot91          db 'HOT9_1',0           ; DATA XREF: .data:0000000140AC45D8?o
+.rdata:00000001407E34F8                                         ; .data:0000000140ACB9E8?o
+.rdata:00000001407E34FF                 align 20h
+.rdata:00000001407E3500 aHot92          db 'HOT9_2',0           ; DATA XREF: .data:0000000140AC45E0?o
+.rdata:00000001407E3500                                         ; .data:0000000140ACB9F0?o
+.rdata:00000001407E3507                 align 8
+.rdata:00000001407E3508 aHot93          db 'HOT9_3',0           ; DATA XREF: .data:0000000140AC45E8?o
+.rdata:00000001407E3508                                         ; .data:0000000140ACB9F8?o
+.rdata:00000001407E350F                 align 10h
+.rdata:00000001407E3510 aHot94          db 'HOT9_4',0           ; DATA XREF: .data:0000000140AC45F0?o
+.rdata:00000001407E3510                                         ; .data:0000000140ACBA00?o
+.rdata:00000001407E3517                 align 8
+.rdata:00000001407E3518 aHot95          db 'HOT9_5',0           ; DATA XREF: .data:0000000140AC45F8?o
+.rdata:00000001407E3518                                         ; .data:0000000140ACBA08?o
+.rdata:00000001407E351F                 align 20h
+.rdata:00000001407E3520 aHot96          db 'HOT9_6',0           ; DATA XREF: .data:0000000140AC4600?o
+.rdata:00000001407E3520                                         ; .data:0000000140ACBA10?o
+.rdata:00000001407E3527                 align 8
+.rdata:00000001407E3528 aHot97          db 'HOT9_7',0           ; DATA XREF: .data:0000000140AC4608?o
+.rdata:00000001407E3528                                         ; .data:0000000140ACBA18?o
+.rdata:00000001407E352F                 align 10h
+.rdata:00000001407E3530 aHot98          db 'HOT9_8',0           ; DATA XREF: .data:0000000140AC4610?o
+.rdata:00000001407E3530                                         ; .data:0000000140ACBA20?o
+.rdata:00000001407E3537                 align 8
+.rdata:00000001407E3538 aHot99          db 'HOT9_9',0           ; DATA XREF: .data:0000000140AC4618?o
+.rdata:00000001407E3538                                         ; .data:0000000140ACBA28?o
+.rdata:00000001407E353F                 align 20h
+.rdata:00000001407E3540 aHot910         db 'HOT9_10',0          ; DATA XREF: .data:0000000140AC4620?o
+.rdata:00000001407E3540                                         ; .data:0000000140ACBA30?o
+.rdata:00000001407E3548 aHot911         db 'HOT9_11',0          ; DATA XREF: .data:0000000140AC4628?o
+.rdata:00000001407E3548                                         ; .data:0000000140ACBA38?o
+.rdata:00000001407E3550 aHot912         db 'HOT9_12',0          ; DATA XREF: .data:0000000140AC4630?o
+.rdata:00000001407E3550                                         ; .data:0000000140ACBA40?o
+.rdata:00000001407E3558 aHot101         db 'HOT10_1',0          ; DATA XREF: .data:0000000140AC4638?o
+.rdata:00000001407E3558                                         ; .data:0000000140ACBA48?o
+.rdata:00000001407E3560 aHot102         db 'HOT10_2',0          ; DATA XREF: .data:0000000140AC4640?o
+.rdata:00000001407E3560                                         ; .data:0000000140ACBA50?o
+.rdata:00000001407E3568 aHot103         db 'HOT10_3',0          ; DATA XREF: .data:0000000140AC4648?o
+.rdata:00000001407E3568                                         ; .data:0000000140ACBA58?o
+.rdata:00000001407E3570 aHot104         db 'HOT10_4',0          ; DATA XREF: .data:0000000140AC4650?o
+.rdata:00000001407E3570                                         ; .data:0000000140ACBA60?o
+.rdata:00000001407E3578 aHot105         db 'HOT10_5',0          ; DATA XREF: .data:0000000140AC4658?o
+.rdata:00000001407E3578                                         ; .data:0000000140ACBA68?o
+.rdata:00000001407E3580 aHot106         db 'HOT10_6',0          ; DATA XREF: .data:0000000140AC4660?o
+.rdata:00000001407E3580                                         ; .data:0000000140ACBA70?o
+.rdata:00000001407E3588 aHot107         db 'HOT10_7',0          ; DATA XREF: .data:0000000140AC4668?o
+.rdata:00000001407E3588                                         ; .data:0000000140ACBA78?o
+.rdata:00000001407E3590 aHot108         db 'HOT10_8',0          ; DATA XREF: .data:0000000140AC4670?o
+.rdata:00000001407E3590                                         ; .data:0000000140ACBA80?o
+.rdata:00000001407E3598 aHot109         db 'HOT10_9',0          ; DATA XREF: .data:0000000140AC4678?o
+.rdata:00000001407E3598                                         ; .data:0000000140ACBA88?o
+.rdata:00000001407E35A0 aHot1010        db 'HOT10_10',0         ; DATA XREF: .data:0000000140AC4680?o
+.rdata:00000001407E35A0                                         ; .data:0000000140ACBA90?o
+.rdata:00000001407E35A9                 align 10h
+.rdata:00000001407E35B0 aHot1011        db 'HOT10_11',0         ; DATA XREF: .data:0000000140AC4688?o
+.rdata:00000001407E35B0                                         ; .data:0000000140ACBA98?o
+.rdata:00000001407E35B9                 align 20h
+.rdata:00000001407E35C0 aHot1012        db 'HOT10_12',0         ; DATA XREF: .data:0000000140AC4690?o
+.rdata:00000001407E35C0                                         ; .data:0000000140ACBAA0?o
+.rdata:00000001407E35C9                 align 10h
+.rdata:00000001407E35D0 aHot111_0       db 'HOT11_1',0          ; DATA XREF: .data:0000000140AC4698?o
+.rdata:00000001407E35D0                                         ; .data:0000000140ACBAA8?o
+.rdata:00000001407E35D8 aHot112_0       db 'HOT11_2',0          ; DATA XREF: .data:0000000140AC46A0?o
+.rdata:00000001407E35D8                                         ; .data:0000000140ACBAB0?o
+.rdata:00000001407E35E0 aHot113         db 'HOT11_3',0          ; DATA XREF: .data:0000000140AC46A8?o
+.rdata:00000001407E35E0                                         ; .data:0000000140ACBAB8?o
+.rdata:00000001407E35E8 aHot114         db 'HOT11_4',0          ; DATA XREF: .data:0000000140AC46B0?o
+.rdata:00000001407E35E8                                         ; .data:0000000140ACBAC0?o
+.rdata:00000001407E35F0 aHot115         db 'HOT11_5',0          ; DATA XREF: .data:0000000140AC46B8?o
+.rdata:00000001407E35F0                                         ; .data:0000000140ACBAC8?o
+.rdata:00000001407E35F8 aHot116         db 'HOT11_6',0          ; DATA XREF: .data:0000000140AC46C0?o
+.rdata:00000001407E35F8                                         ; .data:0000000140ACBAD0?o
+.rdata:00000001407E3600 aHot117         db 'HOT11_7',0          ; DATA XREF: .data:0000000140AC46C8?o
+.rdata:00000001407E3600                                         ; .data:0000000140ACBAD8?o
+.rdata:00000001407E3608 aHot118         db 'HOT11_8',0          ; DATA XREF: .data:0000000140AC46D0?o
+.rdata:00000001407E3608                                         ; .data:0000000140ACBAE0?o
+.rdata:00000001407E3610 aHot119         db 'HOT11_9',0          ; DATA XREF: .data:0000000140AC46D8?o
+.rdata:00000001407E3610                                         ; .data:0000000140ACBAE8?o
+.rdata:00000001407E3618 aHot1110        db 'HOT11_10',0         ; DATA XREF: .data:0000000140AC46E0?o
+.rdata:00000001407E3618                                         ; .data:0000000140ACBAF0?o
+.rdata:00000001407E3621                 align 8
+.rdata:00000001407E3628 aHot1111        db 'HOT11_11',0         ; DATA XREF: .data:0000000140AC46E8?o
+.rdata:00000001407E3628                                         ; .data:0000000140ACBAF8?o
+.rdata:00000001407E3631                 align 8
+.rdata:00000001407E3638 aHot1112        db 'HOT11_12',0         ; DATA XREF: .data:0000000140AC46F0?o
+.rdata:00000001407E3638                                         ; .data:0000000140ACBB00?o
+.rdata:00000001407E3641                 align 8
+.rdata:00000001407E3648 aHotpage11      db 'HOTPAGE1_1',0       ; DATA XREF: .data:0000000140AC46F8?o
+.rdata:00000001407E3648                                         ; .data:0000000140ACBB08?o
+.rdata:00000001407E3653                 align 8
+.rdata:00000001407E3658 aHotpage12      db 'HOTPAGE1_2',0       ; DATA XREF: .data:0000000140AC4700?o
+.rdata:00000001407E3658                                         ; .data:0000000140ACBB10?o
+.rdata:00000001407E3663                 align 8
+.rdata:00000001407E3668 aHotpage13      db 'HOTPAGE1_3',0       ; DATA XREF: .data:0000000140AC4708?o
+.rdata:00000001407E3668                                         ; .data:0000000140ACBB18?o
+.rdata:00000001407E3673                 align 8
+.rdata:00000001407E3678 aHotpage14      db 'HOTPAGE1_4',0       ; DATA XREF: .data:0000000140AC4710?o
+.rdata:00000001407E3678                                         ; .data:0000000140ACBB20?o
+.rdata:00000001407E3683                 align 8
+.rdata:00000001407E3688 aHotpage15      db 'HOTPAGE1_5',0       ; DATA XREF: .data:0000000140AC4718?o
+.rdata:00000001407E3688                                         ; .data:0000000140ACBB28?o
+.rdata:00000001407E3693                 align 8
+.rdata:00000001407E3698 aHotpage16      db 'HOTPAGE1_6',0       ; DATA XREF: .data:0000000140AC4720?o
+.rdata:00000001407E3698                                         ; .data:0000000140ACBB30?o
+.rdata:00000001407E36A3                 align 8
+.rdata:00000001407E36A8 aHotpage17      db 'HOTPAGE1_7',0       ; DATA XREF: .data:0000000140AC4728?o
+.rdata:00000001407E36A8                                         ; .data:0000000140ACBB38?o
+.rdata:00000001407E36B3                 align 8
+.rdata:00000001407E36B8 aHotpage18      db 'HOTPAGE1_8',0       ; DATA XREF: .data:0000000140AC4730?o
+.rdata:00000001407E36B8                                         ; .data:0000000140ACBB40?o
+.rdata:00000001407E36C3                 align 8
+.rdata:00000001407E36C8 aHotpage19      db 'HOTPAGE1_9',0       ; DATA XREF: .data:0000000140AC4738?o
+.rdata:00000001407E36C8                                         ; .data:0000000140ACBB48?o
+.rdata:00000001407E36D3                 align 8
+.rdata:00000001407E36D8 aHotpage110     db 'HOTPAGE1_10',0      ; DATA XREF: .data:0000000140AC4740?o
+.rdata:00000001407E36D8                                         ; .data:0000000140ACBB50?o
+.rdata:00000001407E36E4                 align 8
+.rdata:00000001407E36E8 aHotpage21      db 'HOTPAGE2_1',0       ; DATA XREF: .data:0000000140AC4748?o
+.rdata:00000001407E36E8                                         ; .data:0000000140ACBB58?o
+.rdata:00000001407E36F3                 align 8
+.rdata:00000001407E36F8 aHotpage22      db 'HOTPAGE2_2',0       ; DATA XREF: .data:0000000140AC4750?o
+.rdata:00000001407E36F8                                         ; .data:0000000140ACBB60?o
+.rdata:00000001407E3703                 align 8
+.rdata:00000001407E3708 aHotpage23      db 'HOTPAGE2_3',0       ; DATA XREF: .data:0000000140AC4758?o
+.rdata:00000001407E3708                                         ; .data:0000000140ACBB68?o
+.rdata:00000001407E3713                 align 8
+.rdata:00000001407E3718 aHotpage24      db 'HOTPAGE2_4',0       ; DATA XREF: .data:0000000140AC4760?o
+.rdata:00000001407E3718                                         ; .data:0000000140ACBB70?o
+.rdata:00000001407E3723                 align 8
+.rdata:00000001407E3728 aHotpage25      db 'HOTPAGE2_5',0       ; DATA XREF: .data:0000000140AC4768?o
+.rdata:00000001407E3728                                         ; .data:0000000140ACBB78?o
+.rdata:00000001407E3733                 align 8
+.rdata:00000001407E3738 aHotpage26      db 'HOTPAGE2_6',0       ; DATA XREF: .data:0000000140AC4770?o
+.rdata:00000001407E3738                                         ; .data:0000000140ACBB80?o
+.rdata:00000001407E3743                 align 8
+.rdata:00000001407E3748 aHotpage27      db 'HOTPAGE2_7',0       ; DATA XREF: .data:0000000140AC4778?o
+.rdata:00000001407E3748                                         ; .data:0000000140ACBB88?o
+.rdata:00000001407E3753                 align 8
+.rdata:00000001407E3758 aHotpage28      db 'HOTPAGE2_8',0       ; DATA XREF: .data:0000000140AC4780?o
+.rdata:00000001407E3758                                         ; .data:0000000140ACBB90?o
+.rdata:00000001407E3763                 align 8
+.rdata:00000001407E3768 aHotpage29      db 'HOTPAGE2_9',0       ; DATA XREF: .data:0000000140AC4788?o
+.rdata:00000001407E3768                                         ; .data:0000000140ACBB98?o
+.rdata:00000001407E3773                 align 8
+.rdata:00000001407E3778 aHotpage210     db 'HOTPAGE2_10',0      ; DATA XREF: .data:0000000140AC4790?o
+.rdata:00000001407E3778                                         ; .data:0000000140ACBBA0?o
+.rdata:00000001407E3784                 align 8
+.rdata:00000001407E3788 aHotpage31      db 'HOTPAGE3_1',0       ; DATA XREF: .data:0000000140AC4798?o
+.rdata:00000001407E3788                                         ; .data:0000000140ACBBA8?o
+.rdata:00000001407E3793                 align 8
+.rdata:00000001407E3798 aHotpage32      db 'HOTPAGE3_2',0       ; DATA XREF: .data:0000000140AC47A0?o
+.rdata:00000001407E3798                                         ; .data:0000000140ACBBB0?o
+.rdata:00000001407E37A3                 align 8
+.rdata:00000001407E37A8 aHotpage33      db 'HOTPAGE3_3',0       ; DATA XREF: .data:0000000140AC47A8?o
+.rdata:00000001407E37A8                                         ; .data:0000000140ACBBB8?o
+.rdata:00000001407E37B3                 align 8
+.rdata:00000001407E37B8 aHotpage34      db 'HOTPAGE3_4',0       ; DATA XREF: .data:0000000140AC47B0?o
+.rdata:00000001407E37B8                                         ; .data:0000000140ACBBC0?o
+.rdata:00000001407E37C3                 align 8
+.rdata:00000001407E37C8 aHotpage35      db 'HOTPAGE3_5',0       ; DATA XREF: .data:0000000140AC47B8?o
+.rdata:00000001407E37C8                                         ; .data:0000000140ACBBC8?o
+.rdata:00000001407E37D3                 align 8
+.rdata:00000001407E37D8 aHotpage36      db 'HOTPAGE3_6',0       ; DATA XREF: .data:0000000140AC47C0?o
+.rdata:00000001407E37D8                                         ; .data:0000000140ACBBD0?o
+.rdata:00000001407E37E3                 align 8
+.rdata:00000001407E37E8 aHotpage37      db 'HOTPAGE3_7',0       ; DATA XREF: .data:0000000140AC47C8?o
+.rdata:00000001407E37E8                                         ; .data:0000000140ACBBD8?o
+.rdata:00000001407E37F3                 align 8
+.rdata:00000001407E37F8 aHotpage38      db 'HOTPAGE3_8',0       ; DATA XREF: .data:0000000140AC47D0?o
+.rdata:00000001407E37F8                                         ; .data:0000000140ACBBE0?o
+.rdata:00000001407E3803                 align 8
+.rdata:00000001407E3808 aHotpage39      db 'HOTPAGE3_9',0       ; DATA XREF: .data:0000000140AC47D8?o
+.rdata:00000001407E3808                                         ; .data:0000000140ACBBE8?o
+.rdata:00000001407E3813                 align 8
+.rdata:00000001407E3818 aHotpage310     db 'HOTPAGE3_10',0      ; DATA XREF: .data:0000000140AC47E0?o
+.rdata:00000001407E3818                                         ; .data:0000000140ACBBF0?o
+.rdata:00000001407E3824                 align 8
+.rdata:00000001407E3828 aHotpage41      db 'HOTPAGE4_1',0       ; DATA XREF: .data:0000000140AC47E8?o
+.rdata:00000001407E3828                                         ; .data:0000000140ACBBF8?o
+.rdata:00000001407E3833                 align 8
+.rdata:00000001407E3838 aHotpage42      db 'HOTPAGE4_2',0       ; DATA XREF: .data:0000000140AC47F0?o
+.rdata:00000001407E3838                                         ; .data:0000000140ACBC00?o
+.rdata:00000001407E3843                 align 8
+.rdata:00000001407E3848 aHotpage43      db 'HOTPAGE4_3',0       ; DATA XREF: .data:0000000140AC47F8?o
+.rdata:00000001407E3848                                         ; .data:0000000140ACBC08?o
+.rdata:00000001407E3853                 align 8
+.rdata:00000001407E3858 aHotpage44      db 'HOTPAGE4_4',0       ; DATA XREF: .data:0000000140AC4800?o
+.rdata:00000001407E3858                                         ; .data:0000000140ACBC10?o
+.rdata:00000001407E3863                 align 8
+.rdata:00000001407E3868 aHotpage45      db 'HOTPAGE4_5',0       ; DATA XREF: .data:0000000140AC4808?o
+.rdata:00000001407E3868                                         ; .data:0000000140ACBC18?o
+.rdata:00000001407E3873                 align 8
+.rdata:00000001407E3878 aHotpage46      db 'HOTPAGE4_6',0       ; DATA XREF: .data:0000000140AC4810?o
+.rdata:00000001407E3878                                         ; .data:0000000140ACBC20?o
+.rdata:00000001407E3883                 align 8
+.rdata:00000001407E3888 aHotpage47      db 'HOTPAGE4_7',0       ; DATA XREF: .data:0000000140AC4818?o
+.rdata:00000001407E3888                                         ; .data:0000000140ACBC28?o
+.rdata:00000001407E3893                 align 8
+.rdata:00000001407E3898 aHotpage48      db 'HOTPAGE4_8',0       ; DATA XREF: .data:0000000140AC4820?o
+.rdata:00000001407E3898                                         ; .data:0000000140ACBC30?o
+.rdata:00000001407E38A3                 align 8
+.rdata:00000001407E38A8 aHotpage49      db 'HOTPAGE4_9',0       ; DATA XREF: .data:0000000140AC4828?o
+.rdata:00000001407E38A8                                         ; .data:0000000140ACBC38?o
+.rdata:00000001407E38B3                 align 8
+.rdata:00000001407E38B8 aHotpage410     db 'HOTPAGE4_10',0      ; DATA XREF: .data:0000000140AC4830?o
+.rdata:00000001407E38B8                                         ; .data:0000000140ACBC40?o
+.rdata:00000001407E38C4                 align 8
+.rdata:00000001407E38C8 aHotpage51      db 'HOTPAGE5_1',0       ; DATA XREF: .data:0000000140AC4838?o
+.rdata:00000001407E38C8                                         ; .data:0000000140ACBC48?o
+.rdata:00000001407E38D3                 align 8
+.rdata:00000001407E38D8 aHotpage52      db 'HOTPAGE5_2',0       ; DATA XREF: .data:0000000140AC4840?o
+.rdata:00000001407E38D8                                         ; .data:0000000140ACBC50?o
+.rdata:00000001407E38E3                 align 8
+.rdata:00000001407E38E8 aHotpage53      db 'HOTPAGE5_3',0       ; DATA XREF: .data:0000000140AC4848?o
+.rdata:00000001407E38E8                                         ; .data:0000000140ACBC58?o
+.rdata:00000001407E38F3                 align 8
+.rdata:00000001407E38F8 aHotpage54      db 'HOTPAGE5_4',0       ; DATA XREF: .data:0000000140AC4850?o
+.rdata:00000001407E38F8                                         ; .data:0000000140ACBC60?o
+.rdata:00000001407E3903                 align 8
+.rdata:00000001407E3908 aHotpage55      db 'HOTPAGE5_5',0       ; DATA XREF: .data:0000000140AC4858?o
+.rdata:00000001407E3908                                         ; .data:0000000140ACBC68?o
+.rdata:00000001407E3913                 align 8
+.rdata:00000001407E3918 aHotpage56      db 'HOTPAGE5_6',0       ; DATA XREF: .data:0000000140AC4860?o
+.rdata:00000001407E3918                                         ; .data:0000000140ACBC70?o
+.rdata:00000001407E3923                 align 8
+.rdata:00000001407E3928 aHotpage57      db 'HOTPAGE5_7',0       ; DATA XREF: .data:0000000140AC4868?o
+.rdata:00000001407E3928                                         ; .data:0000000140ACBC78?o
+.rdata:00000001407E3933                 align 8
+.rdata:00000001407E3938 aHotpage58      db 'HOTPAGE5_8',0       ; DATA XREF: .data:0000000140AC4870?o
+.rdata:00000001407E3938                                         ; .data:0000000140ACBC80?o
+.rdata:00000001407E3943                 align 8
+.rdata:00000001407E3948 aHotpage59      db 'HOTPAGE5_9',0       ; DATA XREF: .data:0000000140AC4878?o
+.rdata:00000001407E3948                                         ; .data:0000000140ACBC88?o
+.rdata:00000001407E3953                 align 8
+.rdata:00000001407E3958 aHotpage510     db 'HOTPAGE5_10',0      ; DATA XREF: .data:0000000140AC4880?o
+.rdata:00000001407E3958                                         ; .data:0000000140ACBC90?o
+.rdata:00000001407E3964                 align 8
+.rdata:00000001407E3968 aHotpage61      db 'HOTPAGE6_1',0       ; DATA XREF: .data:0000000140AC4888?o
+.rdata:00000001407E3968                                         ; .data:0000000140ACBC98?o
+.rdata:00000001407E3973                 align 8
+.rdata:00000001407E3978 aHotpage62      db 'HOTPAGE6_2',0       ; DATA XREF: .data:0000000140AC4890?o
+.rdata:00000001407E3978                                         ; .data:0000000140ACBCA0?o
+.rdata:00000001407E3983                 align 8
+.rdata:00000001407E3988 aHotpage63      db 'HOTPAGE6_3',0       ; DATA XREF: .data:0000000140AC4898?o
+.rdata:00000001407E3988                                         ; .data:0000000140ACBCA8?o
+.rdata:00000001407E3993                 align 8
+.rdata:00000001407E3998 aHotpage64      db 'HOTPAGE6_4',0       ; DATA XREF: .data:0000000140AC48A0?o
+.rdata:00000001407E3998                                         ; .data:0000000140ACBCB0?o
+.rdata:00000001407E39A3                 align 8
+.rdata:00000001407E39A8 aHotpage65      db 'HOTPAGE6_5',0       ; DATA XREF: .data:0000000140AC48A8?o
+.rdata:00000001407E39A8                                         ; .data:0000000140ACBCB8?o
+.rdata:00000001407E39B3                 align 8
+.rdata:00000001407E39B8 aHotpage66      db 'HOTPAGE6_6',0       ; DATA XREF: .data:0000000140AC48B0?o
+.rdata:00000001407E39B8                                         ; .data:0000000140ACBCC0?o
+.rdata:00000001407E39C3                 align 8
+.rdata:00000001407E39C8 aHotpage67      db 'HOTPAGE6_7',0       ; DATA XREF: .data:0000000140AC48B8?o
+.rdata:00000001407E39C8                                         ; .data:0000000140ACBCC8?o
+.rdata:00000001407E39D3                 align 8
+.rdata:00000001407E39D8 aHotpage68      db 'HOTPAGE6_8',0       ; DATA XREF: .data:0000000140AC48C0?o
+.rdata:00000001407E39D8                                         ; .data:0000000140ACBCD0?o
+.rdata:00000001407E39E3                 align 8
+.rdata:00000001407E39E8 aHotpage69      db 'HOTPAGE6_9',0       ; DATA XREF: .data:0000000140AC48C8?o
+.rdata:00000001407E39E8                                         ; .data:0000000140ACBCD8?o
+.rdata:00000001407E39F3                 align 8
+.rdata:00000001407E39F8 aHotpage610     db 'HOTPAGE6_10',0      ; DATA XREF: .data:0000000140AC48D0?o
+.rdata:00000001407E39F8                                         ; .data:0000000140ACBCE0?o
+.rdata:00000001407E3A04                 align 8
+.rdata:00000001407E3A08 aHotpage71      db 'HOTPAGE7_1',0       ; DATA XREF: .data:0000000140AC48D8?o
+.rdata:00000001407E3A08                                         ; .data:0000000140ACBCE8?o
+.rdata:00000001407E3A13                 align 8
+.rdata:00000001407E3A18 aHotpage72      db 'HOTPAGE7_2',0       ; DATA XREF: .data:0000000140AC48E0?o
+.rdata:00000001407E3A18                                         ; .data:0000000140ACBCF0?o
+.rdata:00000001407E3A23                 align 8
+.rdata:00000001407E3A28 aHotpage73      db 'HOTPAGE7_3',0       ; DATA XREF: .data:0000000140AC48E8?o
+.rdata:00000001407E3A28                                         ; .data:0000000140ACBCF8?o
+.rdata:00000001407E3A33                 align 8
+.rdata:00000001407E3A38 aHotpage74      db 'HOTPAGE7_4',0       ; DATA XREF: .data:0000000140AC48F0?o
+.rdata:00000001407E3A38                                         ; .data:0000000140ACBD00?o
+.rdata:00000001407E3A43                 align 8
+.rdata:00000001407E3A48 aHotpage75      db 'HOTPAGE7_5',0       ; DATA XREF: .data:0000000140AC48F8?o
+.rdata:00000001407E3A48                                         ; .data:0000000140ACBD08?o
+.rdata:00000001407E3A53                 align 8
+.rdata:00000001407E3A58 aHotpage76      db 'HOTPAGE7_6',0       ; DATA XREF: .data:0000000140AC4900?o
+.rdata:00000001407E3A58                                         ; .data:0000000140ACBD10?o
+.rdata:00000001407E3A63                 align 8
+.rdata:00000001407E3A68 aHotpage77      db 'HOTPAGE7_7',0       ; DATA XREF: .data:0000000140AC4908?o
+.rdata:00000001407E3A68                                         ; .data:0000000140ACBD18?o
+.rdata:00000001407E3A73                 align 8
+.rdata:00000001407E3A78 aHotpage78      db 'HOTPAGE7_8',0       ; DATA XREF: .data:0000000140AC4910?o
+.rdata:00000001407E3A78                                         ; .data:0000000140ACBD20?o
+.rdata:00000001407E3A83                 align 8
+.rdata:00000001407E3A88 aHotpage79      db 'HOTPAGE7_9',0       ; DATA XREF: .data:0000000140AC4918?o
+.rdata:00000001407E3A88                                         ; .data:0000000140ACBD28?o
+.rdata:00000001407E3A93                 align 8
+.rdata:00000001407E3A98 aHotpage710     db 'HOTPAGE7_10',0      ; DATA XREF: .data:0000000140AC4920?o
+.rdata:00000001407E3A98                                         ; .data:0000000140ACBD30?o
+.rdata:00000001407E3AA4                 align 8
+.rdata:00000001407E3AA8 aHotpage81      db 'HOTPAGE8_1',0       ; DATA XREF: .data:0000000140AC4928?o
+.rdata:00000001407E3AA8                                         ; .data:0000000140ACBD38?o
+.rdata:00000001407E3AB3                 align 8
+.rdata:00000001407E3AB8 aHotpage82      db 'HOTPAGE8_2',0       ; DATA XREF: .data:0000000140AC4930?o
+.rdata:00000001407E3AB8                                         ; .data:0000000140ACBD40?o
+.rdata:00000001407E3AC3                 align 8
+.rdata:00000001407E3AC8 aHotpage83      db 'HOTPAGE8_3',0       ; DATA XREF: .data:0000000140AC4938?o
+.rdata:00000001407E3AC8                                         ; .data:0000000140ACBD48?o
+.rdata:00000001407E3AD3                 align 8
+.rdata:00000001407E3AD8 aHotpage84      db 'HOTPAGE8_4',0       ; DATA XREF: .data:0000000140AC4940?o
+.rdata:00000001407E3AD8                                         ; .data:0000000140ACBD50?o
+.rdata:00000001407E3AE3                 align 8
+.rdata:00000001407E3AE8 aHotpage85      db 'HOTPAGE8_5',0       ; DATA XREF: .data:0000000140AC4948?o
+.rdata:00000001407E3AE8                                         ; .data:0000000140ACBD58?o
+.rdata:00000001407E3AF3                 align 8
+.rdata:00000001407E3AF8 aHotpage86      db 'HOTPAGE8_6',0       ; DATA XREF: .data:0000000140AC4950?o
+.rdata:00000001407E3AF8                                         ; .data:0000000140ACBD60?o
+.rdata:00000001407E3B03                 align 8
+.rdata:00000001407E3B08 aHotpage87      db 'HOTPAGE8_7',0       ; DATA XREF: .data:0000000140AC4958?o
+.rdata:00000001407E3B08                                         ; .data:0000000140ACBD68?o
+.rdata:00000001407E3B13                 align 8
+.rdata:00000001407E3B18 aHotpage88      db 'HOTPAGE8_8',0       ; DATA XREF: .data:0000000140AC4960?o
+.rdata:00000001407E3B18                                         ; .data:0000000140ACBD70?o
+.rdata:00000001407E3B23                 align 8
+.rdata:00000001407E3B28 aHotpage89      db 'HOTPAGE8_9',0       ; DATA XREF: .data:0000000140AC4968?o
+.rdata:00000001407E3B28                                         ; .data:0000000140ACBD78?o
+.rdata:00000001407E3B33                 align 8
+.rdata:00000001407E3B38 aHotpage810     db 'HOTPAGE8_10',0      ; DATA XREF: .data:0000000140AC4970?o
+.rdata:00000001407E3B38                                         ; .data:0000000140ACBD80?o
+.rdata:00000001407E3B44                 align 8
+.rdata:00000001407E3B48 aHotpage91      db 'HOTPAGE9_1',0       ; DATA XREF: .data:0000000140AC4978?o
+.rdata:00000001407E3B48                                         ; .data:0000000140ACBD88?o
+.rdata:00000001407E3B53                 align 8
+.rdata:00000001407E3B58 aHotpage92      db 'HOTPAGE9_2',0       ; DATA XREF: .data:0000000140AC4980?o
+.rdata:00000001407E3B58                                         ; .data:0000000140ACBD90?o
+.rdata:00000001407E3B63                 align 8
+.rdata:00000001407E3B68 aHotpage93      db 'HOTPAGE9_3',0       ; DATA XREF: .data:0000000140AC4988?o
+.rdata:00000001407E3B68                                         ; .data:0000000140ACBD98?o
+.rdata:00000001407E3B73                 align 8
+.rdata:00000001407E3B78 aHotpage94      db 'HOTPAGE9_4',0       ; DATA XREF: .data:0000000140AC4990?o
+.rdata:00000001407E3B78                                         ; .data:0000000140ACBDA0?o
+.rdata:00000001407E3B83                 align 8
+.rdata:00000001407E3B88 aHotpage95      db 'HOTPAGE9_5',0       ; DATA XREF: .data:0000000140AC4998?o
+.rdata:00000001407E3B88                                         ; .data:0000000140ACBDA8?o
+.rdata:00000001407E3B93                 align 8
+.rdata:00000001407E3B98 aHotpage96      db 'HOTPAGE9_6',0       ; DATA XREF: .data:0000000140AC49A0?o
+.rdata:00000001407E3B98                                         ; .data:0000000140ACBDB0?o
+.rdata:00000001407E3BA3                 align 8
+.rdata:00000001407E3BA8 aHotpage97      db 'HOTPAGE9_7',0       ; DATA XREF: .data:0000000140AC49A8?o
+.rdata:00000001407E3BA8                                         ; .data:0000000140ACBDB8?o
+.rdata:00000001407E3BB3                 align 8
+.rdata:00000001407E3BB8 aHotpage98      db 'HOTPAGE9_8',0       ; DATA XREF: .data:0000000140AC49B0?o
+.rdata:00000001407E3BB8                                         ; .data:0000000140ACBDC0?o
+.rdata:00000001407E3BC3                 align 8
+.rdata:00000001407E3BC8 aHotpage99      db 'HOTPAGE9_9',0       ; DATA XREF: .data:0000000140AC49B8?o
+.rdata:00000001407E3BC8                                         ; .data:0000000140ACBDC8?o
+.rdata:00000001407E3BD3                 align 8
+.rdata:00000001407E3BD8 aHotpage910     db 'HOTPAGE9_10',0      ; DATA XREF: .data:0000000140AC49C0?o
+.rdata:00000001407E3BD8                                         ; .data:0000000140ACBDD0?o
+.rdata:00000001407E3BE4                 align 8
+.rdata:00000001407E3BE8 aHotpage101     db 'HOTPAGE10_1',0      ; DATA XREF: .data:0000000140AC49C8?o
+.rdata:00000001407E3BE8                                         ; .data:0000000140ACBDD8?o
+.rdata:00000001407E3BF4                 align 8
+.rdata:00000001407E3BF8 aHotpage102     db 'HOTPAGE10_2',0      ; DATA XREF: .data:0000000140AC49D0?o
+.rdata:00000001407E3BF8                                         ; .data:0000000140ACBDE0?o
+.rdata:00000001407E3C04                 align 8
+.rdata:00000001407E3C08 aHotpage103     db 'HOTPAGE10_3',0      ; DATA XREF: .data:0000000140AC49D8?o
+.rdata:00000001407E3C08                                         ; .data:0000000140ACBDE8?o
+.rdata:00000001407E3C14                 align 8
+.rdata:00000001407E3C18 aHotpage104     db 'HOTPAGE10_4',0      ; DATA XREF: .data:0000000140AC49E0?o
+.rdata:00000001407E3C18                                         ; .data:0000000140ACBDF0?o
+.rdata:00000001407E3C24                 align 8
+.rdata:00000001407E3C28 aHotpage105     db 'HOTPAGE10_5',0      ; DATA XREF: .data:0000000140AC49E8?o
+.rdata:00000001407E3C28                                         ; .data:0000000140ACBDF8?o
+.rdata:00000001407E3C34                 align 8
+.rdata:00000001407E3C38 aHotpage106     db 'HOTPAGE10_6',0      ; DATA XREF: .data:0000000140AC49F0?o
+.rdata:00000001407E3C38                                         ; .data:0000000140ACBE00?o
+.rdata:00000001407E3C44                 align 8
+.rdata:00000001407E3C48 aHotpage107     db 'HOTPAGE10_7',0      ; DATA XREF: .data:0000000140AC49F8?o
+.rdata:00000001407E3C48                                         ; .data:0000000140ACBE08?o
+.rdata:00000001407E3C54                 align 8
+.rdata:00000001407E3C58 aHotpage108     db 'HOTPAGE10_8',0      ; DATA XREF: .data:0000000140AC4A00?o
+.rdata:00000001407E3C58                                         ; .data:0000000140ACBE10?o
+.rdata:00000001407E3C64                 align 8
+.rdata:00000001407E3C68 aHotpage109     db 'HOTPAGE10_9',0      ; DATA XREF: .data:0000000140AC4A08?o
+.rdata:00000001407E3C68                                         ; .data:0000000140ACBE18?o
+.rdata:00000001407E3C74                 align 8
+.rdata:00000001407E3C78 aHotpage1010    db 'HOTPAGE10_10',0     ; DATA XREF: .data:0000000140AC4A10?o
+.rdata:00000001407E3C78                                         ; .data:0000000140ACBE20?o
+.rdata:00000001407E3C85                 align 8
+.rdata:00000001407E3C88 aHotpage111     db 'HOTPAGE11_1',0      ; DATA XREF: .data:0000000140AC4A18?o
+.rdata:00000001407E3C88                                         ; .data:0000000140ACBE28?o
+.rdata:00000001407E3C94                 align 8
+.rdata:00000001407E3C98 aHotpage112     db 'HOTPAGE11_2',0      ; DATA XREF: .data:0000000140AC4A20?o
+.rdata:00000001407E3C98                                         ; .data:0000000140ACBE30?o
+.rdata:00000001407E3CA4                 align 8
+.rdata:00000001407E3CA8 aHotpage113     db 'HOTPAGE11_3',0      ; DATA XREF: .data:0000000140AC4A28?o
+.rdata:00000001407E3CA8                                         ; .data:0000000140ACBE38?o
+.rdata:00000001407E3CB4                 align 8
+.rdata:00000001407E3CB8 aHotpage114     db 'HOTPAGE11_4',0      ; DATA XREF: .data:0000000140AC4A30?o
+.rdata:00000001407E3CB8                                         ; .data:0000000140ACBE40?o
+.rdata:00000001407E3CC4                 align 8
+.rdata:00000001407E3CC8 aHotpage115     db 'HOTPAGE11_5',0      ; DATA XREF: .data:0000000140AC4A38?o
+.rdata:00000001407E3CC8                                         ; .data:0000000140ACBE48?o
+.rdata:00000001407E3CD4                 align 8
+.rdata:00000001407E3CD8 aHotpage116     db 'HOTPAGE11_6',0      ; DATA XREF: .data:0000000140AC4A40?o
+.rdata:00000001407E3CD8                                         ; .data:0000000140ACBE50?o
+.rdata:00000001407E3CE4                 align 8
+.rdata:00000001407E3CE8 aHotpage117     db 'HOTPAGE11_7',0      ; DATA XREF: .data:0000000140AC4A48?o
+.rdata:00000001407E3CE8                                         ; .data:0000000140ACBE58?o
+.rdata:00000001407E3CF4                 align 8
+.rdata:00000001407E3CF8 aHotpage118     db 'HOTPAGE11_8',0      ; DATA XREF: .data:0000000140AC4A50?o
+.rdata:00000001407E3CF8                                         ; .data:0000000140ACBE60?o
+.rdata:00000001407E3D04                 align 8
+.rdata:00000001407E3D08 aHotpage119     db 'HOTPAGE11_9',0      ; DATA XREF: .data:0000000140AC4A58?o
+.rdata:00000001407E3D08                                         ; .data:0000000140ACBE68?o
+.rdata:00000001407E3D14                 align 8
+.rdata:00000001407E3D18 aHotpage1110    db 'HOTPAGE11_10',0     ; DATA XREF: .data:0000000140AC4A60?o
+.rdata:00000001407E3D18                                         ; .data:0000000140ACBE70?o
+.rdata:00000001407E3D25                 align 8
+.rdata:00000001407E3D28 aCast1          db 'CAST1',0            ; DATA XREF: .data:0000000140AC4A68?o
+.rdata:00000001407E3D28                                         ; .data:0000000140ACBE78?o
+.rdata:00000001407E3D2E                 align 10h
+.rdata:00000001407E3D30 aCast2          db 'CAST2',0            ; DATA XREF: .data:0000000140AC4A70?o
+.rdata:00000001407E3D30                                         ; .data:0000000140ACBE80?o
+.rdata:00000001407E3D36                 align 8
+.rdata:00000001407E3D38 aCast3          db 'CAST3',0            ; DATA XREF: .data:0000000140AC4A78?o
+.rdata:00000001407E3D38                                         ; .data:0000000140ACBE88?o
+.rdata:00000001407E3D3E                 align 20h
+.rdata:00000001407E3D40 aCast4          db 'CAST4',0            ; DATA XREF: .data:0000000140AC4A80?o
+.rdata:00000001407E3D40                                         ; .data:0000000140ACBE90?o
+.rdata:00000001407E3D46                 align 8
+.rdata:00000001407E3D48 aCast5          db 'CAST5',0            ; DATA XREF: .data:0000000140AC4A88?o
+.rdata:00000001407E3D48                                         ; .data:0000000140ACBE98?o
+.rdata:00000001407E3D4E                 align 10h
+.rdata:00000001407E3D50 aCast6          db 'CAST6',0            ; DATA XREF: .data:0000000140AC4A90?o
+.rdata:00000001407E3D50                                         ; .data:0000000140ACBEA0?o
+.rdata:00000001407E3D56                 align 8
+.rdata:00000001407E3D58 aCast7          db 'CAST7',0            ; DATA XREF: .data:0000000140AC4A98?o
+.rdata:00000001407E3D58                                         ; .data:0000000140ACBEA8?o
+.rdata:00000001407E3D5E                 align 20h
+.rdata:00000001407E3D60 aCast8          db 'CAST8',0            ; DATA XREF: .data:0000000140AC4AA0?o
+.rdata:00000001407E3D60                                         ; .data:0000000140ACBEB0?o
+.rdata:00000001407E3D66                 align 8
+.rdata:00000001407E3D68 aCast9          db 'CAST9',0            ; DATA XREF: .data:0000000140AC4AA8?o
+.rdata:00000001407E3D68                                         ; .data:0000000140ACBEB8?o
+.rdata:00000001407E3D6E                 align 10h
+.rdata:00000001407E3D70 aCast10         db 'CAST10',0           ; DATA XREF: .data:0000000140AC4AB0?o
+.rdata:00000001407E3D70                                         ; .data:0000000140ACBEC0?o
+.rdata:00000001407E3D77                 align 8
+.rdata:00000001407E3D78 aCast11         db 'CAST11',0           ; DATA XREF: .data:0000000140AC4AB8?o
+.rdata:00000001407E3D78                                         ; .data:0000000140ACBEC8?o
+.rdata:00000001407E3D7F                 align 20h
+.rdata:00000001407E3D80 aCast12         db 'CAST12',0           ; DATA XREF: .data:0000000140AC4AC0?o
+.rdata:00000001407E3D80                                         ; .data:0000000140ACBED0?o
+.rdata:00000001407E3D87                 align 8
+.rdata:00000001407E3D88 aCast13         db 'CAST13',0           ; DATA XREF: .data:0000000140AC4AC8?o
+.rdata:00000001407E3D88                                         ; .data:0000000140ACBED8?o
+.rdata:00000001407E3D8F                 align 10h
+.rdata:00000001407E3D90 aCast14         db 'CAST14',0           ; DATA XREF: .data:0000000140AC4AD0?o
+.rdata:00000001407E3D90                                         ; .data:0000000140ACBEE0?o
+.rdata:00000001407E3D97                 align 8
+.rdata:00000001407E3D98 aReply          db 'REPLY',0            ; DATA XREF: .data:0000000140AC4AD8?o
+.rdata:00000001407E3D98                                         ; .data:0000000140ACBEE8?o
+.rdata:00000001407E3D9E                 align 20h
+.rdata:00000001407E3DA0 aCyclereply     db 'CYCLEREPLY',0       ; DATA XREF: .data:0000000140AC4AE0?o
+.rdata:00000001407E3DA0                                         ; .data:0000000140ACBEF0?o
+.rdata:00000001407E3DAB                 align 10h
+.rdata:00000001407E3DB0 aCyclereplyBack db 'CYCLEREPLY_BACK',0  ; DATA XREF: .data:0000000140AC4AE8?o
+.rdata:00000001407E3DB0                                         ; .data:0000000140ACBEF8?o
+.rdata:00000001407E3DC0 aBackdrop       db 'BACKDROP',0         ; DATA XREF: .data:0000000140AC4AF0?o
+.rdata:00000001407E3DC0                                         ; .data:0000000140ACBF00?o
+.rdata:00000001407E3DC9                 align 10h
+.rdata:00000001407E3DD0 aToggletarget   db 'TOGGLETARGET',0     ; DATA XREF: .data:0000000140AC4AF8?o
+.rdata:00000001407E3DD0                                         ; .data:0000000140ACBF08?o
+.rdata:00000001407E3DDD                 align 20h
+.rdata:00000001407E3DE0 aSpellbook_1    db 'SPELLBOOK',0        ; DATA XREF: .data:0000000140AC4B00?o
+.rdata:00000001407E3DE0                                         ; .data:0000000140ACBF10?o
+.rdata:00000001407E3DEA                 align 10h
+.rdata:00000001407E3DF0 aAbilities_0    db 'ABILITIES',0        ; DATA XREF: .data:0000000140AC4B08?o
+.rdata:00000001407E3DF0                                         ; .data:0000000140ACBF18?o
+.rdata:00000001407E3DFA                 align 4
+.rdata:00000001407E3DFC aCombat_0       db 'COMBAT',0           ; DATA XREF: .data:0000000140AC4B10?o
+.rdata:00000001407E3DFC                                         ; .data:0000000140ACBF20?o
+.rdata:00000001407E3E03                 align 8
+.rdata:00000001407E3E08 aSocials_0      db 'SOCIALS',0          ; DATA XREF: .data:0000000140AC4B18?o
+.rdata:00000001407E3E08                                         ; .data:0000000140ACBF28?o
+.rdata:00000001407E3E10 aMain_1         db 'MAIN',0             ; DATA XREF: .data:0000000140AC4B20?o
+.rdata:00000001407E3E10                                         ; .data:0000000140ACBF30?o
+.rdata:00000001407E3E15                 align 8
+.rdata:00000001407E3E18 aWho            db 'WHO',0              ; DATA XREF: .data:0000000140AC4B28?o
+.rdata:00000001407E3E18                                         ; .data:0000000140ACBF38?o
+.rdata:00000001407E3E1C                 align 20h
+.rdata:00000001407E3E20 aInviteFollow   db 'INVITE_FOLLOW',0    ; DATA XREF: .data:0000000140AC4B30?o
+.rdata:00000001407E3E20                                         ; .data:0000000140ACBF40?o
+.rdata:00000001407E3E2E                 align 10h
+.rdata:00000001407E3E30 aDisband        db 'DISBAND',0          ; DATA XREF: .data:0000000140AC4B38?o
+.rdata:00000001407E3E30                                         ; .data:0000000140ACBF48?o
+.rdata:00000001407E3E38 aCamp           db 'CAMP',0             ; DATA XREF: .data:0000000140AC4B40?o
+.rdata:00000001407E3E38                                         ; .data:0000000140ACBF50?o
+.rdata:00000001407E3E3D                 align 20h
+.rdata:00000001407E3E40 aSitStand       db 'SIT_STAND',0        ; DATA XREF: .data:0000000140AC4B48?o
+.rdata:00000001407E3E40                                         ; .data:0000000140ACBF58?o
+.rdata:00000001407E3E4A                 align 10h
+.rdata:00000001407E3E50 aRunWalk        db 'RUN_WALK',0         ; DATA XREF: .data:0000000140AC4B50?o
+.rdata:00000001407E3E50                                         ; .data:0000000140ACBF60?o
+.rdata:00000001407E3E59                 align 20h
+.rdata:00000001407E3E60 aClipIn         db 'CLIP_IN',0          ; DATA XREF: .data:0000000140AC4B58?o
+.rdata:00000001407E3E60                                         ; .data:0000000140ACBF68?o
+.rdata:00000001407E3E68 aClipOut        db 'CLIP_OUT',0         ; DATA XREF: .data:0000000140AC4B60?o
+.rdata:00000001407E3E68                                         ; .data:0000000140ACBF70?o
+.rdata:00000001407E3E71                 align 8
+.rdata:00000001407E3E78 aVoiceOn        db 'VOICE_ON',0         ; DATA XREF: .data:0000000140AC4B68?o
+.rdata:00000001407E3E78                                         ; .data:0000000140ACBF78?o
+.rdata:00000001407E3E81                 align 8
+.rdata:00000001407E3E88 aScreencap      db 'SCREENCAP',0        ; DATA XREF: .data:0000000140AC4B70?o
+.rdata:00000001407E3E88                                         ; .data:0000000140ACBF80?o
+.rdata:00000001407E3E92                 align 8
+.rdata:00000001407E3E98 aHistoryUp      db 'HISTORY_UP',0       ; DATA XREF: .data:0000000140AC4B78?o
+.rdata:00000001407E3E98                                         ; .data:0000000140ACBF88?o
+.rdata:00000001407E3EA3                 align 8
+.rdata:00000001407E3EA8 aHistoryDown    db 'HISTORY_DOWN',0     ; DATA XREF: .data:0000000140AC4B80?o
+.rdata:00000001407E3EA8                                         ; .data:0000000140ACBF90?o
+.rdata:00000001407E3EB5                 align 8
+.rdata:00000001407E3EB8 aPageup         db 'PAGEUP',0           ; DATA XREF: .data:0000000140AC4B88?o
+.rdata:00000001407E3EB8                                         ; .data:0000000140ACBF98?o
+.rdata:00000001407E3EBF                 align 20h
+.rdata:00000001407E3EC0 aPagedown       db 'PAGEDOWN',0         ; DATA XREF: .data:0000000140AC4B90?o
+.rdata:00000001407E3EC0                                         ; .data:0000000140ACBFA0?o
+.rdata:00000001407E3EC9                 align 10h
+.rdata:00000001407E3ED0 aCmdmodeSay     db 'CMDMODE_SAY',0      ; DATA XREF: .data:0000000140AC4B98?o
+.rdata:00000001407E3ED0                                         ; .data:0000000140ACBFA8?o
+.rdata:00000001407E3EDC                 align 20h
+.rdata:00000001407E3EE0 aCmdmodeEmote   db 'CMDMODE_EMOTE',0    ; DATA XREF: .data:0000000140AC4BA0?o
+.rdata:00000001407E3EE0                                         ; .data:0000000140ACBFB0?o
+.rdata:00000001407E3EEE                 align 10h
+.rdata:00000001407E3EF0 aLockWindows    db 'LOCK_WINDOWS',0     ; DATA XREF: .data:0000000140AC4BA8?o
+.rdata:00000001407E3EF0                                         ; .data:0000000140ACBFB8?o
+.rdata:00000001407E3EFD                 align 20h
+.rdata:00000001407E3F00 aTogglePlayerwi db 'TOGGLE_PLAYERWIN',0 ; DATA XREF: .data:0000000140AC4BB0?o
+.rdata:00000001407E3F00                                         ; .data:0000000140ACBFC0?o
+.rdata:00000001407E3F11                 align 8
+.rdata:00000001407E3F18 aTogglePartywin db 'TOGGLE_PARTYWIN',0  ; DATA XREF: .data:0000000140AC4BB8?o
+.rdata:00000001407E3F18                                         ; .data:0000000140ACBFC8?o
+.rdata:00000001407E3F28 aToggleTargetwi db 'TOGGLE_TARGETWIN',0 ; DATA XREF: .data:0000000140AC4BC0?o
+.rdata:00000001407E3F28                                         ; .data:0000000140ACBFD0?o
+.rdata:00000001407E3F39                 align 20h
+.rdata:00000001407E3F40 aToggleSpellswi db 'TOGGLE_SPELLSWIN',0 ; DATA XREF: .data:0000000140AC4BC8?o
+.rdata:00000001407E3F40                                         ; .data:0000000140ACBFD8?o
+.rdata:00000001407E3F51                 align 8
+.rdata:00000001407E3F58 aToggleBuffwin  db 'TOGGLE_BUFFWIN',0   ; DATA XREF: .data:0000000140AC4BD0?o
+.rdata:00000001407E3F58                                         ; .data:0000000140ACBFE0?o
+.rdata:00000001407E3F67                 align 8
+.rdata:00000001407E3F68 aToggleHotbox1w db 'TOGGLE_HOTBOX1WIN',0
+.rdata:00000001407E3F68                                         ; DATA XREF: .data:0000000140AC4BD8?o
+.rdata:00000001407E3F68                                         ; .data:0000000140ACBFE8?o
+.rdata:00000001407E3F7A                 align 20h
+.rdata:00000001407E3F80 aToggleHotbox2w db 'TOGGLE_HOTBOX2WIN',0
+.rdata:00000001407E3F80                                         ; DATA XREF: .data:0000000140AC4BE0?o
+.rdata:00000001407E3F80                                         ; .data:0000000140ACBFF0?o
+.rdata:00000001407E3F92                 align 8
+.rdata:00000001407E3F98 aToggleHotbox3w db 'TOGGLE_HOTBOX3WIN',0
+.rdata:00000001407E3F98                                         ; DATA XREF: .data:0000000140AC4BE8?o
+.rdata:00000001407E3F98                                         ; .data:0000000140ACBFF8?o
+.rdata:00000001407E3FAA                 align 10h
+.rdata:00000001407E3FB0 aToggleHotbox4w db 'TOGGLE_HOTBOX4WIN',0
+.rdata:00000001407E3FB0                                         ; DATA XREF: .data:0000000140AC4BF0?o
+.rdata:00000001407E3FB0                                         ; .data:0000000140ACC000?o
+.rdata:00000001407E3FC2                 align 8
+.rdata:00000001407E3FC8 aToggleHotbox5w db 'TOGGLE_HOTBOX5WIN',0
+.rdata:00000001407E3FC8                                         ; DATA XREF: .data:0000000140AC4BF8?o
+.rdata:00000001407E3FC8                                         ; .data:0000000140ACC008?o
+.rdata:00000001407E3FDA                 align 20h
+.rdata:00000001407E3FE0 aToggleHotbox6w db 'TOGGLE_HOTBOX6WIN',0
+.rdata:00000001407E3FE0                                         ; DATA XREF: .data:0000000140AC4C00?o
+.rdata:00000001407E3FE0                                         ; .data:0000000140ACC010?o
+.rdata:00000001407E3FF2                 align 8
+.rdata:00000001407E3FF8 aToggleHotbox7w db 'TOGGLE_HOTBOX7WIN',0
+.rdata:00000001407E3FF8                                         ; DATA XREF: .data:0000000140AC4C08?o
+.rdata:00000001407E3FF8                                         ; .data:0000000140ACC018?o
+.rdata:00000001407E400A                 align 10h
+.rdata:00000001407E4010 aToggleHotbox8w db 'TOGGLE_HOTBOX8WIN',0
+.rdata:00000001407E4010                                         ; DATA XREF: .data:0000000140AC4C10?o
+.rdata:00000001407E4010                                         ; .data:0000000140ACC020?o
+.rdata:00000001407E4022                 align 8
+.rdata:00000001407E4028 aToggleHotbox9w db 'TOGGLE_HOTBOX9WIN',0
+.rdata:00000001407E4028                                         ; DATA XREF: .data:0000000140AC4C18?o
+.rdata:00000001407E4028                                         ; .data:0000000140ACC028?o
+.rdata:00000001407E403A                 align 20h
+.rdata:00000001407E4040 aToggleHotbox10 db 'TOGGLE_HOTBOX10WIN',0
+.rdata:00000001407E4040                                         ; DATA XREF: .data:0000000140AC4C20?o
+.rdata:00000001407E4040                                         ; .data:0000000140ACC030?o
+.rdata:00000001407E4053                 align 8
+.rdata:00000001407E4058 aToggleHotbox11 db 'TOGGLE_HOTBOX11WIN',0
+.rdata:00000001407E4058                                         ; DATA XREF: .data:0000000140AC4C28?o
+.rdata:00000001407E4058                                         ; .data:0000000140ACC038?o
+.rdata:00000001407E406B                 align 10h
+.rdata:00000001407E4070 aToggleChatwin  db 'TOGGLE_CHATWIN',0   ; DATA XREF: .data:0000000140AC4C30?o
+.rdata:00000001407E4070                                         ; .data:0000000140ACC040?o
+.rdata:00000001407E407F                 align 20h
+.rdata:00000001407E4080 aToggleMailwin  db 'TOGGLE_MAILWIN',0   ; DATA XREF: .data:0000000140AC4C38?o
+.rdata:00000001407E4080                                         ; .data:0000000140ACC048?o
+.rdata:00000001407E408F                 align 10h
+.rdata:00000001407E4090 aToggleMailcomp db 'TOGGLE_MAILCOMPWIN',0
+.rdata:00000001407E4090                                         ; DATA XREF: .data:0000000140AC4C40?o
+.rdata:00000001407E4090                                         ; .data:0000000140ACC050?o
+.rdata:00000001407E40A3                 align 8
+.rdata:00000001407E40A8 aToggleMainmenu db 'TOGGLE_MAINMENUWIN',0
+.rdata:00000001407E40A8                                         ; DATA XREF: .data:0000000140AC4C48?o
+.rdata:00000001407E40A8                                         ; .data:0000000140ACC058?o
+.rdata:00000001407E40BB                 align 20h
+.rdata:00000001407E40C0 aToggleAltadvwi db 'TOGGLE_ALTADVWIN',0 ; DATA XREF: .data:0000000140AC4C50?o
+.rdata:00000001407E40C0                                         ; .data:0000000140ACC060?o
+.rdata:00000001407E40D1                 align 8
+.rdata:00000001407E40D8 aToggleBazaarwi db 'TOGGLE_BAZAARWIN',0 ; DATA XREF: .data:0000000140AC4C58?o
+.rdata:00000001407E40D8                                         ; .data:0000000140ACC068?o
+.rdata:00000001407E40E9                 align 10h
+.rdata:00000001407E40F0 aRtarget        db 'RTARGET',0          ; DATA XREF: .data:0000000140AC4C60?o
+.rdata:00000001407E40F0                                         ; .data:0000000140ACC070?o
+.rdata:00000001407E40F8 aToggleFriendsw db 'TOGGLE_FRIENDSWIN',0
+.rdata:00000001407E40F8                                         ; DATA XREF: .data:0000000140AC4C68?o
+.rdata:00000001407E40F8                                         ; .data:0000000140ACC078?o
+.rdata:00000001407E410A                 align 10h
+.rdata:00000001407E4110 aTogglePetinfow db 'TOGGLE_PETINFOWIN',0
+.rdata:00000001407E4110                                         ; DATA XREF: .data:0000000140AC4C70?o
+.rdata:00000001407E4110                                         ; .data:0000000140ACC080?o
+.rdata:00000001407E4122                 align 8
+.rdata:00000001407E4128 aToggleOptionsw db 'TOGGLE_OPTIONSWIN',0
+.rdata:00000001407E4128                                         ; DATA XREF: .data:0000000140AC4C78?o
+.rdata:00000001407E4128                                         ; .data:0000000140ACC088?o
+.rdata:00000001407E413A                 align 20h
+.rdata:00000001407E4140 aToggleHelpwin  db 'TOGGLE_HELPWIN',0   ; DATA XREF: .data:0000000140AC4C80?o
+.rdata:00000001407E4140                                         ; .data:0000000140ACC090?o
+.rdata:00000001407E414F                 align 10h
+.rdata:00000001407E4150 aToggleSelector db 'TOGGLE_SELECTORWIN',0
+.rdata:00000001407E4150                                         ; DATA XREF: .data:0000000140AC4C88?o
+.rdata:00000001407E4150                                         ; .data:0000000140ACC098?o
+.rdata:00000001407E4163                 align 8
+.rdata:00000001407E4168 aToggleVideomod db 'TOGGLE_VIDEOMODEWIN',0
+.rdata:00000001407E4168                                         ; DATA XREF: .data:0000000140AC4C90?o
+.rdata:00000001407E4168                                         ; .data:0000000140ACC0A0?o
+.rdata:00000001407E417C                 align 20h
+.rdata:00000001407E4180 aToggleBazaarse db 'TOGGLE_BAZAARSEARCHWIN',0
+.rdata:00000001407E4180                                         ; DATA XREF: .data:0000000140AC4C98?o
+.rdata:00000001407E4180                                         ; .data:0000000140ACC0A8?o
+.rdata:00000001407E4197                 align 8
+.rdata:00000001407E4198 aToggleCompassw db 'TOGGLE_COMPASSWIN',0
+.rdata:00000001407E4198                                         ; DATA XREF: .data:0000000140AC4CA0?o
+.rdata:00000001407E4198                                         ; .data:0000000140ACC0B0?o
+.rdata:00000001407E41AA                 align 10h
+.rdata:00000001407E41B0 aToggleRaidwin  db 'TOGGLE_RAIDWIN',0   ; DATA XREF: .data:0000000140AC4CA8?o
+.rdata:00000001407E41B0                                         ; .data:0000000140ACC0B8?o
+.rdata:00000001407E41BF                 align 20h
+.rdata:00000001407E41C0 aToggleMusicpla db 'TOGGLE_MUSICPLAYERWIN',0
+.rdata:00000001407E41C0                                         ; DATA XREF: .data:0000000140AC4CB0?o
+.rdata:00000001407E41C0                                         ; .data:0000000140ACC0C0?o
+.rdata:00000001407E41D6                 align 8
+.rdata:00000001407E41D8 aForwardCam     db 'FORWARD_CAM',0      ; DATA XREF: .data:0000000140AC4CB8?o
+.rdata:00000001407E41D8                                         ; .data:0000000140ACC0C8?o
+.rdata:00000001407E41E4                 align 8
+.rdata:00000001407E41E8 aBackCam        db 'BACK_CAM',0         ; DATA XREF: .data:0000000140AC4CC0?o
+.rdata:00000001407E41E8                                         ; .data:0000000140ACC0D0?o
+.rdata:00000001407E41F1                 align 8
+.rdata:00000001407E41F8 aRightCam       db 'RIGHT_CAM',0        ; DATA XREF: .data:0000000140AC4CC8?o
+.rdata:00000001407E41F8                                         ; .data:0000000140ACC0D8?o
+.rdata:00000001407E4202                 align 8
+.rdata:00000001407E4208 aLeftCam        db 'LEFT_CAM',0         ; DATA XREF: .data:0000000140AC4CD0?o
+.rdata:00000001407E4208                                         ; .data:0000000140ACC0E0?o
+.rdata:00000001407E4211                 align 8
+.rdata:00000001407E4218 aPitchupCam     db 'PITCHUP_CAM',0      ; DATA XREF: .data:0000000140AC4CD8?o
+.rdata:00000001407E4218                                         ; .data:0000000140ACC0E8?o
+.rdata:00000001407E4224                 align 8
+.rdata:00000001407E4228 aPitchdownCam   db 'PITCHDOWN_CAM',0    ; DATA XREF: .data:0000000140AC4CE0?o
+.rdata:00000001407E4228                                         ; .data:0000000140ACC0F0?o
+.rdata:00000001407E4236                 align 8
+.rdata:00000001407E4238 aToggleJournal  db 'TOGGLE_JOURNAL',0   ; DATA XREF: .data:0000000140AC4CE8?o
+.rdata:00000001407E4238                                         ; .data:0000000140ACC0F8?o
+.rdata:00000001407E4247                 align 8
+.rdata:00000001407E4248 aToggleSdbuffwi db 'TOGGLE_SDBUFFWIN',0 ; DATA XREF: .data:0000000140AC4CF0?o
+.rdata:00000001407E4248                                         ; .data:0000000140ACC100?o
+.rdata:00000001407E4259                 align 20h
+.rdata:00000001407E4260 aReleaseMouseCu db 'RELEASE_MOUSE_CURSOR',0
+.rdata:00000001407E4260                                         ; DATA XREF: .data:0000000140AC4CF8?o
+.rdata:00000001407E4260                                         ; .data:0000000140ACC108?o
+.rdata:00000001407E4275                 align 8
+.rdata:00000001407E4278 aToggleStorywin db 'TOGGLE_STORYWIN',0  ; DATA XREF: .data:0000000140AC4D00?o
+.rdata:00000001407E4278                                         ; .data:0000000140ACC110?o
+.rdata:00000001407E4288 aToggleMapwin   db 'TOGGLE_MAPWIN',0    ; DATA XREF: .data:0000000140AC4D08?o
+.rdata:00000001407E4288                                         ; .data:0000000140ACC118?o
+.rdata:00000001407E4296                 align 8
+.rdata:00000001407E4298 aToggleGuildmgm db 'TOGGLE_GUILDMGMTWIN',0
+.rdata:00000001407E4298                                         ; DATA XREF: .data:0000000140AC4D10?o
+.rdata:00000001407E4298                                         ; .data:0000000140ACC120?o
+.rdata:00000001407E42AC                 align 10h
+.rdata:00000001407E42B0 aToggleFellowsh db 'TOGGLE_FELLOWSHIPWIN',0
+.rdata:00000001407E42B0                                         ; DATA XREF: .data:0000000140AC4D18?o
+.rdata:00000001407E42B0                                         ; .data:0000000140ACC128?o
+.rdata:00000001407E42C5                 align 8
+.rdata:00000001407E42C8 aToggleLfgroupw db 'TOGGLE_LFGROUPWIN',0
+.rdata:00000001407E42C8                                         ; DATA XREF: .data:0000000140AC4D20?o
+.rdata:00000001407E42C8                                         ; .data:0000000140ACC130?o
+.rdata:00000001407E42DA                 align 20h
+.rdata:00000001407E42E0 aToggleLfguildw db 'TOGGLE_LFGUILDWIN',0
+.rdata:00000001407E42E0                                         ; DATA XREF: .data:0000000140AC4D28?o
+.rdata:00000001407E42E0                                         ; .data:0000000140ACC138?o
+.rdata:00000001407E42F2                 align 8
+.rdata:00000001407E42F8 aToggletwotarge db 'TOGGLETWOTARGETS',0 ; DATA XREF: .data:0000000140AC4D30?o
+.rdata:00000001407E42F8                                         ; .data:0000000140ACC140?o
+.rdata:00000001407E4309                 align 10h
+.rdata:00000001407E4310 aToggleContextm db 'TOGGLE_CONTEXTMENUS',0
+.rdata:00000001407E4310                                         ; DATA XREF: .data:0000000140AC4D38?o
+.rdata:00000001407E4310                                         ; .data:0000000140ACC148?o
+.rdata:00000001407E4324                 align 8
+.rdata:00000001407E4328 aFirstPersonCam db 'FIRST_PERSON_CAMERA',0
+.rdata:00000001407E4328                                         ; DATA XREF: .data:0000000140AC4D40?o
+.rdata:00000001407E4328                                         ; .data:0000000140ACC150?o
+.rdata:00000001407E433C                 align 20h
+.rdata:00000001407E4340 aOverheadCamera db 'OVERHEAD_CAMERA',0  ; DATA XREF: .data:0000000140AC4D48?o
+.rdata:00000001407E4340                                         ; .data:0000000140ACC158?o
+.rdata:00000001407E4350 aChaseCamera    db 'CHASE_CAMERA',0     ; DATA XREF: .data:0000000140AC4D50?o
+.rdata:00000001407E4350                                         ; .data:0000000140ACC160?o
+.rdata:00000001407E435D                 align 20h
+.rdata:00000001407E4360 aUser1Camera    db 'USER1_CAMERA',0     ; DATA XREF: .data:0000000140AC4D58?o
+.rdata:00000001407E4360                                         ; .data:0000000140ACC168?o
+.rdata:00000001407E436D                 align 10h
+.rdata:00000001407E4370 aUser2Camera    db 'USER2_CAMERA',0     ; DATA XREF: .data:0000000140AC4D60?o
+.rdata:00000001407E4370                                         ; .data:0000000140ACC170?o
+.rdata:00000001407E437D                 align 20h
+.rdata:00000001407E4380 aTetherCamera   db 'TETHER_CAMERA',0    ; DATA XREF: .data:0000000140AC4D68?o
+.rdata:00000001407E4380                                         ; .data:0000000140ACC178?o
+.rdata:00000001407E438E                 align 10h
+.rdata:00000001407E4390 aToggleAdvreque db 'TOGGLE_ADVREQUESTWIN',0
+.rdata:00000001407E4390                                         ; DATA XREF: .data:0000000140AC4D70?o
+.rdata:00000001407E4390                                         ; .data:0000000140ACC180?o
+.rdata:00000001407E43A5                 align 8
+.rdata:00000001407E43A8 aCloseTopWindow db 'CLOSE_TOP_WINDOW',0 ; DATA XREF: .data:0000000140AC4D78?o
+.rdata:00000001407E43A8                                         ; .data:0000000140ACC188?o
+.rdata:00000001407E43B9                 align 20h
+.rdata:00000001407E43C0 aClearTarget    db 'CLEAR_TARGET',0     ; DATA XREF: .data:0000000140AC4D80?o
+.rdata:00000001407E43C0                                         ; .data:0000000140ACC190?o
+.rdata:00000001407E43CD                 align 10h
+.rdata:00000001407E43D0 aCmdToggleFindW db 'CMD_TOGGLE_FIND_WINDOW',0
+.rdata:00000001407E43D0                                         ; DATA XREF: .data:0000000140AC4D88?o
+.rdata:00000001407E43D0                                         ; .data:0000000140ACC198?o
+.rdata:00000001407E43E7                 align 8
+.rdata:00000001407E43E8 aToggleLeadersh db 'TOGGLE_LEADERSHIPWIN',0
+.rdata:00000001407E43E8                                         ; DATA XREF: .data:0000000140AC4D90?o
+.rdata:00000001407E43E8                                         ; .data:0000000140ACC1A0?o
+.rdata:00000001407E43FD                 align 20h
+.rdata:00000001407E4400 aToggleTributeb db 'TOGGLE_TRIBUTEBENEFITWIN',0
+.rdata:00000001407E4400                                         ; DATA XREF: .data:0000000140AC4D98?o
+.rdata:00000001407E4400                                         ; .data:0000000140ACC1A8?o
+.rdata:00000001407E4419                 align 20h
+.rdata:00000001407E4420 aCmdOpeningAtta db 'CMD_OPENING_ATTACK1',0
+.rdata:00000001407E4420                                         ; DATA XREF: .data:0000000140AC4DA0?o
+.rdata:00000001407E4420                                         ; .data:0000000140ACC1B0?o
+.rdata:00000001407E4434                 align 8
+.rdata:00000001407E4438 aCmdOpeningAtta_0 db 'CMD_OPENING_ATTACK2',0
+.rdata:00000001407E4438                                         ; DATA XREF: .data:0000000140AC4DA8?o
+.rdata:00000001407E4438                                         ; .data:0000000140ACC1B8?o
+.rdata:00000001407E444C                 align 10h
+.rdata:00000001407E4450 aCmdOpeningAtta_1 db 'CMD_OPENING_ATTACK3',0
+.rdata:00000001407E4450                                         ; DATA XREF: .data:0000000140AC4DB0?o
+.rdata:00000001407E4450                                         ; .data:0000000140ACC1C0?o
+.rdata:00000001407E4464                 align 8
+.rdata:00000001407E4468 aCmdOpeningAtta_2 db 'CMD_OPENING_ATTACK4',0
+.rdata:00000001407E4468                                         ; DATA XREF: .data:0000000140AC4DB8?o
+.rdata:00000001407E4468                                         ; .data:0000000140ACC1C8?o
+.rdata:00000001407E447C                 align 20h
+.rdata:00000001407E4480 aCmdOpeningAtta_3 db 'CMD_OPENING_ATTACK5',0
+.rdata:00000001407E4480                                         ; DATA XREF: .data:0000000140AC4DC0?o
+.rdata:00000001407E4480                                         ; .data:0000000140ACC1D0?o
+.rdata:00000001407E4494                 align 8
+.rdata:00000001407E4498 aCmdOpeningAtta_4 db 'CMD_OPENING_ATTACK6',0
+.rdata:00000001407E4498                                         ; DATA XREF: .data:0000000140AC4DC8?o
+.rdata:00000001407E4498                                         ; .data:0000000140ACC1D8?o
+.rdata:00000001407E44AC                 align 10h
+.rdata:00000001407E44B0 aCmdOpeningAtta_5 db 'CMD_OPENING_ATTACK7',0
+.rdata:00000001407E44B0                                         ; DATA XREF: .data:0000000140AC4DD0?o
+.rdata:00000001407E44B0                                         ; .data:0000000140ACC1E0?o
+.rdata:00000001407E44C4                 align 8
+.rdata:00000001407E44C8 aCmdOpeningAtta_6 db 'CMD_OPENING_ATTACK8',0
+.rdata:00000001407E44C8                                         ; DATA XREF: .data:0000000140AC4DD8?o
+.rdata:00000001407E44C8                                         ; .data:0000000140ACC1E8?o
+.rdata:00000001407E44DC                 align 20h
+.rdata:00000001407E44E0 aCmdToggleComba db 'CMD_TOGGLE_COMBAT_ABILITY_WIN',0
+.rdata:00000001407E44E0                                         ; DATA XREF: .data:0000000140AC4DE0?o
+.rdata:00000001407E44E0                                         ; .data:0000000140ACC1F0?o
+.rdata:00000001407E44FE                 align 20h
+.rdata:00000001407E4500 aCmdToggleDynam db 'CMD_TOGGLE_DYNAMIC_ZONE_WIN',0
+.rdata:00000001407E4500                                         ; DATA XREF: .data:0000000140AC4DE8?o
+.rdata:00000001407E4500                                         ; .data:0000000140ACC1F8?o
+.rdata:00000001407E451C                 align 20h
+.rdata:00000001407E4520 aCmdTogglePvpLe db 'CMD_TOGGLE_PVP_LEADERBOARD',0
+.rdata:00000001407E4520                                         ; DATA XREF: .data:0000000140AC4DF0?o
+.rdata:00000001407E4520                                         ; .data:0000000140ACC200?o
+.rdata:00000001407E453B                 align 20h
+.rdata:00000001407E4540 aCmdToggletaskw db 'CMD_TOGGLETASKWIN',0
+.rdata:00000001407E4540                                         ; DATA XREF: .data:0000000140AC4DF8?o
+.rdata:00000001407E4540                                         ; .data:0000000140ACC208?o
+.rdata:00000001407E4552                 align 8
+.rdata:00000001407E4558 aCmdToggleTicke db 'CMD_TOGGLE_TICKET_WND',0
+.rdata:00000001407E4558                                         ; DATA XREF: .data:0000000140AC4E00?o
+.rdata:00000001407E4558                                         ; .data:0000000140ACC210?o
+.rdata:00000001407E456E                 align 10h
+.rdata:00000001407E4570 aCmdStopCast    db 'CMD_STOP_CAST',0    ; DATA XREF: .data:0000000140AC4E08?o
+.rdata:00000001407E4570                                         ; .data:0000000140ACC218?o
+.rdata:00000001407E457E                 align 20h
+.rdata:00000001407E4580 aCmdTogglevoice db 'CMD_TOGGLEVOICEWIN',0
+.rdata:00000001407E4580                                         ; DATA XREF: .data:0000000140AC4E10?o
+.rdata:00000001407E4580                                         ; .data:0000000140ACC220?o
+.rdata:00000001407E4593                 align 8
+.rdata:00000001407E4598 aCmdToggleTitle db 'CMD_TOGGLE_TITLE_WND',0
+.rdata:00000001407E4598                                         ; DATA XREF: .data:0000000140AC4E18?o
+.rdata:00000001407E4598                                         ; .data:0000000140ACC228?o
+.rdata:00000001407E45AD                 align 10h
+.rdata:00000001407E45B0 aToggleBandolie db 'TOGGLE_BANDOLIER',0 ; DATA XREF: .data:0000000140AC4E20?o
+.rdata:00000001407E45B0                                         ; .data:0000000140ACC230?o
+.rdata:00000001407E45C1                 align 8
+.rdata:00000001407E45C8 aOpenInvBags    db 'OPEN_INV_BAGS',0    ; DATA XREF: .data:0000000140AC4E28?o
+.rdata:00000001407E45C8                                         ; .data:0000000140ACC238?o
+.rdata:00000001407E45D6                 align 8
+.rdata:00000001407E45D8 aCloseInvBags   db 'CLOSE_INV_BAGS',0   ; DATA XREF: .data:0000000140AC4E30?o
+.rdata:00000001407E45D8                                         ; .data:0000000140ACC240?o
+.rdata:00000001407E45E7                 align 8
+.rdata:00000001407E45E8 aToggleInvBags  db 'TOGGLE_INV_BAGS',0  ; DATA XREF: .data:0000000140AC4E38?o
+.rdata:00000001407E45E8                                         ; .data:0000000140ACC248?o
+.rdata:00000001407E45F8 aToggleSkillsWn db 'TOGGLE_SKILLS_WND',0
+.rdata:00000001407E45F8                                         ; DATA XREF: .data:0000000140AC4E40?o
+.rdata:00000001407E45F8                                         ; .data:0000000140ACC250?o
+.rdata:00000001407E460A                 align 10h
+.rdata:00000001407E4610 aOpenEtnHelp    db 'OPEN_ETN_HELP',0    ; DATA XREF: .data:0000000140AC4E48?o
+.rdata:00000001407E4610                                         ; .data:0000000140ACC258?o
+.rdata:00000001407E461E                 align 20h
+.rdata:00000001407E4620 aCmdToggleBlock db 'CMD_TOGGLE_BLOCKEDBUFFWIN',0
+.rdata:00000001407E4620                                         ; DATA XREF: .data:0000000140AC4E50?o
+.rdata:00000001407E4620                                         ; .data:0000000140ACC260?o
+.rdata:00000001407E463A                 align 20h
+.rdata:00000001407E4640 aCmdToggleAudio db 'CMD_TOGGLE_AUDIO_TRIGGER_WINDOW',0
+.rdata:00000001407E4640                                         ; DATA XREF: .data:0000000140AC4E58?o
+.rdata:00000001407E4640                                         ; .data:0000000140ACC268?o
+.rdata:00000001407E4660 aCmdClipboardPa db 'CMD_CLIPBOARD_PASTE',0
+.rdata:00000001407E4660                                         ; DATA XREF: .data:0000000140AC4E60?o
+.rdata:00000001407E4660                                         ; .data:0000000140ACC270?o
+.rdata:00000001407E4674                 align 8
+.rdata:00000001407E4678 aCmdOpenEqplaye db 'CMD_OPEN_EQPLAYERS',0
+.rdata:00000001407E4678                                         ; DATA XREF: .data:0000000140AC4E68?o
+.rdata:00000001407E4678                                         ; .data:0000000140ACC278?o
+.rdata:00000001407E468B                 align 10h
+.rdata:00000001407E4690 aCmdToggleAuraw db 'CMD_TOGGLE_AURAWND',0
+.rdata:00000001407E4690                                         ; DATA XREF: .data:0000000140AC4E70?o
+.rdata:00000001407E4690                                         ; .data:0000000140ACC280?o
+.rdata:00000001407E46A3                 align 8
+.rdata:00000001407E46A8 aCmdToggleBlock_0 db 'CMD_TOGGLE_BLOCKEDPETBUFFWIN',0
+.rdata:00000001407E46A8                                         ; DATA XREF: .data:0000000140AC4E78?o
+.rdata:00000001407E46A8                                         ; .data:0000000140ACC288?o
+.rdata:00000001407E46C5                 align 8
+.rdata:00000001407E46C8 aCmdToggleRewar db 'CMD_TOGGLE_REWARD_SELECTION_WIN',0
+.rdata:00000001407E46C8                                         ; DATA XREF: .data:0000000140AC4E80?o
+.rdata:00000001407E46C8                                         ; .data:0000000140ACC290?o
+.rdata:00000001407E46E8 aCmdToggleClaim db 'CMD_TOGGLE_CLAIM_WIN',0
+.rdata:00000001407E46E8                                         ; DATA XREF: .data:0000000140AC4E88?o
+.rdata:00000001407E46E8                                         ; .data:0000000140ACC298?o
+.rdata:00000001407E46FD                 align 20h
+.rdata:00000001407E4700 aCmdToggleVoice db 'CMD_TOGGLE_VOICE_BAR',0
+.rdata:00000001407E4700                                         ; DATA XREF: .data:0000000140AC4E90?o
+.rdata:00000001407E4700                                         ; .data:0000000140ACC2A0?o
+.rdata:00000001407E4715                 align 8
+.rdata:00000001407E4718 aCmdToggleAsLis db 'CMD_TOGGLE_AS_LIST',0
+.rdata:00000001407E4718                                         ; DATA XREF: .data:0000000140AC4E98?o
+.rdata:00000001407E4718                                         ; .data:0000000140ACC2A8?o
+.rdata:00000001407E472B                 align 10h
+.rdata:00000001407E4730 aCmdPushToTalk  db 'CMD_PUSH_TO_TALK',0 ; DATA XREF: .data:0000000140AC4EA0?o
+.rdata:00000001407E4730                                         ; .data:0000000140ACC2B0?o
+.rdata:00000001407E4741                 align 8
+.rdata:00000001407E4748 aCmdPushToTalkS db 'CMD_PUSH_TO_TALK_SAY',0
+.rdata:00000001407E4748                                         ; DATA XREF: .data:0000000140AC4EA8?o
+.rdata:00000001407E4748                                         ; .data:0000000140ACC2B8?o
+.rdata:00000001407E475D                 align 20h
+.rdata:00000001407E4760 aCmdPushToTalkG db 'CMD_PUSH_TO_TALK_GROUP',0
+.rdata:00000001407E4760                                         ; DATA XREF: .data:0000000140AC4EB0?o
+.rdata:00000001407E4760                                         ; .data:0000000140ACC2C0?o
+.rdata:00000001407E4777                 align 8
+.rdata:00000001407E4778 aCmdPushToTalkR db 'CMD_PUSH_TO_TALK_RAID',0
+.rdata:00000001407E4778                                         ; DATA XREF: .data:0000000140AC4EB8?o
+.rdata:00000001407E4778                                         ; .data:0000000140ACC2C8?o
+.rdata:00000001407E478E                 align 10h
+.rdata:00000001407E4790 aCmdPushToTalkG_0 db 'CMD_PUSH_TO_TALK_GUILD',0
+.rdata:00000001407E4790                                         ; DATA XREF: .data:0000000140AC4EC0?o
+.rdata:00000001407E4790                                         ; .data:0000000140ACC2D0?o
+.rdata:00000001407E47A7                 align 8
+.rdata:00000001407E47A8 aCmdMercenaries db 'CMD_MERCENARIES',0  ; DATA XREF: .data:0000000140AC4EC8?o
+.rdata:00000001407E47A8                                         ; .data:0000000140ACC2D8?o
+.rdata:00000001407E47B8 aCmdMarketplace db 'CMD_MARKETPLACE',0  ; DATA XREF: .data:0000000140AC4ED0?o
+.rdata:00000001407E47B8                                         ; .data:0000000140ACC2E0?o
+.rdata:00000001407E47C8 aCmdUnused      db 'CMD_UNUSED',0       ; DATA XREF: .data:0000000140AC4ED8?o
+.rdata:00000001407E47C8                                         ; .data:0000000140ACC2E8?o
+.rdata:00000001407E47D3                 align 8
+.rdata:00000001407E47D8 aCmdExtendedTar db 'CMD_EXTENDED_TARGET_WINDOW',0
+.rdata:00000001407E47D8                                         ; DATA XREF: .data:0000000140AC4EE0?o
+.rdata:00000001407E47D8                                         ; .data:0000000140ACC2F0?o
+.rdata:00000001407E47F3                 align 8
+.rdata:00000001407E47F8 aCmdAchievement db 'CMD_ACHIEVEMENT_WINDOW',0
+.rdata:00000001407E47F8                                         ; DATA XREF: .data:0000000140AC4EE8?o
+.rdata:00000001407E47F8                                         ; .data:0000000140ACC2F8?o
+.rdata:00000001407E480F                 align 10h
+.rdata:00000001407E4810 aTargetXtarget1 db 'TARGET_XTARGET_1',0 ; DATA XREF: .data:0000000140AC4EF0?o
+.rdata:00000001407E4810                                         ; .data:0000000140ACC300?o
+.rdata:00000001407E4821                 align 8
+.rdata:00000001407E4828 aTargetXtarget2 db 'TARGET_XTARGET_2',0 ; DATA XREF: .data:0000000140AC4EF8?o
+.rdata:00000001407E4828                                         ; .data:0000000140ACC308?o
+.rdata:00000001407E4839                 align 20h
+.rdata:00000001407E4840 aTargetXtarget3 db 'TARGET_XTARGET_3',0 ; DATA XREF: .data:0000000140AC4F00?o
+.rdata:00000001407E4840                                         ; .data:0000000140ACC310?o
+.rdata:00000001407E4851                 align 8
+.rdata:00000001407E4858 aTargetXtarget4 db 'TARGET_XTARGET_4',0 ; DATA XREF: .data:0000000140AC4F08?o
+.rdata:00000001407E4858                                         ; .data:0000000140ACC318?o
+.rdata:00000001407E4869                 align 10h
+.rdata:00000001407E4870 aTargetXtarget5 db 'TARGET_XTARGET_5',0 ; DATA XREF: .data:0000000140AC4F10?o
+.rdata:00000001407E4870                                         ; .data:0000000140ACC320?o
+.rdata:00000001407E4881                 align 8
+.rdata:00000001407E4888 aTargetXtarget6 db 'TARGET_XTARGET_6',0 ; DATA XREF: .data:0000000140AC4F18?o
+.rdata:00000001407E4888                                         ; .data:0000000140ACC328?o
+.rdata:00000001407E4899                 align 20h
+.rdata:00000001407E48A0 aTargetXtarget7 db 'TARGET_XTARGET_7',0 ; DATA XREF: .data:0000000140AC4F20?o
+.rdata:00000001407E48A0                                         ; .data:0000000140ACC330?o
+.rdata:00000001407E48B1                 align 8
+.rdata:00000001407E48B8 aTargetXtarget8 db 'TARGET_XTARGET_8',0 ; DATA XREF: .data:0000000140AC4F28?o
+.rdata:00000001407E48B8                                         ; .data:0000000140ACC338?o
+.rdata:00000001407E48C9                 align 10h
+.rdata:00000001407E48D0 aTargetXtarget9 db 'TARGET_XTARGET_9',0 ; DATA XREF: .data:0000000140AC4F30?o
+.rdata:00000001407E48D0                                         ; .data:0000000140ACC340?o
+.rdata:00000001407E48E1                 align 8
+.rdata:00000001407E48E8 aTargetXtarget1_0 db 'TARGET_XTARGET_10',0
+.rdata:00000001407E48E8                                         ; DATA XREF: .data:0000000140AC4F38?o
+.rdata:00000001407E48E8                                         ; .data:0000000140ACC348?o
+.rdata:00000001407E48FA                 align 20h
+.rdata:00000001407E4900 aTargetXtarget1_1 db 'TARGET_XTARGET_11',0
+.rdata:00000001407E4900                                         ; DATA XREF: .data:0000000140AC4F40?o
+.rdata:00000001407E4900                                         ; .data:0000000140ACC350?o
+.rdata:00000001407E4912                 align 8
+.rdata:00000001407E4918 aTargetXtarget1_2 db 'TARGET_XTARGET_12',0
+.rdata:00000001407E4918                                         ; DATA XREF: .data:0000000140AC4F48?o
+.rdata:00000001407E4918                                         ; .data:0000000140ACC358?o
+.rdata:00000001407E492A                 align 10h
+.rdata:00000001407E4930 aTargetXtarget1_3 db 'TARGET_XTARGET_13',0
+.rdata:00000001407E4930                                         ; DATA XREF: .data:0000000140AC4F50?o
+.rdata:00000001407E4930                                         ; .data:0000000140ACC360?o
+.rdata:00000001407E4942                 align 8
+.rdata:00000001407E4948 aTargetXtarget1_4 db 'TARGET_XTARGET_14',0
+.rdata:00000001407E4948                                         ; DATA XREF: .data:0000000140AC4F58?o
+.rdata:00000001407E4948                                         ; .data:0000000140ACC368?o
+.rdata:00000001407E495A                 align 20h
+.rdata:00000001407E4960 aTargetXtarget1_5 db 'TARGET_XTARGET_15',0
+.rdata:00000001407E4960                                         ; DATA XREF: .data:0000000140AC4F60?o
+.rdata:00000001407E4960                                         ; .data:0000000140ACC370?o
+.rdata:00000001407E4972                 align 8
+.rdata:00000001407E4978 aTargetXtarget1_6 db 'TARGET_XTARGET_16',0
+.rdata:00000001407E4978                                         ; DATA XREF: .data:0000000140AC4F68?o
+.rdata:00000001407E4978                                         ; .data:0000000140ACC378?o
+.rdata:00000001407E498A                 align 10h
+.rdata:00000001407E4990 aTargetXtarget1_7 db 'TARGET_XTARGET_17',0
+.rdata:00000001407E4990                                         ; DATA XREF: .data:0000000140AC4F70?o
+.rdata:00000001407E4990                                         ; .data:0000000140ACC380?o
+.rdata:00000001407E49A2                 align 8
+.rdata:00000001407E49A8 aTargetXtarget1_8 db 'TARGET_XTARGET_18',0
+.rdata:00000001407E49A8                                         ; DATA XREF: .data:0000000140AC4F78?o
+.rdata:00000001407E49A8                                         ; .data:0000000140ACC388?o
+.rdata:00000001407E49BA                 align 20h
+.rdata:00000001407E49C0 aTargetXtarget1_9 db 'TARGET_XTARGET_19',0
+.rdata:00000001407E49C0                                         ; DATA XREF: .data:0000000140AC4F80?o
+.rdata:00000001407E49C0                                         ; .data:0000000140ACC390?o
+.rdata:00000001407E49D2                 align 8
+.rdata:00000001407E49D8 aTargetXtarget2_0 db 'TARGET_XTARGET_20',0
+.rdata:00000001407E49D8                                         ; DATA XREF: .data:0000000140AC4F88?o
+.rdata:00000001407E49D8                                         ; .data:0000000140ACC398?o
+.rdata:00000001407E49EA                 align 10h
+.rdata:00000001407E49F0 aAddXtarget     db 'ADD_XTARGET',0      ; DATA XREF: .data:0000000140AC4F90?o
+.rdata:00000001407E49F0                                         ; .data:0000000140ACC3A0?o
+.rdata:00000001407E49FC                 align 20h
+.rdata:00000001407E4A00 aRemoveXtarget  db 'REMOVE_XTARGET',0   ; DATA XREF: .data:0000000140AC4F98?o
+.rdata:00000001407E4A00                                         ; .data:0000000140ACC3A8?o
+.rdata:00000001407E4A0F                 align 10h
+.rdata:00000001407E4A10 aCycleXtarget   db 'CYCLE_XTARGET',0    ; DATA XREF: .data:0000000140AC4FA0?o
+.rdata:00000001407E4A10                                         ; .data:0000000140ACC3B0?o
+.rdata:00000001407E4A1E                 align 20h
+.rdata:00000001407E4A20 aRemoveXtargetB db 'REMOVE_XTARGET_BY_SLOT',0
+.rdata:00000001407E4A20                                         ; DATA XREF: .data:0000000140AC4FA8?o
+.rdata:00000001407E4A20                                         ; .data:0000000140ACC3B8?o
+.rdata:00000001407E4A37                 align 8
+.rdata:00000001407E4A38 aCmdRealEstateI db 'CMD_REAL_ESTATE_ITEMS_WINDOW',0
+.rdata:00000001407E4A38                                         ; DATA XREF: .data:0000000140AC4FB0?o
+.rdata:00000001407E4A38                                         ; .data:0000000140ACC3C0?o
+.rdata:00000001407E4A55                 align 8
+.rdata:00000001407E4A58 aCmdRealEstateM db 'CMD_REAL_ESTATE_MANAGE_WINDOW',0
+.rdata:00000001407E4A58                                         ; DATA XREF: .data:0000000140AC4FB8?o
+.rdata:00000001407E4A58                                         ; .data:0000000140ACC3C8?o
+.rdata:00000001407E4A76                 align 8
+.rdata:00000001407E4A78 aCmdRealEstateT db 'CMD_REAL_ESTATE_TROPHIES_WINDOW',0
+.rdata:00000001407E4A78                                         ; DATA XREF: .data:0000000140AC4FC0?o
+.rdata:00000001407E4A78                                         ; .data:0000000140ACC3D0?o
+.rdata:00000001407E4A98 aCmdRealEstateP db 'CMD_REAL_ESTATE_PLOT_SEARCH_WINDOW',0
+.rdata:00000001407E4A98                                         ; DATA XREF: .data:0000000140AC4FC8?o
+.rdata:00000001407E4A98                                         ; .data:0000000140ACC3D8?o
+.rdata:00000001407E4ABB                 align 20h
+.rdata:00000001407E4AC0 aCmdRealEstateH db 'CMD_REAL_ESTATE_HELP_WINDOW',0
+.rdata:00000001407E4AC0                                         ; DATA XREF: .data:0000000140AC4FD0?o
+.rdata:00000001407E4AC0                                         ; .data:0000000140ACC3E0?o
+.rdata:00000001407E4ADC                 align 20h
+.rdata:00000001407E4AE0 aCmdRealEstateI_0 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_TOGGLE_MODE',0
+.rdata:00000001407E4AE0                                         ; DATA XREF: .data:0000000140AC4FD8?o
+.rdata:00000001407E4AE0                                         ; .data:0000000140ACC3E8?o
+.rdata:00000001407E4B0B                 align 10h
+.rdata:00000001407E4B10 aCmdRealEstateI_1 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_SET_MODE_COLLISION',0
+.rdata:00000001407E4B10                                         ; DATA XREF: .data:0000000140AC4FE0?o
+.rdata:00000001407E4B10                                         ; .data:0000000140ACC3F0?o
+.rdata:00000001407E4B42                 align 8
+.rdata:00000001407E4B48 aCmdRealEstateI_2 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_SET_MODE_WALL',0
+.rdata:00000001407E4B48                                         ; DATA XREF: .data:0000000140AC4FE8?o
+.rdata:00000001407E4B48                                         ; .data:0000000140ACC3F8?o
+.rdata:00000001407E4B75                 align 8
+.rdata:00000001407E4B78 aCmdRealEstateI_3 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_SET_MODE_CURSOR',0
+.rdata:00000001407E4B78                                         ; DATA XREF: .data:0000000140AC4FF0?o
+.rdata:00000001407E4B78                                         ; .data:0000000140ACC400?o
+.rdata:00000001407E4BA7                 align 8
+.rdata:00000001407E4BA8 aCmdRealEstateI_4 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_SET_MODE_FREE',0
+.rdata:00000001407E4BA8                                         ; DATA XREF: .data:0000000140AC4FF8?o
+.rdata:00000001407E4BA8                                         ; .data:0000000140ACC408?o
+.rdata:00000001407E4BD5                 align 8
+.rdata:00000001407E4BD8 aCmdRealEstateI_5 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_RESET_ITEM_MOUSE_X_ROTATION',0
+.rdata:00000001407E4BD8                                         ; DATA XREF: .data:0000000140AC5000?o
+.rdata:00000001407E4BD8                                         ; .data:0000000140ACC410?o
+.rdata:00000001407E4C13                 align 8
+.rdata:00000001407E4C18 aCmdRealEstateI_6 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_RESET_ITEM_MOUSE_Y_ROTATION',0
+.rdata:00000001407E4C18                                         ; DATA XREF: .data:0000000140AC5008?o
+.rdata:00000001407E4C18                                         ; .data:0000000140ACC418?o
+.rdata:00000001407E4C53                 align 8
+.rdata:00000001407E4C58 aCmdRealEstateI_7 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_RESET_ITEM_WHEEL_ROTATION',0
+.rdata:00000001407E4C58                                         ; DATA XREF: .data:0000000140AC5010?o
+.rdata:00000001407E4C58                                         ; .data:0000000140ACC420?o
+.rdata:00000001407E4C91                 align 8
+.rdata:00000001407E4C98 aCmdRealEstateI_8 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_RESET_ITEM_SIZE',0
+.rdata:00000001407E4C98                                         ; DATA XREF: .data:0000000140AC5018?o
+.rdata:00000001407E4C98                                         ; .data:0000000140ACC428?o
+.rdata:00000001407E4CC7                 align 10h
+.rdata:00000001407E4CD0 aCmdRealEstateI_9 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_ROTATE_ITEM_MOUSE_X_ROTATION_90_DE'
+.rdata:00000001407E4CD0                                         ; DATA XREF: .data:0000000140AC5020?o
+.rdata:00000001407E4CD0                                         ; .data:0000000140ACC430?o
+.rdata:00000001407E4CD0                 db 'GREES',0
+.rdata:00000001407E4D17                 align 20h
+.rdata:00000001407E4D20 aCmdRealEstateI_10 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_ROTATE_ITEM_MOUSE_Y_ROTATION_90_DE'
+.rdata:00000001407E4D20                                         ; DATA XREF: .data:0000000140AC5028?o
+.rdata:00000001407E4D20                                         ; .data:0000000140ACC438?o
+.rdata:00000001407E4D20                 db 'GREES',0
+.rdata:00000001407E4D67                 align 10h
+.rdata:00000001407E4D70 aCmdRealEstateI_11 db 'CMD_REAL_ESTATE_ITEM_PLACEMENT_ROTATE_ITEM_WHEEL_ROTATION_90_DEGR'
+.rdata:00000001407E4D70                                         ; DATA XREF: .data:0000000140AC5030?o
+.rdata:00000001407E4D70                                         ; .data:0000000140ACC440?o
+.rdata:00000001407E4D70                 db 'EES',0
+.rdata:00000001407E4DB5                 align 8
+.rdata:00000001407E4DB8 aCmdRealEstateL db 'CMD_REAL_ESTATE_LEAVE',0
+.rdata:00000001407E4DB8                                         ; DATA XREF: .data:0000000140AC5038?o
+.rdata:00000001407E4DB8                                         ; .data:0000000140ACC448?o
+.rdata:00000001407E4DCE                 align 10h
+.rdata:00000001407E4DD0 aCmdVoteResults db 'CMD_VOTE_RESULTS',0 ; DATA XREF: .data:0000000140AC5040?o
+.rdata:00000001407E4DD0                                         ; .data:0000000140ACC450?o
+.rdata:00000001407E4DE1                 align 8
+.rdata:00000001407E4DE8 aCmdToggleTcg   db 'CMD_TOGGLE_TCG',0   ; DATA XREF: .data:0000000140AC5048?o
+.rdata:00000001407E4DE8                                         ; .data:0000000140ACC458?o
+.rdata:00000001407E4DF7                 align 8
+.rdata:00000001407E4DF8 aCmdMoveDown    db 'CMD_MOVE_DOWN',0    ; DATA XREF: .data:0000000140AC5050?o
+.rdata:00000001407E4DF8                                         ; .data:0000000140ACC460?o
+.rdata:00000001407E4E06                 align 8
+.rdata:00000001407E4E08 aCmdStopAction  db 'CMD_STOP_ACTION',0  ; DATA XREF: .data:0000000140AC5058?o
+.rdata:00000001407E4E08                                         ; .data:0000000140ACC468?o
+.rdata:00000001407E4E18 aCmdToggleAlarm db 'CMD_TOGGLE_ALARM',0 ; DATA XREF: .data:0000000140AC5060?o
+.rdata:00000001407E4E18                                         ; .data:0000000140ACC470?o
+.rdata:00000001407E4E29                 align 10h
+.rdata:00000001407E4E30 aCmdToggleBankB db 'CMD_TOGGLE_BANK_BAGS',0
+.rdata:00000001407E4E30                                         ; DATA XREF: .data:0000000140AC5068?o
+.rdata:00000001407E4E30                                         ; .data:0000000140ACC478?o
+.rdata:00000001407E4E45                 align 8
+.rdata:00000001407E4E48 aToggleZoneGuid db 'TOGGLE_ZONE_GUIDE_WINDOW',0
+.rdata:00000001407E4E48                                         ; DATA XREF: .data:0000000140AC5070?o
+.rdata:00000001407E4E48                                         ; .data:0000000140ACC480?o
+.rdata:00000001407E4E61                 align 8
+.rdata:00000001407E4E68 aToggleZonePath db 'TOGGLE_ZONE_PATH_WINDOW',0
+.rdata:00000001407E4E68                                         ; DATA XREF: .data:0000000140AC5078?o
+.rdata:00000001407E4E68                                         ; .data:0000000140ACC488?o
+.rdata:00000001407E4E80 aCmdMarketplace_0 db 'CMD_MARKETPLACE_SILVER',0
+.rdata:00000001407E4E80                                         ; DATA XREF: .data:0000000140AC5080?o
+.rdata:00000001407E4E80                                         ; .data:0000000140ACC490?o
+.rdata:00000001407E4E97                 align 8
+.rdata:00000001407E4E98 aCmdMarketplace_1 db 'CMD_MARKETPLACE_ALL_ACCESS',0
+.rdata:00000001407E4E98                                         ; DATA XREF: .data:0000000140AC5088?o
+.rdata:00000001407E4E98                                         ; .data:0000000140ACC498?o
+.rdata:00000001407E4EB3                 align 8
+.rdata:00000001407E4EB8 aCmdHistoricAle db 'CMD_HISTORIC_ALERTS',0
+.rdata:00000001407E4EB8                                         ; DATA XREF: .data:0000000140AC5090?o
+.rdata:00000001407E4EB8                                         ; .data:0000000140ACC4A0?o
+.rdata:00000001407E4ECC                 align 10h
+.rdata:00000001407E4ED0 aUnused477      db 'UNUSED_477',0       ; DATA XREF: .data:0000000140AC5098?o
+.rdata:00000001407E4ED0                                         ; .data:0000000140ACC4A8?o
+.rdata:00000001407E4EDB                 align 20h
+.rdata:00000001407E4EE0 aCmdToggleAggro db 'CMD_TOGGLE_AGGRO',0 ; DATA XREF: .data:0000000140AC50A0?o
+.rdata:00000001407E4EE0                                         ; .data:0000000140ACC4B0?o
+.rdata:00000001407E4EF1                 align 8
+.rdata:00000001407E4EF8 aCmdLockAggro   db 'CMD_LOCK_AGGRO',0   ; DATA XREF: .data:0000000140AC50A8?o
+.rdata:00000001407E4EF8                                         ; .data:0000000140ACC4B8?o
+.rdata:00000001407E4F07                 align 8
+.rdata:00000001407E4F08 aCmdToggleBarte db 'CMD_TOGGLE_BARTER_SEARCH',0
+.rdata:00000001407E4F08                                         ; DATA XREF: .data:0000000140AC50B0?o
+.rdata:00000001407E4F08                                         ; .data:0000000140ACC4C0?o
+.rdata:00000001407E4F21                 align 8
+.rdata:00000001407E4F28 aCmdOpenUrl     db 'CMD_OPEN_URL',0     ; DATA XREF: .data:0000000140AC50B8?o
+.rdata:00000001407E4F28                                         ; .data:0000000140ACC4C8?o
+.rdata:00000001407E4F35                 align 8
+.rdata:00000001407E4F38 aCmdToggleTarge db 'CMD_TOGGLE_TARGETOFTARGETWIN',0
+.rdata:00000001407E4F38                                         ; DATA XREF: .data:0000000140AC50C0?o
+.rdata:00000001407E4F38                                         ; .data:0000000140ACC4D0?o
+.rdata:00000001407E4F55                 align 8
+.rdata:00000001407E4F58 aCmdRaidDelegat db 'CMD_RAID_DELEGATE_MAIN_ASSIST',0
+.rdata:00000001407E4F58                                         ; DATA XREF: .data:0000000140AC50C8?o
+.rdata:00000001407E4F58                                         ; .data:0000000140ACC4D8?o
+.rdata:00000001407E4F76                 align 8
+.rdata:00000001407E4F78 aCmdInspectBuff db 'CMD_INSPECT_BUFFS',0
+.rdata:00000001407E4F78                                         ; DATA XREF: .data:0000000140AC50D0?o
+.rdata:00000001407E4F78                                         ; .data:0000000140ACC4E0?o
+.rdata:00000001407E4F8A                 align 10h
+.rdata:00000001407E4F90 aCmdGroupDelega db 'CMD_GROUP_DELEGATE_MARK_NPC',0
+.rdata:00000001407E4F90                                         ; DATA XREF: .data:0000000140AC50D8?o
+.rdata:00000001407E4F90                                         ; .data:0000000140ACC4E8?o
+.rdata:00000001407E4FAC                 align 10h
+.rdata:00000001407E4FB0 aCmdRaidDelegat_0 db 'CMD_RAID_DELEGATE_MARK_NPC',0
+.rdata:00000001407E4FB0                                         ; DATA XREF: .data:0000000140AC50E0?o
+.rdata:00000001407E4FB0                                         ; .data:0000000140ACC4F0?o
+.rdata:00000001407E4FCB                 align 10h
+.rdata:00000001407E4FD0 aCmdGroupMarkNp db 'CMD_GROUP_MARK_NPC_1',0
+.rdata:00000001407E4FD0                                         ; DATA XREF: .data:0000000140AC50E8?o
+.rdata:00000001407E4FD0                                         ; .data:0000000140ACC4F8?o
+.rdata:00000001407E4FE5                 align 8
+.rdata:00000001407E4FE8 aCmdGroupMarkNp_0 db 'CMD_GROUP_MARK_NPC_2',0
+.rdata:00000001407E4FE8                                         ; DATA XREF: .data:0000000140AC50F0?o
+.rdata:00000001407E4FE8                                         ; .data:0000000140ACC500?o
+.rdata:00000001407E4FFD                 align 20h
+.rdata:00000001407E5000 aCmdGroupMarkNp_1 db 'CMD_GROUP_MARK_NPC_3',0
+.rdata:00000001407E5000                                         ; DATA XREF: .data:0000000140AC50F8?o
+.rdata:00000001407E5000                                         ; .data:0000000140ACC508?o
+.rdata:00000001407E5015                 align 8
+.rdata:00000001407E5018 aCmdRaidMarkNpc db 'CMD_RAID_MARK_NPC_1',0
+.rdata:00000001407E5018                                         ; DATA XREF: .data:0000000140AC5100?o
+.rdata:00000001407E5018                                         ; .data:0000000140ACC510?o
+.rdata:00000001407E502C                 align 10h
+.rdata:00000001407E5030 aCmdRaidMarkNpc_0 db 'CMD_RAID_MARK_NPC_2',0
+.rdata:00000001407E5030                                         ; DATA XREF: .data:0000000140AC5108?o
+.rdata:00000001407E5030                                         ; .data:0000000140ACC518?o
+.rdata:00000001407E5044                 align 8
+.rdata:00000001407E5048 aCmdRaidMarkNpc_1 db 'CMD_RAID_MARK_NPC_3',0
+.rdata:00000001407E5048                                         ; DATA XREF: .data:0000000140AC5110?o
+.rdata:00000001407E5048                                         ; .data:0000000140ACC520?o
+.rdata:00000001407E505C                 align 20h
+.rdata:00000001407E5060 aCmdFindPcGroup db 'CMD_FIND_PC_GROUP_RAID',0
+.rdata:00000001407E5060                                         ; DATA XREF: .data:0000000140AC5118?o
+.rdata:00000001407E5060                                         ; .data:0000000140ACC528?o
+.rdata:00000001407E5077                 align 8
+.rdata:00000001407E5078 aCmdToggleKeyri db 'CMD_TOGGLE_KEYRINGS',0
+.rdata:00000001407E5078                                         ; DATA XREF: .data:0000000140AC5120?o
+.rdata:00000001407E5078                                         ; .data:0000000140ACC530?o
+.rdata:00000001407E508C                 align 10h
+.rdata:00000001407E5090 aCmdGroupDelega_0 db 'CMD_GROUP_DELEGATE_MASTER_LOOTER',0
+.rdata:00000001407E5090                                         ; DATA XREF: .data:0000000140AC5128?o
+.rdata:00000001407E5090                                         ; .data:0000000140ACC538?o
+.rdata:00000001407E50B1                 align 8
+.rdata:00000001407E50B8 aCmdRaidDelegat_1 db 'CMD_RAID_DELEGATE_MASTER_LOOTER',0
+.rdata:00000001407E50B8                                         ; DATA XREF: .data:0000000140AC5130?o
+.rdata:00000001407E50B8                                         ; .data:0000000140ACC540?o
+.rdata:00000001407E50D8 aCmdToggleAdvan db 'CMD_TOGGLE_ADVANCED_LOOT_WIN',0
+.rdata:00000001407E50D8                                         ; DATA XREF: .data:0000000140AC5138?o
+.rdata:00000001407E50D8                                         ; .data:0000000140ACC548?o
+.rdata:00000001407E50F5                 align 8
+.rdata:00000001407E50F8 aCmdTogglePickz db 'CMD_TOGGLE_PICKZONE_WIN',0
+.rdata:00000001407E50F8                                         ; DATA XREF: .data:0000000140AC5140?o
+.rdata:00000001407E50F8                                         ; .data:0000000140ACC550?o
+.rdata:00000001407E5110 aCmdToggleTaskO db 'CMD_TOGGLE_TASK_OVERLAY_WIN',0
+.rdata:00000001407E5110                                         ; DATA XREF: .data:0000000140AC5148?o
+.rdata:00000001407E5110                                         ; .data:0000000140ACC558?o
+.rdata:00000001407E512C                 align 10h
+.rdata:00000001407E5130 aCmdToggleItemO db 'CMD_TOGGLE_ITEM_OVERFLOW_WND',0
+.rdata:00000001407E5130                                         ; DATA XREF: .data:0000000140AC5150?o
+.rdata:00000001407E5130                                         ; .data:0000000140ACC560?o
+.rdata:00000001407E514D                 align 10h
+.rdata:00000001407E5150 aCmdEventCalend db 'CMD_EVENT_CALENDAR',0
+.rdata:00000001407E5150                                         ; DATA XREF: .data:0000000140AC5158?o
+.rdata:00000001407E5150                                         ; .data:0000000140ACC568?o
+.rdata:00000001407E5163                 align 8
+.rdata:00000001407E5168 aCmdToggleFindi db 'CMD_TOGGLE_FINDITEM_WND',0
+.rdata:00000001407E5168                                         ; DATA XREF: .data:0000000140AC5160?o
+.rdata:00000001407E5168                                         ; .data:0000000140ACC570?o
+.rdata:00000001407E5180 aCmdHerosjourne db 'CMD_HEROSJOURNEY_TEXT',0
+.rdata:00000001407E5180                                         ; DATA XREF: .data:0000000140AC5168?o
+.rdata:00000001407E5180                                         ; .data:0000000140ACC578?o
+.rdata:00000001407E5196                 align 8
+.rdata:00000001407E5198 aCmdToggleFacti db 'CMD_TOGGLE_FACTION_WND',0
+.rdata:00000001407E5198                                         ; DATA XREF: .data:0000000140AC5170?o
+.rdata:00000001407E5198                                         ; .data:0000000140ACC580?o
+.rdata:00000001407E51AF                 align 10h
+.rdata:00000001407E51B0 aCmdChatTabNext db 'CMD_CHAT_TAB_NEXT',0
+.rdata:00000001407E51B0                                         ; DATA XREF: .data:0000000140AC5178?o
+.rdata:00000001407E51B0                                         ; .data:0000000140ACC588?o
+.rdata:00000001407E51C2                 align 8
+.rdata:00000001407E51C8 aCmdChatTabPrev db 'CMD_CHAT_TAB_PREV',0
+.rdata:00000001407E51C8                                         ; DATA XREF: .data:0000000140AC5180?o
+.rdata:00000001407E51C8                                         ; .data:0000000140ACC590?o
+.rdata:00000001407E51DA                 align 20h
+.rdata:00000001407E51E0 aCmdToggleOvers db 'CMD_TOGGLE_OVERSEER_WIN',0
+.rdata:00000001407E51E0                                         ; DATA XREF: .data:0000000140AC5188?o
+.rdata:00000001407E51E0                                         ; .data:0000000140ACC598?o
+.rdata:00000001407E51F8 aCmdToggleTrade db 'CMD_TOGGLE_TRADESKILL_DEPOT_WND',0
+.rdata:00000001407E51F8                                         ; DATA XREF: .data:0000000140AC5190?o
+.rdata:00000001407E51F8                                         ; .data:0000000140ACC5A0?o
+.rdata:00000001407E5218 aToggleFps      db 'TOGGLE_FPS',0       ; DATA XREF: .data:0000000140AC5198?o
+.rdata:00000001407E5218                                         ; .data:0000000140ACC5A8?o
+.rdata:00000001407E5223                 align 8
+.rdata:00000001407E5228 aToggleAvatar   db 'TOGGLE_AVATAR',0    ; DATA XREF: .data:0000000140AC51A0?o
+.rdata:00000001407E5228                                         ; .data:0000000140ACC5B0?o
+.rdata:00000001407E5236                 align 8
+.rdata:00000001407E5238 aTogglePetition db 'TOGGLE_PETITION',0  ; DATA XREF: .data:0000000140AC51A8?o
+.rdata:00000001407E5238                                         ; .data:0000000140ACC5B8?o
+.rdata:00000001407E5248 aToggleMeminfo  db 'TOGGLE_MEMINFO',0   ; DATA XREF: .data:0000000140AC51B0?o
+.rdata:00000001407E5248                                         ; .data:0000000140ACC5C0?o
+.rdata:00000001407E5257                 align 8
+.rdata:00000001407E5258 aFlyUp          db 'FLY_UP',0           ; DATA XREF: .data:0000000140AC51B8?o
+.rdata:00000001407E5258                                         ; .data:0000000140ACC5C8?o
+.rdata:00000001407E525F                 align 20h
+.rdata:00000001407E5260 aFlyDown        db 'FLY_DOWN',0         ; DATA XREF: .data:0000000140AC51C0?o
+.rdata:00000001407E5260                                         ; .data:0000000140ACC5D0?o
+.rdata:00000001407E5269                 align 10h
+.rdata:00000001407E5270 aAddRoute       db 'ADD_ROUTE',0        ; DATA XREF: .data:0000000140AC51C8?o
+.rdata:00000001407E5270                                         ; .data:0000000140ACC5D8?o
+.rdata:00000001407E527A                 align 20h
+.rdata:00000001407E5280 aLayPpoint      db 'LAY_PPOINT',0       ; DATA XREF: .data:0000000140AC51D0?o
+.rdata:00000001407E5280                                         ; .data:0000000140ACC5E0?o
+.rdata:00000001407E528B                 align 10h
+.rdata:00000001407E5290 aLayLink        db 'LAY_LINK',0         ; DATA XREF: .data:0000000140AC51D8?o
+.rdata:00000001407E5290                                         ; .data:0000000140ACC5E8?o
+.rdata:00000001407E5299                 align 20h
+.rdata:00000001407E52A0 aConfirmYes     db 'CONFIRM_YES',0      ; DATA XREF: .data:0000000140AC51E0?o
+.rdata:00000001407E52A0                                         ; .data:0000000140ACC5F0?o
+.rdata:00000001407E52AC                 align 10h
+.rdata:00000001407E52B0 aConfirmNo      db 'CONFIRM_NO',0       ; DATA XREF: .data:0000000140AC51E8?o
+.rdata:00000001407E52B0                                         ; .data:0000000140ACC5F8?o
+.rdata:00000001407E52BB                 align 20h
+.rdata:00000001407E52C0 aTargetPrevNpc  db 'TARGET_PREV_NPC',0  ; DATA XREF: .data:0000000140AC51F0?o
+.rdata:00000001407E52C0                                         ; .data:0000000140ACC600?o
+.rdata:00000001407E52D0 aTargetNextNpc  db 'TARGET_NEXT_NPC',0  ; DATA XREF: .data:0000000140AC51F8?o
+.rdata:00000001407E52D0                                         ; .data:0000000140ACC608?o
+.rdata:00000001407E52E0 aRotateStats    db 'ROTATE_STATS',0     ; DATA XREF: .data:0000000140AC5200?o
+.rdata:00000001407E52E0                                         ; .data:0000000140ACC610?o
+.rdata:00000001407E52ED                 align 10h
+.rdata:00000001407E52F0 aToggleNpcTune  db 'TOGGLE_NPC_TUNE',0  ; DATA XREF: .data:0000000140AC5208?o
+.rdata:00000001407E52F0                                         ; .data:0000000140ACC618?o
+.rdata:00000001407E5300 aToggleqamarker db 'TOGGLEQAMARKER',0   ; DATA XREF: 

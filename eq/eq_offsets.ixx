@@ -24,8 +24,8 @@ namespace eq
 
         namespace Spawn
         {
-            const uint32_t Previous                          = 0x04;      // uintptr_t pointer
-            const uint32_t Next                              = 0x08;      // uintptr_t pointer
+            const uint32_t Previous                          = 0x08;      // uintptr_t pointer
+            const uint32_t Next                              = 0x10;      // uintptr_t pointer
             const uint32_t JumpStrength                      = 0x20;      // float       // determines how high up you will jump upward, but not forward
             const uint32_t SwimStrength                      = 0x24;      // float
             const uint32_t SpeedMultiplier                   = 0x28;      // float       // spells like SoW

@@ -122,5 +122,20 @@
     <ClCompile Include="..\eqapp\eqapp_interpretcommand.ixx">
       <Filter>Source Files\eqapp</Filter>
     </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_follow.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_windowtitle.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_macro.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_macromanager.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_constants.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

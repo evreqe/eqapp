@@ -158,10 +158,15 @@
     <ClCompile Include="..\eqapp\eqapp.ixx" />
     <ClCompile Include="..\eqapp\eqapp_boxchatclient.ixx" />
     <ClCompile Include="..\eqapp\eqapp_console.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_constants.ixx" />
     <ClCompile Include="..\eqapp\eqapp_detours.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_follow.ixx" />
     <ClCompile Include="..\eqapp\eqapp_interpretcommand.ixx" />
     <ClCompile Include="..\eqapp\eqapp_log.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_macro.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_macromanager.ixx" />
     <ClCompile Include="..\eqapp\eqapp_timer.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_windowtitle.ixx" />
     <ClCompile Include="..\eq\eq.ixx" />
     <ClCompile Include="..\eq\eq_addresses.ixx" />
     <ClCompile Include="..\eq\eq_classes.ixx" />

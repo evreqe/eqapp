@@ -37,7 +37,7 @@ public:
 
 private:
 
-     TimePoint m_time = std::chrono::steady_clock::now();
+    TimePoint m_time = std::chrono::steady_clock::now();
 
 };
 

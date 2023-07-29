@@ -79,7 +79,7 @@ class eq::Classes::CEverQuest
 public:
     char* DoPercentConvert(char* text, bool isOutgoing);
     void InterpretCommand(uintptr_t* playerSpawn, const char* text);
-    void SetGameState(uint32_t gameState);
+    void SetGameState(int gameState);
 };
 
 typedef char* (__thiscall* EQ_FUNCTION_TYPE_CEverQuest__DoPercentConvert)(void* thisPointer, char* text, bool isOutgoing);
@@ -94,7 +94,11 @@ void EQ_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uintptr_t* play
      ((EQ_FUNCTION_TYPE_CEverQuest__InterpretCommand)eq::EQGame::Addresses::Functions::CEverQuest__InterpretCommand)(thisPointer, playerSpawn, text);
 }
 
-typedef void (__thiscall* EQ_FUNCTION_TYPE_CEverQuest__SetGameState)(void* thisPointer, uint32_t gameState);
+typedef void (__thiscall* EQ_FUNCTION_TYPE_CEverQuest__SetGameState)(void* thisPointer, int gameState);
+void EQ_FUNCTION_CEverQuest__SetGameState(void* thisPointer, int gameState)
+{
+     ((EQ_FUNCTION_TYPE_CEverQuest__SetGameState)eq::EQGame::Addresses::Functions::CEverQuest__SetGameState)(thisPointer, gameState);
+}
 
 //////////////////////////////////////////////////
 /* CDisplay */

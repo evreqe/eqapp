@@ -11,9 +11,6 @@ namespace eq
 {
     namespace Constants
     {
-        const char* WindowTitleDefault     = "EverQuest";
-        const char* WindowTitleModified    = "EverQuest*";
-
         constexpr float PI = std::numbers::pi_v<float>;
 
         const uint32_t NumHotbars          = 11;

@@ -71,7 +71,7 @@ public:
     void open();
     void close();
     void deleteFileContents();
-    void createFolder();
+    bool createFolder();
 
     bool isEnabled();
     void setEnabled(bool b);
@@ -121,21 +121,7 @@ void Log::vwrite(const FormatString& format, fmt::format_args args)
         fileName = fileName.substr(fileName.rfind("\\") + 1);
     }
 
-    std::string_view functionName = loc.function_name();
-
-    std::size_t beginPosition;
-    if ((beginPosition = functionName.find("tb::")) != std::string::npos)
-    {
-        std::size_t endPosition;
-        if ((endPosition = functionName.find("(", beginPosition)) != std::string::npos && endPosition != beginPosition)
-        {
-            endPosition = endPosition + 1;
-
-            functionName = functionName.substr(beginPosition, endPosition - beginPosition);
-        }
-    }
-
-    m_sourceText = fmt::format(FMT_COMPILE("[{}:{}:{}()] "), fileName, loc.line(), functionName);
+    m_sourceText = fmt::format(FMT_COMPILE("[{}:{}:{}()] "), fileName, loc.line(), loc.function_name());
 
     std::stringstream ss;
     ss << m_sourceText;
@@ -199,14 +185,16 @@ void Log::deleteFileContents()
     m_file.close();
 }
 
-void Log::createFolder()
+bool Log::createFolder()
 {
     namespace fs = std::filesystem;
 
     if (fs::is_directory(m_folderName) == false || fs::exists(m_folderName) == false)
     {
-        fs::create_directory(m_folderName);
+        return fs::create_directory(m_folderName);
     }
+
+    return false;
 }
 
 bool Log::isEnabled()
