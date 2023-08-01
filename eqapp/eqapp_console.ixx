@@ -101,7 +101,7 @@ void Console::Print()
 
     for (std::string text; std::getline(m_stringStream, text, '\n'); )
     {
-        if (text.size() == 0)
+        if (text.empty() == true)
         {
             continue;
         }

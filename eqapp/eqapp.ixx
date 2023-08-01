@@ -11,11 +11,15 @@ export import eqapp_constants;
 export import eqapp_log;
 export import eqapp_detours;
 export import eqapp_console;
+export import eqapp_nodraw;
 export import eqapp_boxchatclient;
+export import eqapp_chatevents;
 export import eqapp_follow;
 export import eqapp_windowtitle;
 export import eqapp_interpretcommand;
 export import eqapp_macromanager;
+export import eqapp_soundmanager;
+export import eqapp_esp;
 
 export
 {
@@ -102,10 +106,14 @@ void Application::Load()
     EQAPP_Detours_Load();
 
     g_Console.Load();
+    g_NoDraw.Load();
+    g_ESP.Load();
     g_InterpretCommand.Load();
     g_MacroManager.Load();
+    g_SoundManager.Load();
     g_WindowTitle.Load();
     g_BoxChatClient.Load();
+    g_ChatEvents.Load();
     g_Follow.Load();
 
     // Box Chat
@@ -132,10 +140,14 @@ void Application::Load()
 void Application::Unload()
 {
     g_Follow.Unload();
+    g_ChatEvents.Unload();
     g_BoxChatClient.Unload();
     g_WindowTitle.Unload();
+    g_SoundManager.Unload();
     g_MacroManager.Unload();
     g_InterpretCommand.Unload();
+    g_ESP.Unload();
+    g_NoDraw.Unload();
 
     std::print(std::cout, "********** Unloaded! **********\n");
     g_Console.Print();

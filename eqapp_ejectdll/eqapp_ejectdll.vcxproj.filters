@@ -13,10 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\misc">
+      <UniqueIdentifier>{deb76db2-76ea-4ac2-bf1a-368a9024b75b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eq">
+      <UniqueIdentifier>{4921cac6-985b-4d8c-a3f1-7782d9358191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eqapp">
+      <UniqueIdentifier>{de49f7fc-c461-4e9b-b98d-15d60f875d0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\eq\eq_constants.ixx">
+      <Filter>Source Files\eq</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_constants.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\misc\common.h">
+      <Filter>Header Files\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\misc\utility.h">
+      <Filter>Header Files\misc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

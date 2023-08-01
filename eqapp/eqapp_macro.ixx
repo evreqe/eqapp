@@ -83,7 +83,7 @@ bool Macro::IsEnabled()
 void Macro::Toggle()
 {
     util::ToggleBool(m_isEnabled);
-    std::print(std::cout, "{}: '{}'={}\n", m_className, m_name, m_isEnabled);
+    std::print(std::cout, "{}: '{}' = {}\n", m_className, m_name, m_isEnabled);
 }
 
 void Macro::Enable()

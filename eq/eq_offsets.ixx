@@ -11,21 +11,88 @@ namespace eq
 {
     namespace Offsets
     {
+        namespace CRender
+        {
+            const uint32_t VirtualFunctionTable     = 0x00;     // uintptr_t pointer
+            const uint32_t IDirect3DN               = 0xEE0;    // uintptr_t pointer    // IDirect3D9*
+            const uint32_t IDirect3DDeviceN         = 0xEE8;    // uintptr_t pointer    // IDirect3DDevice9*    // LPDIRECT3DDEVICE9
+            const uint32_t IDirect3DSurfaceN        = 0xEF0;    // uintptr_t pointer    // IDirect3DSurface9*
+        }
+
+        namespace CRenderVirtualFunctionTable
+        {
+            const uint32_t ResetDevice                = 0xC8;     // uintptr_t pointer
+            const uint32_t DrawLine2D                 = 0x110;    // uintptr_t pointer
+            const uint32_t DrawLine3D                 = 0x118;    // uintptr_t pointer
+            const uint32_t RenderScene                = 0x158;    // uintptr_t pointer
+            const uint32_t RenderBlind                = 0x160;    // uintptr_t pointer
+            const uint32_t UpdateDisplay              = 0x168;    // uintptr_t pointer
+            const uint32_t TransformWorldToCamera     = 0x1B8;    // uintptr_t pointer
+        }
+
+        namespace SGraphicsEngine
+        {
+            const uint32_t CRender            = 0x18;    // uintptr_t pointer
+            const uint32_t CParticleSystem    = 0x20;    // uintptr_t pointer
+        }
+
         namespace CEverQuest
         {
             const uint32_t GameState    = 0x5E4;    // uint32_t    // "Gamestate at crash = %d\n"
         }
 
+        namespace CDisplay
+        {
+            const uint32_t CCamera    = 0x118;    // uintptr_t pointer
+        }
+
+        namespace CCamera
+        {
+            const uint32_t VirtualFunctionTable    = 0x00;    // uint32_t pointer
+            const uint32_t FieldOfView             = 0x08;    // float
+            const uint32_t AspectRatio             = 0x0C;    // float
+            const uint32_t Unknown                 = 0x14;    // float    // 0.0 to 1.0
+            const uint32_t DrawDistance            = 0x1C;    // float
+            const uint32_t ActorClipPlane          = 0x24;    // float
+            const uint32_t ShadowClipPlane         = 0x28;    // float
+            const uint32_t DrawDistance2           = 0x2C;    // float
+            const uint32_t FarClipPlane            = 0x30;    // float
+            const uint32_t ScreenWidthHalf         = 0x3C;    // float    // resolution width divided by 2
+            const uint32_t ScreenHeightHalf        = 0x40;    // float    // resolution height divided by 2
+            const uint32_t Heading                 = 0xB4;    // float    // yaw
+            const uint32_t Pitch                   = 0xB8;    // float    // pitch
+            const uint32_t Rotation                = 0xBC;    // float    // roll
+            const uint32_t Y                       = 0xC0;    // float
+            const uint32_t X                       = 0xC4;    // float
+            const uint32_t Z                       = 0xC8;    // float
+        }
+
+        namespace CCameraVirtualFunctionTable
+        {
+            const uint32_t SetLocation                      = 0x80;    // uintptr_t pointer    // Y, X, Z
+            const uint32_t SetOrientation                   = 0x88;    // uintptr_t pointer    // Heading, Pitch, Rotation
+            const uint32_t WorldSpaceToScreenSpace          = 0xE8;    // uintptr_t pointer
+            const uint32_t ScreenSpaceToWorldSpaceHelper    = 0xF0;    // uintptr_t pointer
+            const uint32_t WorldSpaceToScreenSpaceHelper    = 0xF8;    // uintptr_t pointer
+        }
+
         namespace SpawnManager
         {
-            const uint32_t FirstSpawn    = 0x10;    // uint32_t pointer
-            const uint32_t LastSpawn     = 0x18;    // uint32_t pointer
+            const uint32_t FirstSpawn    = 0x10;    // uintptr_t pointer
+            const uint32_t LastSpawn     = 0x18;    // uintptr_t pointer
+        }
+
+        namespace SoundManager
+        {
+            const uint32_t IsDisabled      = 0x60;      // bool
+            const uint32_t SoundRealism    = 0x1FCC;    // float
+            const uint32_t SoundVolume     = 0x1FD0;    // float
         }
 
         namespace Spawn
         {
-            const uint32_t Previous                          = 0x08;      // uintptr_t pointer
-            const uint32_t Next                              = 0x10;      // uintptr_t pointer
+            const uint32_t PreviousSpawn                     = 0x08;      // uintptr_t pointer
+            const uint32_t NextSpawn                         = 0x10;      // uintptr_t pointer
             const uint32_t JumpStrength                      = 0x20;      // float       // determines how high up you will jump upward, but not forward
             const uint32_t SwimStrength                      = 0x24;      // float
             const uint32_t SpeedMultiplier                   = 0x28;      // float       // spells like SoW
@@ -38,9 +105,9 @@ namespace eq
             const uint32_t Y                                 = 0x74;      // float
             const uint32_t X                                 = 0x78;      // float
             const uint32_t Z                                 = 0x7C;      // float
-            const uint32_t SpeedX                            = 0x70;      // float
-            const uint32_t SpeedY                            = 0x74;      // float
-            const uint32_t SpeedZ                            = 0x78;      // float
+            const uint32_t SpeedX                            = 0x80;      // float
+            const uint32_t SpeedY                            = 0x84;      // float
+            const uint32_t SpeedZ                            = 0x88;      // float
             const uint32_t MovementSpeed                     = 0x8C;      // float       // how fast you are moving while walking, running, riding a mount, etc
             const uint32_t Heading                           = 0x90;      // float       // turning
             const uint32_t Angle                             = 0x94;      // float

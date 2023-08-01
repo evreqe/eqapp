@@ -48,7 +48,7 @@ public:
     void Enable();
     void Disable();
     void PrintStatus();
-    void LoadMacros();
+    void LoadFiles();
     void InterpretMacro(const std::string& name);
     void SetMacroTimerInterval(const std::string& name, eqapp::Timer::TimeInterval timeInterval);
     std::string GetDisplayText();
@@ -81,7 +81,7 @@ MacroManager::~MacroManager()
 
 void MacroManager::Load()
 {
-    LoadMacros();
+    LoadFiles();
 
     m_isLoaded = true;
 }
@@ -145,7 +145,7 @@ void MacroManager::PrintStatus()
     }
 }
 
-void MacroManager::LoadMacros()
+void MacroManager::LoadFiles()
 {
     m_macroList.clear();
 
@@ -290,27 +290,27 @@ bool MacroManager::HandleInterpetCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//MacroManagerEnable")
+    if (commandText == "//MacroManagerEnable" || commandText == "//MacroManagerOn")
     {
         Enable();
         return true;
     }
 
-    if (commandText == "//MacroManagerDisable")
+    if (commandText == "//MacroManagerDisable" || commandText == "//MacroManagerOff")
     {
         Disable();
         return true;
     }
 
-    if (commandText == "//MacroManagerStatus" || commandText == "//Macros")
+    if (commandText == "//MacroManagerStatus")
     {
         PrintStatus();
         return true;
     }
 
-    if (commandText == "//MacroManagerLoadMacros" || commandText == "//LoadMacros")
+    if (commandText == "//MacroManagerLoadFiles" || commandText == "//LoadMacros")
     {
-        LoadMacros();
+        LoadFiles();
         return true;
     }
 

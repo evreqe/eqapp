@@ -134,7 +134,7 @@ void WindowTitle::Execute()
 
     std::string playerSpawnName = EQ_GetPlayerSpawnName();
 
-    if (playerSpawnName.size() == 0)
+    if (playerSpawnName.empty() == true)
     {
         return;
     }
@@ -152,13 +152,13 @@ bool WindowTitle::HandleInterpetCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//WindowTitleEnable")
+    if (commandText == "//WindowTitleEnable" || commandText == "//WindowTitleOn")
     {
         Enable();
         return true;
     }
 
-    if (commandText == "//WindowTitleDisable")
+    if (commandText == "//WindowTitleDisable" || commandText == "//WindowTitleOff")
     {
         Disable();
         return true;

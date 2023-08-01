@@ -31,11 +31,11 @@
     <Filter Include="Header Files\mq">
       <UniqueIdentifier>{26161976-693e-41e3-b112-1542551f742b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\misc">
+      <UniqueIdentifier>{d4b1a8db-ab2e-4e18-a3d0-80415dbd2386}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dllmain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\magic_enum\magic_enum.hpp">
       <Filter>Header Files\magic_enum</Filter>
     </ClInclude>
@@ -57,14 +57,14 @@
     <ClInclude Include="..\mq\eqmain.h">
       <Filter>Header Files\mq</Filter>
     </ClInclude>
-    <ClInclude Include="..\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\mq\mq.h">
       <Filter>Header Files\mq</Filter>
     </ClInclude>
-    <ClInclude Include="..\utility.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\misc\common.h">
+      <Filter>Header Files\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\misc\utility.h">
+      <Filter>Header Files\misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +135,18 @@
       <Filter>Source Files\eqapp</Filter>
     </ClCompile>
     <ClCompile Include="..\eqapp\eqapp_constants.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_nodraw.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_chatevents.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_soundmanager.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_esp.ixx">
       <Filter>Source Files\eqapp</Filter>
     </ClCompile>
   </ItemGroup>

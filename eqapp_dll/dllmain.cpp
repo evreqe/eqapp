@@ -1,4 +1,20 @@
-#include "dllmain.h"
+#include "common.h"
+#include "utility.h"
+
+import eqapp;
+
+import eqapp_constants;
+
+HMODULE g_Module = NULL;
+
+const char* g_DLLFileName = eqapp::Constants::DLLFileName.c_str();
+
+#define EXTERN_DLL_EXPORT extern "C" __declspec(dllexport)
+
+EXTERN_DLL_EXPORT DWORD __stdcall Inject();
+EXTERN_DLL_EXPORT DWORD __stdcall Eject();
+
+BOOL __stdcall DllMain(HMODULE hmodule, DWORD reason, LPVOID reserved);
 
 EXTERN_DLL_EXPORT DWORD __stdcall Inject()
 {
@@ -19,7 +35,7 @@ EXTERN_DLL_EXPORT DWORD __stdcall Eject()
 
     g_Application.Unload();
 
-    HMODULE thisModule = GetModuleHandleA(g_DLLName);
+    HMODULE thisModule = GetModuleHandleA(g_DLLFileName);
 
     FreeLibraryAndExitThread(thisModule, 0);
 

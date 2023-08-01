@@ -271,13 +271,13 @@ bool Follow::HandleInterpetCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//FollowEnable")
+    if (commandText == "//FollowEnable" || commandText == "//FollowOn")
     {
         Enable();
         return true;
     }
 
-    if (commandText == "//FollowDisable")
+    if (commandText == "//FollowDisable" || commandText == "//FollowOff")
     {
         Disable();
         return true;

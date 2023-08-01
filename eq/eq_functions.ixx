@@ -13,6 +13,18 @@ export
 {
 
 //////////////////////////////////////////////////
+/* log functions */
+//////////////////////////////////////////////////
+
+void EQ_Log(const std::string& text)
+{
+    std::fstream file;
+    file.open("eqapp/eq_log.txt", std::ios::out | std::ios::app);
+    file << text;
+    file.close();
+}
+
+//////////////////////////////////////////////////
 /* non-member functions */
 //////////////////////////////////////////////////
 
@@ -34,6 +46,33 @@ typedef uintptr_t (* EQ_FUNCTION_TYPE_DrawText)(const char* text, uint32_t x, ui
 uintptr_t EQ_FUNCTION_DrawText(const char* text, uint32_t x, uint32_t y, uint32_t drawTextColor)
 {
      return ((EQ_FUNCTION_TYPE_DrawText)eq::EQGame::Addresses::Functions::DrawText)(text, x, y, drawTextColor);
+}
+
+//////////////////////////////////////////////////
+/* class virtual table functions */
+//////////////////////////////////////////////////
+
+bool EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace(void* thisPointer, eq::Location& location, float& screenX, float& screenY)
+{
+    uintptr_t xCCamera = EQ_GetCCamera();
+    if (xCCamera == NULL)
+    {
+        return false;
+    }
+
+    uintptr_t xCCameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(xCCamera + eq::Offsets::CCamera::VirtualFunctionTable);
+    if (xCCameraVirtualFunctionTable == NULL)
+    {
+        return false;
+    }
+
+    uintptr_t xCCameraWorldSpaceToScreenSpace = eq::Memory::Read<uintptr_t>(xCCameraVirtualFunctionTable + eq::Offsets::CCameraVirtualFunctionTable::WorldSpaceToScreenSpace);
+    if (xCCameraWorldSpaceToScreenSpace == NULL)
+    {
+        return false;
+    }
+
+    return ((EQ_FUNCTION_TYPE_CCamera__WorldSpaceToScreenSpace)xCCameraWorldSpaceToScreenSpace)(thisPointer, location, screenX, screenY);
 }
 
 //////////////////////////////////////////////////
@@ -292,6 +331,17 @@ uintptr_t EQ_GetCDisplay()
     return eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::CDisplay);
 }
 
+uintptr_t EQ_GetCCamera()
+{
+    uintptr_t xCDisplay = EQ_GetCDisplay();
+    if (xCDisplay == NULL)
+    {
+        return NULL;
+    }
+
+    return eq::Memory::Read<uintptr_t>(xCDisplay + eq::Offsets::CDisplay::CCamera);
+}
+
 uintptr_t EQ_GetChatManager()
 {
     return EQ_FUNCTION_GetChatManager();
@@ -300,6 +350,38 @@ uintptr_t EQ_GetChatManager()
 uintptr_t EQ_GetSpawnManager()
 {
     return eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::SpawnManager);
+}
+
+uintptr_t EQ_GetSoundManager()
+{
+    return eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::SoundManager);
+}
+
+uintptr_t EQ_GetSGraphicsEngine()
+{
+    return eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::SGraphicsEngine);
+}
+
+uintptr_t EQ_GetCRender()
+{
+    uintptr_t xSGraphicsEngine = EQ_GetSGraphicsEngine();
+    if (xSGraphicsEngine == NULL)
+    {
+        return NULL;
+    }
+
+    return eq::Memory::Read<uintptr_t>(xSGraphicsEngine + eq::Offsets::SGraphicsEngine::CRender);
+}
+
+uintptr_t EQ_GetCParticleSystem()
+{
+    uintptr_t xSGraphicsEngine = EQ_GetSGraphicsEngine();
+    if (xSGraphicsEngine == NULL)
+    {
+        return NULL;
+    }
+
+    return eq::Memory::Read<uintptr_t>(xSGraphicsEngine + eq::Offsets::SGraphicsEngine::CParticleSystem);
 }
 
 uint32_t EQ_GetGameState()
@@ -388,7 +470,7 @@ std::vector<uintptr_t> EQ_GetSpawnList()
     {
         spawnList.push_back(spawn);
 
-        spawn = EQ_GetSpawnNext(spawn);
+        spawn = EQ_GetSpawnNextSpawn(spawn);
     }
 
     return spawnList;
@@ -409,7 +491,7 @@ bool EQ_DoesSpawnExist(uint64_t spawn)
             return true;
         }
 
-        currentSpawn = EQ_GetSpawnNext(currentSpawn);
+        currentSpawn = EQ_GetSpawnNextSpawn(currentSpawn);
     }
 
     return false;
@@ -425,13 +507,13 @@ uint64_t EQ_GetNumSpawnsInZone(uint8_t spawnType)
         uint8_t spawnTypeEx = EQ_GetSpawnType(spawn);
         if (spawnTypeEx != spawnType)
         {
-            spawn = EQ_GetSpawnNext(spawn);
+            spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
         numSpawns++;
 
-        spawn = EQ_GetSpawnNext(spawn);
+        spawn = EQ_GetSpawnNextSpawn(spawn);
     }
 
     return numSpawns;
@@ -456,7 +538,7 @@ uint64_t EQ_GetNumNearbySpawns(uint8_t spawnType, float distance, float distance
     {
         if (spawn == playerSpawn)
         {
-            spawn = EQ_GetSpawnNext(spawn);
+            spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
@@ -467,27 +549,27 @@ uint64_t EQ_GetNumNearbySpawns(uint8_t spawnType, float distance, float distance
         uint8_t spawnType_ = EQ_GetSpawnType(spawn);
         if (spawnType_ != spawnType)
         {
-            spawn = EQ_GetSpawnNext(spawn);
+            spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
         float spawnDistance = EQ_CalculateDistance(playerSpawnY, playerSpawnX, spawnY, spawnX);
         if (spawnDistance > distance)
         {
-            spawn = EQ_GetSpawnNext(spawn);
+            spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
         float spawnDistanceZ = std::fabsf(playerSpawnZ - spawnZ);
         if (spawnDistanceZ > distanceZ)
         {
-            spawn = EQ_GetSpawnNext(spawn);
+            spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
         numSpawns++;
 
-        spawn = EQ_GetSpawnNext(spawn);
+        spawn = EQ_GetSpawnNextSpawn(spawn);
     }
 
     return numSpawns;
@@ -548,7 +630,7 @@ uintptr_t EQ_GetSpawnByNameOrNameNumbered(const std::string& spawnName)
             return spawn;
         }
 
-        spawn = EQ_GetSpawnNext(spawn);
+        spawn = EQ_GetSpawnNextSpawn(spawn);
     }
 
     return NULL;
@@ -1049,14 +1131,14 @@ std::string EQ_GetSpawnLastName(uintptr_t spawn)
     return spawnLastName;
 }
 
-uintptr_t EQ_GetSpawnPrevious(uintptr_t spawn)
+uintptr_t EQ_GetSpawnPreviousSpawn(uintptr_t spawn)
 {
-    return eq::Memory::Read<uintptr_t>(spawn + eq::Offsets::Spawn::Previous);
+    return eq::Memory::Read<uintptr_t>(spawn + eq::Offsets::Spawn::PreviousSpawn);
 }
 
-uintptr_t EQ_GetSpawnNext(uintptr_t spawn)
+uintptr_t EQ_GetSpawnNextSpawn(uintptr_t spawn)
 {
-    return eq::Memory::Read<uintptr_t>(spawn + eq::Offsets::Spawn::Next);
+    return eq::Memory::Read<uintptr_t>(spawn + eq::Offsets::Spawn::NextSpawn);
 }
 
 float EQ_GetSpawnJumpStrength(uintptr_t spawn)
@@ -1677,6 +1759,16 @@ void EQ_PlaySound(const std::string& fileName)
 {
     std::string filePath = std::format("sounds/{}", fileName);
 
+    if (filePath.ends_with(".wav") == false)
+    {
+        return;
+    }
+
+    if (std::filesystem::exists(filePath) == false)
+    {
+        return;
+    }
+
     PlaySoundA(filePath.c_str(), NULL, SND_FILENAME | SND_NODEFAULT | SND_ASYNC);
 }
 
@@ -1723,6 +1815,22 @@ void EQ_ClearTarget()
     EQ_SetTargetSpawn(NULL);
 }
 
+bool EQ_WorldLocationToScreenLocation(float worldY, float worldX, float worldZ, float& screenX, float& screenY)
+{
+    uintptr_t xCCamera = EQ_GetCCamera();
+    if (xCCamera == NULL)
+    {
+        return false;
+    }
+
+    eq::Location location;
+    location.Y = worldY;
+    location.X = worldX;
+    location.Z = worldZ;
+
+    return EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace((uintptr_t*)xCCamera, location, screenX, screenY);
+}
+
 std::string EQ_StringMap_GetValueByKey(const std::unordered_map<uint32_t, std::string>& stringMap, uint32_t key)
 {
     auto it = stringMap.find(key);
@@ -1745,34 +1853,6 @@ uint32_t EQ_StringMap_GetKeyByValue(const std::unordered_map<uint32_t, std::stri
     }
 
     return 0xFFFFFFFF;
-}
-
-void EQ_UseAlternateAbility(uint32_t alternateAbilityID)
-{
-    std::string commandText = std::format("/alt activate {}", alternateAbilityID);
-
-    EQ_InterpretCommand(commandText.c_str());
-}
-
-void EQ_UseDiscipline(const std::string& disciplineName)
-{
-    std::string commandText = std::format("/discipline {}", disciplineName);
-
-    EQ_InterpretCommand(commandText.c_str());
-}
-
-void EQ_UseAbility(uint64_t abilityNumber)
-{
-    std::string commandText = std::format("/doability {}", abilityNumber);
-
-    EQ_InterpretCommand(commandText.c_str());
-}
-
-void EQ_UseItem(const std::string& itemName)
-{
-    std::string commandText = std::format("/useitem {}", itemName);
-
-    EQ_InterpretCommand(commandText.c_str());
 }
 
 }

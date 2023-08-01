@@ -13,21 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\misc">
+      <UniqueIdentifier>{64b289b6-c11f-49fc-90e5-bf10a409a7fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eqapp">
+      <UniqueIdentifier>{82821c5b-58a0-4009-9179-a7fdcfbbc652}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\eqapp\eqapp_boxchatserver.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\eqapp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\common.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\misc\common.h">
+      <Filter>Header Files\misc</Filter>
     </ClInclude>
-    <ClInclude Include="..\utility.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\misc\utility.h">
+      <Filter>Header Files\misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,6 +11,8 @@ namespace eq
 {
     namespace Constants
     {
+        const std::string GameProcessName = "eqgame.exe";
+
         constexpr float PI = std::numbers::pi_v<float>;
 
         const uint32_t NumHotbars          = 11;

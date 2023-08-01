@@ -40,7 +40,9 @@ public:
 
 private:
 
-    const std::string m_name = "EQ Box Chat Server";
+    const std::string m_applicationName = "EQ Box Chat Server";
+
+    const std::string m_className = "Box Chat Server";
 
     const char* m_keepAliveText = "$KeepAlive\n";
 
@@ -53,7 +55,7 @@ private:
 
     WSADATA m_wsaData;
 
-    const size_t m_numClients = 256;
+    const std::size_t m_numClients = 256;
     std::array<SOCKET, 256> m_clientSocketList;
     std::array<std::string, 256> m_clientNameList;
     std::array<std::string, 256> m_clientGlobalChannelNameList;
@@ -83,7 +85,7 @@ BoxChatServer::~BoxChatServer()
 
 bool BoxChatServer::Load()
 {
-    std::print("{}\n", m_name);
+    std::print("{}\n", m_applicationName);
 
     std::print("Build: {} {}\n", __DATE__, __TIME__);
 
@@ -120,7 +122,7 @@ bool BoxChatServer::Load()
         return false;
     }
 
-    for (size_t i = 0 ; i < m_numClients; i++)
+    for (std::size_t i = 0 ; i < m_numClients; i++)
     {
         m_clientSocketList[i] = INVALID_SOCKET;
         m_clientNameList[i] = "UNKNOWN";
@@ -140,7 +142,7 @@ bool BoxChatServer::Unload()
     closesocket(m_recvSocket);
     closesocket(m_sendSocket);
 
-    for (size_t i = 0 ; i < m_numClients; i++)
+    for (std::size_t i = 0 ; i < m_numClients; i++)
     {
         closesocket(m_clientSocketList[i]);
     }
@@ -162,7 +164,7 @@ bool BoxChatServer::Loop()
     FD_ZERO(&m_ReadFdSet);
     FD_SET(m_listenSocket, &m_ReadFdSet);
 
-    for (size_t i = 0 ; i < m_numClients; i++)
+    for (std::size_t i = 0 ; i < m_numClients; i++)
     {
         m_recvSocket = m_clientSocketList[i];
 
@@ -193,7 +195,7 @@ bool BoxChatServer::Loop()
 
         std::print("Client connected. Socket: '{}' IP Address: '{}' Port Number: '{}'\n", m_acceptSocket, ipAddressAsString, ntohs(m_serverAddress.sin_port));
 
-        for (size_t i = 0; i < m_numClients; i++)
+        for (std::size_t i = 0; i < m_numClients; i++)
         {
             if (m_clientSocketList[i] == INVALID_SOCKET)
             {
@@ -204,7 +206,7 @@ bool BoxChatServer::Loop()
         }
     }
 
-    for (size_t i = 0; i < m_numClients; i++)
+    for (std::size_t i = 0; i < m_numClients; i++)
     {
         m_recvSocket = m_clientSocketList[i];
 
@@ -297,7 +299,7 @@ bool BoxChatServer::Loop()
 
                             if (clientName.size() != 0)
                             {
-                                for (size_t k = 0; k < m_numClients; k++)
+                                for (std::size_t k = 0; k < m_numClients; k++)
                                 {
                                     if (m_clientSocketList[k] == m_recvSocket)
                                     {
@@ -317,7 +319,7 @@ bool BoxChatServer::Loop()
 
                             if (clientGlobalChannelName.size() != 0)
                             {
-                                for (size_t k = 0; k < m_numClients; k++)
+                                for (std::size_t k = 0; k < m_numClients; k++)
                                 {
                                     if (m_clientSocketList[k] == m_recvSocket)
                                     {
@@ -337,7 +339,7 @@ bool BoxChatServer::Loop()
 
                             if (clientChannelName.size() != 0)
                             {
-                                for (size_t k = 0; k < m_numClients; k++)
+                                for (std::size_t k = 0; k < m_numClients; k++)
                                 {
                                     if (m_clientSocketList[k] == m_recvSocket)
                                     {
@@ -403,7 +405,7 @@ bool BoxChatServer::Loop()
                             int sendIndex = -1;
                             int recvIndex = -1;
 
-                            for (size_t l = 0; l < m_numClients; l++)
+                            for (std::size_t l = 0; l < m_numClients; l++)
                             {
                                 if (m_clientSocketList[l] == INVALID_SOCKET)
                                 {
@@ -430,7 +432,7 @@ bool BoxChatServer::Loop()
                                 }
                             }
 
-                            for (size_t j = 0; j < m_numClients; j++)
+                            for (std::size_t j = 0; j < m_numClients; j++)
                             {
                                 if (m_clientSocketList[j] == 0)
                                 {
@@ -440,7 +442,7 @@ bool BoxChatServer::Loop()
                                 // skip clients with empty names or UNKNOWN
                                 if (bBCT == true || bBCTC == true)
                                 {
-                                    if (m_clientNameList[j].size() == 0)
+                                    if (m_clientNameList[j].empty() == true)
                                     {
                                         continue;
                                     }
@@ -468,7 +470,7 @@ bool BoxChatServer::Loop()
                                 if (bBCT == true)
                                 {
                                     std::string sendToClientName = wordList.at(1);
-                                    if (sendToClientName.size() == 0)
+                                    if (sendToClientName.empty() == true)
                                     {
                                         continue;
                                     }
@@ -488,7 +490,7 @@ bool BoxChatServer::Loop()
                                 else if (bBCTC == true)
                                 {
                                     std::string sendToChannelName = wordList.at(1);
-                                    if (sendToChannelName.size() == 0)
+                                    if (sendToChannelName.empty() == true)
                                     {
                                         continue;
                                     }
@@ -521,7 +523,7 @@ bool BoxChatServer::Loop()
                                 }
 
                                 std::string wordListExAsString = util::String::Join(wordListEx, " ");
-                                if (wordListExAsString.size() == 0)
+                                if (wordListExAsString.empty() == true)
                                 {
                                     continue;
                                 }
@@ -534,13 +536,13 @@ bool BoxChatServer::Loop()
 
                                 for (auto& commandToken : commandTokens)
                                 {
-                                    if (commandToken.size() == 0)
+                                    if (commandToken.empty() == true)
                                     {
                                         continue;
                                     }
 
                                     std::string commandText = std::format("$InterpretCommand {}\n", commandToken);
-                                    if (commandText.size() == 0)
+                                    if (commandText.empty() == true)
                                     {
                                         continue;
                                     }

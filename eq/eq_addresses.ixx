@@ -22,11 +22,6 @@ namespace eq
             return address - PreferredAddress + BaseAddress;
         }
 
-        void FixAddressEx(uintptr_t& address)
-        {
-            address = address - PreferredAddress + BaseAddress;
-        }
-
         namespace Addresses
         {
             uintptr_t VersionDate = FixAddress(__ActualVersionDate_x);
@@ -43,8 +38,13 @@ namespace eq
                 uintptr_t TargetSpawn = FixAddress(pinstTarget_x);
 
                 uintptr_t SpawnManager = FixAddress(pinstSpawnManager_x);
+                uintptr_t SoundManager = FixAddress(pinstEQSoundManager_x);
+
                 uintptr_t CEverQuest = FixAddress(pinstCEverQuest_x);
                 uintptr_t CDisplay = FixAddress(pinstCDisplay_x);
+
+                uintptr_t CRender = FixAddress(pinstRenderInterface_x);
+                uintptr_t SGraphicsEngine = FixAddress(pinstSGraphicsEngine_x);
             }
 
             namespace Functions
@@ -64,6 +64,9 @@ namespace eq
                 // SpawnManager
                 uintptr_t SpawnManager__GetSpawnByID = FixAddress(PlayerManagerClient__GetSpawnByID_x);
                 uintptr_t SpawnManager__GetSpawnByName = FixAddress(PlayerManagerClient__GetSpawnByName_x);
+
+                // SoundManager
+                uintptr_t SoundManager__PlaySound = FixAddress(EqSoundManager__WavePlay_x);
 
                 // CEverQuest
                 uintptr_t CEverQuest__DoPercentConvert = FixAddress(CEverQuest__DoPercentConvert_x);
@@ -87,9 +90,18 @@ namespace eq
             return address - PreferredAddress + BaseAddress;
         }
 
-        void FixAddressEx(uintptr_t& address)
+        namespace Addresses
         {
-            address = address - PreferredAddress + BaseAddress;
+            namespace Functions
+            {
+                uintptr_t CParticleSystem__Render = FixAddress(CParticleSystem__Render_x);
+                uintptr_t CParticleSystem__CreateSpellEmitter = FixAddress(CParticleSystem__CreateSpellEmitter_x);
+
+                uintptr_t CRender__RenderScene = FixAddress(CRender__RenderScene_x);
+                uintptr_t CRender__RenderBlind = FixAddress(CRender__RenderBlind_x);
+                uintptr_t CRender__ResetDevice = FixAddress(CRender__ResetDevice_x);
+                uintptr_t CRender__UpdateDisplay = FixAddress(CRender__UpdateDisplay_x);
+            }
         }
     }
 
@@ -102,11 +114,6 @@ namespace eq
         uintptr_t FixAddress(uintptr_t address)
         {
             return address - PreferredAddress + BaseAddress;
-        }
-
-        void FixAddressEx(uintptr_t& address)
-        {
-            address = address - PreferredAddress + BaseAddress;
         }
     }
 }

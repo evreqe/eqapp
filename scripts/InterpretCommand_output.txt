@@ -1,0 +1,792 @@
+if (commandText == "//Hot1_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_1);
+    return true;
+}
+
+if (commandText == "//Hot1_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_2);
+    return true;
+}
+
+if (commandText == "//Hot1_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_3);
+    return true;
+}
+
+if (commandText == "//Hot1_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_4);
+    return true;
+}
+
+if (commandText == "//Hot1_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_5);
+    return true;
+}
+
+if (commandText == "//Hot1_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_6);
+    return true;
+}
+
+if (commandText == "//Hot1_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_7);
+    return true;
+}
+
+if (commandText == "//Hot1_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_8);
+    return true;
+}
+
+if (commandText == "//Hot1_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_9);
+    return true;
+}
+
+if (commandText == "//Hot1_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_10);
+    return true;
+}
+
+if (commandText == "//Hot1_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_11);
+    return true;
+}
+
+if (commandText == "//Hot1_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT1_12);
+    return true;
+}
+
+if (commandText == "//Hot2_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_1);
+    return true;
+}
+
+if (commandText == "//Hot2_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_2);
+    return true;
+}
+
+if (commandText == "//Hot2_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_3);
+    return true;
+}
+
+if (commandText == "//Hot2_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_4);
+    return true;
+}
+
+if (commandText == "//Hot2_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_5);
+    return true;
+}
+
+if (commandText == "//Hot2_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_6);
+    return true;
+}
+
+if (commandText == "//Hot2_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_7);
+    return true;
+}
+
+if (commandText == "//Hot2_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_8);
+    return true;
+}
+
+if (commandText == "//Hot2_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_9);
+    return true;
+}
+
+if (commandText == "//Hot2_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_10);
+    return true;
+}
+
+if (commandText == "//Hot2_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_11);
+    return true;
+}
+
+if (commandText == "//Hot2_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT2_12);
+    return true;
+}
+
+if (commandText == "//Hot3_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_1);
+    return true;
+}
+
+if (commandText == "//Hot3_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_2);
+    return true;
+}
+
+if (commandText == "//Hot3_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_3);
+    return true;
+}
+
+if (commandText == "//Hot3_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_4);
+    return true;
+}
+
+if (commandText == "//Hot3_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_5);
+    return true;
+}
+
+if (commandText == "//Hot3_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_6);
+    return true;
+}
+
+if (commandText == "//Hot3_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_7);
+    return true;
+}
+
+if (commandText == "//Hot3_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_8);
+    return true;
+}
+
+if (commandText == "//Hot3_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_9);
+    return true;
+}
+
+if (commandText == "//Hot3_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_10);
+    return true;
+}
+
+if (commandText == "//Hot3_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_11);
+    return true;
+}
+
+if (commandText == "//Hot3_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT3_12);
+    return true;
+}
+
+if (commandText == "//Hot4_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_1);
+    return true;
+}
+
+if (commandText == "//Hot4_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_2);
+    return true;
+}
+
+if (commandText == "//Hot4_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_3);
+    return true;
+}
+
+if (commandText == "//Hot4_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_4);
+    return true;
+}
+
+if (commandText == "//Hot4_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_5);
+    return true;
+}
+
+if (commandText == "//Hot4_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_6);
+    return true;
+}
+
+if (commandText == "//Hot4_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_7);
+    return true;
+}
+
+if (commandText == "//Hot4_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_8);
+    return true;
+}
+
+if (commandText == "//Hot4_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_9);
+    return true;
+}
+
+if (commandText == "//Hot4_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_10);
+    return true;
+}
+
+if (commandText == "//Hot4_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_11);
+    return true;
+}
+
+if (commandText == "//Hot4_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT4_12);
+    return true;
+}
+
+if (commandText == "//Hot5_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_1);
+    return true;
+}
+
+if (commandText == "//Hot5_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_2);
+    return true;
+}
+
+if (commandText == "//Hot5_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_3);
+    return true;
+}
+
+if (commandText == "//Hot5_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_4);
+    return true;
+}
+
+if (commandText == "//Hot5_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_5);
+    return true;
+}
+
+if (commandText == "//Hot5_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_6);
+    return true;
+}
+
+if (commandText == "//Hot5_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_7);
+    return true;
+}
+
+if (commandText == "//Hot5_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_8);
+    return true;
+}
+
+if (commandText == "//Hot5_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_9);
+    return true;
+}
+
+if (commandText == "//Hot5_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_10);
+    return true;
+}
+
+if (commandText == "//Hot5_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_11);
+    return true;
+}
+
+if (commandText == "//Hot5_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT5_12);
+    return true;
+}
+
+if (commandText == "//Hot6_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_1);
+    return true;
+}
+
+if (commandText == "//Hot6_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_2);
+    return true;
+}
+
+if (commandText == "//Hot6_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_3);
+    return true;
+}
+
+if (commandText == "//Hot6_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_4);
+    return true;
+}
+
+if (commandText == "//Hot6_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_5);
+    return true;
+}
+
+if (commandText == "//Hot6_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_6);
+    return true;
+}
+
+if (commandText == "//Hot6_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_7);
+    return true;
+}
+
+if (commandText == "//Hot6_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_8);
+    return true;
+}
+
+if (commandText == "//Hot6_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_9);
+    return true;
+}
+
+if (commandText == "//Hot6_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_10);
+    return true;
+}
+
+if (commandText == "//Hot6_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_11);
+    return true;
+}
+
+if (commandText == "//Hot6_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT6_12);
+    return true;
+}
+
+if (commandText == "//Hot7_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_1);
+    return true;
+}
+
+if (commandText == "//Hot7_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_2);
+    return true;
+}
+
+if (commandText == "//Hot7_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_3);
+    return true;
+}
+
+if (commandText == "//Hot7_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_4);
+    return true;
+}
+
+if (commandText == "//Hot7_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_5);
+    return true;
+}
+
+if (commandText == "//Hot7_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_6);
+    return true;
+}
+
+if (commandText == "//Hot7_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_7);
+    return true;
+}
+
+if (commandText == "//Hot7_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_8);
+    return true;
+}
+
+if (commandText == "//Hot7_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_9);
+    return true;
+}
+
+if (commandText == "//Hot7_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_10);
+    return true;
+}
+
+if (commandText == "//Hot7_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_11);
+    return true;
+}
+
+if (commandText == "//Hot7_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT7_12);
+    return true;
+}
+
+if (commandText == "//Hot8_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_1);
+    return true;
+}
+
+if (commandText == "//Hot8_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_2);
+    return true;
+}
+
+if (commandText == "//Hot8_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_3);
+    return true;
+}
+
+if (commandText == "//Hot8_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_4);
+    return true;
+}
+
+if (commandText == "//Hot8_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_5);
+    return true;
+}
+
+if (commandText == "//Hot8_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_6);
+    return true;
+}
+
+if (commandText == "//Hot8_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_7);
+    return true;
+}
+
+if (commandText == "//Hot8_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_8);
+    return true;
+}
+
+if (commandText == "//Hot8_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_9);
+    return true;
+}
+
+if (commandText == "//Hot8_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_10);
+    return true;
+}
+
+if (commandText == "//Hot8_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_11);
+    return true;
+}
+
+if (commandText == "//Hot8_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT8_12);
+    return true;
+}
+
+if (commandText == "//Hot9_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_1);
+    return true;
+}
+
+if (commandText == "//Hot9_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_2);
+    return true;
+}
+
+if (commandText == "//Hot9_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_3);
+    return true;
+}
+
+if (commandText == "//Hot9_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_4);
+    return true;
+}
+
+if (commandText == "//Hot9_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_5);
+    return true;
+}
+
+if (commandText == "//Hot9_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_6);
+    return true;
+}
+
+if (commandText == "//Hot9_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_7);
+    return true;
+}
+
+if (commandText == "//Hot9_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_8);
+    return true;
+}
+
+if (commandText == "//Hot9_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_9);
+    return true;
+}
+
+if (commandText == "//Hot9_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_10);
+    return true;
+}
+
+if (commandText == "//Hot9_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_11);
+    return true;
+}
+
+if (commandText == "//Hot9_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT9_12);
+    return true;
+}
+
+if (commandText == "//Hot10_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_1);
+    return true;
+}
+
+if (commandText == "//Hot10_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_2);
+    return true;
+}
+
+if (commandText == "//Hot10_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_3);
+    return true;
+}
+
+if (commandText == "//Hot10_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_4);
+    return true;
+}
+
+if (commandText == "//Hot10_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_5);
+    return true;
+}
+
+if (commandText == "//Hot10_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_6);
+    return true;
+}
+
+if (commandText == "//Hot10_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_7);
+    return true;
+}
+
+if (commandText == "//Hot10_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_8);
+    return true;
+}
+
+if (commandText == "//Hot10_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_9);
+    return true;
+}
+
+if (commandText == "//Hot10_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_10);
+    return true;
+}
+
+if (commandText == "//Hot10_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_11);
+    return true;
+}
+
+if (commandText == "//Hot10_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT10_12);
+    return true;
+}
+
+if (commandText == "//Hot11_1")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_1);
+    return true;
+}
+
+if (commandText == "//Hot11_2")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_2);
+    return true;
+}
+
+if (commandText == "//Hot11_3")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_3);
+    return true;
+}
+
+if (commandText == "//Hot11_4")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_4);
+    return true;
+}
+
+if (commandText == "//Hot11_5")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_5);
+    return true;
+}
+
+if (commandText == "//Hot11_6")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_6);
+    return true;
+}
+
+if (commandText == "//Hot11_7")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_7);
+    return true;
+}
+
+if (commandText == "//Hot11_8")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_8);
+    return true;
+}
+
+if (commandText == "//Hot11_9")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_9);
+    return true;
+}
+
+if (commandText == "//Hot11_10")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_10);
+    return true;
+}
+
+if (commandText == "//Hot11_11")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_11);
+    return true;
+}
+
+if (commandText == "//Hot11_12")
+{
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HOT11_12);
+    return true;
+}
+
