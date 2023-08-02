@@ -54,25 +54,25 @@ uintptr_t EQ_FUNCTION_DrawText(const char* text, uint32_t x, uint32_t y, uint32_
 
 bool EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace(void* thisPointer, eq::Location& location, float& screenX, float& screenY)
 {
-    uintptr_t xCCamera = EQ_GetCCamera();
-    if (xCCamera == NULL)
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
     {
         return false;
     }
 
-    uintptr_t xCCameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(xCCamera + eq::Offsets::CCamera::VirtualFunctionTable);
-    if (xCCameraVirtualFunctionTable == NULL)
+    uintptr_t cameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(camera + eq::Offsets::CCamera::VirtualFunctionTable_);
+    if (cameraVirtualFunctionTable == NULL)
     {
         return false;
     }
 
-    uintptr_t xCCameraWorldSpaceToScreenSpace = eq::Memory::Read<uintptr_t>(xCCameraVirtualFunctionTable + eq::Offsets::CCameraVirtualFunctionTable::WorldSpaceToScreenSpace);
-    if (xCCameraWorldSpaceToScreenSpace == NULL)
+    uintptr_t cameraWorldSpaceToScreenSpace = eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::WorldSpaceToScreenSpace);
+    if (cameraWorldSpaceToScreenSpace == NULL)
     {
         return false;
     }
 
-    return ((EQ_FUNCTION_TYPE_CCamera__WorldSpaceToScreenSpace)xCCameraWorldSpaceToScreenSpace)(thisPointer, location, screenX, screenY);
+    return ((EQ_FUNCTION_TYPE_CCamera__WorldSpaceToScreenSpace)cameraWorldSpaceToScreenSpace)(thisPointer, location, screenX, screenY);
 }
 
 //////////////////////////////////////////////////
@@ -98,24 +98,24 @@ void EQ_OutputFiles()
     EQ_InterpretCommand("/outputfile spellbook");
 }
 
-float EQ_CalculateDistance(float y1, float x1, float y2, float x2)
+float EQ_GetDistance2D(float y1, float x1, float y2, float x2)
 {
-    return std::sqrtf(std::powf(x2 - x1, 2) + std::powf(y2 - y1, 2));
+    return std::sqrtf(std::powf(x2 - x1, 2.0f) + std::powf(y2 - y1, 2.0f));
 }
 
-float EQ_CalculateDistance3D(float y1, float x1, float z1, float y2, float x2, float z2)
+float EQ_GetDistance3D(float y1, float x1, float z1, float y2, float x2, float z2)
 {
-    return std::sqrtf(std::powf(x2 - x1, 2) + std::powf(y2 - y1, 2) + std::powf(z2 - z1, 2));
+    return std::sqrtf(std::powf(x2 - x1, 2.0f) + std::powf(y2 - y1, 2.0f) + std::powf(z2 - z1, 2.0f));
 }
 
-bool EQ_IsWithinDistance(float y1, float x1, float y2, float x2, float distance)
+bool EQ_IsWithinDistance2D(float y1, float x1, float y2, float x2, float distance)
 {
-    return (std::powf(x2 - x1, 2) + std::powf(y2 - y1, 2)) <= std::powf(distance, 2);
+    return (std::powf(x2 - x1, 2.0f) + std::powf(y2 - y1, 2.0f)) <= std::powf(distance, 2.0f);
 }
 
 bool EQ_IsWithinDistance3D(float y1, float x1, float z1, float y2, float x2, float z2, float distance)
 {
-    return (std::powf(x2 - x1, 2) + std::powf(y2 - y1, 2) + std::powf(z2 - z1, 2)) <= std::powf(distance, 2);
+    return (std::powf(x2 - x1, 2.0f) + std::powf(y2 - y1, 2.0f) + std::powf(z2 - z1, 2.0f)) <= std::powf(distance, 2.0f);
 }
 
 float EQ_GetBearing(float y1, float x1, float y2, float x2)
@@ -178,6 +178,42 @@ float EQ_GetBearing(float y1, float x1, float y2, float x2)
     }
 
     return result;
+}
+
+float EQ_GetDistanceByLocation2D(const eq::Location& location1, const eq::Location& location2)
+{
+    return EQ_GetDistance2D(location1.Y, location1.X, location2.Y, location2.X);
+}
+
+float EQ_GetDistanceByLocation3D(const eq::Location& location1, const eq::Location& location2)
+{
+    return EQ_GetDistance3D(location1.Y, location1.X, location1.Z, location2.Y, location2.X, location2.Z);
+}
+
+bool EQ_IsWithinDistanceByLocation2D(const eq::Location& location1, const eq::Location& location2, float distance)
+{
+    return EQ_IsWithinDistance2D(location1.Y, location1.X, location2.Y, location2.X, distance);
+}
+
+bool EQ_IsWithinDistanceByLocation3D(const eq::Location& location1, const eq::Location& location2, float distance)
+{
+    return EQ_IsWithinDistance3D(location1.Y, location1.X, location1.Z, location2.Y, location2.X, location2.Z, distance);
+}
+
+float EQ_GetBearingByLocation(const eq::Location& location1, const eq::Location& location2)
+{
+    return EQ_GetBearing(location1.Y, location1.X, location2.Y, location2.X);
+}
+
+eq::Location EQ_GetMidpointByLocation(const eq::Location& location1, const eq::Location& location2)
+{
+    eq::Location midpoint;
+
+    midpoint.Y = std::midpoint(location1.Y, location2.Y);
+    midpoint.X = std::midpoint(location1.X, location2.X);
+    midpoint.Z = std::midpoint(location1.Z, location2.Z);
+
+    return midpoint;
 }
 
 float EQ_RoundHeading(float heading)
@@ -300,27 +336,6 @@ void EQ_ApplyRightwardMovement(float& y, float& x, float heading, float distance
     x += addX * distance;
 }
 
-glm::vec2 EQ_GetMidpoint2f(glm::vec2 point1, glm::vec2 point2)
-{
-    glm::vec2 midpoint;
-
-    midpoint.y = std::midpoint(point1.y, point2.y);
-    midpoint.x = std::midpoint(point1.x, point2.x);
-
-    return midpoint;
-}
-
-glm::vec3 EQ_GetMidpoint3f(glm::vec3 point1, glm::vec3 point2)
-{
-    glm::vec3 midpoint;
-
-    midpoint.y = std::midpoint(point1.y, point2.y);
-    midpoint.x = std::midpoint(point1.x, point2.x);
-    midpoint.z = std::midpoint(point1.z, point2.z);
-
-    return midpoint;
-}
-
 uintptr_t EQ_GetCEverQuest()
 {
     return eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::CEverQuest);
@@ -333,13 +348,13 @@ uintptr_t EQ_GetCDisplay()
 
 uintptr_t EQ_GetCCamera()
 {
-    uintptr_t xCDisplay = EQ_GetCDisplay();
-    if (xCDisplay == NULL)
+    uintptr_t display = EQ_GetCDisplay();
+    if (display == NULL)
     {
         return NULL;
     }
 
-    return eq::Memory::Read<uintptr_t>(xCDisplay + eq::Offsets::CDisplay::CCamera);
+    return eq::Memory::Read<uintptr_t>(display + eq::Offsets::CDisplay::CCamera);
 }
 
 uintptr_t EQ_GetChatManager()
@@ -364,24 +379,24 @@ uintptr_t EQ_GetSGraphicsEngine()
 
 uintptr_t EQ_GetCRender()
 {
-    uintptr_t xSGraphicsEngine = EQ_GetSGraphicsEngine();
-    if (xSGraphicsEngine == NULL)
+    uintptr_t graphicsEngine = EQ_GetSGraphicsEngine();
+    if (graphicsEngine == NULL)
     {
         return NULL;
     }
 
-    return eq::Memory::Read<uintptr_t>(xSGraphicsEngine + eq::Offsets::SGraphicsEngine::CRender);
+    return eq::Memory::Read<uintptr_t>(graphicsEngine + eq::Offsets::SGraphicsEngine::CRender);
 }
 
 uintptr_t EQ_GetCParticleSystem()
 {
-    uintptr_t xSGraphicsEngine = EQ_GetSGraphicsEngine();
-    if (xSGraphicsEngine == NULL)
+    uintptr_t graphicsEngine = EQ_GetSGraphicsEngine();
+    if (graphicsEngine == NULL)
     {
         return NULL;
     }
 
-    return eq::Memory::Read<uintptr_t>(xSGraphicsEngine + eq::Offsets::SGraphicsEngine::CParticleSystem);
+    return eq::Memory::Read<uintptr_t>(graphicsEngine + eq::Offsets::SGraphicsEngine::CParticleSystem);
 }
 
 uint32_t EQ_GetGameState()
@@ -460,9 +475,9 @@ POINT EQ_GetMousePosition()
     return point;
 }
 
-std::vector<uintptr_t> EQ_GetSpawnList()
+eq::SpawnList EQ_GetSpawnList()
 {
-    std::vector<uintptr_t> spawnList;
+    eq::SpawnList spawnList;
     spawnList.reserve(4096);
 
     uintptr_t spawn = EQ_GetFirstSpawn();
@@ -476,36 +491,36 @@ std::vector<uintptr_t> EQ_GetSpawnList()
     return spawnList;
 }
 
-bool EQ_DoesSpawnExist(uint64_t spawn)
+bool EQ_DoesSpawnExist(uintptr_t spawn)
 {
     if (spawn == NULL)
     {
         return false;
     }
 
-    uintptr_t currentSpawn = EQ_GetFirstSpawn();
-    while (currentSpawn != NULL)
+    uintptr_t spawn_ = EQ_GetFirstSpawn();
+    while (spawn_ != NULL)
     {
-        if (currentSpawn == spawn)
+        if (spawn_ == spawn)
         {
             return true;
         }
 
-        currentSpawn = EQ_GetSpawnNextSpawn(currentSpawn);
+        spawn_ = EQ_GetSpawnNextSpawn(spawn_);
     }
 
     return false;
 }
 
-uint64_t EQ_GetNumSpawnsInZone(uint8_t spawnType)
+uint64_t EQ_GetNumPlayersInZone()
 {
     uint64_t numSpawns = 0;
 
     uintptr_t spawn = EQ_GetFirstSpawn();
     while (spawn != NULL)
     {
-        uint8_t spawnTypeEx = EQ_GetSpawnType(spawn);
-        if (spawnTypeEx != spawnType)
+        uint8_t spawnType_ = EQ_GetSpawnType(spawn);
+        if (spawnType_ != eq::Constants::Spawn::Type::Player)
         {
             spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
@@ -519,7 +534,7 @@ uint64_t EQ_GetNumSpawnsInZone(uint8_t spawnType)
     return numSpawns;
 }
 
-uint64_t EQ_GetNumNearbySpawns(uint8_t spawnType, float distance, float distanceZ)
+uint64_t EQ_GetNumNearbyPlayers(float distance, float distanceZ)
 {
     uint64_t numSpawns = 0;
 
@@ -529,9 +544,7 @@ uint64_t EQ_GetNumNearbySpawns(uint8_t spawnType, float distance, float distance
         return numSpawns;
     }
 
-    float playerSpawnY = EQ_GetSpawnY(playerSpawn);
-    float playerSpawnX = EQ_GetSpawnX(playerSpawn);
-    float playerSpawnZ = EQ_GetSpawnZ(playerSpawn);
+    eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
 
     uintptr_t spawn = EQ_GetFirstSpawn();
     while (spawn != NULL)
@@ -542,25 +555,25 @@ uint64_t EQ_GetNumNearbySpawns(uint8_t spawnType, float distance, float distance
             continue;
         }
 
-        float spawnY = EQ_GetSpawnY(spawn);
-        float spawnX = EQ_GetSpawnX(spawn);
-        float spawnZ = EQ_GetSpawnZ(spawn);
+        eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
         uint8_t spawnType_ = EQ_GetSpawnType(spawn);
-        if (spawnType_ != spawnType)
+        if (spawnType_ != eq::Constants::Spawn::Type::Player)
         {
             spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
-        float spawnDistance = EQ_CalculateDistance(playerSpawnY, playerSpawnX, spawnY, spawnX);
+        float spawnDistance = EQ_GetDistanceByLocation2D(playerSpawnLocation, spawnLocation);
         if (spawnDistance > distance)
         {
             spawn = EQ_GetSpawnNextSpawn(spawn);
             continue;
         }
 
-        float spawnDistanceZ = std::fabsf(playerSpawnZ - spawnZ);
+        float spawnZ = EQ_GetSpawnZ(spawn);
+
+        float spawnDistanceZ = std::fabsf(playerSpawnLocation.Z - spawnLocation.Z);
         if (spawnDistanceZ > distanceZ)
         {
             spawn = EQ_GetSpawnNextSpawn(spawn);
@@ -592,7 +605,7 @@ uintptr_t EQ_GetSpawnByID(uint32_t spawnID)
     return spawn;
 }
 
-uintptr_t EQ_GetSpawnByName(const std::string& spawnName)
+uintptr_t EQ_GetSpawnByNameNumbered(const std::string& spawnName)
 {
     uintptr_t spawnManager = EQ_GetSpawnManager();
     if (spawnManager == NULL)
@@ -600,7 +613,6 @@ uintptr_t EQ_GetSpawnByName(const std::string& spawnName)
         return NULL;
     }
 
-    // this function uses named numbered
     uintptr_t spawn = EQ_FUNCTION_SpawnManager__GetSpawnByName((uintptr_t*)spawnManager, spawnName.c_str());
     if (spawn == NULL)
     {
@@ -626,6 +638,25 @@ uintptr_t EQ_GetSpawnByNameOrNameNumbered(const std::string& spawnName)
         std::string spawnNameNumbered_ = EQ_GetSpawnNameNumbered(spawn);
 
         if (spawnNameNumbered_ == spawnName)
+        {
+            return spawn;
+        }
+
+        spawn = EQ_GetSpawnNextSpawn(spawn);
+    }
+
+    return NULL;
+}
+
+uintptr_t EQ_GetSpawnByName(const std::string& spawnName)
+{
+    uintptr_t spawn = EQ_GetFirstSpawn();
+
+    while (spawn != NULL)
+    {
+        std::string spawnName_ = EQ_GetSpawnName(spawn);
+
+        if (spawnName_ == spawnName)
         {
             return spawn;
         }
@@ -705,7 +736,7 @@ uint32_t EQ_GetPlayerSpawnID()
     uintptr_t playerSpawn = EQ_GetPlayerSpawn();
     if (playerSpawn == NULL)
     {
-        return 0xFFFFFFFF;
+        return eq::Constants::Spawn::ID::Null;
     }
 
     return EQ_GetSpawnID(playerSpawn);
@@ -749,7 +780,7 @@ uint32_t EQ_GetTargetSpawnID()
     uintptr_t targetSpawn = EQ_GetTargetSpawn();
     if (targetSpawn == NULL)
     {
-        return 0xFFFFFFFF;
+        return eq::Constants::Spawn::ID::Null;
     }
 
     return EQ_GetSpawnID(targetSpawn);
@@ -788,21 +819,19 @@ std::string EQ_GetTargetSpawnLastName()
     return EQ_GetSpawnLastName(targetSpawn);
 }
 
-float EQ_GetSpawnDistance(uintptr_t spawn)
+float EQ_GetSpawnDistance2D(uintptr_t spawn)
 {
     uintptr_t playerSpawn = EQ_GetPlayerSpawn();
     if (playerSpawn == NULL)
     {
-        return -1.0f;
+        return eq::Constants::FloatInfinity;
     }
 
-    float playerSpawnY = EQ_GetSpawnY(playerSpawn);
-    float playerSpawnX = EQ_GetSpawnX(playerSpawn);
+    eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
 
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    float spawnDistance = EQ_CalculateDistance(playerSpawnY, playerSpawnX, spawnY, spawnX);
+    float spawnDistance = EQ_GetDistanceByLocation2D(playerSpawnLocation, spawnLocation);
 
     return spawnDistance;
 }
@@ -812,23 +841,38 @@ float EQ_GetSpawnDistance3D(uintptr_t spawn)
     uintptr_t playerSpawn = EQ_GetPlayerSpawn();
     if (playerSpawn == NULL)
     {
-        return -1.0f;
+        return eq::Constants::FloatInfinity;
     }
 
-    float playerSpawnY = EQ_GetSpawnY(playerSpawn);
-    float playerSpawnX = EQ_GetSpawnX(playerSpawn);
-    float playerSpawnZ = EQ_GetSpawnZ(playerSpawn);
+    eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
 
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
-    float spawnZ = EQ_GetSpawnZ(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    float spawnDistance = EQ_CalculateDistance3D(playerSpawnY, playerSpawnX, playerSpawnZ, spawnY, spawnX, spawnZ);
+    float spawnDistance = EQ_GetDistanceByLocation3D(playerSpawnLocation, spawnLocation);
 
     return spawnDistance;
 }
 
-bool EQ_IsSpawnWithinDistance(uintptr_t spawn, float distance)
+eq::Location EQ_GetSpawnLocation(uintptr_t spawn)
+{
+    eq::Location location;
+    location.Y = eq::Constants::FloatInfinity;
+    location.X = eq::Constants::FloatInfinity;
+    location.Z = eq::Constants::FloatInfinity;
+
+    if (spawn == NULL)
+    {
+        return location;
+    }
+
+    location.Y = eq::Memory::Read<float>(spawn + eq::Offsets::Spawn::Y);
+    location.X = eq::Memory::Read<float>(spawn + eq::Offsets::Spawn::X);
+    location.Z = eq::Memory::Read<float>(spawn + eq::Offsets::Spawn::Z);
+
+    return location;
+}
+
+bool EQ_IsSpawnWithinDistance2D(uintptr_t spawn, float distance)
 {
     uintptr_t playerSpawn = EQ_GetPlayerSpawn();
     if (playerSpawn == NULL)
@@ -836,13 +880,11 @@ bool EQ_IsSpawnWithinDistance(uintptr_t spawn, float distance)
         return false;
     }
 
-    float playerSpawnY = EQ_GetSpawnY(playerSpawn);
-    float playerSpawnX = EQ_GetSpawnX(playerSpawn);
+    eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
 
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    bool isWithinDistance = EQ_IsWithinDistance(playerSpawnY, playerSpawnX, spawnY, spawnX, distance);
+    bool isWithinDistance = EQ_IsWithinDistanceByLocation2D(playerSpawnLocation, spawnLocation, distance);
 
     return isWithinDistance;
 }
@@ -855,65 +897,54 @@ bool EQ_IsSpawnWithinDistance3D(uintptr_t spawn, float distance)
         return false;
     }
 
-    float playerSpawnY = EQ_GetSpawnY(playerSpawn);
-    float playerSpawnX = EQ_GetSpawnX(playerSpawn);
-    float playerSpawnZ = EQ_GetSpawnZ(playerSpawn);
+    eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
 
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
-    float spawnZ = EQ_GetSpawnZ(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    bool isWithinDistance = EQ_IsWithinDistance3D(playerSpawnY, playerSpawnX, playerSpawnZ, spawnY, spawnX, spawnZ, distance);
+    bool isWithinDistance = EQ_IsWithinDistanceByLocation3D(playerSpawnLocation, spawnLocation, distance);
 
     return isWithinDistance;
 }
 
-bool EQ_IsSpawnWithinDistanceOfLocation(uintptr_t spawn, float y, float x, float z, float distance)
+bool EQ_IsSpawnWithinDistanceOfLocation2D(uintptr_t spawn, const eq::Location& location, float distance)
 {
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    float diffY = std::fabsf(spawnY - y);
-    float diffX = std::fabsf(spawnX - x);
+    float diffY = std::fabsf(spawnLocation.Y - location.Y);
+    float diffX = std::fabsf(spawnLocation.X - location.X);
 
     bool isWithinDistance = (diffY < distance && diffX < distance);
 
     return isWithinDistance;
 }
 
-bool EQ_IsSpawnWithinDistance3DOfLocation(uintptr_t spawn, float y, float x, float z, float distance)
+bool EQ_IsSpawnWithinDistanceOfLocation3D(uintptr_t spawn, const eq::Location& location, float distance)
 {
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
-    float spawnZ = EQ_GetSpawnZ(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    float diffY = std::fabsf(spawnY - y);
-    float diffX = std::fabsf(spawnX - x);
-    float diffZ = std::fabsf(spawnZ - z);
+    float diffY = std::fabsf(spawnLocation.Y - location.Y);
+    float diffX = std::fabsf(spawnLocation.X - location.X);
+    float diffZ = std::fabsf(spawnLocation.Z - location.Z);
 
     bool isWithinDistance = (diffY < distance && diffX < distance && diffZ < distance);
 
     return isWithinDistance;
 }
 
-bool EQ_IsSpawnWithinDistanceOfSpawn(uintptr_t spawn1, uintptr_t spawn2, float distance)
+bool EQ_IsSpawnWithinDistanceOfSpawn2D(uintptr_t spawn1, uintptr_t spawn2, float distance)
 {
-    float spawnY = EQ_GetSpawnY(spawn2);
-    float spawnX = EQ_GetSpawnX(spawn2);
-    float spawnZ = EQ_GetSpawnZ(spawn2);
+    eq::Location spawn2Location = EQ_GetSpawnLocation(spawn2);
 
-    bool isWithinDistance = EQ_IsSpawnWithinDistanceOfLocation(spawn1, distance, spawnY, spawnX, spawnZ);
+    bool isWithinDistance = EQ_IsSpawnWithinDistanceOfLocation2D(spawn1, spawn2Location, distance);
 
     return isWithinDistance;
 }
 
-bool EQ_IsSpawnWithinDistance3DOfSpawn(uintptr_t spawn1, uintptr_t spawn2, float distance)
+bool EQ_IsSpawnWithinDistanceOfSpawn3D(uintptr_t spawn1, uintptr_t spawn2, float distance)
 {
-    float spawnY = EQ_GetSpawnY(spawn2);
-    float spawnX = EQ_GetSpawnX(spawn2);
-    float spawnZ = EQ_GetSpawnZ(spawn2);
+    eq::Location spawn2Location = EQ_GetSpawnLocation(spawn2);
 
-    bool isWithinDistance = EQ_IsSpawnWithinDistance3DOfLocation(spawn1, distance, spawnY, spawnX, spawnZ);
+    bool isWithinDistance = EQ_IsSpawnWithinDistanceOfLocation3D(spawn1, spawn2Location, distance);
 
     return isWithinDistance;
 }
@@ -1005,7 +1036,7 @@ bool EQ_IsSpawnBehindSpawn(uintptr_t spawn1, uintptr_t spawn2)
     // use 512 / 8 = 64 for tighter angle
     // use 512 / 4 = 128 for wider angle
 
-    if (EQ_IsSpawnBehindSpawnEx(spawn1, spawn2, 64.0f) == true)
+    if (EQ_IsSpawnBehindSpawnEx(spawn1, spawn2, 96.0f) == true)
     {
         return true;
     }
@@ -1090,6 +1121,16 @@ bool EQ_IsTargetBehindPlayer()
     }
 
     return EQ_IsSpawnBehindPlayer(targetSpawn);
+}
+
+int EQ_GetSpawnLevel(uintptr_t spawn)
+{
+    if (spawn == NULL)
+    {
+        return -1;
+    }
+
+    return EQ_FUNCTION_Spawn__GetLevel((uintptr_t*)spawn);
 }
 
 std::string EQ_GetSpawnNameNumbered(uintptr_t spawn)
@@ -1610,40 +1651,51 @@ void EQ_TurnAround()
     EQ_SetSpawnHeading(playerSpawn, playerHeading);
 }
 
-void EQ_TurnSpawnTowardsLocation(uintptr_t spawn, float y, float x)
+void EQ_TurnCameraTowardsLocation(const eq::Location& location)
 {
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    uintptr_t playerSpawn = EQ_GetPlayerSpawn();
+    if (playerSpawn == NULL)
+    {
+        return;
+    }
 
-    float heading = EQ_GetBearing(spawnY, spawnX, y, x);
+    eq::Location cameraLocation = EQ_GetCameraLocation();
+
+    float heading = EQ_GetBearingByLocation(cameraLocation, location);
+
+    EQ_SetSpawnHeading(playerSpawn, heading);
+}
+
+void EQ_TurnSpawnTowardsLocation(uintptr_t spawn, const eq::Location& location)
+{
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+
+    float heading = EQ_GetBearingByLocation(spawnLocation, location);
 
     EQ_SetSpawnHeading(spawn, heading);
 }
 
-void EQ_TurnSpawnAwayFromLocation(uintptr_t spawn, float y, float x)
+void EQ_TurnSpawnAwayFromLocation(uintptr_t spawn, const eq::Location& location)
 {
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    float heading = EQ_GetBearing(y, x, spawnY, spawnX);
+    float heading = EQ_GetBearingByLocation(location, spawnLocation);
 
     EQ_SetSpawnHeading(spawn, heading);
 }
 
 void EQ_TurnSpawnTowardsSpawn(uintptr_t spawn1, uintptr_t spawn2)
 {
-    float spawnY = EQ_GetSpawnY(spawn2);
-    float spawnX = EQ_GetSpawnX(spawn2);
+    eq::Location spawn2Location = EQ_GetSpawnLocation(spawn2);
 
-    EQ_TurnSpawnTowardsLocation(spawn1, spawnY, spawnX);
+    EQ_TurnSpawnTowardsLocation(spawn1, spawn2Location);
 }
 
 void EQ_TurnSpawnAwayFromSpawn(uintptr_t spawn1, uintptr_t spawn2)
 {
-    float spawnY = EQ_GetSpawnY(spawn2);
-    float spawnX = EQ_GetSpawnX(spawn2);
+    eq::Location spawn2Location = EQ_GetSpawnLocation(spawn2);
 
-    EQ_TurnSpawnAwayFromLocation(spawn1, spawnY, spawnX);
+    EQ_TurnSpawnAwayFromLocation(spawn1, spawn2Location);
 }
 
 void EQ_TurnPlayerTowardsSpawn(uintptr_t spawn)
@@ -1654,10 +1706,9 @@ void EQ_TurnPlayerTowardsSpawn(uintptr_t spawn)
         return;
     }
 
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    EQ_TurnSpawnTowardsLocation(playerSpawn, spawnY, spawnX);
+    EQ_TurnSpawnTowardsLocation(playerSpawn, spawnLocation);
 }
 
 void EQ_TurnPlayerAwayFromSpawn(uintptr_t spawn)
@@ -1668,10 +1719,9 @@ void EQ_TurnPlayerAwayFromSpawn(uintptr_t spawn)
         return;
     }
 
-    float spawnY = EQ_GetSpawnY(spawn);
-    float spawnX = EQ_GetSpawnX(spawn);
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
 
-    EQ_TurnSpawnAwayFromLocation(playerSpawn, spawnY, spawnX);
+    EQ_TurnSpawnAwayFromLocation(playerSpawn, spawnLocation);
 }
 
 void EQ_TurnPlayerTowardsTarget()
@@ -1696,10 +1746,126 @@ void EQ_TurnPlayerAwayFromTarget()
     EQ_TurnPlayerAwayFromSpawn(targetSpawn);
 }
 
+void EQ_LookCameraAtLocation(const eq::Location& location)
+{
+    uintptr_t playerSpawn = EQ_GetPlayerSpawn();
+    if (playerSpawn == NULL)
+    {
+        return;
+    }
+
+    EQ_SetCameraViewToFirstPerson();
+
+    eq::Location cameraLocation = EQ_GetCameraLocation();
+
+    float opposite = EQ_GetDistanceByLocation2D(cameraLocation, location);
+
+    float adjacent = std::fabsf(cameraLocation.Z - location.Z);
+
+    float hypotenuse = std::sqrtf(std::powf(opposite, 2.0f) + std::powf(adjacent, 2.0f));
+
+    if (adjacent == 0.0f || hypotenuse == 0.0f)
+    {
+        return;
+    }
+
+    float angleRadians = std::acosf(adjacent / hypotenuse); // SOHCAHTOA
+
+    float angleDegrees = EQ_GetDegrees(angleRadians);
+
+    EQ_TurnCameraTowardsLocation(location);
+
+    if (location.Z > cameraLocation.Z)
+    {
+        EQ_SetSpawnPitch(playerSpawn, eq::Constants::Spawn::Pitch::Max - angleDegrees);
+    }
+    else if (location.Z < cameraLocation.Z)
+    {
+        EQ_SetSpawnPitch(playerSpawn, eq::Constants::Spawn::Pitch::Min + angleDegrees);
+    }
+}
+
+void EQ_LookCameraAtSpawn(uintptr_t spawn)
+{
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+
+    EQ_LookCameraAtLocation(spawnLocation);
+}
+
+
+void EQ_LookCameraAtTarget()
+{
+    uintptr_t targetSpawn = EQ_GetTargetSpawn();
+    if (targetSpawn == NULL)
+    {
+        return;
+    }
+
+    EQ_LookCameraAtSpawn(targetSpawn);
+}
+
+void EQ_LookPlayerAtLocation(const eq::Location& location)
+{
+    uintptr_t playerSpawn = EQ_GetPlayerSpawn();
+    if (playerSpawn == NULL)
+    {
+        return;
+    }
+
+    EQ_SetCameraViewToFirstPerson();
+
+    EQ_TurnSpawnTowardsLocation(playerSpawn, location);
+
+    eq::Location cameraLocation = EQ_GetCameraLocation();
+
+    float opposite = EQ_GetDistanceByLocation2D(cameraLocation, location);
+
+    float adjacent = std::fabsf(cameraLocation.Z - location.Z);
+
+    float hypotenuse = std::sqrtf(std::powf(opposite, 2.0f) + std::powf(adjacent, 2.0f));
+
+    if (adjacent == 0.0f || hypotenuse == 0.0f)
+    {
+        return;
+    }
+
+    float angleRadians = std::acosf(adjacent / hypotenuse); // SOHCAHTOA
+
+    float angleDegrees = EQ_GetDegrees(angleRadians);
+
+    if (location.Z < cameraLocation.Z)
+    {
+        EQ_SetSpawnPitch(playerSpawn, eq::Constants::Spawn::Pitch::Min + angleDegrees);
+    }
+    else if (location.Z > cameraLocation.Z)
+    {
+        EQ_SetSpawnPitch(playerSpawn, eq::Constants::Spawn::Pitch::Max - angleDegrees);
+    }
+
+}
+
+void EQ_LookPlayerAtSpawn(uintptr_t spawn)
+{
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+
+    EQ_LookPlayerAtLocation(spawnLocation);
+}
+
+void EQ_LookPlayerAtTarget()
+{
+    uintptr_t targetSpawn = EQ_GetTargetSpawn();
+    if (targetSpawn == NULL)
+    {
+        return;
+    }
+
+    EQ_LookPlayerAtSpawn(targetSpawn);
+}
+
 void EQ_InterpretCommand(const std::string& text)
 {
-    uintptr_t xCEverQuest = EQ_GetCEverQuest();
-    if (xCEverQuest == NULL)
+    uintptr_t everquest = EQ_GetCEverQuest();
+    if (everquest == NULL)
     {
         return;
     }
@@ -1710,7 +1876,7 @@ void EQ_InterpretCommand(const std::string& text)
         return;
     }
 
-    EQ_FUNCTION_CEverQuest__InterpretCommand((uintptr_t*)xCEverQuest, (uintptr_t*)playerSpawn, text.c_str());
+    EQ_FUNCTION_CEverQuest__InterpretCommand((uintptr_t*)everquest, (uintptr_t*)playerSpawn, text.c_str());
 }
 
 void EQ_ExecuteCommand(uint32_t commandID)
@@ -1753,6 +1919,185 @@ void EQ_DrawText(const std::string& text, uint32_t x, uint32_t y)
 void EQ_DrawTextByColor(const std::string& text, uint32_t x, uint32_t y, uint32_t drawTextColor)
 {
     EQ_FUNCTION_DrawText(text.c_str(), x, y, drawTextColor);
+}
+
+void EQ_SetCameraViewToFirstPerson()
+{
+    EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::FIRST_PERSON_CAMERA, true);
+}
+
+eq::Location EQ_GetCameraLocation()
+{
+    eq::Location location;
+    location.Y = eq::Constants::FloatInfinity;
+    location.X = eq::Constants::FloatInfinity;
+    location.Z = eq::Constants::FloatInfinity;
+
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return location;
+    }
+
+    location.Y = eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Y);
+    location.X = eq::Memory::Read<float>(camera + eq::Offsets::CCamera::X);
+    location.Z = eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Z);
+
+    return location;
+}
+
+eq::Orientation EQ_GetCameraOrientation()
+{
+    eq::Orientation orientation;
+    orientation.Heading = eq::Constants::FloatInfinity;
+    orientation.Pitch = eq::Constants::FloatInfinity;
+    orientation.Rotation = eq::Constants::FloatInfinity;
+
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return orientation;
+    }
+
+    orientation.Heading = eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Heading);
+    orientation.Pitch = eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Pitch);
+    orientation.Rotation = eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Rotation);
+
+    return orientation;
+}
+
+float EQ_GetCameraPitch()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Pitch);
+}
+
+float EQ_GetCameraFieldOfView()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::FieldOfView);
+}
+
+float EQ_GetCameraDrawDistance()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::DrawDistance);
+}
+
+float EQ_GetCameraFarClipPlane()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::FarClipPlane);
+}
+
+void EQ_SetCameraLocation(eq::Location& location)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::Y, location.Y);
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::X, location.X);
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::Z, location.Z);
+}
+
+void EQ_SetCameraPitch(float pitch)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::WriteProtected<float>(camera + eq::Offsets::CCamera::Pitch, pitch);
+}
+
+void EQ_SetCameraFieldOfView(float fieldOfView)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::FieldOfView, fieldOfView);
+}
+
+void EQ_SetCameraDrawDistance(float distance)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::DrawDistance, distance);
+}
+
+void EQ_SetCameraFarClipPlane(float distance)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::FarClipPlane, distance);
+}
+
+bool EQ_GetScreenCoordinatesByLocation(eq::Location& location, eq::ScreenCoordinates& screenCoordinates)
+{
+   uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return false;
+    }
+
+    float screenX = -1.0f;
+    float screenY = -1.0f;
+    bool isLocationOnScreen = EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace((uintptr_t*)camera, location, screenX, screenY);
+    if (isLocationOnScreen == true)
+    {
+        screenCoordinates.X = (uint32_t)screenX;
+        screenCoordinates.Y = (uint32_t)screenY;
+    }
+
+    return isLocationOnScreen;
+}
+
+bool EQ_IsLocationOnScreen(eq::Location& location)
+{
+    eq::ScreenCoordinates screenCoordinates;
+    return EQ_GetScreenCoordinatesByLocation(location, screenCoordinates);
+}
+
+bool EQ_IsSpawnOnScreen(uintptr_t spawn)
+{
+    eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+
+    return EQ_IsLocationOnScreen(spawnLocation);
 }
 
 void EQ_PlaySound(const std::string& fileName)
@@ -1813,22 +2158,6 @@ void EQ_LookDown()
 void EQ_ClearTarget()
 {
     EQ_SetTargetSpawn(NULL);
-}
-
-bool EQ_WorldLocationToScreenLocation(float worldY, float worldX, float worldZ, float& screenX, float& screenY)
-{
-    uintptr_t xCCamera = EQ_GetCCamera();
-    if (xCCamera == NULL)
-    {
-        return false;
-    }
-
-    eq::Location location;
-    location.Y = worldY;
-    location.X = worldX;
-    location.Z = worldZ;
-
-    return EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace((uintptr_t*)xCCamera, location, screenX, screenY);
 }
 
 std::string EQ_StringMap_GetValueByKey(const std::unordered_map<uint32_t, std::string>& stringMap, uint32_t key)

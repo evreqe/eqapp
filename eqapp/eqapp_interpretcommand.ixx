@@ -276,6 +276,21 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
         return true;
     }
 
+    if (commandText == "//OutputFiles")
+    {
+        EQ_OutputFiles();
+        return true;
+    }
+
+    if (commandText == "//SpawnList")
+    {
+        eq::SpawnList spawnList = EQ_GetSpawnList();
+
+        std::print(std::cout, "Spawn List size: {}\n", spawnList.size());
+
+        return true;
+    }
+
     if (commandText == "//Beep")
     {
         util::WinAPI::Beep();
@@ -306,12 +321,9 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//SpawnList")
+    if (commandText == "//ClearTarget")
     {
-        std::vector<uintptr_t> spawnList = EQ_GetSpawnList();
-
-        std::print(std::cout, "Spawn List size: {}\n", spawnList.size());
-
+        EQ_ClearTarget();
         return true;
     }
 

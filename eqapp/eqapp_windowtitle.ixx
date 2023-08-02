@@ -103,6 +103,11 @@ void WindowTitle::Toggle()
 {
     util::ToggleBool(m_isEnabled);
     std::print(std::cout, "{}: {}\n", m_className, m_isEnabled);
+
+    if (m_isEnabled == false)
+    {
+        EQ_SetWindowTitle(m_defaultWindowTitle);
+    }
 }
 
 void WindowTitle::Enable()

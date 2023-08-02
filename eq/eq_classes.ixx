@@ -14,6 +14,7 @@ namespace eq
     namespace Classes
     {
         class ChatManager;
+        class CharacterZoneClient;
         class Spawn;
         class SpawnManager;
         class SoundManager;
@@ -42,14 +43,37 @@ void EQ_FUNCTION_ChatManager__PrintText(void* thisPointer, const char* text, uin
 }
 
 //////////////////////////////////////////////////
+/* CharacterZoneClient */
+//////////////////////////////////////////////////
+
+class eq::Classes::CharacterZoneClient
+{
+public:
+    //
+};
+
+//////////////////////////////////////////////////
 /* Spawn */
 //////////////////////////////////////////////////
 
 class eq::Classes::Spawn
 {
 public:
-    //
+    uintptr_t GetCharacterZoneClient();
+    int GetLevel();
 };
+
+typedef uintptr_t (__thiscall* EQ_FUNCTION_TYPE_Spawn__GetCharacterZoneClient)(void* thisPointer);
+uintptr_t EQ_FUNCTION_Spawn__GetCharacterZoneClient(void* thisPointer)
+{
+    return ((EQ_FUNCTION_TYPE_Spawn__GetCharacterZoneClient)eq::EQGame::Addresses::Functions::Spawn__GetCharacterZoneClient)(thisPointer);
+}
+
+typedef int (__thiscall* EQ_FUNCTION_TYPE_Spawn__GetLevel)(void* thisPointer);
+int EQ_FUNCTION_Spawn__GetLevel(void* thisPointer)
+{
+    return ((EQ_FUNCTION_TYPE_Spawn__GetLevel)eq::EQGame::Addresses::Functions::Spawn__GetLevel)(thisPointer);
+}
 
 //////////////////////////////////////////////////
 /* SpawnManager */

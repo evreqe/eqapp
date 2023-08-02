@@ -253,7 +253,7 @@ void Follow::Execute()
 {
     EQ_TurnPlayerTowardsSpawn(m_spawn);
 
-    float spawnDistance = EQ_GetSpawnDistance(m_spawn);
+    float spawnDistance = EQ_GetSpawnDistance2D(m_spawn);
     if (spawnDistance <= m_distance)
     {
         EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::FORWARD, false);

@@ -71,11 +71,11 @@ char* ReadString(uintptr_t address)
 
 void WriteString(uintptr_t address, const char* value)
 {
-    size_t length = std::strlen(value);
+    std::size_t length = std::strlen(value);
 
-    size_t j = 0;
+    std::size_t j = 0;
 
-    for (size_t i = 0; i < length; i++)
+    for (std::size_t i = 0; i < length; i++)
     {
         *(unsigned char*)(address + j) = value[i];
         j++;

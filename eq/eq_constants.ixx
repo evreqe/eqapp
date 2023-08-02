@@ -9,17 +9,26 @@ export
 
 namespace eq
 {
+    using SpawnList = std::vector<uintptr_t>;
+
     namespace Constants
     {
         const std::string GameProcessName = "eqgame.exe";
 
         constexpr float PI = std::numbers::pi_v<float>;
 
+        constexpr float FloatInfinity = std::numeric_limits<float>::infinity();
+
         const uint32_t NumHotbars          = 11;
         const uint32_t NumHotbarButtons    = 12;
 
         namespace Spawn
         {
+            namespace ID
+            {
+                const uint32_t Null    = 0xFFFFFFFF;
+            }
+
             namespace Type
             {
                 const uint32_t Player     = 0;
@@ -60,6 +69,208 @@ namespace eq
             {
                 const float Default     = 0.8000000119f;
                 const float Slippery    = 0.01999999955f;    // ice or slime is on the floor making the player slide around
+            }
+
+            namespace Gender
+            {
+                const uint8_t Male       = 0;
+                const uint8_t Female     = 1;
+                const uint8_t Unknown    = 2;
+            }
+
+            namespace Race
+            {
+                const uint32_t Unknown         = 0;
+                const uint32_t Human           = 1;
+                const uint32_t Barbarian       = 2;
+                const uint32_t Erudite         = 3;
+                const uint32_t WoodElf         = 4;
+                const uint32_t HighElf         = 5;
+                const uint32_t DarkElf         = 6;
+                const uint32_t HalfElf         = 7;
+                const uint32_t Dwarf           = 8;
+                const uint32_t Troll           = 9;
+                const uint32_t Ogre            = 10;
+                const uint32_t Halfling        = 11;
+                const uint32_t Gnome           = 12;
+                const uint32_t Skeleton        = 60;
+                const uint32_t InvisibleMan    = 127;    // enchanter pets, auras, etc
+                const uint32_t Iksar           = 128;
+                const uint32_t VahShir         = 130;
+                const uint32_t Froglok         = 330;
+                const uint32_t Chokadai        = 356;
+                const uint32_t Skeleton2       = 367;
+                const uint32_t Skeleton3       = 484;
+                const uint32_t Drakkin         = 522;
+                const uint32_t Campfire        = 567;    // fellowship campfires, etc
+
+                namespace Strings
+                {
+                    const std::unordered_map<uint32_t, std::string> LongName =
+                    {
+                        {Unknown,         "Unknown"},
+                        {Human,           "Human"},
+                        {Barbarian,       "Barbarian"},
+                        {Erudite,         "Erudite"},
+                        {WoodElf,         "Wood Elf"},
+                        {HighElf,         "High Elf"},
+                        {DarkElf,         "Dark Elf"},
+                        {HalfElf,         "Half Elf"},
+                        {Dwarf,           "Dwarf"},
+                        {Troll,           "Troll"},
+                        {Ogre,            "Ogre"},
+                        {Halfling,        "Halfling"},
+                        {Gnome,           "Gnome"},
+                        {InvisibleMan,    "Invisible Man"},
+                        {Iksar,           "Iksar"},
+                        {VahShir,         "Vah Shir"},
+                        {Froglok,         "Froglok"},
+                        {Drakkin,         "Drakkin"},
+                        {Campfire,        "Campfire"},
+                    };
+
+                    const std::unordered_map<uint32_t, std::string> ShortName =
+                    {
+                        {Unknown,         "UNK"},
+                        {Human,           "HUM"},
+                        {Barbarian,       "BAR"},
+                        {Erudite,         "ERU"},
+                        {WoodElf,         "ELF"},
+                        {HighElf,         "HIE"},
+                        {DarkElf,         "DEF"},
+                        {HalfElf,         "HEF"},
+                        {Dwarf,           "DWF"},
+                        {Troll,           "TRL"},
+                        {Ogre,            "OGR"},
+                        {Halfling,        "HFL"},
+                        {Gnome,           "GNM"},
+                        {InvisibleMan,    "IVM"},
+                        {Iksar,           "IKS"},
+                        {VahShir,         "VAH"},
+                        {Froglok,         "FRG"},
+                        {Drakkin,         "DRK"},
+                        {Campfire,        "CMP"},
+                    };
+                }
+            }
+
+            namespace Class
+            {
+                const uint32_t Unknown                = 0;
+                const uint32_t Warrior                = 1;
+                const uint32_t Cleric                 = 2;
+                const uint32_t Paladin                = 3;
+                const uint32_t Ranger                 = 4;
+                const uint32_t ShadowKnight           = 5;
+                const uint32_t Druid                  = 6;
+                const uint32_t Monk                   = 7;
+                const uint32_t Bard                   = 8;
+                const uint32_t Rogue                  = 9;
+                const uint32_t Shaman                 = 10;
+                const uint32_t Necromancer            = 11;
+                const uint32_t Wizard                 = 12;
+                const uint32_t Magician               = 13;
+                const uint32_t Enchanter              = 14;
+                const uint32_t Beastlord              = 15;
+                const uint32_t Berserker              = 16;
+
+                const uint32_t Mercenary              = 17;
+
+                const uint32_t WarriorGM              = 20;    // GM = Guildmaster
+                const uint32_t ClericGM               = 21;
+                const uint32_t PaladinGM              = 22;
+                const uint32_t RangerGM               = 23;
+                const uint32_t ShadowKnightGM         = 24;
+                const uint32_t DruidGM                = 25;
+                const uint32_t MonkGM                 = 26;
+                const uint32_t BardGM                 = 27;
+                const uint32_t RogueGM                = 28;
+                const uint32_t ShamanGM               = 29;
+                const uint32_t NecromancerGM          = 30;
+                const uint32_t WizardGM               = 31;
+                const uint32_t MagicianGM             = 32;
+                const uint32_t EnchanterGM            = 33;
+                const uint32_t BeastlordGM            = 34;
+                const uint32_t BerserkerGM            = 35;
+
+                const uint32_t Banker                 = 40;
+                const uint32_t Merchant               = 41;
+
+                const uint32_t Object                 = 62;    // auras, controllers, crates, tents, corpses, etc
+
+                const uint32_t GuildBanker            = 66;
+                const uint32_t FellowshipRegistrar    = 69;
+                const uint32_t FactionMerchant        = 70;
+                const uint32_t MercenaryLiaison       = 71;
+                const uint32_t RealEstateMerchant     = 72;
+                const uint32_t LoyaltyMerchant        = 73;
+                const uint32_t TributeMaster          = 74;
+
+                namespace Strings
+                {
+                    const std::unordered_map<uint32_t, std::string> LongName =
+                    {
+                        {Unknown,                "Unknown"},
+                        {Warrior,                "Warrior"},
+                        {Cleric,                 "Cleric"},
+                        {Paladin,                "Paladin"},
+                        {Ranger,                 "Ranger"},
+                        {ShadowKnight,           "Shadow Knight"},
+                        {Druid,                  "Druid"},
+                        {Monk,                   "Monk"},
+                        {Bard,                   "Bard"},
+                        {Rogue,                  "Rogue"},
+                        {Shaman,                 "Shaman"},
+                        {Necromancer,            "Necromancer"},
+                        {Wizard,                 "Wizard"},
+                        {Magician,               "Magician"},
+                        {Enchanter,              "Enchanter"},
+                        {Beastlord,              "Beastlord"},
+                        {Berserker,              "Berserker"},
+                                                 
+                        {Mercenary,              "Mercenary"},
+                                                 
+                        {Banker,                 "Banker"},
+                        {Merchant,               "Merchant"},
+
+                        {Object,                 "Object"},
+                        {GuildBanker,            "Guild Banker"},
+                        {FellowshipRegistrar,    "Fellowship Registrar"},
+                        {FactionMerchant,        "Faction Merchant"},
+                        {MercenaryLiaison,       "Mercenary Liaison"},
+                        {RealEstateMerchant,     "Real Estate Merchant"},
+                        {LoyaltyMerchant,        "Loyalty Merchant"},
+                        {TributeMaster,          "Tribute Master"},
+                    };
+
+                    const std::unordered_map<uint32_t, std::string> ShortName =
+                    {
+                        {Unknown,         "UNK"},
+                        {Warrior,         "WAR"},
+                        {Cleric,          "CLR"},
+                        {Paladin,         "PAL"},
+                        {Ranger,          "RNG"},
+                        {ShadowKnight,    "SHD"},
+                        {Druid,           "DRU"},
+                        {Monk,            "MNK"},
+                        {Bard,            "BRD"},
+                        {Rogue,           "ROG"},
+                        {Shaman,          "SHM"},
+                        {Necromancer,     "NEC"},
+                        {Wizard,          "WIZ"},
+                        {Magician,        "MAG"},
+                        {Enchanter,       "ENC"},
+                        {Beastlord,       "BST"},
+                        {Berserker,       "BER"},
+
+                        {Mercenary,       "MCN"},
+
+                        {Banker,          "BNK"},
+                        {Merchant,        "MCT"},
+
+                        {Object,          "OBJ"},
+                    };
+                }
             }
         }
 
@@ -229,6 +440,45 @@ namespace eq
             const uint32_t Teal         = 18;    // ARGB 0xFF00F0F0
             const uint32_t Default6     = 19;    // ARGB 0xFF606060
             const uint32_t Black2       = 20;    // ARGB 0xFF000000
+        }
+    }
+
+    namespace ColorARGB
+    {
+        const uint32_t Red          = 0xFFFF0000;
+        const uint32_t Orange       = 0xFFFF8000;
+        const uint32_t Yellow       = 0xFFFFFF00;
+        const uint32_t Green        = 0xFF00FF00;
+        const uint32_t Blue         = 0xFF0000FF;
+        const uint32_t Purple       = 0xFF8000FF;
+        const uint32_t Pink         = 0xFFFF80FF;
+        const uint32_t Magenta      = 0xFFFF00FF;
+        const uint32_t Teal         = 0xFF00FFFF;
+        const uint32_t Brown        = 0xFF804000;
+        const uint32_t Jade         = 0xFF00FF80;
+        const uint32_t Gray         = 0xFF808080;
+        const uint32_t Silver       = 0xFFC0C0C0;
+        const uint32_t White        = 0xFFFFFFFF;
+        const uint32_t Black        = 0xFF000000;
+        const uint32_t DarkRed      = 0xFF800000;
+        const uint32_t DarkGreen    = 0xFF008000;
+        const uint32_t DarkBlue     = 0xFF000080;
+        const uint32_t ToolTip      = 0xC8000040;
+    }
+
+    namespace CCamera
+    {
+        namespace FieldOfView
+        {
+            const float Default      = 45.0f;
+            const float DruidBuff    = 60.0f;    // Spell: Mask of the Hunter, Spell: Mask of the Forest, etc
+        }
+
+        namespace Pitch
+        {
+            const float Default    = -8.5f;      // looking forward, view is centered
+            const float Min        = -136.5f;    // looking all the way down
+            const float Max        = 119.5f;     // looking all the way up
         }
     }
 }

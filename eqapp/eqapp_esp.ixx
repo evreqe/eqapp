@@ -47,6 +47,7 @@ public:
     void Toggle();
     void Enable();
     void Disable();
+    std::string GetDisplayText();
     void Execute();
     bool HandleInterpetCommand(const std::string& commandText);
 
@@ -56,6 +57,8 @@ private:
 
     bool m_isEnabled = true;
     bool m_isLoaded = false;
+
+    float m_distance = 512.0f;
 
 };
 
@@ -115,20 +118,78 @@ void ESP::Disable()
     }
 }
 
+std::string ESP::GetDisplayText()
+{
+    std::string displayText;
+
+    auto displayTextBackInserter = std::back_inserter(displayText);
+
+    if (IsEnabled() == true)
+    {
+        std::format_to(displayTextBackInserter, "{} enabled\n", m_className);
+    }
+    else
+    {
+        std::format_to(displayTextBackInserter, "{} disabled\n", m_className);
+    }
+
+    return displayText;
+}
+
 void ESP::Execute()
 {
     uintptr_t playerSpawn = EQ_GetPlayerSpawn();
-
-    float playerSpawnY = EQ_GetSpawnY(playerSpawn);
-    float playerSpawnX = EQ_GetSpawnX(playerSpawn);
-    float playerSpawnZ = EQ_GetSpawnZ(playerSpawn);
-
-    float screenX = -1.0f;
-    float screenY = -1.0f;
-    bool result = EQ_WorldLocationToScreenLocation(playerSpawnY, playerSpawnX, playerSpawnZ, screenX, screenY);
-    if (result == true)
+    if (playerSpawn == NULL)
     {
-        EQ_DrawText("+", (uint32_t)screenX, (uint32_t)screenY);
+        return;
+    }
+
+    eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
+
+    eq::ScreenCoordinates playerSpawnScreenCoordinates;
+    bool isPlayerOnScreen = EQ_GetScreenCoordinatesByLocation(playerSpawnLocation, playerSpawnScreenCoordinates);
+    if (isPlayerOnScreen == true)
+    {
+        EQ_DrawText("+", playerSpawnScreenCoordinates.X, playerSpawnScreenCoordinates.Y);
+    }
+
+    eq::SpawnList spawnList = EQ_GetSpawnList();
+
+    for (auto& spawn : spawnList)
+    {
+        if (spawn == playerSpawn)
+        {
+            continue;
+        }
+
+        uint8_t spawnType = EQ_GetSpawnType(spawn);
+        if (spawnType == eq::Constants::Spawn::Type::Player)
+        {
+            continue;
+        }
+
+        float spawnDistance = EQ_GetSpawnDistance3D(spawn);
+        if (spawnDistance > m_distance)
+        {
+            continue;
+        }
+
+        std::string spawnNameNumbered = EQ_GetSpawnNameNumbered(spawn);
+        if (spawnNameNumbered.empty() == true)
+        {
+            continue;
+        }
+
+        eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+
+        eq::ScreenCoordinates spawnScreenCoordinates;
+        bool spawnIsOnScreen = EQ_GetScreenCoordinatesByLocation(spawnLocation, spawnScreenCoordinates);
+        if (spawnIsOnScreen == true)
+        {
+            std::string spawnText = std::format("+ {}", spawnNameNumbered);
+
+            EQ_DrawText(spawnText, spawnScreenCoordinates.X, spawnScreenCoordinates.Y);
+        }
     }
 }
 

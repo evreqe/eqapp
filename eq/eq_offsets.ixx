@@ -13,21 +13,21 @@ namespace eq
     {
         namespace CRender
         {
-            const uint32_t VirtualFunctionTable     = 0x00;     // uintptr_t pointer
+            namespace VirtualFunctionTable
+            {
+                const uint32_t ResetDevice                = 0xC8;     // uintptr_t pointer
+                const uint32_t DrawLine2D                 = 0x110;    // uintptr_t pointer
+                const uint32_t DrawLine3D                 = 0x118;    // uintptr_t pointer
+                const uint32_t RenderScene                = 0x158;    // uintptr_t pointer
+                const uint32_t RenderBlind                = 0x160;    // uintptr_t pointer
+                const uint32_t UpdateDisplay              = 0x168;    // uintptr_t pointer
+                const uint32_t TransformWorldToCamera     = 0x1B8;    // uintptr_t pointer
+            }
+
+            const uint32_t VirtualFunctionTable_    = 0x00;     // uintptr_t pointer
             const uint32_t IDirect3DN               = 0xEE0;    // uintptr_t pointer    // IDirect3D9*
             const uint32_t IDirect3DDeviceN         = 0xEE8;    // uintptr_t pointer    // IDirect3DDevice9*    // LPDIRECT3DDEVICE9
             const uint32_t IDirect3DSurfaceN        = 0xEF0;    // uintptr_t pointer    // IDirect3DSurface9*
-        }
-
-        namespace CRenderVirtualFunctionTable
-        {
-            const uint32_t ResetDevice                = 0xC8;     // uintptr_t pointer
-            const uint32_t DrawLine2D                 = 0x110;    // uintptr_t pointer
-            const uint32_t DrawLine3D                 = 0x118;    // uintptr_t pointer
-            const uint32_t RenderScene                = 0x158;    // uintptr_t pointer
-            const uint32_t RenderBlind                = 0x160;    // uintptr_t pointer
-            const uint32_t UpdateDisplay              = 0x168;    // uintptr_t pointer
-            const uint32_t TransformWorldToCamera     = 0x1B8;    // uintptr_t pointer
         }
 
         namespace SGraphicsEngine
@@ -48,7 +48,17 @@ namespace eq
 
         namespace CCamera
         {
-            const uint32_t VirtualFunctionTable    = 0x00;    // uint32_t pointer
+            namespace VirtualFunctionTable
+            {
+                const uint32_t SetLocation                      = 0x80;    // uintptr_t pointer    // Y, X, Z
+                const uint32_t SetOrientation                   = 0x88;    // uintptr_t pointer    // Heading, Pitch, Rotation
+                const uint32_t ScreenSpaceToWorldSpace          = 0xE0;    // uintptr_t pointer
+                const uint32_t WorldSpaceToScreenSpace          = 0xE8;    // uintptr_t pointer
+                const uint32_t ScreenSpaceToWorldSpaceHelper    = 0xF0;    // uintptr_t pointer
+                const uint32_t WorldSpaceToScreenSpaceHelper    = 0xF8;    // uintptr_t pointer
+            }
+
+            const uint32_t VirtualFunctionTable_   = 0x00;    // uint32_t pointer
             const uint32_t FieldOfView             = 0x08;    // float
             const uint32_t AspectRatio             = 0x0C;    // float
             const uint32_t Unknown                 = 0x14;    // float    // 0.0 to 1.0
@@ -65,15 +75,6 @@ namespace eq
             const uint32_t Y                       = 0xC0;    // float
             const uint32_t X                       = 0xC4;    // float
             const uint32_t Z                       = 0xC8;    // float
-        }
-
-        namespace CCameraVirtualFunctionTable
-        {
-            const uint32_t SetLocation                      = 0x80;    // uintptr_t pointer    // Y, X, Z
-            const uint32_t SetOrientation                   = 0x88;    // uintptr_t pointer    // Heading, Pitch, Rotation
-            const uint32_t WorldSpaceToScreenSpace          = 0xE8;    // uintptr_t pointer
-            const uint32_t ScreenSpaceToWorldSpaceHelper    = 0xF0;    // uintptr_t pointer
-            const uint32_t WorldSpaceToScreenSpaceHelper    = 0xF8;    // uintptr_t pointer
         }
 
         namespace SpawnManager

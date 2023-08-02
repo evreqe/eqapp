@@ -137,16 +137,22 @@ void EQAPP_Detours_DisplayText()
          displayText.append(g_BoxChatClient.GetDisplayText());
     }
 
-    // Follow
-    if (g_Follow.IsLoaded() == true)
-    {
-        displayText.append(g_Follow.GetDisplayText());
-    }
-
     // Macro Manager
     if (g_MacroManager.IsLoaded() == true)
     {
         displayText.append(g_MacroManager.GetDisplayText());
+    }
+
+    // ESP
+    if (g_ESP.IsLoaded() == true)
+    {
+         displayText.append(g_ESP.GetDisplayText());
+    }
+
+    // Follow
+    if (g_Follow.IsLoaded() == true)
+    {
+        displayText.append(g_Follow.GetDisplayText());
     }
 
     EQ_DrawText(displayText, drawTextX, drawTextY);

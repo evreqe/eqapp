@@ -269,6 +269,8 @@ bool ChatEvents::LoadFiles()
         result = LoadFile(fileEntryForPlayer);
     }
 
+    std::print(std::cout, "{}: loaded {} chat events\n", m_className, m_chatEventList.size());
+
     return result;
 }
 

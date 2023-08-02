@@ -61,6 +61,16 @@ namespace eq
                 // ChatManager
                 uintptr_t ChatManager__PrintText = FixAddress(CEverQuest__dsp_chat_x);
 
+                // CharacterZoneClient
+                uintptr_t CharacterZoneClient__GetCurrentHitPoints = FixAddress(CharacterZoneClient__Cur_HP_x);
+                uintptr_t CharacterZoneClient__GetCurrentManaPoints = FixAddress(CharacterZoneClient__Cur_Mana_x);
+                uintptr_t CharacterZoneClient__GetMaxHitPoints = FixAddress(CharacterZoneClient__Max_HP_x);
+                uintptr_t CharacterZoneClient__GetMaxManaPoints = FixAddress(CharacterZoneClient__Max_Mana_x);
+
+                // Spawn
+                uintptr_t Spawn__GetCharacterZoneClient = FixAddress(PlayerClient__GetPcClient_x);
+                uintptr_t Spawn__GetLevel = FixAddress(PlayerZoneClient__GetLevel_x);
+
                 // SpawnManager
                 uintptr_t SpawnManager__GetSpawnByID = FixAddress(PlayerManagerClient__GetSpawnByID_x);
                 uintptr_t SpawnManager__GetSpawnByName = FixAddress(PlayerManagerClient__GetSpawnByName_x);
@@ -94,9 +104,11 @@ namespace eq
         {
             namespace Functions
             {
+                // CParticleSystem
                 uintptr_t CParticleSystem__Render = FixAddress(CParticleSystem__Render_x);
                 uintptr_t CParticleSystem__CreateSpellEmitter = FixAddress(CParticleSystem__CreateSpellEmitter_x);
 
+                // CRender
                 uintptr_t CRender__RenderScene = FixAddress(CRender__RenderScene_x);
                 uintptr_t CRender__RenderBlind = FixAddress(CRender__RenderBlind_x);
                 uintptr_t CRender__ResetDevice = FixAddress(CRender__ResetDevice_x);

@@ -186,6 +186,8 @@ void MacroManager::LoadFiles()
             std::print(std::cout, "{}: failed to load macro '{}'\n", m_className, filePath);
         }
     }
+
+    std::print(std::cout, "{}: loaded {} macros\n", m_className, m_macroList.size());
 }
 
 void MacroManager::InterpretMacro(const std::string& name)
