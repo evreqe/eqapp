@@ -321,9 +321,27 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//ClearTarget")
+    if (commandText == "//CastRayToTarget")
     {
-        EQ_ClearTarget();
+        bool result = EQ_CastRayToTarget();
+        std::print(std::cout, "CastRayToTarget(): {}\n", result);
+        return true;
+    }
+
+    if (commandText == "//CastRay")
+    {
+        uintptr_t playerSpawn = EQ_GetPlayerSpawn();
+        uintptr_t targetSpawn = EQ_GetTargetSpawn();
+
+        if (playerSpawn != NULL && targetSpawn != NULL)
+        {
+            eq::Location playerSpawnLocation = EQ_GetSpawnLocation(playerSpawn);
+            eq::Location targetSpawnLocation = EQ_GetSpawnLocation(targetSpawn);
+
+            bool result = EQ_CastRay(playerSpawnLocation, targetSpawnLocation);
+            std::print(std::cout, "CastRay(): {}\n", result);
+        }
+
         return true;
     }
 
@@ -339,15 +357,73 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
 
     if (commandText == "//Jump")
     {
-        EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::JUMP, true);
-        EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::JUMP, false);
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::JUMP);
+        return true;
+    }
+
+    if (commandText == "//Consider")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CONSIDER);
         return true;
     }
 
     if (commandText == "//Duck")
     {
-        EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::DUCK, true);
-        EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::DUCK, false);
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::DUCK);
+        return true;
+    }
+
+    if (commandText == "//Hail")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::HAIL);
+        return true;
+    }
+
+    if (commandText == "//Use")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::USE);
+        return true;
+    }
+
+    if (commandText == "//CenterView")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CENTERVIEW);
+        return true;
+    }
+
+    if (commandText == "//TargetMe")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::TARGETME);
+        return true;
+    }
+
+    if (commandText == "//Party1")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::PARTY1);
+        return true;
+    }
+
+    if (commandText == "//Party2")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::PARTY2);
+        return true;
+    }
+
+    if (commandText == "//Party3")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::PARTY3);
+        return true;
+    }
+
+    if (commandText == "//Party4")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::PARTY4);
+        return true;
+    }
+
+    if (commandText == "//Party5")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::PARTY5);
         return true;
     }
 
@@ -1245,6 +1321,54 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
         return true;
     }
 
+    if (commandText == "//Who")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::WHO);
+        return true;
+    }
+
+    if (commandText == "//Who")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::WHO);
+        return true;
+    }
+
+    if (commandText == "//InviteFollow")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::INVITE_FOLLOW);
+        return true;
+    }
+
+    if (commandText == "//Disband")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::DISBAND);
+        return true;
+    }
+
+    if (commandText == "//Camp")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CAMP);
+        return true;
+    }
+
+    if (commandText == "//SitStand")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::SIT_STAND);
+        return true;
+    }
+
+    if (commandText == "//RunWalk")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::RUN_WALK);
+        return true;
+    }
+
+    if (commandText == "//Screenshot")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::SCREENCAP);
+        return true;
+    }
+
     if (commandText == "//FirstPersonCamera")
     {
         EQ_ExecuteCommand(eq::Constants::ExecuteCommand::FIRST_PERSON_CAMERA);
@@ -1452,6 +1576,12 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
     if (commandText == "//StopAction")
     {
         EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CMD_STOP_ACTION);
+        return true;
+    }
+
+    if (commandText == "//InspectBuffs")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CMD_INSPECT_BUFFS);
         return true;
     }
 

@@ -161,13 +161,13 @@ public:
 class eq::Classes::CCamera
 {
 public:
-    int SetCameraLocation(eq::Location& location);
-    int SetCameraOrientation(eq::Orientation& orientation);
+    int SetLocation(eq::Location& location, bool canSetLocation);
+    int SetOrientation(eq::Orientation& orientation);
     bool WorldSpaceToScreenSpace(eq::Location& location, float& screenX, float& screenY);
 };
 
-typedef int (__thiscall* EQ_FUNCTION_TYPE_CCamera__SetCameraLocation)(void* thisPointer, eq::Location& location);
-typedef int (__thiscall* EQ_FUNCTION_TYPE_CCamera__SetCameraOrientation)(void* thisPointer, eq::Orientation& orientation);
+typedef int (__thiscall* EQ_FUNCTION_TYPE_CCamera__SetLocation)(void* thisPointer, eq::Location& location, bool canSetLocation);
+typedef int (__thiscall* EQ_FUNCTION_TYPE_CCamera__SetOrientation)(void* thisPointer, eq::Orientation& orientation);
 typedef bool (__thiscall* EQ_FUNCTION_TYPE_CCamera__WorldSpaceToScreenSpace)(void* thisPointer, eq::Location& location, float& screenX, float& screenY);
 
 //////////////////////////////////////////////////
@@ -178,6 +178,8 @@ class eq::Classes::CRender
 {
 public:
     int ResetDevice(bool unknown);
+    void DrawLine2D(const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB);
+    void DrawLine3D(const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB);
     void RenderScene();
     void RenderBlind();
     void UpdateDisplay();
@@ -188,6 +190,9 @@ void EQ_FUNCTION_CRender__ResetDevice(void* thisPointer, bool unknown)
 {
     ((EQ_FUNCTION_TYPE_CRender__ResetDevice)eq::EQGraphics::Addresses::Functions::CRender__ResetDevice)(thisPointer, unknown);
 }
+
+typedef void (__thiscall* EQ_FUNCTION_TYPE_CRender__DrawLine2D)(void* thisPointer, const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB);
+typedef void (__thiscall* EQ_FUNCTION_TYPE_CRender__DrawLine3D)(void* thisPointer, const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB);
 
 typedef void (__thiscall* EQ_FUNCTION_TYPE_CRender__RenderScene)(void* thisPointer);
 void EQ_FUNCTION_CRender__RenderScene(void* thisPointer)

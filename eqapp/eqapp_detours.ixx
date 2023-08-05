@@ -1,6 +1,7 @@
 module;
 
 #include "common.h"
+#include "utility.h"
 
 export module eqapp_detours;
 
@@ -19,6 +20,7 @@ export import eqapp_windowtitle;
 export import eqapp_macromanager;
 export import eqapp_soundmanager;
 export import eqapp_esp;
+export import eqapp_freecamera;
 
 export
 {
@@ -35,12 +37,19 @@ EQ_DEFINE_DETOUR(ChatManager__PrintText)
 EQ_DEFINE_DETOUR(SoundManager__PlaySound)
 EQ_DEFINE_DETOUR(CEverQuest__InterpretCommand)
 EQ_DEFINE_DETOUR(CEverQuest__SetGameState)
+EQ_DEFINE_DETOUR(CCamera__SetLocation)
 EQ_DEFINE_DETOUR(CRender__RenderScene)
+EQ_DEFINE_DETOUR(CRender__RenderBlind)
 EQ_DEFINE_DETOUR(CRender__UpdateDisplay)
 EQ_DEFINE_DETOUR(CParticleSystem__CreateSpellEmitter)
 
+void EQAPP_Detours_AddDetoursForVirtualFunctions();
+void EQAPP_Detours_RemoveDetoursForVirtualFunctions();
 void EQAPP_Detours_Load();
 void EQAPP_Detours_Unload();
+void EQAPP_Detours_OnEnterOrLeaveZone();
+void EQAPP_Detours_OnEnterZone();
+void EQAPP_Detours_OnLeaveZone();
 void EQAPP_Detours_DisplayText();
 void EQAPP_Detours_Loop();
 
@@ -50,7 +59,9 @@ void EQAPP_DETOURED_FUNCTION_ChatManager__PrintText(void* thisPointer, const cha
 void EQAPP_DETOURED_FUNCTION_SoundManager__PlaySound(void* thisPointer, int soundID, void* soundControl);
 void EQAPP_DETOURED_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uintptr_t* playerSpawn, const char* text);
 void EQAPP_DETOURED_FUNCTION_CEverQuest__SetGameState(void* thisPointer, int gameState);
+int EQAPP_DETOURED_FUNCTION_CCamera__SetLocation(void* thisPointer, eq::Location& location, bool canSetLocation);
 void EQAPP_DETOURED_FUNCTION_CRender__RenderScene(void* thisPointer);
+void EQAPP_DETOURED_FUNCTION_CRender__RenderBlind(void* thisPointer);
 void EQAPP_DETOURED_FUNCTION_CRender__UpdateDisplay(void* thisPointer);
 int EQAPP_DETOURED_FUNCTION_CParticleSystem__CreateSpellEmitter
 (
@@ -70,6 +81,17 @@ int EQAPP_DETOURED_FUNCTION_CParticleSystem__CreateSpellEmitter
     bool arg13,
     int previewMode
 );
+
+void EQAPP_Detours_AddDetoursForVirtualFunctions()
+{
+    EQAPP_REAL_FUNCTION_CCamera__SetLocation = (EQ_FUNCTION_TYPE_CCamera__SetLocation)EQ_GetCCameraSetLocation();
+    EQ_ADD_DETOUR(CCamera__SetLocation)
+}
+
+void EQAPP_Detours_RemoveDetoursForVirtualFunctions()
+{
+    EQ_REMOVE_DETOUR(CCamera__SetLocation)
+}
 
 void EQAPP_Detours_Load()
 {
@@ -97,11 +119,16 @@ void EQAPP_Detours_Load()
     EQ_EQGRAPHICS_INIT_DETOUR(CRender__RenderScene)
     EQ_ADD_DETOUR(CRender__RenderScene)
 
+    EQ_EQGRAPHICS_INIT_DETOUR(CRender__RenderBlind)
+    EQ_ADD_DETOUR(CRender__RenderBlind)
+
     EQ_EQGRAPHICS_INIT_DETOUR(CRender__UpdateDisplay)
     EQ_ADD_DETOUR(CRender__UpdateDisplay)
 
     EQ_EQGRAPHICS_INIT_DETOUR(CParticleSystem__CreateSpellEmitter)
     EQ_ADD_DETOUR(CParticleSystem__CreateSpellEmitter)
+
+    EQAPP_Detours_AddDetoursForVirtualFunctions();
 
     DetourTransactionCommit();
 }
@@ -118,10 +145,32 @@ void EQAPP_Detours_Unload()
     EQ_REMOVE_DETOUR(CEverQuest__InterpretCommand)
     EQ_REMOVE_DETOUR(CEverQuest__SetGameState)
     EQ_REMOVE_DETOUR(CRender__RenderScene)
+    EQ_REMOVE_DETOUR(CRender__RenderBlind)
     EQ_REMOVE_DETOUR(CRender__UpdateDisplay)
     EQ_REMOVE_DETOUR(CParticleSystem__CreateSpellEmitter)
 
+    EQAPP_Detours_RemoveDetoursForVirtualFunctions();
+
     DetourTransactionCommit();
+}
+
+void EQAPP_Detours_OnEnterOrLeaveZone()
+{
+    //
+}
+
+void EQAPP_Detours_OnEnterZone()
+{
+    EQAPP_Detours_OnEnterOrLeaveZone();
+
+    //
+}
+
+void EQAPP_Detours_OnLeaveZone()
+{
+    EQAPP_Detours_OnEnterOrLeaveZone();
+
+    //
 }
 
 void EQAPP_Detours_DisplayText()
@@ -147,6 +196,12 @@ void EQAPP_Detours_DisplayText()
     if (g_ESP.IsLoaded() == true)
     {
          displayText.append(g_ESP.GetDisplayText());
+    }
+
+    // Free Camera
+    if (g_FreeCamera.IsLoaded() == true)
+    {
+         displayText.append(g_FreeCamera.GetDisplayText());
     }
 
     // Follow
@@ -252,10 +307,23 @@ void EQAPP_DETOURED_FUNCTION_DrawNetStatus(uint32_t x, uint32_t y, uintptr_t wor
 
 bool EQAPP_DETOURED_FUNCTION_ExecuteCommand(uint32_t commandID, bool keyDown, void* data, void* keyCombo)
 {
-    //g_Log.write("----------------------------\n");
-    //g_Log.write("ExecuteCommand() commandID: {}\n", commandID);
-    //g_Log.write("ExecuteCommand() keyDown: {}\n", keyDown);
-    //g_Log.write("----------------------------\n");
+    g_Log.write("----------------------------\n");
+    g_Log.write("ExecuteCommand() commandID: {}\n", commandID);
+    g_Log.write("ExecuteCommand() keyDown: {}\n", keyDown);
+    g_Log.write("----------------------------\n");
+
+    // Free Camera
+    if (g_FreeCamera.IsLoaded() == true)
+    {
+        if (g_FreeCamera.IsEnabled() == true)
+        {
+            bool result = g_FreeCamera.HandleExecuteCommand(commandID, keyDown);
+            if (result == true)
+            {
+                return true;
+            }
+        }
+    }
 
     // Follow
     if (g_Follow.IsLoaded() == true)
@@ -297,6 +365,27 @@ void EQAPP_DETOURED_FUNCTION_ChatManager__PrintText(void* thisPointer, const cha
     if (chatText.empty() == true)
     {
         return;
+    }
+
+    if (chatText.starts_with("LOADING, PLEASE WAIT...") == true)
+    {
+        EQAPP_Detours_OnLeaveZone();
+    }
+
+    if (chatText.starts_with("You have entered ") == true)
+    {
+        if (chatText.starts_with("You have entered combat...") == false)
+        {
+            if (chatText.starts_with("You have entered an ") == false)
+            {
+                EQAPP_Detours_OnEnterZone();
+            }
+        }
+    }
+
+    if (chatText.starts_with("It will take you about ") == true && chatText.ends_with(" seconds to prepare your camp.") == true)
+    {
+        EQ_OutputFiles();
     }
 
     // Chat Events
@@ -389,6 +478,15 @@ void EQAPP_DETOURED_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uin
             }
         }
 
+        // Free Camera
+        if (g_FreeCamera.IsLoaded() == true)
+        {
+            if (g_FreeCamera.HandleInterpetCommand(commandText) == true)
+            {
+                return;
+            }
+        }
+
         // Chat Events
         if (g_ChatEvents.IsLoaded() == true)
         {
@@ -463,6 +561,15 @@ void EQAPP_DETOURED_FUNCTION_CEverQuest__SetGameState(void* thisPointer, int gam
         return;
     }
 
+    // Free Camera
+    if (g_FreeCamera.IsLoaded() == true)
+    {
+        if (g_FreeCamera.IsEnabled() == true)
+        {
+            g_FreeCamera.Disable();
+        }
+    }
+
     // Follow
     if (g_Follow.IsLoaded() == true)
     {
@@ -473,6 +580,30 @@ void EQAPP_DETOURED_FUNCTION_CEverQuest__SetGameState(void* thisPointer, int gam
     }
 
     EQAPP_REAL_FUNCTION_CEverQuest__SetGameState(thisPointer, gameState);
+}
+
+int EQAPP_DETOURED_FUNCTION_CCamera__SetLocation(void* thisPointer, eq::Location& location, bool canSetLocation)
+{
+    if (thisPointer == NULL)
+    {
+        return -1;
+    }
+
+    //g_Log.write("----------------------------\n");
+    //g_Log.write("CCamera__SetLocation(): {},{},{}\n", location.Y, location.X, location.Z);
+    //g_Log.write("----------------------------\n");
+
+    // Free Camera
+    if (g_FreeCamera.IsLoaded() == true)
+    {
+        if (g_FreeCamera.IsEnabled() == true)
+        {
+            g_FreeCamera.Execute();
+            return -1;
+        }
+    }
+
+    return EQAPP_REAL_FUNCTION_CCamera__SetLocation(thisPointer, location, canSetLocation);
 }
 
 void EQAPP_DETOURED_FUNCTION_CRender__RenderScene(void* thisPointer)
@@ -495,6 +626,19 @@ void EQAPP_DETOURED_FUNCTION_CRender__RenderScene(void* thisPointer)
     }
 
     EQAPP_REAL_FUNCTION_CRender__RenderScene(thisPointer);
+}
+
+void EQAPP_DETOURED_FUNCTION_CRender__RenderBlind(void* thisPointer)
+{
+    if (thisPointer == NULL)
+    {
+        return;
+    }
+
+    // never blind
+    return;
+
+    //EQAPP_REAL_FUNCTION_CRender__RenderBlind(thisPointer);
 }
 
 void EQAPP_DETOURED_FUNCTION_CRender__UpdateDisplay(void* thisPointer)

@@ -441,44 +441,44 @@ namespace eq
             const uint32_t Default6     = 19;    // ARGB 0xFF606060
             const uint32_t Black2       = 20;    // ARGB 0xFF000000
         }
-    }
 
-    namespace ColorARGB
-    {
-        const uint32_t Red          = 0xFFFF0000;
-        const uint32_t Orange       = 0xFFFF8000;
-        const uint32_t Yellow       = 0xFFFFFF00;
-        const uint32_t Green        = 0xFF00FF00;
-        const uint32_t Blue         = 0xFF0000FF;
-        const uint32_t Purple       = 0xFF8000FF;
-        const uint32_t Pink         = 0xFFFF80FF;
-        const uint32_t Magenta      = 0xFFFF00FF;
-        const uint32_t Teal         = 0xFF00FFFF;
-        const uint32_t Brown        = 0xFF804000;
-        const uint32_t Jade         = 0xFF00FF80;
-        const uint32_t Gray         = 0xFF808080;
-        const uint32_t Silver       = 0xFFC0C0C0;
-        const uint32_t White        = 0xFFFFFFFF;
-        const uint32_t Black        = 0xFF000000;
-        const uint32_t DarkRed      = 0xFF800000;
-        const uint32_t DarkGreen    = 0xFF008000;
-        const uint32_t DarkBlue     = 0xFF000080;
-        const uint32_t ToolTip      = 0xC8000040;
-    }
-
-    namespace CCamera
-    {
-        namespace FieldOfView
+        namespace ColorARGB
         {
-            const float Default      = 45.0f;
-            const float DruidBuff    = 60.0f;    // Spell: Mask of the Hunter, Spell: Mask of the Forest, etc
+            const uint32_t Red          = 0xFFFF0000;
+            const uint32_t Orange       = 0xFFFF8000;
+            const uint32_t Yellow       = 0xFFFFFF00;
+            const uint32_t Green        = 0xFF00FF00;
+            const uint32_t Blue         = 0xFF0000FF;
+            const uint32_t Purple       = 0xFF8000FF;
+            const uint32_t Pink         = 0xFFFF80FF;
+            const uint32_t Magenta      = 0xFFFF00FF;
+            const uint32_t Teal         = 0xFF00FFFF;
+            const uint32_t Brown        = 0xFF804000;
+            const uint32_t Jade         = 0xFF00FF80;
+            const uint32_t Gray         = 0xFF808080;
+            const uint32_t Silver       = 0xFFC0C0C0;
+            const uint32_t White        = 0xFFFFFFFF;
+            const uint32_t Black        = 0xFF000000;
+            const uint32_t DarkRed      = 0xFF800000;
+            const uint32_t DarkGreen    = 0xFF008000;
+            const uint32_t DarkBlue     = 0xFF000080;
+            const uint32_t ToolTip      = 0xC8000040;
         }
 
-        namespace Pitch
+        namespace CCamera
         {
-            const float Default    = -8.5f;      // looking forward, view is centered
-            const float Min        = -136.5f;    // looking all the way down
-            const float Max        = 119.5f;     // looking all the way up
+            namespace FieldOfView
+            {
+                const float Default      = 45.0f;
+                const float DruidBuff    = 60.0f;    // Spell: Mask of the Hunter, Spell: Mask of the Forest, etc
+            }
+
+            namespace Pitch
+            {
+                const float Default    = -8.5f;      // looking forward, view is centered
+                const float Min        = -136.5f;    // looking all the way down
+                const float Max        = 119.5f;     // looking all the way up
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ export import eqapp_interpretcommand;
 export import eqapp_macromanager;
 export import eqapp_soundmanager;
 export import eqapp_esp;
+export import eqapp_freecamera;
 
 export
 {
@@ -107,6 +108,7 @@ void Application::Load()
 
     g_Console.Load();
     g_NoDraw.Load();
+    g_FreeCamera.Load();
     g_ESP.Load();
     g_InterpretCommand.Load();
     g_MacroManager.Load();
@@ -147,6 +149,7 @@ void Application::Unload()
     g_MacroManager.Unload();
     g_InterpretCommand.Unload();
     g_ESP.Unload();
+    g_FreeCamera.Unload();
     g_NoDraw.Unload();
 
     std::print(std::cout, "********** Unloaded! **********\n");

@@ -57,6 +57,8 @@ namespace eq
                 uintptr_t GetMeleeRange = FixAddress(__get_melee_range_x);
                 uintptr_t GetChatManager = FixAddress(ChatManagerClient__Instance_x);
                 uintptr_t DrawText = FixAddress(CDisplay__WriteTextHD2_x);
+                uintptr_t CastRay = FixAddress(__CastRay_x);
+                uintptr_t CastRay2 = FixAddress(__CastRay2_x);
 
                 // ChatManager
                 uintptr_t ChatManager__PrintText = FixAddress(CEverQuest__dsp_chat_x);

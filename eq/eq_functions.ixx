@@ -13,7 +13,7 @@ export
 {
 
 //////////////////////////////////////////////////
-/* log functions */
+/* misc functions */
 //////////////////////////////////////////////////
 
 void EQ_Log(const std::string& text)
@@ -48,31 +48,61 @@ uintptr_t EQ_FUNCTION_DrawText(const char* text, uint32_t x, uint32_t y, uint32_
      return ((EQ_FUNCTION_TYPE_DrawText)eq::EQGame::Addresses::Functions::DrawText)(text, x, y, drawTextColor);
 }
 
+typedef int (* EQ_FUNCTION_TYPE_CastRay)(uintptr_t spawn, float y, float x, float z);
+int EQ_FUNCTION_CastRay(uintptr_t spawn, float y, float x, float z)
+{
+     return ((EQ_FUNCTION_TYPE_CastRay)eq::EQGame::Addresses::Functions::CastRay)(spawn, y, x, z);
+}
+
+typedef int (* EQ_FUNCTION_TYPE_CastRay2)(const eq::Location& location, int race, float y, float x, float z);
+int EQ_FUNCTION_CastRay2(const eq::Location& location, int race, float y, float x, float z)
+{
+     return ((EQ_FUNCTION_TYPE_CastRay2)eq::EQGame::Addresses::Functions::CastRay2)(location, race, y, x, z);
+}
+
 //////////////////////////////////////////////////
 /* class virtual table functions */
 //////////////////////////////////////////////////
 
+// CCamera //
+
 bool EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace(void* thisPointer, eq::Location& location, float& screenX, float& screenY)
 {
-    uintptr_t camera = EQ_GetCCamera();
-    if (camera == NULL)
-    {
-        return false;
-    }
-
-    uintptr_t cameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(camera + eq::Offsets::CCamera::VirtualFunctionTable_);
-    if (cameraVirtualFunctionTable == NULL)
-    {
-        return false;
-    }
-
-    uintptr_t cameraWorldSpaceToScreenSpace = eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::WorldSpaceToScreenSpace);
+    uintptr_t cameraWorldSpaceToScreenSpace = EQ_GetCCameraWorldSpaceToScreenSpace();
     if (cameraWorldSpaceToScreenSpace == NULL)
     {
         return false;
     }
 
     return ((EQ_FUNCTION_TYPE_CCamera__WorldSpaceToScreenSpace)cameraWorldSpaceToScreenSpace)(thisPointer, location, screenX, screenY);
+}
+
+// CRender //
+
+bool EQ_FUNCTION_CRender__DrawLine2D(void* thisPointer, const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB)
+{
+    uintptr_t renderDrawLine2D = EQ_GetCRenderDrawLine2D();
+    if (renderDrawLine2D == NULL)
+    {
+        return false;
+    }
+
+    ((EQ_FUNCTION_TYPE_CRender__DrawLine2D)renderDrawLine2D)(thisPointer, vector1, vector2, colorARGB);
+
+    return true;
+}
+
+bool EQ_FUNCTION_CRender__DrawLine3D(void* thisPointer, const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB)
+{
+    uintptr_t renderDrawLine3D = EQ_GetCRenderDrawLine2D();
+    if (renderDrawLine3D == NULL)
+    {
+        return false;
+    }
+
+    ((EQ_FUNCTION_TYPE_CRender__DrawLine3D)renderDrawLine3D)(thisPointer, vector1, vector2, colorARGB);
+
+    return true;
 }
 
 //////////////////////////////////////////////////
@@ -144,7 +174,7 @@ float EQ_GetBearing(float y1, float x1, float y2, float x2)
     v9 = v5;
     v10 = x2;
 
-    v11 = std::atan2(v8, v9) * 180.0f * 0.3183099014828645f;
+    v11 = std::atan2f(v8, v9) * 180.0f * 0.3183099014828645f;
 
     if (y1 < v4)
     {
@@ -276,64 +306,98 @@ float EQ_GetDegrees(float radians)
     return (radians * eq::Constants::Heading::MaxHalf) / eq::Constants::PI;
 }
 
-void EQ_ApplyForwardMovement(float& y, float& x, float heading, float distance)
+void EQ_ApplyForwardMovementToLocation(eq::Location& location, eq::Orientation& orientation, float speed)
 {
-    heading = heading + 128.0f;
+    bool isLookingStraightUpOrDown = true;
 
-    heading = EQ_FixHeading(heading);
+    if (orientation.Pitch > eq::Constants::CCamera::Pitch::Min && orientation.Pitch < eq::Constants::CCamera::Pitch::Max)
+    {
+        isLookingStraightUpOrDown = false;
+    }
 
-    float headingRadians = EQ_GetRadians(heading);
+    orientation.Heading += 128.0f;
 
-    float addY = std::sinf(headingRadians);
-    float addX = std::cosf(headingRadians);
+    orientation.Heading = EQ_FixHeading(orientation.Heading);
 
-    y += addY * distance;
-    x -= addX * distance;
+    float headingRadians = EQ_GetRadians(orientation.Heading);
+
+    orientation.Pitch = orientation.Pitch + std::fabsf(eq::Constants::CCamera::Pitch::Default); // remove negative offset from pitch
+
+    float pitchRadians = EQ_GetRadians(orientation.Pitch);
+
+    float diffY = std::sinf(headingRadians);
+    float diffX = std::cosf(headingRadians);
+    float diffZ = std::sinf(pitchRadians);
+
+    if (isLookingStraightUpOrDown == false)
+    {
+        location.Y += diffY * speed;
+        location.X -= diffX * speed;
+    }
+
+    location.Z += diffZ * speed;
 }
 
-void EQ_ApplyBackwardMovement(float& y, float& x, float heading, float distance)
+void EQ_ApplyBackwardMovementToLocation(eq::Location& location, eq::Orientation& orientation, float speed)
 {
-    heading = heading - 128.0f;
+    bool isLookingStraightUpOrDown = true;
 
-    heading = EQ_FixHeading(heading);
+    if (orientation.Pitch > eq::Constants::CCamera::Pitch::Min && orientation.Pitch < eq::Constants::CCamera::Pitch::Max)
+    {
+        isLookingStraightUpOrDown = false;
+    }
 
-    float headingRadians = EQ_GetRadians(heading);
+    orientation.Heading -= 128.0f;
 
-    float addY = std::sinf(headingRadians);
-    float addX = std::cosf(headingRadians);
+    orientation.Heading = EQ_FixHeading(orientation.Heading);
 
-    y += addY * distance;
-    x -= addX * distance;
+    float headingRadians = EQ_GetRadians(orientation.Heading);
+
+    orientation.Pitch = orientation.Pitch + std::fabsf(eq::Constants::CCamera::Pitch::Default); // remove negative offset from pitch
+
+    float pitchRadians = EQ_GetRadians(orientation.Pitch);
+
+    float diffY = std::sinf(headingRadians);
+    float diffX = std::cosf(headingRadians);
+    float diffZ = std::sinf(pitchRadians);
+
+    if (isLookingStraightUpOrDown == false)
+    {
+        location.Y += diffY * speed;
+        location.X -= diffX * speed;
+    }
+
+    location.Z -= diffZ * speed;
 }
 
-void EQ_ApplyLeftwardMovement(float& y, float& x, float heading, float distance)
+void EQ_ApplyLeftwardMovementToLocation(eq::Location& location, eq::Orientation& orientation, float speed)
 {
-    //heading = heading + 0.0f;
+    //orientation.Heading += 0.0f;
 
-    heading = EQ_FixHeading(heading);
+    orientation.Heading = EQ_FixHeading(orientation.Heading);
 
-    float headingRadians = EQ_GetRadians(heading);
+    float headingRadians = EQ_GetRadians(orientation.Heading);
 
-    float addY = std::sinf(headingRadians);
-    float addX = std::cosf(headingRadians);
+    float diffY = std::sinf(headingRadians);
+    float diffX = std::cosf(headingRadians);
 
-    y -= addY * distance;
-    x += addX * distance;
+    location.Y -= diffY * speed;
+    location.X += diffX * speed;
 }
 
-void EQ_ApplyRightwardMovement(float& y, float& x, float heading, float distance)
+void EQ_ApplyRightwardMovementToLocation(eq::Location& location, eq::Orientation& orientation, float speed)
 {
-    heading = heading + 256.0f;
+    orientation.Heading += 256.0f;
 
-    heading = EQ_FixHeading(heading);
+    orientation.Heading = EQ_FixHeading(orientation.Heading);
 
-    float headingRadians = EQ_GetRadians(heading);
+    float headingRadians = EQ_GetRadians(orientation.Heading);
 
-    float addY = std::sinf(headingRadians);
-    float addX = std::cosf(headingRadians);
+    float diffY = std::sinf(headingRadians);
+    float diffX = std::cosf(headingRadians);
 
-    y -= addY * distance;
-    x += addX * distance;
+    location.Y -= diffY * speed;
+    location.X += diffX * speed;
 }
 
 uintptr_t EQ_GetCEverQuest()
@@ -355,6 +419,74 @@ uintptr_t EQ_GetCCamera()
     }
 
     return eq::Memory::Read<uintptr_t>(display + eq::Offsets::CDisplay::CCamera);
+}
+
+uintptr_t EQ_GetCCameraSetLocation()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return false;
+    }
+
+    uintptr_t cameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(camera + eq::Offsets::CCamera::VirtualFunctionTable_);
+    if (cameraVirtualFunctionTable == NULL)
+    {
+        return false;
+    }
+
+    return eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::SetLocation);
+}
+
+uintptr_t EQ_GetCCameraSetOrientation()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return false;
+    }
+
+    uintptr_t cameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(camera + eq::Offsets::CCamera::VirtualFunctionTable_);
+    if (cameraVirtualFunctionTable == NULL)
+    {
+        return false;
+    }
+
+    return eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::SetOrientation);
+}
+
+uintptr_t EQ_GetCCameraWorldSpaceToScreenSpace()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return false;
+    }
+
+    uintptr_t cameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(camera + eq::Offsets::CCamera::VirtualFunctionTable_);
+    if (cameraVirtualFunctionTable == NULL)
+    {
+        return false;
+    }
+
+    return eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::WorldSpaceToScreenSpace);
+}
+
+uintptr_t EQ_GetCCameraScreenSpaceToWorldSpace()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return false;
+    }
+
+    uintptr_t cameraVirtualFunctionTable = eq::Memory::Read<uintptr_t>(camera + eq::Offsets::CCamera::VirtualFunctionTable_);
+    if (cameraVirtualFunctionTable == NULL)
+    {
+        return false;
+    }
+
+    return eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::ScreenSpaceToWorldSpace);
 }
 
 uintptr_t EQ_GetChatManager()
@@ -386,6 +518,40 @@ uintptr_t EQ_GetCRender()
     }
 
     return eq::Memory::Read<uintptr_t>(graphicsEngine + eq::Offsets::SGraphicsEngine::CRender);
+}
+
+uintptr_t EQ_GetCRenderDrawLine2D()
+{
+    uintptr_t render = EQ_GetCRender();
+    if (render == NULL)
+    {
+        return NULL;
+    }
+
+    uintptr_t renderVirtualFunctionTable = eq::Memory::Read<uintptr_t>(render + eq::Offsets::CRender::VirtualFunctionTable_);
+    if (renderVirtualFunctionTable == NULL)
+    {
+        return NULL;
+    }
+
+    return eq::Memory::Read<uintptr_t>(renderVirtualFunctionTable + eq::Offsets::CRender::VirtualFunctionTable::DrawLine2D);
+}
+
+uintptr_t EQ_GetCRenderDrawLine3D()
+{
+    uintptr_t render = EQ_GetCRender();
+    if (render == NULL)
+    {
+        return NULL;
+    }
+
+    uintptr_t renderVirtualFunctionTable = eq::Memory::Read<uintptr_t>(render + eq::Offsets::CRender::VirtualFunctionTable_);
+    if (renderVirtualFunctionTable == NULL)
+    {
+        return NULL;
+    }
+
+    return eq::Memory::Read<uintptr_t>(renderVirtualFunctionTable + eq::Offsets::CRender::VirtualFunctionTable::DrawLine3D);
 }
 
 uintptr_t EQ_GetCParticleSystem()
@@ -1881,6 +2047,7 @@ void EQ_InterpretCommand(const std::string& text)
 
 void EQ_ExecuteCommand(uint32_t commandID)
 {
+    EQ_FUNCTION_ExecuteCommand(commandID, true, nullptr, nullptr);
     EQ_FUNCTION_ExecuteCommand(commandID, false, nullptr, nullptr);
 }
 
@@ -1921,9 +2088,52 @@ void EQ_DrawTextByColor(const std::string& text, uint32_t x, uint32_t y, uint32_
     EQ_FUNCTION_DrawText(text.c_str(), x, y, drawTextColor);
 }
 
+bool EQ_DrawLine2D(const eq::Vector3f& vector1, const eq::Vector3f& vector2, uint32_t colorARGB)
+{
+    uintptr_t render = EQ_GetCRender();
+    if (render == NULL)
+    {
+        return false;
+    }
+
+    return EQ_FUNCTION_CRender__DrawLine2D((uintptr_t*)render, vector1, vector2, colorARGB);
+}
+
+bool EQ_DrawLine3D(const eq::Location& location1, const eq::Location& location2, uint32_t colorARGB)
+{
+    uintptr_t render = EQ_GetCRender();
+    if (render == NULL)
+    {
+        return false;
+    }
+
+    eq::ScreenCoordinates location1ScreenCoordinates;
+    bool islocation1OnScreen = EQ_GetScreenCoordinatesByLocation((eq::Location&)location1, location1ScreenCoordinates);
+
+    eq::ScreenCoordinates location2ScreenCoordinates;
+    bool islocation2OnScreen = EQ_GetScreenCoordinatesByLocation((eq::Location&)location2, location2ScreenCoordinates);
+
+    if (islocation1OnScreen == false || islocation2OnScreen == false)
+    {
+        return false;
+    }
+
+    eq::Vector3f vector1;
+    vector1.X = (float)location1ScreenCoordinates.X;
+    vector1.Y = (float)location1ScreenCoordinates.Y;
+    vector1.Z = 1.0f;
+
+    eq::Vector3f vector2;
+    vector2.X = (float)location2ScreenCoordinates.X;
+    vector2.Y = (float)location2ScreenCoordinates.Y;
+    vector2.Z = 1.0f;
+
+    return EQ_FUNCTION_CRender__DrawLine2D((uintptr_t*)render, vector1, vector2, colorARGB);
+}
+
 void EQ_SetCameraViewToFirstPerson()
 {
-    EQ_ExecuteCommandEx(eq::Constants::ExecuteCommand::FIRST_PERSON_CAMERA, true);
+    EQ_ExecuteCommand(eq::Constants::ExecuteCommand::FIRST_PERSON_CAMERA);
 }
 
 eq::Location EQ_GetCameraLocation()
@@ -1966,17 +2176,6 @@ eq::Orientation EQ_GetCameraOrientation()
     return orientation;
 }
 
-float EQ_GetCameraPitch()
-{
-    uintptr_t camera = EQ_GetCCamera();
-    if (camera == NULL)
-    {
-        return eq::Constants::FloatInfinity;
-    }
-
-    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Pitch);
-}
-
 float EQ_GetCameraFieldOfView()
 {
     uintptr_t camera = EQ_GetCCamera();
@@ -1986,6 +2185,17 @@ float EQ_GetCameraFieldOfView()
     }
 
     return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::FieldOfView);
+}
+
+float EQ_GetCameraAspectRatio()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::AspectRatio);
 }
 
 float EQ_GetCameraDrawDistance()
@@ -1999,6 +2209,28 @@ float EQ_GetCameraDrawDistance()
     return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::DrawDistance);
 }
 
+float EQ_GetCameraActorClipPlane()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::ActorClipPlane);
+}
+
+float EQ_GetCameraShadowClipPlane()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::ShadowClipPlane);
+}
+
 float EQ_GetCameraFarClipPlane()
 {
     uintptr_t camera = EQ_GetCCamera();
@@ -2010,7 +2242,62 @@ float EQ_GetCameraFarClipPlane()
     return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::FarClipPlane);
 }
 
-void EQ_SetCameraLocation(eq::Location& location)
+float EQ_GetCameraScreenWidthHalf()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::ScreenWidthHalf);
+}
+
+float EQ_GetCameraScreenHeightHalf()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::ScreenHeightHalf);
+}
+
+float EQ_GetCameraHeading()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Heading);
+}
+
+float EQ_GetCameraPitch()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Pitch);
+}
+
+float EQ_GetCameraRotation()
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return eq::Constants::FloatInfinity;
+    }
+
+    return eq::Memory::Read<float>(camera + eq::Offsets::CCamera::Rotation);
+}
+
+void EQ_SetCameraLocation(const eq::Location& location)
 {
     uintptr_t camera = EQ_GetCCamera();
     if (camera == NULL)
@@ -2023,7 +2310,7 @@ void EQ_SetCameraLocation(eq::Location& location)
     eq::Memory::Write<float>(camera + eq::Offsets::CCamera::Z, location.Z);
 }
 
-void EQ_SetCameraPitch(float pitch)
+void EQ_SetCameraOrientation(const eq::Orientation& orientation)
 {
     uintptr_t camera = EQ_GetCCamera();
     if (camera == NULL)
@@ -2031,7 +2318,9 @@ void EQ_SetCameraPitch(float pitch)
         return;
     }
 
-    eq::Memory::WriteProtected<float>(camera + eq::Offsets::CCamera::Pitch, pitch);
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::Heading, orientation.Heading);
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::Pitch, orientation.Pitch);
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::Rotation, orientation.Rotation);
 }
 
 void EQ_SetCameraFieldOfView(float fieldOfView)
@@ -2056,6 +2345,28 @@ void EQ_SetCameraDrawDistance(float distance)
     eq::Memory::Write<float>(camera + eq::Offsets::CCamera::DrawDistance, distance);
 }
 
+void EQ_SetCameraActorClipPlane(float distance)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::ActorClipPlane, distance);
+}
+
+void EQ_SetCameraShadowClipPlane(float distance)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::Write<float>(camera + eq::Offsets::CCamera::ShadowClipPlane, distance);
+}
+
 void EQ_SetCameraFarClipPlane(float distance)
 {
     uintptr_t camera = EQ_GetCCamera();
@@ -2067,9 +2378,42 @@ void EQ_SetCameraFarClipPlane(float distance)
     eq::Memory::Write<float>(camera + eq::Offsets::CCamera::FarClipPlane, distance);
 }
 
+void EQ_SetCameraHeading(float heading)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::WriteProtected<float>(camera + eq::Offsets::CCamera::Heading, heading);
+}
+
+void EQ_SetCameraPitch(float pitch)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::WriteProtected<float>(camera + eq::Offsets::CCamera::Pitch, pitch);
+}
+
+void EQ_SetCameraRotation(float rotation)
+{
+    uintptr_t camera = EQ_GetCCamera();
+    if (camera == NULL)
+    {
+        return;
+    }
+
+    eq::Memory::WriteProtected<float>(camera + eq::Offsets::CCamera::Rotation, rotation);
+}
+
 bool EQ_GetScreenCoordinatesByLocation(eq::Location& location, eq::ScreenCoordinates& screenCoordinates)
 {
-   uintptr_t camera = EQ_GetCCamera();
+    uintptr_t camera = EQ_GetCCamera();
     if (camera == NULL)
     {
         return false;
@@ -2080,6 +2424,14 @@ bool EQ_GetScreenCoordinatesByLocation(eq::Location& location, eq::ScreenCoordin
     bool isLocationOnScreen = EQ_FUNCTION_CCamera__WorldSpaceToScreenSpace((uintptr_t*)camera, location, screenX, screenY);
     if (isLocationOnScreen == true)
     {
+        float screenWidth = EQ_GetCameraScreenWidthHalf() * 2.0f;
+        float screenHeight = EQ_GetCameraScreenHeightHalf() * 2.0f;
+
+        if (screenX < 0.0f || screenX > screenWidth || screenY < 0.0f || screenY > screenHeight)
+        {
+            return false;
+        }
+
         screenCoordinates.X = (uint32_t)screenX;
         screenCoordinates.Y = (uint32_t)screenY;
     }
@@ -2158,6 +2510,42 @@ void EQ_LookDown()
 void EQ_ClearTarget()
 {
     EQ_SetTargetSpawn(NULL);
+}
+
+bool EQ_CastRay(const eq::Location& location1, const eq::Location& location2)
+{
+    int result = EQ_FUNCTION_CastRay2(location1, eq::Constants::Spawn::Race::Unknown, location2.Y, location2.X, location2.Z);
+
+    return (result != 0);
+}
+
+bool EQ_CastRayToTarget()
+{
+    uintptr_t playerSpawn = EQ_GetPlayerSpawn();
+    uintptr_t targetSpawn = EQ_GetTargetSpawn();
+
+    if (playerSpawn == NULL || targetSpawn == NULL)
+    {
+        return false;
+    }
+
+    bool result = EQ_CanSpawnCastRayToSpawn(playerSpawn, targetSpawn);
+
+    return (result != 0);
+}
+
+bool EQ_CanSpawnCastRayToLocation(uintptr_t spawn, const eq::Location& location)
+{
+    int result = EQ_FUNCTION_CastRay(spawn, location.Y, location.X, location.Z);
+
+    return (result != 0);
+}
+
+bool EQ_CanSpawnCastRayToSpawn(uintptr_t spawn1, uintptr_t spawn2)
+{
+    eq::Location spawn2Location = EQ_GetSpawnLocation(spawn2);
+
+    return EQ_CanSpawnCastRayToLocation(spawn1, spawn2Location);
 }
 
 std::string EQ_StringMap_GetValueByKey(const std::unordered_map<uint32_t, std::string>& stringMap, uint32_t key)

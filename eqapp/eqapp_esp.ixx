@@ -153,6 +153,16 @@ void ESP::Execute()
         EQ_DrawText("+", playerSpawnScreenCoordinates.X, playerSpawnScreenCoordinates.Y);
     }
 
+/*
+    uintptr_t targetSpawn = EQ_GetTargetSpawn();
+    if (targetSpawn != NULL)
+    {
+        eq::Location targetSpawnLocation = EQ_GetSpawnLocation(targetSpawn);
+
+        EQ_DrawLine3D(playerSpawnLocation, targetSpawnLocation, eq::ColorARGB::Gray);
+    }
+*/
+
     eq::SpawnList spawnList = EQ_GetSpawnList();
 
     for (auto& spawn : spawnList)
@@ -178,6 +188,30 @@ void ESP::Execute()
         if (spawnNameNumbered.empty() == true)
         {
             continue;
+        }
+
+        if (spawnNameNumbered.contains("_familiar") == true)
+        {
+            continue;
+        }
+
+        if (spawnNameNumbered.contains("_Mount") == true)
+        {
+            continue;
+        }
+
+        std::string spawnLastName = EQ_GetSpawnLastName(spawn);
+        if (spawnNameNumbered.empty() == false)
+        {
+            if (spawnLastName.ends_with(" Pet") == true)
+            {
+                continue;
+            }
+
+            if (spawnLastName.ends_with(" Mercenary") == true)
+            {
+                continue;
+            }
         }
 
         eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);

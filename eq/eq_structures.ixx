@@ -11,18 +11,23 @@ namespace eq
 {
     struct Vector2f
     {
-        float Y;
         float X;
+        float Y;
     };
 
     struct Vector3f
+    {
+        float X;
+        float Y;
+        float Z;
+    };
+
+    struct Location
     {
         float Y;
         float X;
         float Z;
     };
-
-    using Location = Vector3f;
 
     struct Orientation
     {

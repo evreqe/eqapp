@@ -59,8 +59,11 @@ private:
     bool m_isEnabled = true;
     bool m_isLoaded = false;
 
-    eqapp::Timer m_timer;
-    eqapp::Timer::TimeInterval m_timerInterval = 60;
+    bool m_shouldRenderSceneOnce = false;
+    uint32_t m_numRenderScene = 0;
+
+    bool m_shouldUpdateDisplayOnce = false;
+    uint32_t m_numUpdateDisplay = 0;
 
 };
 
@@ -122,13 +125,6 @@ void NoDraw::Disable()
 
 bool NoDraw::HandleCRenderRenderScene()
 {
-    if (m_timer.HasTimeElapsedInSeconds(m_timerInterval) == true)
-    {
-        m_timer.Restart();
-
-        return false;
-    }
-
     if (EQ_IsWindowInBackground() == true)
     {
         return true;
@@ -139,13 +135,6 @@ bool NoDraw::HandleCRenderRenderScene()
 
 bool NoDraw::HandleCRenderUpdateDisplay()
 {
-    if (m_timer.HasTimeElapsedInSeconds(m_timerInterval) == true)
-    {
-        m_timer.Restart();
-
-        return false;
-    }
-
     if (EQ_IsWindowInBackground() == true)
     {
         return true;

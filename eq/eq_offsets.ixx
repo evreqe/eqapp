@@ -50,15 +50,17 @@ namespace eq
         {
             namespace VirtualFunctionTable
             {
-                const uint32_t SetLocation                      = 0x80;    // uintptr_t pointer    // Y, X, Z
-                const uint32_t SetOrientation                   = 0x88;    // uintptr_t pointer    // Heading, Pitch, Rotation
+                const uint32_t SetLocation                      = 0x70;    // uintptr_t pointer
+                const uint32_t SetOrientation                   = 0x78;    // uintptr_t pointer
+                const uint32_t UpdateLocation                   = 0x80;    // uintptr_t pointer
+                const uint32_t UpdateOrientation                = 0x88;    // uintptr_t pointer
                 const uint32_t ScreenSpaceToWorldSpace          = 0xE0;    // uintptr_t pointer
                 const uint32_t WorldSpaceToScreenSpace          = 0xE8;    // uintptr_t pointer
                 const uint32_t ScreenSpaceToWorldSpaceHelper    = 0xF0;    // uintptr_t pointer
                 const uint32_t WorldSpaceToScreenSpaceHelper    = 0xF8;    // uintptr_t pointer
             }
 
-            const uint32_t VirtualFunctionTable_   = 0x00;    // uint32_t pointer
+            const uint32_t VirtualFunctionTable_   = 0x00;    // uintptr_t pointer
             const uint32_t FieldOfView             = 0x08;    // float
             const uint32_t AspectRatio             = 0x0C;    // float
             const uint32_t Unknown                 = 0x14;    // float    // 0.0 to 1.0
