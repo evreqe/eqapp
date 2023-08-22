@@ -489,6 +489,11 @@ uintptr_t EQ_GetCCameraScreenSpaceToWorldSpace()
     return eq::Memory::Read<uintptr_t>(cameraVirtualFunctionTable + eq::Offsets::CCamera::VirtualFunctionTable::ScreenSpaceToWorldSpace);
 }
 
+uintptr_t EQ_GetCXWndManager()
+{
+    return eq::Memory::Read<uintptr_t>(eq::EQGame::Addresses::Pointers::CXWndManager);
+}
+
 uintptr_t EQ_GetChatManager()
 {
     return EQ_FUNCTION_GetChatManager();
@@ -639,6 +644,37 @@ POINT EQ_GetMousePosition()
     ScreenToClient(window, &point);
 
     return point;
+}
+
+std::string EQ_GetZoneShortName()
+{
+    char zoneShortName[eq::Offsets::EQZoneInfo::SizeOf::ShortName];
+    std::memcpy(zoneShortName, (void*)(eq::EQGame::Addresses::EQZoneInfo +  eq::Offsets::EQZoneInfo::ShortName), sizeof(zoneShortName));
+
+    return zoneShortName;
+}
+
+std::string EQ_GetZoneLongName()
+{
+    char zoneLongName[eq::Offsets::EQZoneInfo::SizeOf::LongName];
+    std::memcpy(zoneLongName, (void*)(eq::EQGame::Addresses::EQZoneInfo + eq::Offsets::EQZoneInfo::LongName), sizeof(zoneLongName));
+
+    return zoneLongName;
+}
+
+int EQ_GetZoneType()
+{
+    return eq::Memory::Read<int>(eq::EQGame::Addresses::EQZoneInfo + eq::Offsets::EQZoneInfo::Type);
+}
+
+int EQ_GetZoneID()
+{
+    return eq::Memory::Read<int>(eq::EQGame::Addresses::EQZoneInfo + eq::Offsets::EQZoneInfo::ID);
+}
+
+float EQ_GetZoneGravity()
+{
+    return eq::Memory::Read<float>(eq::EQGame::Addresses::EQZoneInfo + eq::Offsets::EQZoneInfo::Gravity);
 }
 
 eq::SpawnList EQ_GetSpawnList()

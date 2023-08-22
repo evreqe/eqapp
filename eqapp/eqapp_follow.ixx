@@ -295,6 +295,7 @@ bool Follow::HandleInterpetCommand(const std::string& commandText)
         {
             PrintStatus();
         }
+
         return true;
     }
 

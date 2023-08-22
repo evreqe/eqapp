@@ -29,7 +29,7 @@ namespace eq
 
             uintptr_t WindowHandle = FixAddress(__HWnd_x);
 
-            uintptr_t World = FixAddress(__gWorld_x);
+            uintptr_t EQZoneInfo = FixAddress(instEQZoneInfo_x);
 
             namespace Pointers
             {
@@ -37,6 +37,7 @@ namespace eq
                 uintptr_t PlayerSpawn = FixAddress(pinstLocalPlayer_x);
                 uintptr_t TargetSpawn = FixAddress(pinstTarget_x);
 
+                uintptr_t CXWndManager = FixAddress(pinstCXWndManager_x);
                 uintptr_t SpawnManager = FixAddress(pinstSpawnManager_x);
                 uintptr_t SoundManager = FixAddress(pinstEQSoundManager_x);
 
@@ -52,25 +53,21 @@ namespace eq
                 // non-member functions
                 uintptr_t DrawNetStatus = FixAddress(DrawNetStatus_x); // draw the F11 text and bar in top left of screen showing ping
                 uintptr_t ExecuteCommand = FixAddress(__ExecuteCmd_x); // execute functions that keys and slash commands are bound to
-                uintptr_t GetTime = FixAddress(__EQGetTime_x); // uses GetTickCount() to calculate time that has passed
                 uintptr_t GetBearing = FixAddress(__get_bearing_x); // calculates number of degrees to face towards another spawn
                 uintptr_t GetMeleeRange = FixAddress(__get_melee_range_x);
                 uintptr_t GetChatManager = FixAddress(ChatManagerClient__Instance_x);
-                uintptr_t DrawText = FixAddress(CDisplay__WriteTextHD2_x);
+                uintptr_t DrawText = FixAddress(CDisplay__WriteTextHD2_x); // static function
                 uintptr_t CastRay = FixAddress(__CastRay_x);
                 uintptr_t CastRay2 = FixAddress(__CastRay2_x);
+
+                // CXWndManager
+                uintptr_t CXWndManager__DrawCursor = FixAddress(CXWndManager__DrawCursor_x);
+                uintptr_t CXWndManager__DrawWindows = FixAddress(CXWndManager__DrawWindows_x);
 
                 // ChatManager
                 uintptr_t ChatManager__PrintText = FixAddress(CEverQuest__dsp_chat_x);
 
-                // CharacterZoneClient
-                uintptr_t CharacterZoneClient__GetCurrentHitPoints = FixAddress(CharacterZoneClient__Cur_HP_x);
-                uintptr_t CharacterZoneClient__GetCurrentManaPoints = FixAddress(CharacterZoneClient__Cur_Mana_x);
-                uintptr_t CharacterZoneClient__GetMaxHitPoints = FixAddress(CharacterZoneClient__Max_HP_x);
-                uintptr_t CharacterZoneClient__GetMaxManaPoints = FixAddress(CharacterZoneClient__Max_Mana_x);
-
                 // Spawn
-                uintptr_t Spawn__GetCharacterZoneClient = FixAddress(PlayerClient__GetPcClient_x);
                 uintptr_t Spawn__GetLevel = FixAddress(PlayerZoneClient__GetLevel_x);
 
                 // SpawnManager

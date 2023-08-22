@@ -214,10 +214,12 @@ void FreeCamera::Execute()
 
 bool FreeCamera::HandleExecuteCommand(uint32_t commandID, bool keyDown)
 {
-    //if (keyDown == false)
-    //{
-        //return false;
-    //}
+/*
+    if (keyDown == false)
+    {
+        return false;
+    }
+*/
 
     if
     (
@@ -249,7 +251,7 @@ bool FreeCamera::HandleExecuteCommand(uint32_t commandID, bool keyDown)
 
 bool FreeCamera::HandleInterpetCommand(const std::string& commandText)
 {
-    if (commandText == "//FreeCameraToggle")
+    if (commandText == "//FreeCameraToggle" || commandText == "//FreeCamera")
     {
         Toggle();
         return true;

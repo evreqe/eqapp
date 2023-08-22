@@ -151,7 +151,7 @@ void WindowTitle::Execute()
 
 bool WindowTitle::HandleInterpetCommand(const std::string& commandText)
 {
-    if (commandText == "//WindowTitleToggle")
+    if (commandText == "//WindowTitleToggle" || commandText == "//WindowTitle")
     {
         Toggle();
         return true;

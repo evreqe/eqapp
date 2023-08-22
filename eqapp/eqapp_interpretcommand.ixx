@@ -192,13 +192,18 @@ void InterpretCommand::Execute()
 
 void InterpretCommand::ConvertCommandText(std::string& commandText)
 {
+    if (commandText.contains("{") == false && commandText.contains("}") == false)
+    {
+        return;
+    }
+
     if (commandText.contains("{PlayerID}") == true)
     {
         uint32_t playerSpawnID = EQ_GetPlayerSpawnID();
-        if (playerSpawnID != 0xFFFFFFFF)
+        if (playerSpawnID != eq::Constants::Spawn::ID::Null)
         {
             std::string playerSpawnIDAsString = std::to_string(playerSpawnID);
-            if (playerSpawnIDAsString.size() != 0)
+            if (playerSpawnIDAsString.empty() == false)
             {
                 util::String::ReplaceAll(commandText, "{PlayerID}", playerSpawnIDAsString);
             }
@@ -208,7 +213,7 @@ void InterpretCommand::ConvertCommandText(std::string& commandText)
     if (commandText.contains("{PlayerName}") == true)
     {
         std::string playerSpawnName = EQ_GetPlayerSpawnName();
-        if (playerSpawnName.size() != 0)
+        if (playerSpawnName.empty() == false)
         {
             util::String::ReplaceAll(commandText, "{PlayerName}", playerSpawnName);
         }
@@ -217,10 +222,10 @@ void InterpretCommand::ConvertCommandText(std::string& commandText)
     if (commandText.contains("{TargetID}") == true)
     {
         uint32_t targetSpawnID = EQ_GetTargetSpawnID();
-        if (targetSpawnID != 0xFFFFFFFF)
+        if (targetSpawnID != eq::Constants::Spawn::ID::Null)
         {
             std::string targetSpawnIDAsString = std::to_string(targetSpawnID);
-            if (targetSpawnIDAsString.size() != 0)
+            if (targetSpawnIDAsString.empty() == false)
             {
                 util::String::ReplaceAll(commandText, "{TargetID}", targetSpawnIDAsString);
             }
@@ -230,7 +235,7 @@ void InterpretCommand::ConvertCommandText(std::string& commandText)
     if (commandText.contains("{TargetName}") == true)
     {
         std::string targetSpawnName = EQ_GetTargetSpawnName();
-        if (targetSpawnName.size() != 0)
+        if (targetSpawnName.empty() == false)
         {
             util::String::ReplaceAll(commandText, "{TargetName}", targetSpawnName);
         }
@@ -271,6 +276,70 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
             std::print(std::cout, "arg1: {}\n", arg1);
             std::print(std::cout, "arg2: {}\n", arg2);
             std::print(std::cout, "remainder: {}\n", remainder);
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//Echo ") == true)
+    {
+        std::string afterText = util::String::GetAfter(commandText, " ");
+        if (afterText.empty() == false)
+        {
+            std::print(std::cout, "Echo: {}\n", afterText);
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//Target ") == true)
+    {
+        std::string arg0;
+        auto result = scn::scan(commandText, "{}", arg0);
+        if (result)
+        {
+            std::string remainder = result.range_as_string();
+            util::String::TrimSpacesOnLeftAndRight(remainder);
+            if (remainder.size() != 0)
+            {
+                uintptr_t spawn = EQ_GetSpawnByNameOrNameNumbered(remainder);
+                if (spawn != NULL)
+                {
+                    EQ_SetTargetSpawn(spawn);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//TargetID ") == true)
+    {
+        std::string arg0;
+        uint32_t arg1;
+        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
+        if (result)
+        {
+            EQ_SetTargetSpawnByID(arg1);
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//Multiline ") == true)
+    {
+        if (commandText.contains(";") == true)
+        {
+            std::string afterText = util::String::GetAfter(commandText, " ");
+            if (afterText.empty() == false)
+            {
+                std::vector<std::string> commandTextList_ = util::String::Split(afterText, ';');
+
+                for (auto& commandText_ : commandTextList_)
+                {
+                    AddCommandTextToList(commandText_);
+                }
+            }
         }
 
         return true;
@@ -341,6 +410,219 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
             bool result = EQ_CastRay(playerSpawnLocation, targetSpawnLocation);
             std::print(std::cout, "CastRay(): {}\n", result);
         }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//PlaySound ") == true)
+    {
+        std::string afterText = util::String::GetAfter(commandText, " ");
+        if (afterText.empty() == false)
+        {
+            if (afterText.ends_with(".mp3") == false)
+            {
+                if (afterText.ends_with(".wav") == false)
+                {
+                    afterText.append(".wav");
+                }
+
+                EQ_PlaySound(afterText);
+            }
+            else
+            {
+                std::print(std::cout, "PlaySound: MP3 files are not supported.\n");
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//StopSound")
+    {
+        EQ_StopSound();
+
+        return true;
+    }
+
+    if (commandText == "//AcceptInvite")
+    {
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CLEAR_TARGET);
+        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::INVITE_FOLLOW);
+
+        return true;
+    }
+
+    if (commandText == "//TurnLeft")
+    {
+        EQ_TurnLeft();
+
+        return true;
+    }
+
+    if (commandText == "//TurnRight")
+    {
+        EQ_TurnRight();
+
+        return true;
+    }
+
+    if (commandText == "//TurnAround")
+    {
+        EQ_TurnAround();
+
+        return true;
+    }
+
+    if (commandText == "//FaceNorth")
+    {
+
+        EQ_SetPlayerSpawnHeadingNorth();
+
+        return true;
+    }
+
+    if (commandText == "//FaceNorthWest")
+    {
+
+        EQ_SetPlayerSpawnHeadingNorthWest();
+
+        return true;
+    }
+
+    if (commandText == "//FaceWest")
+    {
+
+        EQ_SetPlayerSpawnHeadingWest();
+
+        return true;
+    }
+
+    if (commandText == "//FaceSouthWest")
+    {
+
+        EQ_SetPlayerSpawnHeadingSouthWest();
+
+        return true;
+    }
+
+    if (commandText == "//FaceSouth")
+    {
+
+        EQ_SetPlayerSpawnHeadingSouth();
+
+        return true;
+    }
+
+    if (commandText == "//FaceSouthEast")
+    {
+
+        EQ_SetPlayerSpawnHeadingSouthEast();
+
+        return true;
+    }
+
+    if (commandText == "//FaceEast")
+    {
+
+        EQ_SetPlayerSpawnHeadingEast();
+
+        return true;
+    }
+
+    if (commandText == "//FaceNorthEast")
+    {
+
+        EQ_SetPlayerSpawnHeadingNorthEast();
+
+        return true;
+    }
+
+    if (commandText.starts_with("//Face ") == true)
+    {
+        std::string afterText = util::String::GetAfter(commandText, " ");
+        if (afterText.empty() == false)
+        {
+            uintptr_t spawn = EQ_GetSpawnByNameOrNameNumbered(afterText);
+            if (spawn != NULL)
+            {
+                EQ_TurnPlayerTowardsSpawn(spawn);
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//FaceTarget")
+    {
+        EQ_TurnPlayerTowardsTarget();
+
+        return true;
+    }
+
+    if (commandText == "//LookAtTarget")
+    {
+        EQ_LookPlayerAtTarget();
+
+        return true;
+    }
+
+    if (commandText == "//StopSong" || commandText == "//Melody")
+    {
+        EQ_InterpretCommand("/stopsong");
+        EQ_InterpretCommand("/melody");
+
+        return true;
+    }
+
+    if (commandText.starts_with("//Melody ") == true)
+    {
+        std::string afterText = util::String::GetAfter(commandText, " ");
+        if (afterText.empty() == false)
+        {
+            std::vector<std::string> tokenList = util::String::Split(afterText, ',');
+            if (tokenList.empty() == false)
+            {
+                EQ_InterpretCommand("/stopsong");
+                EQ_InterpretCommand("/melody");
+
+                std::stringstream ss;
+                ss << "/melody";
+
+                for (auto& token : tokenList)
+                {
+                    if (util::String::IsDigits(token) == true)
+                    {
+                        ss << " " << token;
+                    }
+                }
+
+                EQ_InterpretCommand(ss.str());
+            }
+        }
+
+        return true;
+    }
+
+    if (commandText == "//ZoneInfo")
+    {
+        std::string zoneLongName = EQ_GetZoneLongName();
+        std::string zoneShortName = EQ_GetZoneShortName();
+        int zoneID = EQ_GetZoneID();
+
+        std::string zoneInfoText = std::format("ZoneInfo: {} ({}) [ID: {}]", zoneLongName, zoneShortName, zoneID);
+
+        std::print(std::cout, "{}\n", zoneInfoText);
+
+        return true;
+    }
+
+    if (commandText == "//SetForegroundWindow")
+    {
+        HWND window = EQ_GetWindow();
+
+        ShowWindow(window, SW_SHOW);
+        SetForegroundWindow(window);
+        SetFocus(window);
 
         return true;
     }
@@ -1318,12 +1600,6 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
     if (commandText == "//Cast14")
     {
         EQ_ExecuteCommand(eq::Constants::ExecuteCommand::CAST14);
-        return true;
-    }
-
-    if (commandText == "//Who")
-    {
-        EQ_ExecuteCommand(eq::Constants::ExecuteCommand::WHO);
         return true;
     }
 

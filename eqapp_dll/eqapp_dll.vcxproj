@@ -162,6 +162,7 @@
     <ClCompile Include="..\eqapp\eqapp_detours.ixx" />
     <ClCompile Include="..\eqapp\eqapp_esp.ixx" />
     <ClCompile Include="..\eqapp\eqapp_follow.ixx" />
+    <ClCompile Include="..\eqapp\eqapp_freecamera.ixx" />
     <ClCompile Include="..\eqapp\eqapp_interpretcommand.ixx" />
     <ClCompile Include="..\eqapp\eqapp_log.ixx" />
     <ClCompile Include="..\eqapp\eqapp_macro.ixx" />

@@ -33,6 +33,7 @@ export
 
 EQ_DEFINE_DETOUR(DrawNetStatus)
 EQ_DEFINE_DETOUR(ExecuteCommand)
+EQ_DEFINE_DETOUR(CXWndManager__DrawWindows)
 EQ_DEFINE_DETOUR(ChatManager__PrintText)
 EQ_DEFINE_DETOUR(SoundManager__PlaySound)
 EQ_DEFINE_DETOUR(CEverQuest__InterpretCommand)
@@ -55,6 +56,7 @@ void EQAPP_Detours_Loop();
 
 void EQAPP_DETOURED_FUNCTION_DrawNetStatus(uint32_t x, uint32_t y, uintptr_t worldPointer);
 bool EQAPP_DETOURED_FUNCTION_ExecuteCommand(uint32_t commandID, bool keyDown, void* data, void* keyCombo);
+int EQAPP_DETOURED_FUNCTION_CXWndManager__DrawWindows(void* thisPointer);
 void EQAPP_DETOURED_FUNCTION_ChatManager__PrintText(void* thisPointer, const char* text, uint32_t chatTextColor, bool isLogOK, bool doPercentConvert, char* nullString);
 void EQAPP_DETOURED_FUNCTION_SoundManager__PlaySound(void* thisPointer, int soundID, void* soundControl);
 void EQAPP_DETOURED_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uintptr_t* playerSpawn, const char* text);
@@ -104,6 +106,9 @@ void EQAPP_Detours_Load()
     EQ_EQGAME_INIT_DETOUR(ExecuteCommand)
     EQ_ADD_DETOUR(ExecuteCommand)
 
+    EQ_EQGAME_INIT_DETOUR(CXWndManager__DrawWindows)
+    EQ_ADD_DETOUR(CXWndManager__DrawWindows)
+
     EQ_EQGAME_INIT_DETOUR(ChatManager__PrintText)
     EQ_ADD_DETOUR(ChatManager__PrintText)
 
@@ -140,6 +145,7 @@ void EQAPP_Detours_Unload()
 
     EQ_REMOVE_DETOUR(DrawNetStatus)
     EQ_REMOVE_DETOUR(ExecuteCommand)
+    EQ_REMOVE_DETOUR(CXWndManager__DrawWindows)
     EQ_REMOVE_DETOUR(ChatManager__PrintText)
     EQ_REMOVE_DETOUR(SoundManager__PlaySound)
     EQ_REMOVE_DETOUR(CEverQuest__InterpretCommand)
@@ -232,15 +238,6 @@ void EQAPP_Detours_Loop()
         }
     }
 
-    // ESP
-    if (g_ESP.IsLoaded() == true)
-    {
-        if (g_ESP.IsEnabled() == true)
-        {
-            g_ESP.Execute();
-        }
-    }
-
     // Macro Manager
     if (g_MacroManager.IsLoaded() == true)
     {
@@ -307,10 +304,10 @@ void EQAPP_DETOURED_FUNCTION_DrawNetStatus(uint32_t x, uint32_t y, uintptr_t wor
 
 bool EQAPP_DETOURED_FUNCTION_ExecuteCommand(uint32_t commandID, bool keyDown, void* data, void* keyCombo)
 {
-    g_Log.write("----------------------------\n");
-    g_Log.write("ExecuteCommand() commandID: {}\n", commandID);
-    g_Log.write("ExecuteCommand() keyDown: {}\n", keyDown);
-    g_Log.write("----------------------------\n");
+    //g_Log.write("----------------------------\n");
+    //g_Log.write("ExecuteCommand() commandID: {}\n", commandID);
+    //g_Log.write("ExecuteCommand() keyDown: {}\n", keyDown);
+    //g_Log.write("----------------------------\n");
 
     // Free Camera
     if (g_FreeCamera.IsLoaded() == true)
@@ -338,6 +335,28 @@ bool EQAPP_DETOURED_FUNCTION_ExecuteCommand(uint32_t commandID, bool keyDown, vo
     }
 
     return EQAPP_REAL_FUNCTION_ExecuteCommand(commandID, keyDown, data, keyCombo);
+}
+
+int EQAPP_DETOURED_FUNCTION_CXWndManager__DrawWindows(void* thisPointer)
+{
+    if (thisPointer == NULL)
+    {
+        return 1;
+    }
+
+    if (EQ_IsWindowInBackground() == false)
+    {
+        // ESP
+        if (g_ESP.IsLoaded() == true)
+        {
+            if (g_ESP.IsEnabled() == true)
+            {
+                g_ESP.Execute();
+            }
+        }
+    }
+
+    return EQAPP_REAL_FUNCTION_CXWndManager__DrawWindows(thisPointer);
 }
 
 void EQAPP_DETOURED_FUNCTION_ChatManager__PrintText(void* thisPointer, const char* text, uint32_t chatTextColor, bool isLogOK, bool doPercentConvert, char* nullString)
@@ -456,10 +475,10 @@ void EQAPP_DETOURED_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uin
         return;
     }
 
+    g_InterpretCommand.ConvertCommandText(commandText);
+
     if (commandText.starts_with("//") == true)
     {
-        g_InterpretCommand.ConvertCommandText(commandText);
-
         // Interpret Command
         if (g_InterpretCommand.IsLoaded() == true)
         {

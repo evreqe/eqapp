@@ -58,7 +58,7 @@ private:
     bool m_isEnabled = true;
     bool m_isLoaded = false;
 
-    float m_distance = 512.0f;
+    float m_distanceMax = 512.0f;
 
 };
 
@@ -179,7 +179,16 @@ void ESP::Execute()
         }
 
         float spawnDistance = EQ_GetSpawnDistance3D(spawn);
-        if (spawnDistance > m_distance)
+        if (spawnDistance > m_distanceMax)
+        {
+            continue;
+        }
+
+        eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+
+        eq::ScreenCoordinates spawnScreenCoordinates;
+        bool spawnIsOnScreen = EQ_GetScreenCoordinatesByLocation(spawnLocation, spawnScreenCoordinates);
+        if (spawnIsOnScreen == false)
         {
             continue;
         }
@@ -195,13 +204,18 @@ void ESP::Execute()
             continue;
         }
 
+        if (spawnNameNumbered.contains("_warder") == true)
+        {
+            continue;
+        }
+
         if (spawnNameNumbered.contains("_Mount") == true)
         {
             continue;
         }
 
         std::string spawnLastName = EQ_GetSpawnLastName(spawn);
-        if (spawnNameNumbered.empty() == false)
+        if (spawnLastName.empty() == false)
         {
             if (spawnLastName.ends_with(" Pet") == true)
             {
@@ -214,22 +228,31 @@ void ESP::Execute()
             }
         }
 
-        eq::Location spawnLocation = EQ_GetSpawnLocation(spawn);
+        int spawnLevel = EQ_GetSpawnLevel(spawn);
 
-        eq::ScreenCoordinates spawnScreenCoordinates;
-        bool spawnIsOnScreen = EQ_GetScreenCoordinatesByLocation(spawnLocation, spawnScreenCoordinates);
-        if (spawnIsOnScreen == true)
+        std::string spawnText = std::format("[{}] {}", spawnLevel, spawnNameNumbered);
+
+        if (spawnLastName.empty() == false)
         {
-            std::string spawnText = std::format("+ {}", spawnNameNumbered);
+            std::string lastNameText = std::format("\n({})", spawnLastName);
 
-            EQ_DrawText(spawnText, spawnScreenCoordinates.X, spawnScreenCoordinates.Y);
+            spawnText.append(lastNameText);
         }
+
+        if (spawnDistance > 100.0f)
+        {
+            std::string distanceText = std::format("\n{}m", (int)spawnDistance);
+
+            spawnText.append(distanceText);
+        }
+
+        EQ_DrawText(spawnText, spawnScreenCoordinates.X, spawnScreenCoordinates.Y);
     }
 }
 
 bool ESP::HandleInterpetCommand(const std::string& commandText)
 {
-    if (commandText == "//ESPToggle")
+    if (commandText == "//ESPToggle" || commandText == "//ESP")
     {
         Toggle();
         return true;

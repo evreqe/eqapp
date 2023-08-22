@@ -304,7 +304,7 @@ bool MacroManager::HandleInterpetCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//MacroManagerStatus")
+    if (commandText == "//MacroManagerStatus" || commandText == "//Macros")
     {
         PrintStatus();
         return true;

@@ -149,5 +149,8 @@
     <ClCompile Include="..\eqapp\eqapp_esp.ixx">
       <Filter>Source Files\eqapp</Filter>
     </ClCompile>
+    <ClCompile Include="..\eqapp\eqapp_freecamera.ixx">
+      <Filter>Source Files\eqapp</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

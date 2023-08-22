@@ -147,6 +147,21 @@ namespace eq
                 const uint32_t ActorDefinition    = 0x40;    // char[64]
             }
         }
+
+        namespace EQZoneInfo
+        {
+            const uint32_t ShortName    = 0x00;     // char[128]
+            const uint32_t LongName     = 0x80;     // char[128]
+            const uint32_t Type         = 0x180;    // int
+            const uint32_t ID           = 0x184;    // int
+            const uint32_t Gravity      = 0x1E0;    // float
+
+            namespace SizeOf
+            {
+                const uint32_t ShortName    = 0x80;    // char[128]
+                const uint32_t LongName     = 0x80;    // char[128]
+            }
+        }
     }
 }
 

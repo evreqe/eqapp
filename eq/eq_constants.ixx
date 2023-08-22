@@ -480,6 +480,19 @@ namespace eq
                 const float Max        = 119.5f;     // looking all the way up
             }
         }
+
+        namespace EQZoneInfo
+        {
+            namespace Type
+            {
+                const int IndoorDungeon     = 0;    // Zones without sky SolB for example.
+                const int Outdoor           = 1;    // Zones with sky like Commonlands for example.
+                const int OutdoorCity       = 2;    // A Player City with sky Plane of Knowledge for example.
+                const int DungeonCity       = 3;    // A Player City without sky Ak'anon for example.
+                const int IndoorCity        = 4;    // A Player City without sky Erudin for example.
+                const int OutdoorDungeon    = 5;    // Dungeons with sky like Blackburrow for example.
+            }
+        }
     }
 }
 

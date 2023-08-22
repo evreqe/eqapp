@@ -13,8 +13,8 @@ namespace eq
 {
     namespace Classes
     {
+        class CXWndManager;
         class ChatManager;
-        class CharacterZoneClient;
         class Spawn;
         class SpawnManager;
         class SoundManager;
@@ -24,6 +24,29 @@ namespace eq
         class CRender;
         class CParticleSystem;
     }
+}
+
+//////////////////////////////////////////////////
+/* CXWndManager */
+//////////////////////////////////////////////////
+
+class eq::Classes::CXWndManager
+{
+public:
+    int DrawCursor();
+    int DrawWindows();
+};
+
+typedef int (__thiscall* EQ_FUNCTION_TYPE_CXWndManager__DrawCursor)(void* thisPointer);
+int EQ_FUNCTION_CXWndManager__DrawCursor(void* thisPointer)
+{
+    return ((EQ_FUNCTION_TYPE_CXWndManager__DrawCursor)eq::EQGame::Addresses::Functions::CXWndManager__DrawCursor)(thisPointer);
+}
+
+typedef int (__thiscall* EQ_FUNCTION_TYPE_CXWndManager__DrawWindows)(void* thisPointer);
+int EQ_FUNCTION_CXWndManager__DrawWindows(void* thisPointer)
+{
+    return ((EQ_FUNCTION_TYPE_CXWndManager__DrawWindows)eq::EQGame::Addresses::Functions::CXWndManager__DrawWindows)(thisPointer);
 }
 
 //////////////////////////////////////////////////
@@ -43,31 +66,14 @@ void EQ_FUNCTION_ChatManager__PrintText(void* thisPointer, const char* text, uin
 }
 
 //////////////////////////////////////////////////
-/* CharacterZoneClient */
-//////////////////////////////////////////////////
-
-class eq::Classes::CharacterZoneClient
-{
-public:
-    //
-};
-
-//////////////////////////////////////////////////
 /* Spawn */
 //////////////////////////////////////////////////
 
 class eq::Classes::Spawn
 {
 public:
-    uintptr_t GetCharacterZoneClient();
     int GetLevel();
 };
-
-typedef uintptr_t (__thiscall* EQ_FUNCTION_TYPE_Spawn__GetCharacterZoneClient)(void* thisPointer);
-uintptr_t EQ_FUNCTION_Spawn__GetCharacterZoneClient(void* thisPointer)
-{
-    return ((EQ_FUNCTION_TYPE_Spawn__GetCharacterZoneClient)eq::EQGame::Addresses::Functions::Spawn__GetCharacterZoneClient)(thisPointer);
-}
 
 typedef int (__thiscall* EQ_FUNCTION_TYPE_Spawn__GetLevel)(void* thisPointer);
 int EQ_FUNCTION_Spawn__GetLevel(void* thisPointer)

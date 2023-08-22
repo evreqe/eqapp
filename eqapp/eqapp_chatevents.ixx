@@ -276,7 +276,7 @@ bool ChatEvents::LoadFiles()
 
 bool ChatEvents::HandleChatManagerPrintText(const std::string& chatText)
 {
-    if (chatText.contains("#") == true)
+    if (chatText.starts_with("#") == true)
     {
         return false;
     }
@@ -316,7 +316,7 @@ bool ChatEvents::HandleInterpetCommand(const std::string& commandText)
         return true;
     }
 
-    if (commandText == "//ChatEventsStatus")
+    if (commandText == "//ChatEventsStatus" || commandText == "//ChatEvents")
     {
         PrintStatus();
         return true;
