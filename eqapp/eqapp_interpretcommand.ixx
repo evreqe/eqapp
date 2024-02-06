@@ -157,14 +157,17 @@ void InterpretCommand::Execute()
     {
         bUsePause = true;
 
-        std::string arg0;
-        eqapp::Timer::TimeInterval arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, eqapp::Timer::TimeInterval>(commandText, "{} {}"))
         {
+            const auto& [arg0, arg1] = result->values();
+
             timeInterval = arg1;
 
             bUseTimer = true;
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
     }
 
@@ -264,18 +267,32 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
 
     if (commandText.starts_with("//Test ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        int arg2;
-        auto result = scn::scan(commandText, "{} {} {}", arg0, arg1, arg2);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string, int, float>(commandText, "{} {} {} {}"))
         {
-            std::string remainder = result.range_as_string();
+            const auto& [arg0, arg1, arg2, arg3] = result->values();
 
             std::print(std::cout, "arg0: {}\n", arg0);
             std::print(std::cout, "arg1: {}\n", arg1);
             std::print(std::cout, "arg2: {}\n", arg2);
-            std::print(std::cout, "remainder: {}\n", remainder);
+            std::print(std::cout, "arg3: {}\n", arg3);
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
+        }
+
+        return true;
+    }
+
+    if (commandText.starts_with("//SplitText ") == true)
+    {
+        auto textList = util::String::Split(commandText, ' ');
+        if (textList.empty() == false)
+        {
+            for (auto& text : textList)
+            {
+                std::print(std::cout, "Text: {}\n", text);
+            }
         }
 
         return true;
@@ -294,20 +311,22 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
 
     if (commandText.starts_with("//Target ") == true)
     {
-        std::string arg0;
-        auto result = scn::scan(commandText, "{}", arg0);
-        if (result)
+        if (auto result = scn::scan<std::string>(commandText, "{}"))
         {
-            std::string remainder = result.range_as_string();
-            util::String::TrimSpacesOnLeftAndRight(remainder);
+            auto remainder = std::string_view{result->range()};
+
             if (remainder.size() != 0)
             {
-                uintptr_t spawn = EQ_GetSpawnByNameOrNameNumbered(remainder);
+                uintptr_t spawn = EQ_GetSpawnByNameOrNameNumbered(remainder.data());
                 if (spawn != NULL)
                 {
                     EQ_SetTargetSpawn(spawn);
                 }
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -315,12 +334,15 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
 
     if (commandText.starts_with("//TargetID ") == true)
     {
-        std::string arg0;
-        uint32_t arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, uint32_t>(commandText, "{} {}"))
         {
+            const auto& [arg0, arg1] = result->values();
+
             EQ_SetTargetSpawnByID(arg1);
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -342,12 +364,6 @@ bool InterpretCommand::HandleInterpretCommand(const std::string& commandText)
             }
         }
 
-        return true;
-    }
-
-    if (commandText == "//OutputFiles")
-    {
-        EQ_OutputFiles();
         return true;
     }
 

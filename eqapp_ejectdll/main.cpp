@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
             char moduleName[1024] = {0};
             GetModuleBaseNameA(processHandle, moduleHandle, moduleName, sizeof(moduleName));
 
-            std::print("{}: {}\n", i, moduleName);
+            //std::print("{}: {}\n", i, moduleName);
 
             if (std::strcmp(moduleName, g_GameProcessName) == 0)
             {

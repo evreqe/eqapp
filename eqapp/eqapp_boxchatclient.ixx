@@ -607,15 +607,18 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatSendText ") == true || commandText.starts_with("//BCST ") == true)
     {
-        std::string arg0;
-        auto result = scn::scan(commandText, "{}", arg0);
-        if (result)
+        if (auto result = scn::scan<std::string>(commandText, "{}"))
         {
-            std::string remainder = result.range_as_string();
-            if (remainder.empty() == false)
+            auto remainder = std::string_view{result->range()};
+
+            if (remainder.size() != 0)
             {
-                SendText(remainder);
+                SendText(remainder.data());
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -629,15 +632,18 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatConnect ") == true || commandText.starts_with("//BCC ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            if (arg1.empty() == false)
+            const auto& [arg0, arg1] = result->values();
+
+            if (arg1.size() != 0)
             {
                 Connect(arg1);
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -657,16 +663,19 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatIP ") == true || commandText.starts_with("//BCIP ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            if (arg1.empty() == false)
+            const auto& [arg0, arg1] = result->values();
+
+            if (arg1.size() != 0)
             {
                 SetIPAddress(arg1);
                 PrintIPAddress();
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -680,16 +689,19 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatPortNumber ") == true || commandText.starts_with("//BCPN ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            if (arg1.empty() == false)
+            const auto& [arg0, arg1] = result->values();
+
+            if (arg1.size() != 0)
             {
                 SetPortNumber(arg1);
                 PrintPortNumber();
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -703,16 +715,19 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatClientName ") == true || commandText.starts_with("//BCCN ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            if (arg1.empty() == false)
+            const auto& [arg0, arg1] = result->values();
+
+            if (arg1.size() != 0)
             {
                 SetClientName(arg1);
                 PrintClientName();
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -726,16 +741,19 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatClientGlobalChannelName ") == true || commandText.starts_with("//BCCGCN ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            if (arg1.empty() == false)
+            const auto& [arg0, arg1] = result->values();
+
+            if (arg1.size() != 0)
             {
                 SetClientGlobalChannelName(arg1);
                 PrintClientGlobalChannelName();
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -749,16 +767,19 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatClientChannelName ") == true || commandText.starts_with("//BCCCN ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            if (arg1.empty() == false)
+            const auto& [arg0, arg1] = result->values();
+
+            if (arg1.size() != 0)
             {
                 SetClientChannelName(arg1);
                 PrintClientChannelName();
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -766,19 +787,25 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatTell ") == true || commandText.starts_with("//BoxChatTo ") == true || commandText.starts_with("//BCT ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            std::string remainder = result.range_as_string();
-            util::String::TrimSpacesOnLeftAndRight(remainder);
-            if (remainder.empty() == false)
-            {
-                std::string sendText = std::format("$BoxChatTell {} {}\n", arg1, remainder);
+            const auto& [arg0, arg1] = result->values();
 
-                SendText(sendText);
+            if (arg1.size() != 0)
+            {
+                auto remainder = std::string_view{result->range()};
+
+                if (remainder.size() != 0)
+                {
+                    std::string sendText = std::format("$BoxChatTell {} {}\n", arg1, remainder.data());
+
+                    SendText(sendText);
+                }
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -786,19 +813,25 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatToChannel ") == true || commandText.starts_with("//BCTC ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
         {
-            std::string remainder = result.range_as_string();
-            util::String::TrimSpacesOnLeftAndRight(remainder);
-            if (remainder.empty() == false)
-            {
-                std::string sendText = std::format("$BoxChatToChannel {} {}\n", arg1, remainder);
+            const auto& [arg0, arg1] = result->values();
 
-                SendText(sendText);
+            if (arg1.size() != 0)
+            {
+                auto remainder = std::string_view{result->range()};
+
+                if (remainder.size() != 0)
+                {
+                    std::string sendText = std::format("$BoxChatToChannel {} {}\n", arg1, remainder.data());
+
+                    SendText(sendText);
+                }
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -806,18 +839,20 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatToOthers ") == true || commandText.starts_with("//BCTO ") == true)
     {
-        std::string arg0;
-        auto result = scn::scan(commandText, "{}", arg0);
-        if (result)
+        if (auto result = scn::scan<std::string>(commandText, "{}"))
         {
-            std::string remainder = result.range_as_string();
-            util::String::TrimSpacesOnLeftAndRight(remainder);
-            if (remainder.empty() == false)
+            auto remainder = std::string_view{result->range()};
+
+            if (remainder.size() != 0)
             {
-                std::string sendText = std::format("$BoxChatToOthers {}\n", remainder);
+                std::string sendText = std::format("$BoxChatToOthers {}\n", remainder.data());
 
                 SendText(sendText);
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -825,18 +860,20 @@ bool BoxChatClient::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//BoxChatToAll ") == true || commandText.starts_with("//BCTA ") == true)
     {
-        std::string arg0;
-        auto result = scn::scan(commandText, "{}", arg0);
-        if (result)
+        if (auto result = scn::scan<std::string>(commandText, "{}"))
         {
-            std::string remainder = result.range_as_string();
-            util::String::TrimSpacesOnLeftAndRight(remainder);
-            if (remainder.empty() == false)
+            auto remainder = std::string_view{result->range()};
+
+            if (remainder.size() != 0)
             {
-                std::string sendText = std::format("$BoxChatToAll {}\n", remainder);
+                std::string sendText = std::format("$BoxChatToAll {}\n", remainder.data());
 
                 SendText(sendText);
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;

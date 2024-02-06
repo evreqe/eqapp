@@ -15,7 +15,7 @@ namespace eq
         {
             namespace VirtualFunctionTable
             {
-                const uint32_t ResetDevice                = 0xC8;     // uintptr_t pointer
+                const uint32_t ReleaseDevice              = 0xC0;     // uintptr_t pointer
                 const uint32_t DrawLine2D                 = 0x110;    // uintptr_t pointer
                 const uint32_t DrawLine3D                 = 0x118;    // uintptr_t pointer
                 const uint32_t RenderScene                = 0x158;    // uintptr_t pointer
@@ -25,9 +25,13 @@ namespace eq
             }
 
             const uint32_t VirtualFunctionTable_    = 0x00;     // uintptr_t pointer
-            const uint32_t IDirect3DN               = 0xEE0;    // uintptr_t pointer    // IDirect3D9*
-            const uint32_t IDirect3DDeviceN         = 0xEE8;    // uintptr_t pointer    // IDirect3DDevice9*    // LPDIRECT3DDEVICE9
-            const uint32_t IDirect3DSurfaceN        = 0xEF0;    // uintptr_t pointer    // IDirect3DSurface9*
+
+            //const uint32_t IDirect3DN               = 0xEE0;    // uintptr_t pointer    // IDirect3D9*
+            //const uint32_t IDirect3DDeviceN         = 0xEE8;    // uintptr_t pointer    // IDirect3DDevice9*    // LPDIRECT3DDEVICE9
+            //const uint32_t IDirect3DSurfaceN        = 0xEF0;    // uintptr_t pointer    // IDirect3DSurface9*
+            const uint32_t IDirect3DN               = 0xEF0;    // uintptr_t pointer    // DirectX11
+            const uint32_t IDirect3DDeviceN         = 0xEF8;    // uintptr_t pointer    // DirectX11
+            const uint32_t IDirect3DSurfaceN        = 0xF00;    // uintptr_t pointer    // DirectX11
         }
 
         namespace SGraphicsEngine

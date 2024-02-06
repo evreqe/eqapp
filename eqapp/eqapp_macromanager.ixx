@@ -318,13 +318,10 @@ bool MacroManager::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//Macro ") == true)
     {
-        std::string arg0;
-        std::string arg1;
-        eqapp::Timer::TimeInterval arg2;
-
-        auto result1 = scn::scan(commandText, "{} {} {}", arg0, arg1, arg2);
-        if (result1)
+        if (auto result = scn::scan<std::string, std::string, eqapp::Timer::TimeInterval>(commandText, "{} {} {}"))
         {
+            const auto& [arg0, arg1, arg2] = result->values();
+
             if (arg1.size() != 0)
             {
                 SetMacroTimerInterval(arg1, arg2);
@@ -332,13 +329,18 @@ bool MacroManager::HandleInterpetCommand(const std::string& commandText)
         }
         else
         {
-            auto result2 = scn::scan(commandText, "{} {}", arg0, arg1);
-            if (result2)
+            if (auto result = scn::scan<std::string, std::string>(commandText, "{} {}"))
             {
+                const auto& [arg0, arg1] = result->values();
+
                 if (arg1.size() != 0)
                 {
                     InterpretMacro(arg1);
                 }
+            }
+            else
+            {
+                std::print(std::cout, "ERROR: {}", result.error().msg());
             }
         }
 

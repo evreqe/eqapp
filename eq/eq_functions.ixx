@@ -114,20 +114,6 @@ void EQ_ToggleBool(bool& b)
     b = !b;
 }
 
-void EQ_OutputFiles()
-{
-    EQ_InterpretCommand("/outputfile achievements");
-    EQ_InterpretCommand("/outputfile faction");
-    EQ_InterpretCommand("/outputfile guild");
-    EQ_InterpretCommand("/outputfile guildbank");
-    EQ_InterpretCommand("/outputfile guildhall");
-    EQ_InterpretCommand("/outputfile inventory");
-    EQ_InterpretCommand("/outputfile missingspells");
-    EQ_InterpretCommand("/outputfile raid");
-    EQ_InterpretCommand("/outputfile realestate");
-    EQ_InterpretCommand("/outputfile spellbook");
-}
-
 float EQ_GetDistance2D(float y1, float x1, float y2, float x2)
 {
     return std::sqrtf(std::powf(x2 - x1, 2.0f) + std::powf(y2 - y1, 2.0f));

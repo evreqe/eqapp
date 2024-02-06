@@ -159,7 +159,7 @@ void ESP::Execute()
     {
         eq::Location targetSpawnLocation = EQ_GetSpawnLocation(targetSpawn);
 
-        EQ_DrawLine3D(playerSpawnLocation, targetSpawnLocation, eq::ColorARGB::Gray);
+        EQ_DrawLine2D(playerSpawnLocation, targetSpawnLocation, eq::ColorARGB::Gray);
     }
 */
 
@@ -168,12 +168,6 @@ void ESP::Execute()
     for (auto& spawn : spawnList)
     {
         if (spawn == playerSpawn)
-        {
-            continue;
-        }
-
-        uint8_t spawnType = EQ_GetSpawnType(spawn);
-        if (spawnType == eq::Constants::Spawn::Type::Player)
         {
             continue;
         }
@@ -193,21 +187,8 @@ void ESP::Execute()
             continue;
         }
 
+        std::string spawnName = EQ_GetSpawnName(spawn);
         std::string spawnNameNumbered = EQ_GetSpawnNameNumbered(spawn);
-        if (spawnNameNumbered.empty() == true)
-        {
-            continue;
-        }
-
-        if (spawnNameNumbered.contains("_familiar") == true)
-        {
-            continue;
-        }
-
-        if (spawnNameNumbered.contains("_warder") == true)
-        {
-            continue;
-        }
 
         if (spawnNameNumbered.contains("_Mount") == true)
         {
@@ -215,22 +196,21 @@ void ESP::Execute()
         }
 
         std::string spawnLastName = EQ_GetSpawnLastName(spawn);
-        if (spawnLastName.empty() == false)
-        {
-            if (spawnLastName.ends_with(" Pet") == true)
-            {
-                continue;
-            }
 
-            if (spawnLastName.ends_with(" Mercenary") == true)
-            {
-                continue;
-            }
-        }
+        uint8_t spawnType = EQ_GetSpawnType(spawn);
 
         int spawnLevel = EQ_GetSpawnLevel(spawn);
 
-        std::string spawnText = std::format("[{}] {}", spawnLevel, spawnNameNumbered);
+        std::string spawnText = std::format("[{}] ", spawnLevel);
+
+        if (spawnType == eq::Constants::Spawn::Type::Player)
+        {
+            spawnText.append(spawnName);
+        }
+        else
+        {
+            spawnText.append(spawnNameNumbered);
+        }
 
         if (spawnLastName.empty() == false)
         {

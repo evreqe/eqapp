@@ -228,12 +228,53 @@ namespace util
             std::vector<std::string> tokenList;
             tokenList.reserve(numSplit);
 
+            if (numSplit == 0)
+            {
+                return tokenList;
+            }
+
             std::istringstream iss(subject);
 
             for (std::size_t i = 0; i < numSplit; i++)
             {
                 std::string token;
                 std::getline(iss, token, delimiter);
+
+                if (token.empty() == true)
+                {
+                    break;
+                }
+
+                tokenList.push_back(token);
+            }
+
+            return tokenList;
+        }
+
+        static std::vector<std::string> SplitUntilN(const std::string& subject, const char delimiter, std::size_t numSplit)
+        {
+            std::vector<std::string> tokenList;
+            tokenList.reserve(numSplit);
+
+            if (numSplit == 0)
+            {
+                return tokenList;
+            }
+
+            std::istringstream iss(subject);
+
+            for (std::size_t i = 0; i < numSplit; i++)
+            {
+                std::string token;
+
+                if (i == numSplit - 1)
+                {
+                    std::getline(iss, token);
+                }
+                else
+                {
+                    std::getline(iss, token, delimiter);
+                }
 
                 if (token.empty() == true)
                 {
@@ -371,6 +412,16 @@ namespace util
             }
 
             return baseAddress;
+        }
+
+        static bool IsForegroundWindowCurrentProcessID()
+        {
+            HWND foregroundHwnd = GetForegroundWindow();
+
+            DWORD foregroundProcessId;
+            GetWindowThreadProcessId(foregroundHwnd, &foregroundProcessId);
+
+            return (foregroundProcessId == GetCurrentProcessId());
         }
 
         static bool IsProcessRunning(const wchar_t* fileName)

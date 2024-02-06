@@ -301,19 +301,21 @@ bool Follow::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//Follow ") == true)
     {
-        std::string arg0;
-        auto result = scn::scan(commandText, "{}", arg0);
-        if (result)
+        if (auto result = scn::scan<std::string>(commandText, "{}"))
         {
-            std::string remainder = result.range_as_string();
-            util::String::TrimSpacesOnLeftAndRight(remainder);
+            auto remainder = std::string_view{result->range()};
+
             if (remainder.size() != 0)
             {
-                if (SetSpawnByName(remainder) == true)
+                if (SetSpawnByName(remainder.data()) == true)
                 {
                     PrintStatus();
                 }
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -321,15 +323,18 @@ bool Follow::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//FollowID ") == true)
     {
-        std::string arg0;
-        uint32_t arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, uint32_t>(commandText, "{} {}"))
         {
+            const auto& [arg0, arg1] = result->values();
+
             if (SetSpawnByID(arg1) == true)
             {
                 PrintStatus();
             }
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;
@@ -343,12 +348,15 @@ bool Follow::HandleInterpetCommand(const std::string& commandText)
 
     if (commandText.starts_with("//FollowDistance ") == true)
     {
-        std::string arg0;
-        float arg1;
-        auto result = scn::scan(commandText, "{} {}", arg0, arg1);
-        if (result)
+        if (auto result = scn::scan<std::string, float>(commandText, "{} {}"))
         {
+            const auto& [arg0, arg1] = result->values();
+
             SetDistance(arg1);
+        }
+        else
+        {
+            std::print(std::cout, "ERROR: {}", result.error().msg());
         }
 
         return true;

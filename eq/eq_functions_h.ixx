@@ -11,7 +11,6 @@ export
 {
 
 void EQ_ToggleBool(bool& b);
-void EQ_OutputFiles();
 float EQ_GetDistance2D(float y1, float x1, float y2, float x2);
 float EQ_GetDistance3D(float y1, float x1, float z1, float y2, float x2, float z2);
 bool EQ_IsWithinDistance2D(float y1, float x1, float y2, float x2, float distance);

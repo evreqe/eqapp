@@ -90,7 +90,7 @@ namespace eq
 
     namespace EQGraphics
     {
-        uintptr_t BaseAddress = (uintptr_t)GetModuleHandleA("EQGraphicsDX9.dll");
+        uintptr_t BaseAddress = (uintptr_t)GetModuleHandleA("EQGraphics.dll");
 
         constexpr uintptr_t PreferredAddress = 0x180000000;
 

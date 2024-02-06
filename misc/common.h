@@ -40,6 +40,7 @@
 #include <string_view>
 #include <sstream>
 #include <thread>
+#include <tuple>
 #include <type_traits>
 #include <unordered_map>
 #include <utility>
@@ -52,8 +53,9 @@
 #include "fmt/compile.h"
 #pragma comment(lib, "fmt.lib")
 
-#include "scn/scn.h"
+#include "scn/scan.h"
 #pragma comment(lib, "scn.lib")
+#pragma comment(lib, "simdutf.lib")
 
 #include "glm/glm.hpp"
 

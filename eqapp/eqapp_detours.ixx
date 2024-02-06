@@ -48,9 +48,6 @@ void EQAPP_Detours_AddDetoursForVirtualFunctions();
 void EQAPP_Detours_RemoveDetoursForVirtualFunctions();
 void EQAPP_Detours_Load();
 void EQAPP_Detours_Unload();
-void EQAPP_Detours_OnEnterOrLeaveZone();
-void EQAPP_Detours_OnEnterZone();
-void EQAPP_Detours_OnLeaveZone();
 void EQAPP_Detours_DisplayText();
 void EQAPP_Detours_Loop();
 
@@ -160,25 +157,6 @@ void EQAPP_Detours_Unload()
     DetourTransactionCommit();
 }
 
-void EQAPP_Detours_OnEnterOrLeaveZone()
-{
-    //
-}
-
-void EQAPP_Detours_OnEnterZone()
-{
-    EQAPP_Detours_OnEnterOrLeaveZone();
-
-    //
-}
-
-void EQAPP_Detours_OnLeaveZone()
-{
-    EQAPP_Detours_OnEnterOrLeaveZone();
-
-    //
-}
-
 void EQAPP_Detours_DisplayText()
 {
     const uint32_t drawTextX = 8;
@@ -221,8 +199,6 @@ void EQAPP_Detours_DisplayText()
 
 void EQAPP_Detours_Loop()
 {
-    EQAPP_Detours_DisplayText();
-
     // Console
     if (g_Console.IsLoaded() == true)
     {
@@ -354,6 +330,9 @@ int EQAPP_DETOURED_FUNCTION_CXWndManager__DrawWindows(void* thisPointer)
                 g_ESP.Execute();
             }
         }
+
+        // HUD
+        EQAPP_Detours_DisplayText();
     }
 
     return EQAPP_REAL_FUNCTION_CXWndManager__DrawWindows(thisPointer);
@@ -386,27 +365,6 @@ void EQAPP_DETOURED_FUNCTION_ChatManager__PrintText(void* thisPointer, const cha
         return;
     }
 
-    if (chatText.starts_with("LOADING, PLEASE WAIT...") == true)
-    {
-        EQAPP_Detours_OnLeaveZone();
-    }
-
-    if (chatText.starts_with("You have entered ") == true)
-    {
-        if (chatText.starts_with("You have entered combat...") == false)
-        {
-            if (chatText.starts_with("You have entered an ") == false)
-            {
-                EQAPP_Detours_OnEnterZone();
-            }
-        }
-    }
-
-    if (chatText.starts_with("It will take you about ") == true && chatText.ends_with(" seconds to prepare your camp.") == true)
-    {
-        EQ_OutputFiles();
-    }
-
     // Chat Events
     if (g_ChatEvents.IsLoaded() == true)
     {
@@ -414,7 +372,7 @@ void EQAPP_DETOURED_FUNCTION_ChatManager__PrintText(void* thisPointer, const cha
         {
             if (g_ChatEvents.HandleChatManagerPrintText(chatText) == true)
             {
-                std::print(std::cout, "#Chat Event!\n");
+                std::print(std::cout, "#Chat Event occurred!\n");
             }
         }
     }
@@ -568,6 +526,9 @@ void EQAPP_DETOURED_FUNCTION_CEverQuest__InterpretCommand(void* thisPointer, uin
                 return;
             }
         }
+
+        std::print(std::cout, "ERROR: commandText not found: {}\n", commandText);
+        return;
     }
 
     EQAPP_REAL_FUNCTION_CEverQuest__InterpretCommand(thisPointer, playerSpawn, text);
@@ -655,9 +616,8 @@ void EQAPP_DETOURED_FUNCTION_CRender__RenderBlind(void* thisPointer)
     }
 
     // never blind
-    return;
-
     //EQAPP_REAL_FUNCTION_CRender__RenderBlind(thisPointer);
+    return;
 }
 
 void EQAPP_DETOURED_FUNCTION_CRender__UpdateDisplay(void* thisPointer)
